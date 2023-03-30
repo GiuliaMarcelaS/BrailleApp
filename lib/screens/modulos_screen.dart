@@ -15,8 +15,11 @@ class ModulosScreen extends StatelessWidget {
     Navigator.of(context).pushNamed('/celula-screen');
 }
 
+  void _F1(BuildContext context){
+    Navigator.of(context).pushNamed('/F1-screen');
+}
   void _fase1(BuildContext context){
-    Navigator.of(context).pushNamed('/fase1-screen');
+    Navigator.of(context).pushNamed('/Fase1-screen');
 }
 
 
@@ -31,7 +34,7 @@ class ModulosScreen extends StatelessWidget {
       body:  Column(
         children: [
           Container(
-            child: ElevatedButton(onPressed: (() => _celula(context)), child: Text('célula'), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: Size.fromWidth(350))
+            child: ElevatedButton(onPressed: (() => _F1(context)), child: Text('célula'), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: Size.fromWidth(350))
                     ),
              margin: EdgeInsets.only(top:70),
           ),

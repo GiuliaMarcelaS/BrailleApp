@@ -1,6 +1,8 @@
 import 'package:braille_app/fase1/f1.dart';
+import 'package:braille_app/fase1/fase1.dart';
 import 'package:braille_app/models/auth.dart';
 import 'package:braille_app/models/braillecell.dart';
+import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/screens/auth_or_home_screen.dart';
 import 'package:braille_app/screens/auth_screen.dart';
 import 'package:braille_app/screens/traducao_screen.dart';
@@ -29,9 +31,14 @@ class BrailleApp extends StatelessWidget{
           create: (_) => Cell("", ''),
           update:(ctx, auth, previous){
             return Cell(auth.token??'', auth.userId ?? '');
+          },),
+        ChangeNotifierProxyProvider<Auth,Passer>(
+          create: (_) => Passer("", ''),
+          update:(ctx, auth, previous){
+            return Passer(auth.token??'', auth.userId ?? '');
           },
   
-        )
+        ),
       ],
       child: MaterialApp(
         routes: {
@@ -39,7 +46,8 @@ class BrailleApp extends StatelessWidget{
           '/modulos-screen': (ctx) => ModulosScreen(),
          '/interface-screen':(ctx) => Interface(),
           '/traducao-screen':(ctx)=> TraducaoScreen(),
-          '/fase1-screen':(ctz) => F1(),
+          '/F1-screen':(ctz) => F1(),
+          '/Fase1-screen':(ctz) => Fase1(),
         },
         ),
     );

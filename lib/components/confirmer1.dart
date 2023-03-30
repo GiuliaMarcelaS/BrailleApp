@@ -1,3 +1,4 @@
+import 'package:braille_app/models/passer.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:braille_app/models/auth.dart';
@@ -13,12 +14,13 @@ class Confirmer1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
-    final cell = Provider.of<Cell>(context, listen: false);
+    final passer = Provider.of<Passer>(context, listen: false);
     return Container(
                 child: IconButton(
-                  onPressed: () => cell.toggleBall1(cell,auth.token ?? '',auth.userId ?? ''),
-                  icon: Icon(cell.isClicked1? Icons.circle : Icons.circle_outlined,)
+                  onPressed: () => passer.passPhase1(auth.token ?? '',auth.userId ?? ''),
+                  icon: Icon(Icons.arrow_circle_right),
                 ),
+                  margin: EdgeInsets.only(top: 500, left: 450),
            );
   
   }

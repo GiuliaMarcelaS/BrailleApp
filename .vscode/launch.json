@@ -5,11 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "chrome",
+            "name": "braille_app",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}"
+            "type": "dart"
+        },
+        {
+            "name": "braille_app (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "braille_app (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
         }
     ]
 }
