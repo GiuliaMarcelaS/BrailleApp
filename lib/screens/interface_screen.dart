@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:braille_app/screens/modulos_screen.dart';
 
 class Interface extends StatelessWidget {
-  const Interface({super.key});
+ Interface({super.key});
 
   void _modulos(BuildContext context){
     Navigator.of(context).pushNamed('/modulos-screen');
@@ -13,6 +13,7 @@ class Interface extends StatelessWidget {
   void _traduzir(BuildContext context){
     Navigator.of(context).pushNamed('/traducao-screen');
 }
+  bool _isButtonDisabled = true;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class Interface extends StatelessWidget {
              // margin: EdgeInsets.only(top: 1),
               ),
             Container(
-              child: ElevatedButton(onPressed: (() => _traduzir(context)), child: Text('Realizar Tradução'), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: Size.fromWidth(350))
+              child: ElevatedButton(onPressed: _isButtonDisabled ? null : (() => _traduzir(context)), child: Text('Realizar Tradução'), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: Size.fromWidth(350))
               ),
               margin: EdgeInsets.only(top: 125),
               ),
