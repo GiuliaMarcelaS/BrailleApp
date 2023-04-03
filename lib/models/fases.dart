@@ -1,4 +1,6 @@
-class Fase{
+import 'package:flutter/material.dart';
+
+class Fase with ChangeNotifier{
   final String id;
   final String title;
 

@@ -30,7 +30,8 @@ class Passer with ChangeNotifier{
 
   Future<void> passPhase1( String token, String userId) async{
 
-    fase = 2;
+   if(fase <= 2){
+    fase = 2;}
     notifyListeners();
     await http.put(
     Uri.parse('${Constants.BASE_URL}/$userId/fase.json?auth=$token'),

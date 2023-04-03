@@ -10,10 +10,10 @@ class FaseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  final Fase fase;
+  final Fase fase = ModalRoute.of(context)!.settings.arguments as Fase;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Teste'),
+        title: Text(fase.title),
       ),
     );
   }
