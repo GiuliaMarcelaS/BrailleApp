@@ -5,6 +5,8 @@ import '../models/fase_list.dart';
 import '../models/fases.dart';
 import 'fase_item.dart';
 
+bool _isButtonDisabled = true;
+
 class FaseGrid extends StatelessWidget {
 
   @override

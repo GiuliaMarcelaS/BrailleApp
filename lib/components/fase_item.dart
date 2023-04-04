@@ -8,6 +8,7 @@ class FaseItem extends StatelessWidget {
 //   void _fases(BuildContext context){
 //     Navigator.of(context).pushNamed('/fases-screen', arguments: fase);
 // }
+ bool _isButtonDisabled = true;
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +16,9 @@ class FaseItem extends StatelessWidget {
     return GridTile(
       child: GestureDetector(
         child: Card(
-          color: Colors.green,
+        color:(_isButtonDisabled? Colors.grey : Colors.green),
         ),
-        onTap: () => Navigator.of(context).pushNamed('/fases-screen', arguments: fase),
+        onTap: (_isButtonDisabled? null : () => Navigator.of(context).pushNamed('/fases-screen', arguments: fase)),
       ),
       footer: GridTileBar(
         title: Text(

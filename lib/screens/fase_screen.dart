@@ -15,6 +15,12 @@ class FaseScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(fase.title),
       ),
+      body: Container(
+                child: IconButton(
+                  onPressed: () {} //=> passer.passPhase1(auth.token ?? '',auth.userId ?? ''),
+                  ,icon: Icon(Icons.arrow_circle_right),
+                ),
+      )
     );
   }
 }

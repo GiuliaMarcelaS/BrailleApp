@@ -25,7 +25,6 @@ class ModulosScreen extends StatelessWidget {
     Navigator.of(context).pushNamed('/Fase1-screen');
 }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
