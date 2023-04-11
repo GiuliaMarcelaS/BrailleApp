@@ -4,6 +4,7 @@ import 'package:braille_app/models/auth.dart';
 import 'package:braille_app/models/braillecell.dart';
 import 'package:braille_app/models/fase_list.dart';
 import 'package:braille_app/models/passer.dart';
+import 'package:braille_app/models/passer2.dart';
 import 'package:braille_app/screens/auth_or_home_screen.dart';
 import 'package:braille_app/screens/auth_screen.dart';
 import 'package:braille_app/screens/fase_screen.dart';
@@ -37,10 +38,10 @@ class BrailleApp extends StatelessWidget{
           update:(ctx, auth, previous){
             return Cell(auth.token??'', auth.userId ?? '');
           },),
-        ChangeNotifierProxyProvider<Auth,Passer>(
-          create: (_) => Passer("", ''),
+        ChangeNotifierProxyProvider<Auth,Passer2>(
+          create: (_) => Passer2("", ''),
           update:(ctx, auth, previous){
-            return Passer(auth.token??'', auth.userId ?? '');
+            return Passer2(auth.token??'', auth.userId ?? '');
           },
   
         ),

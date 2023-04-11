@@ -13,7 +13,7 @@ class Interface extends StatelessWidget {
   void _traduzir(BuildContext context){
     Navigator.of(context).pushNamed('/traducao-screen');
 }
-  bool _isButtonDisabled = true;
+  bool _isButtonDisabled = false;
 
   @override
   Widget build(BuildContext context) {

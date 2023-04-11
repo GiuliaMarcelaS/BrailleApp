@@ -8,7 +8,7 @@ class FaseItem extends StatelessWidget {
 //   void _fases(BuildContext context){
 //     Navigator.of(context).pushNamed('/fases-screen', arguments: fase);
 // }
- bool _isButtonDisabled = true;
+ bool _isButtonDisabled = false;
 
   @override
   Widget build(BuildContext context) {
