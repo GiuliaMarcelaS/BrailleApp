@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 import 'screens/modulos_screen.dart';
 import 'package:braille_app/screens/interface_screen.dart';
 import 'package:braille_app/screens/auth_screen.dart';
+import 'package:braille_app/models/fases.dart';
 
 main (){
  runApp(BrailleApp());
@@ -32,6 +33,9 @@ class BrailleApp extends StatelessWidget{
           ),
           ChangeNotifierProvider(
           create: (_) => FaseList(),
+          ),
+          ChangeNotifierProvider(
+          create: (_) => Fase(),
           ),
         ChangeNotifierProxyProvider<Auth,Cell>(
           create: (_) => Cell("", ''),

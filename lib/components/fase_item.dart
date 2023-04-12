@@ -5,20 +5,19 @@ import 'package:braille_app/models/fases.dart';
 import 'package:provider/provider.dart';
 class FaseItem extends StatelessWidget {
 
+
 //   void _fases(BuildContext context){
-//     Navigator.of(context).pushNamed('/fases-screen', arguments: fase);
-// }
  bool _isButtonDisabled = false;
 
   @override
   Widget build(BuildContext context) {
-    final fase = Provider.of<Fase>(context);
+  final fase = Provider.of<Fase>(context);
     return GridTile(
       child: GestureDetector(
         child: Card(
-        color:(_isButtonDisabled? Colors.grey : Colors.green),
+        color:(fase.id<=fase.fase? Colors.green : Colors.grey),
         ),
-        onTap: (_isButtonDisabled? null : () => Navigator.of(context).pushNamed('/fases-screen', arguments: fase)),
+        onTap: (fase.id<=fase.fase? () => Navigator.of(context).pushNamed('/fases-screen', arguments: fase) : null),
       ),
       footer: GridTileBar(
         title: Text(

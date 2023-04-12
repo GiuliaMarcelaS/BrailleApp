@@ -27,7 +27,7 @@ class Passer2 with ChangeNotifier{
    Future<void> loadFase(String token, String userId) async{
 
    final response = await http.put(
-    Uri.parse('${Constants.BASE_URL}/$userId/teste2.json?auth=$token'));
+    Uri.parse('${Constants.TESTE2_URL}/$userId/teste2.json?auth=$token'));
     print(response.body);
     }
 
@@ -36,6 +36,6 @@ class Passer2 with ChangeNotifier{
     faseHabilitada = !faseHabilitada;
     notifyListeners();
     await http.put(
-    Uri.parse('${Constants.BASE_URL}/$userId/teste2.json?auth=$token'),
+    Uri.parse('${Constants.TESTE2_URL}/$userId/teste2.json?auth=$token'),
     body: jsonEncode({"faseHabilitada":faseHabilitada}),);
 }}

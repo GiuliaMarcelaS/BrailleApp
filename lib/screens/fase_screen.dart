@@ -13,7 +13,7 @@ class FaseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final passer2 = Provider.of<Passer2>(context);
+     final passer2 = Provider.of<Fase>(context);
      final auth = Provider.of<Auth>(context, listen: false);
   final Fase fase = ModalRoute.of(context)!.settings.arguments as Fase;
     return Scaffold(
@@ -22,7 +22,7 @@ class FaseScreen extends StatelessWidget {
       ),
       body: Container(
                 child: IconButton(
-                  onPressed: () =>passer2.habilitaFase(passer2,auth.token ?? '',auth.userId ?? '') //=> passer.passPhase1(auth.token ?? '',auth.userId ?? ''),
+                  onPressed: () =>fase.selecionaFase(/*fase,auth.token ?? '',auth.userId ?? ''*/) //=> passer.passPhase1(auth.token ?? '',auth.userId ?? ''),
                   ,icon: Icon(Icons.arrow_circle_right),
                 ),
       )

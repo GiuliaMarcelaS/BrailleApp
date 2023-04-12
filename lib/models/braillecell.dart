@@ -40,7 +40,7 @@ class Cell with ChangeNotifier {
   Future<void> loadBall1(String token, String userId) async{
 
    final response = await http.put(
-    Uri.parse('${Constants.BASE_URL}/$userId/teste.json?auth=$token'));
+    Uri.parse('${Constants.TESTE2_URL}/$userId/teste.json?auth=$token'));
     print(response.body);
     }
 
@@ -49,7 +49,7 @@ class Cell with ChangeNotifier {
     isClicked1 = !isClicked1;
     notifyListeners();
     await http.put(
-    Uri.parse('${Constants.BASE_URL}/$userId/teste.json?auth=$token'),
+    Uri.parse('${Constants.TESTE2_URL}/$userId/teste.json?auth=$token'),
     body: jsonEncode({"isClicked1":isClicked1}),);
 
     // final ball1Response = await http.get(
