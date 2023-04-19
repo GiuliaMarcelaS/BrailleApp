@@ -15,7 +15,7 @@ class Fase1 extends StatefulWidget {
 class _Fase1State extends State<Fase1> {
    void initState(){
     super.initState();
-    Provider.of<Passer>(context, listen: false).loadPhase('', '');
+  
     
   }
 
