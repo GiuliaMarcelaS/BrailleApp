@@ -10,6 +10,8 @@ class Cell with ChangeNotifier {
  String _token;
  // String? id;
   final String _userId;
+  int linha;
+  int coluna;
   bool isClicked1;
   bool isClicked2;
   bool isClicked3;
@@ -23,6 +25,8 @@ class Cell with ChangeNotifier {
     this._userId,
     {
     //this.id,
+    this.linha = 1,
+    this.coluna = 1,
     this.isClicked1 = false,
     this.isClicked2 = false,
     this.isClicked3 = false,

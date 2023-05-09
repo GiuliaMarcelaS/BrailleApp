@@ -1,6 +1,8 @@
 import 'package:braille_app/fase1/f1.dart';
 import 'package:braille_app/fase1/fase1.dart';
 import 'package:braille_app/models/auth.dart';
+import 'package:braille_app/models/ball.dart';
+import 'package:braille_app/models/balls_list.dart';
 import 'package:braille_app/models/braillecell.dart';
 import 'package:braille_app/models/fase_list.dart';
 import 'package:braille_app/models/passer.dart';
@@ -36,7 +38,13 @@ class BrailleApp extends StatelessWidget{
           create: (_) => FaseList(),
           ),
           ChangeNotifierProvider(
+          create: (_) => BallsList(),
+          ),
+          ChangeNotifierProvider(
           create: (_) => Fase(),
+          ),
+          ChangeNotifierProvider(
+          create: (_) => Ball(),
           ),
         ChangeNotifierProvider(
           create: (_) => Passer1(),

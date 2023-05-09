@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:braille_app/models/braillecell.dart';
 import 'package:provider/provider.dart';
 import 'package:braille_app/models/auth.dart';
+import 'package:braille_app/models/ball.dart';
 
 class Matriz extends StatelessWidget {
   Matriz({super.key});
@@ -13,6 +14,7 @@ class Matriz extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cell = Provider.of<Cell>(context);
+    final ball = Provider.of<Ball>(context);
     final auth = Provider.of<Auth>(context, listen: false);
     return Column(
       children: [
@@ -26,7 +28,7 @@ class Matriz extends StatelessWidget {
               ),
                Container(
                 child: IconButton(
-                  onPressed: () => cell.toggleBall2(cell),
+                  onPressed: () => ball.pressBall,
                   icon: Icon(cell.isClicked2? Icons.circle : Icons.circle_outlined,)
                 ),
               ),
