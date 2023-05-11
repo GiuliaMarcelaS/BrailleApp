@@ -5,7 +5,6 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:braille_app/models/auth.dart';
-import 'package:braille_app/exceptions/auth_exception.dart';
 
 enum AuthMode{Signup, Login}
 

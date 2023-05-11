@@ -13,16 +13,28 @@ class Translation extends StatefulWidget {
 }
 
 class _TranslationState extends State<Translation> {
+  String letra = '';
+
   
   @override
   Widget build(BuildContext context) {
     final ball = Provider.of<Ball>(context);
     return Column(
       children: [
-        Container(child: Text(ball.translation),
+        Form(
+          child: TextField(
+            decoration: InputDecoration(labelText: 'insira uma letra'),
+            onSubmitted: (valor) {
+              ball.reset(letra);
+              letra = valor;
+              ball.translate(letra);
+            },
+            controller: TextEditingController(),
+          ),
         ),
-        ElevatedButton(onPressed: ball.translate, child: Text("teste")
-        )
+        
+       // ElevatedButton(onPressed: ball.translate(letra), child: Text("traduzir")
+        //)
       ],
     );
   }
