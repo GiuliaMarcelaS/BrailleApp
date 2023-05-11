@@ -1,3 +1,4 @@
+import 'package:braille_app/models/fases.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:braille_app/utils/constants.dart';
@@ -6,17 +7,17 @@ import 'dart:convert';
 
 class Passer with ChangeNotifier{
   String _token;
-  final String _userId;
-  int fase;
+  String _userId;
+  int faseCompleta;
 
   Passer(
     this._token,
     this._userId,
-    {this.fase = 0,
+    {this.faseCompleta = 1,
     }
   );
-   void _passPhase1 (){
-    fase = 2;
+   void _incrementaFase (Fase fase){
+    faseCompleta = fase.id+1;
     notifyListeners();
   }
 
@@ -28,14 +29,12 @@ class Passer with ChangeNotifier{
     print(response.body);
     }
 
-  Future<void> passPhase1( String token, String userId) async{
-
-   if(fase <= 2){
-    fase = 2;}
+  Future<void> incrementaFase(Fase fase, String token, String userId) async{
+    faseCompleta = fase.id+1;
     notifyListeners();
     await http.put(
     Uri.parse('${Constants.BASE_URL}/$userId/fase.json?auth=$token'),
-    body: jsonEncode({"fase":fase}),);
+    body: jsonEncode({"fase":faseCompleta}),);
   }
 
 }

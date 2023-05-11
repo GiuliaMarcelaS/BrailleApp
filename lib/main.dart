@@ -57,6 +57,11 @@ class BrailleApp extends StatelessWidget{
           update:(ctx, auth, previous){
             return Cell(auth.token??'', auth.userId ?? '');
           },),
+        ChangeNotifierProxyProvider<Auth,Passer>(
+          create: (_) => Passer("", ''),
+          update:(ctx, auth, previous){
+            return Passer(auth.token??'', auth.userId ?? '');
+          },),
       ],
       child: MaterialApp(
         routes: {
@@ -65,7 +70,7 @@ class BrailleApp extends StatelessWidget{
          '/interface-screen':(ctx) => Interface(),
           '/traducao-screen':(ctx)=> TraducaoScreen(),
           '/F1-screen':(ctz) => F1(),
-          '/Fase1-screen':(ctz) => Fase1(),
+          // '/Fase1-screen':(ctz) => Fase1(),
           '/fases-screen':(ctz) => FaseScreen(),
         },
         ),

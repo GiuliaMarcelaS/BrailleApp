@@ -1,4 +1,5 @@
 import 'package:braille_app/models/fases.dart';
+import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/passer1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -15,6 +16,7 @@ class FaseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      final passer2 = Provider.of<Fase>(context);
+     final passer = Provider.of<Passer>(context);
      final passer1 = Provider.of<Passer1>(context);
      final auth = Provider.of<Auth>(context, listen: false);
      final fase = Provider.of<Fase>(context);
@@ -26,7 +28,7 @@ class FaseScreen extends StatelessWidget {
       ),
       body: Container(
                 child: IconButton(
-                  onPressed: () {passer1.addFase(passarItem);
+                  onPressed: () {passer.incrementaFase(faset, auth.token??'', auth.userId??'');
                   print(passer1.item);} //=> passer.passPhase1(auth.token ?? '',auth.userId ?? ''),
                   ,icon: Icon(Icons.arrow_circle_right),
                 ),
