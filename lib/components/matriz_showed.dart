@@ -8,7 +8,12 @@ import 'package:braille_app/models/auth.dart';
 import 'package:braille_app/models/ball.dart';
 
 class MatrizShowed extends StatefulWidget {
-  MatrizShowed({super.key});
+  int id;
+
+  MatrizShowed({
+    super.key,
+    this.id =0,
+    });
 
   @override
   State<MatrizShowed> createState() => _MatrizShowedState();

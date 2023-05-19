@@ -18,7 +18,7 @@ class _TranslationState extends State<Translation> {
   
   @override
   Widget build(BuildContext context) {
-    final ball = Provider.of<Ball>(context);
+    final ball = Provider.of<Ball>(context,);
     return Column(
       children: [
         Form(

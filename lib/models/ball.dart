@@ -7,6 +7,7 @@ import 'package:braille_app/utils/constants.dart';
 
 class Ball with ChangeNotifier{
   int id;
+  int cellType;
   bool pressedBall1;
   bool pressedBall2;
   bool pressedBall3;
@@ -17,6 +18,7 @@ class Ball with ChangeNotifier{
 
   Ball({
     this.id = 0,
+    this.cellType = 0,
     this.pressedBall1 = false,
     this.pressedBall2 = false,
     this.pressedBall3 = false,

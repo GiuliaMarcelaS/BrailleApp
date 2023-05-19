@@ -1,4 +1,5 @@
 import 'package:braille_app/components/fase_item.dart';
+import 'package:braille_app/components/translation.dart';
 import 'package:braille_app/models/fase_list.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';

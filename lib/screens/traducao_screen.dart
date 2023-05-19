@@ -1,4 +1,5 @@
 import 'package:braille_app/components/balls_grid.dart';
+import 'package:braille_app/components/cells_grid.dart';
 import 'package:braille_app/components/fase_grid.dart';
 import 'package:braille_app/components/matriz.dart';
 import 'package:braille_app/components/matriz_showed.dart';
@@ -18,8 +19,8 @@ class TraducaoScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          MatrizShowed(),
-          Translation(),
+          BallsGrid(),
+          Translation()
         ],
       ),
     );
