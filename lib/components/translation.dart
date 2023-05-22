@@ -14,11 +14,12 @@ class Translation extends StatefulWidget {
 
 class _TranslationState extends State<Translation> {
   String letra = '';
-
+  int tipo = 0;
   
   @override
   Widget build(BuildContext context) {
     final ball = Provider.of<Ball>(context,);
+     final Ball tipo = ModalRoute.of(context)!.settings.arguments as Ball;
     return Column(
       children: [
         Form(
@@ -27,7 +28,7 @@ class _TranslationState extends State<Translation> {
             onSubmitted: (valor) {
               ball.reset(letra);
               letra = valor;
-              ball.translate(letra);
+              ball.translate(letra,tipo);
             },
             controller: TextEditingController(),
           ),

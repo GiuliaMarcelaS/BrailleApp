@@ -15,18 +15,20 @@ class BallsGrid extends StatelessWidget {
   Widget build(BuildContext context) {
   final provider = Provider.of<BallsList>(context);
   final List<Ball> loadedBalls = provider.items;
-    return GridView.builder(
-      padding: const EdgeInsets.all(10),
-      itemCount: loadedBalls.length,
-      itemBuilder: (ctx, i) => ChangeNotifierProvider(
-        create: (_) => loadedBalls[i], 
-        child: BallItem()),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 3/2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-      ), 
-      );
+    return Expanded(
+      child: GridView.builder(
+        padding: const EdgeInsets.all(10),
+        itemCount: loadedBalls.length,
+        itemBuilder: (ctx, i) => ChangeNotifierProvider(
+          create: (_) => loadedBalls[i], 
+          child: BallItem()),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 3/2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+        ), 
+        ),
+    );
   }
 }

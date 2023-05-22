@@ -1,5 +1,6 @@
 import 'package:braille_app/components/ball_item.dart';
 import 'package:braille_app/components/cell_item.dart';
+import 'package:braille_app/components/matriz_showed.dart';
 import 'package:braille_app/models/ball.dart';
 import 'package:braille_app/models/balls_list.dart';
 import 'package:braille_app/models/cells_list.dart';
@@ -23,7 +24,7 @@ class CellsGrid extends StatelessWidget {
         itemCount: loadedCells.length,
         itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
           value: loadedCells[i], 
-          child: CellItem()),
+          child: MatrizShowed()),
         ),
     );
   }

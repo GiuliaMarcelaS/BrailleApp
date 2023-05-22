@@ -19,7 +19,7 @@ class TraducaoScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          BallsGrid(),
+          MatrizShowed(),
           Translation()
         ],
       ),

@@ -53,40 +53,20 @@ class Ball with ChangeNotifier{
 
    List duasMatrizes = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'];
     
-    translate(String letra){
-   if(duasMatrizes.contains(letra)){
-     if (letra=="0"){
-      pressedBall1=!pressedBall1;
+    translate2(String letra){
+      pressedBall2=!pressedBall2;
+      pressedBall4=!pressedBall4;
+    
+    notifyListeners();
     }
-    else if (letra=="1"){
-      pressedBall1=!pressedBall1;
-    }
-    else if (letra=="2"){
-      pressedBall1=!pressedBall1;
-    }
-    else if (letra=="3"){
-      pressedBall1=!pressedBall1;
-    }
-    else if (letra=="4"){
-      pressedBall1=!pressedBall1;
-    }
-    else if (letra=="5"){
-      pressedBall1=!pressedBall1;
-    }
-    else if (letra=="6"){
-      pressedBall1=!pressedBall1;
-    }
-    else if (letra=="7"){
-      pressedBall1=!pressedBall1;
-    }
-    else if (letra=="8"){
-      pressedBall1=!pressedBall1;
-    }
-    else if (letra=="9"){
-      pressedBall1=!pressedBall1;
-    }
-   }
-    else if (letra=="a"){
+
+    translate(String letra, Ball ball){
+      if (ball.cellType ==1){
+      pressedBall2=!pressedBall2;
+      pressedBall4=!pressedBall4;
+      }
+      if (ball.cellType ==2){
+    if (letra=="a"||letra=="A"){
       pressedBall1=!pressedBall1;
     }
     else if (letra=="b"){
@@ -221,7 +201,7 @@ class Ball with ChangeNotifier{
       pressedBall4=!pressedBall4;
       pressedBall5=!pressedBall5;
       pressedBall6=!pressedBall6;
-    }
+    }}
     notifyListeners();
    }
 
