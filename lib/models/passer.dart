@@ -6,8 +6,10 @@ import 'dart:convert';
 
 
 class Passer with ChangeNotifier{
-  String _token;
-  String _userId;
+  // ignore: unused_field
+  final String _token;
+  // ignore: unused_field
+  final String _userId;
   int faseCompleta;
 
   Passer(
@@ -16,6 +18,7 @@ class Passer with ChangeNotifier{
     {this.faseCompleta = 1,
     }
   );
+   // ignore: unused_element
    void _incrementaFase (Fase fase){
     faseCompleta = fase.id+1;
     notifyListeners();
@@ -26,6 +29,7 @@ class Passer with ChangeNotifier{
 
    final response = await http.put(
     Uri.parse('${Constants.BASE_URL}/$userId/fase.json?auth=$token'));
+    // ignore: avoid_print
     print(response.body);
     }
 

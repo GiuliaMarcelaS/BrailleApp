@@ -1,12 +1,9 @@
 import 'package:braille_app/exceptions/auth_exception.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:braille_app/models/auth.dart';
 
-enum AuthMode{Signup, Login}
+enum AuthMode{signup, login}
 
 class AuthForm extends StatefulWidget {
   const AuthForm({super.key});
@@ -20,14 +17,14 @@ class _AuthFormState extends State<AuthForm> {
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
-  AuthMode _authMode = AuthMode.Login;
-  Map<String, String> _authData ={
+  AuthMode _authMode = AuthMode.login;
+  final Map<String, String> _authData ={
     'email': '',
     'password': '',
   };
 
-  bool _isLogin() => _authMode == AuthMode.Login;
-  bool _isSignup() => _authMode == AuthMode.Signup;
+  bool _isLogin() => _authMode == AuthMode.login;
+  bool _isSignup() => _authMode == AuthMode.signup;
 
   Future<void> _submit() async {
     final isValid = _formKey.currentState?.validate() ?? false;
@@ -56,21 +53,21 @@ class _AuthFormState extends State<AuthForm> {
   void _switchAuthMode(){
     setState(() {
       if(_isLogin()){
-        _authMode = AuthMode.Signup;
+        _authMode = AuthMode.signup;
       } else{
-        _authMode = AuthMode.Login;
+        _authMode = AuthMode.login;
       }
     });
   }
 
   void _showErrorDialog(String msg){
     showDialog(context: context, builder: (ctx)=> AlertDialog(
-      title: Text('Ocorreu um erro'),
+      title: const Text('Ocorreu um erro'),
       content: Text(msg),
       actions: [
         TextButton(
           onPressed: (() => Navigator.of(context).pop()),
-           child: Text('Fechar'))
+           child: const Text('Fechar'))
       ],
     ));
   }
@@ -78,67 +75,68 @@ class _AuthFormState extends State<AuthForm> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Container(
-        child: Form(
-          key: _formKey,
-          child:Column(children: [
-            TextFormField(
-              decoration: InputDecoration(labelText: 'E-mail'),
-              keyboardType: TextInputType.emailAddress,
-              onSaved: (email) => _authData['email'] = email ??'',
-              validator: (_email) {
-                final email = _email ?? '';
-                if (email.trim().isEmpty|| !email.contains('@')){
-                  return 'Informe um e-mail válido';
-                  }
-                  return null;
-                },
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Senha'),
-              keyboardType: TextInputType.emailAddress,
-              obscureText: true,
-              controller: _passwordController,
-              onSaved: (password) => _authData['password'] = password ??'',
-              validator: (_password) {
-                final password = _password ?? '';
-                if (password.isEmpty||password.length < 5){
-                  return 'Informe uma senha válida';
-                }
-              },
-            ),
-            if(_isSignup())
-             TextFormField(
-              decoration: InputDecoration(labelText: 'Confirmar Senha'),
-              keyboardType: TextInputType.emailAddress,
-              obscureText: true,
-             // onSaved: (password) => _authData['password'] = password ??'',
-              validator: _isLogin() ? null
-              :(_password) {
-                final password = _password ?? '';
-                if(password != _passwordController.text){
-                  return 'Senhas informadas não conferem.';
+      child: Form(
+        key: _formKey,
+        child:Column(children: [
+          TextFormField(
+            decoration: const InputDecoration(labelText: 'E-mail'),
+            keyboardType: TextInputType.emailAddress,
+            onSaved: (email) => _authData['email'] = email ??'',
+            // ignore: no_leading_underscores_for_local_identifiers
+            validator: (_email) {
+              final email = _email ?? '';
+              if (email.trim().isEmpty|| !email.contains('@')){
+                return 'Informe um e-mail válido';
                 }
                 return null;
               },
-            ),
-            SizedBox(height: 20,),
-            if(_isLoading)
-            CircularProgressIndicator()
-            else
-            ElevatedButton(
-              onPressed: _submit, 
+          ),
+          TextFormField(
+            decoration: const InputDecoration(labelText: 'Senha'),
+            keyboardType: TextInputType.emailAddress,
+            obscureText: true,
+            controller: _passwordController,
+            onSaved: (password) => _authData['password'] = password ??'',
+            // ignore: no_leading_underscores_for_local_identifiers, body_might_complete_normally_nullable
+            validator: (_password) {
+              final password = _password ?? '';
+              if (password.isEmpty||password.length < 5){
+                return 'Informe uma senha válida';
+              }
+            },
+          ),
+          if(_isSignup())
+           TextFormField(
+            decoration: const InputDecoration(labelText: 'Confirmar Senha'),
+            keyboardType: TextInputType.emailAddress,
+            obscureText: true,
+           // onSaved: (password) => _authData['password'] = password ??'',
+            validator: _isLogin() ? null
+            // ignore: no_leading_underscores_for_local_identifiers
+            :(_password) {
+              final password = _password ?? '';
+              if(password != _passwordController.text){
+                return 'Senhas informadas não conferem.';
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 20,),
+          if(_isLoading)
+          const CircularProgressIndicator()
+          else
+          ElevatedButton(
+            onPressed: _submit, 
+            child: Text(
+              _authMode == AuthMode.login? 'ENTRAR': 'REGISTRAR',
+            )),
+            //Spacer(),
+            TextButton(
+              onPressed: _switchAuthMode, 
               child: Text(
-                _authMode == AuthMode.Login? 'ENTRAR': 'REGISTRAR',
-              )),
-              //Spacer(),
-              TextButton(
-                onPressed: _switchAuthMode, 
-                child: Text(
-                  _isLogin() ? 'REGISTRAR': 'JÁ POSSUI CONTA?'
-                ))
-          ],) ),
-      ),
+                _isLogin() ? 'REGISTRAR': 'JÁ POSSUI CONTA?'
+              ))
+        ],) ),
     );
   }
 }

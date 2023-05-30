@@ -52,6 +52,7 @@ class Auth with ChangeNotifier{
     ),
     );
     notifyListeners();
+    // ignore: avoid_print
     print(body);
   }
 

@@ -5,9 +5,9 @@ import '../models/fase_list.dart';
 import '../models/fases.dart';
 import 'fase_item.dart';
 
-bool _isButtonDisabled = true;
-
 class FaseGrid extends StatelessWidget {
+  const FaseGrid({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class FaseGrid extends StatelessWidget {
       itemCount: loadedFases.length,
       itemBuilder: (ctx, i) => ChangeNotifierProvider(
         create: (_) => loadedFases[i], 
-        child: FaseItem()),
+        child: const FaseItem()),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 3/2,

@@ -1,14 +1,13 @@
 import 'dart:convert';
-import 'dart:math';
-
 import 'package:braille_app/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Cell with ChangeNotifier {
- String _token;
- // String? id;
+ // ignore: unused_field
+ final String _token;
+  // ignore: unused_field
   final String _userId;
   int linha;
   int coluna;
@@ -18,13 +17,11 @@ class Cell with ChangeNotifier {
   bool isClicked4;
   bool isClicked5;
   bool isClicked6;
-//  String _token;
 
   Cell(
     this._token,
     this._userId,
     {
-    //this.id,
     this.linha = 1,
     this.coluna = 1,
     this.isClicked1 = false,
@@ -35,6 +32,7 @@ class Cell with ChangeNotifier {
     this.isClicked6 = false,
   });
 
+  // ignore: unused_element
   void _toggleBall1 (){
     isClicked1 = !isClicked1;
     notifyListeners();
@@ -45,6 +43,7 @@ class Cell with ChangeNotifier {
 
    final response = await http.put(
     Uri.parse('${Constants.TESTE2_URL}/$userId/teste.json?auth=$token'));
+    // ignore: avoid_print
     print(response.body);
     }
 
@@ -56,12 +55,6 @@ class Cell with ChangeNotifier {
     Uri.parse('${Constants.TESTE2_URL}/$userId/teste.json?auth=$token'),
     body: jsonEncode({"isClicked1":isClicked1}),);
 
-    // final ball1Response = await http.get(
-    //   Uri.parse('${Constants.BASE_URL}/$userId.json?auth=$token'),
-    // );
-
-    // Map<String, dynamic> ball1Data = ball1Response.body == 'null' ? {} : jsonDecode(ball1Response.body);
-    
   }
 
 

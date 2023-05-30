@@ -1,9 +1,8 @@
-import 'package:braille_app/models/fases.dart';
 import 'package:braille_app/models/passer_item.dart';
 import 'package:flutter/material.dart';
 
 class Passer1 with ChangeNotifier{
-  Map<int, PasserItem> _item = {};
+  final Map<int, PasserItem> _item = {};
 
   Map<int, PasserItem> get item {
     return {..._item};

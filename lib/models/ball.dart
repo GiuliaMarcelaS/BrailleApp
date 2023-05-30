@@ -1,9 +1,4 @@
-import 'dart:convert';
-
-import 'package:braille_app/components/translation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:braille_app/utils/constants.dart';
 
 class Ball with ChangeNotifier{
   int id;
@@ -52,23 +47,12 @@ class Ball with ChangeNotifier{
    }
 
    List duasMatrizes = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'];
-    
-    translate2(String letra){
-      pressedBall2=!pressedBall2;
-      pressedBall4=!pressedBall4;
-    
-    notifyListeners();
-    }
 
-    translate(String letra, Ball ball){
-      if (ball.cellType ==1){
+    translate(String letra){
+      if (letra =='a'){
       pressedBall2=!pressedBall2;
       pressedBall4=!pressedBall4;
       }
-      if (ball.cellType ==2){
-    if (letra=="a"||letra=="A"){
-      pressedBall1=!pressedBall1;
-    }
     else if (letra=="b"){
       pressedBall1=!pressedBall1;
       pressedBall3=!pressedBall3;
@@ -201,7 +185,7 @@ class Ball with ChangeNotifier{
       pressedBall4=!pressedBall4;
       pressedBall5=!pressedBall5;
       pressedBall6=!pressedBall6;
-    }}
+    }
     notifyListeners();
    }
 

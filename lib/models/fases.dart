@@ -18,14 +18,6 @@ class Fase with ChangeNotifier{
     
   });
    
-  //  Future <void> selecionaFase() async{
-  //   fase = id+1;
-  //   notifyListeners();
-
-  //   await http.patch(
-  //     Uri.parse("${Constants.TESTE2_URL}/fase/$id.json"),
-  //     body: jsonEncode({"fase" : fase}),
-  //   );}
    Future <void> habilitaFase() async{
     faseHabilitada = !faseHabilitada;
     notifyListeners();

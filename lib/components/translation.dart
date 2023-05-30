@@ -1,8 +1,5 @@
 import 'package:braille_app/models/ball.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
 class Translation extends StatefulWidget {
@@ -14,28 +11,23 @@ class Translation extends StatefulWidget {
 
 class _TranslationState extends State<Translation> {
   String letra = '';
-  int tipo = 0;
   
   @override
   Widget build(BuildContext context) {
     final ball = Provider.of<Ball>(context,);
-     final Ball tipo = ModalRoute.of(context)!.settings.arguments as Ball;
     return Column(
       children: [
         Form(
           child: TextField(
-            decoration: InputDecoration(labelText: 'insira uma letra'),
+            decoration: const InputDecoration(labelText: 'insira uma letra'),
             onSubmitted: (valor) {
               ball.reset(letra);
               letra = valor;
-              ball.translate(letra,tipo);
+              ball.translate(letra);
             },
             controller: TextEditingController(),
           ),
         ),
-        
-       // ElevatedButton(onPressed: ball.translate(letra), child: Text("traduzir")
-        //)
       ],
     );
   }

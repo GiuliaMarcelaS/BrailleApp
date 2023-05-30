@@ -1,10 +1,8 @@
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
-import 'package:braille_app/screens/modulos_screen.dart';
+
 
 class Interface extends StatelessWidget {
- Interface({super.key});
+ const Interface({super.key});
 
   void _modulos(BuildContext context){
     Navigator.of(context).pushNamed('/modulos-screen');
@@ -13,7 +11,7 @@ class Interface extends StatelessWidget {
   void _traduzir(BuildContext context){
     Navigator.of(context).pushNamed('/traducao-screen');
 }
-  bool _isButtonDisabled = false;
+  final bool _isButtonDisabled = false;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +23,8 @@ class Interface extends StatelessWidget {
                 color: Colors.white,
                 shape: BoxShape.circle,
               ),
-              padding: EdgeInsets.all(29),
-              margin: EdgeInsets.only(top: 100, bottom: 5),
+              padding: const EdgeInsets.all(29),
+              margin: const EdgeInsets.only(top: 100, bottom: 5),
               alignment: Alignment.center,
               width: 180,
               height: 200,
@@ -35,25 +33,24 @@ class Interface extends StatelessWidget {
               ),
             ),
             Container(
-              child: Text('Muiraquitã em Braille',style: TextStyle(color: Colors.white)),
               alignment: Alignment.center,
               height: 20,
-             // margin: EdgeInsets.only(top: 1),
+              child: const Text('Muiraquitã em Braille',style: TextStyle(color: Colors.white)),
               ),
             Container(
-              child: ElevatedButton(onPressed: _isButtonDisabled ? null : (() => _traduzir(context)), child: Text('Realizar Tradução'), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: Size.fromWidth(350))
+              margin: const EdgeInsets.only(top: 125),
+              child: ElevatedButton(onPressed: _isButtonDisabled ? null : (() => _traduzir(context)), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: const Size.fromWidth(350)), child: const Text('Realizar Tradução')
               ),
-              margin: EdgeInsets.only(top: 125),
               ),
              Container(
-                child: ElevatedButton(onPressed: (() => _modulos(context)), child: Text('Aprender Braille'), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: Size.fromWidth(350))
+                margin: const EdgeInsets.only(top: 10),
+                child: ElevatedButton(onPressed: (() => _modulos(context)), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: const Size.fromWidth(350)), child: const Text('Aprender Braille')
                 ),
-                margin: EdgeInsets.only(top: 10),
                 ),
             
               Container(
-                child: Text('Bem-Vindo!', style: TextStyle(color: Colors.white),),
-                margin: EdgeInsets.only(top:70),
+                margin: const EdgeInsets.only(top:70),
+                child: const Text('Bem-Vindo!', style: TextStyle(color: Colors.white),),
                 )
           ],
         ),

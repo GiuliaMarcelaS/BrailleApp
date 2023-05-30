@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:braille_app/data/fases_data.dart';
 
 class FaseList with ChangeNotifier{
-  List<Fase> _items = fasesData;
+  final List<Fase> _items = fasesData;
 
   List<Fase> get items => [..._items];
 
