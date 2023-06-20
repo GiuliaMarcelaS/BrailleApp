@@ -15,13 +15,14 @@ class FaseScreen extends StatelessWidget {
      final passer = Provider.of<Passer>(context);
    //  final passer1 = Provider.of<Passer1>(context);
      final auth = Provider.of<Auth>(context, listen: false);
+     final fase = Provider.of<Fase>(context);
    final Fase faset = ModalRoute.of(context)!.settings.arguments as Fase;
     return Scaffold(
       appBar: AppBar(
         title: Text(faset.title),
       ),
       body: IconButton(
-        onPressed: () {passer.incrementaFase(faset, auth.token??'', auth.userId??'');
+        onPressed: () {passer.incrementaFaset(faset,);
         // ignore: avoid_print
        // print(passer1.item);
         }

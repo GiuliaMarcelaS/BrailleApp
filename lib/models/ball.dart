@@ -8,16 +8,28 @@ class Ball with ChangeNotifier{
   bool pressedBall4;
   bool pressedBall5;
   bool pressedBall6;
+  bool pressedBall11;
+  bool pressedBall22;
+  bool pressedBall33;
+  bool pressedBall44;
+  bool pressedBall55;
+  bool pressedBall66;
   String translation;
 
   Ball({
     this.id = 0,
-    this.pressedBall1 = false,
-    this.pressedBall2 = false,
-    this.pressedBall3 = false,
-    this.pressedBall4 = false,
-    this.pressedBall5 = false,
-    this.pressedBall6 = false,
+    required this.pressedBall1,
+    required this.pressedBall2,
+    required this.pressedBall3,
+    required this.pressedBall4,
+    required this.pressedBall5,
+    required this.pressedBall6,
+    this.pressedBall11 = false,
+    this.pressedBall22 = false,
+    this.pressedBall33 = false,
+    this.pressedBall44 = false,
+    this.pressedBall55 = false,
+    this.pressedBall66 = false,
     this.translation = "",
     
   });
@@ -51,21 +63,23 @@ class Ball with ChangeNotifier{
 
    List duasMatrizes = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'];
 
-    translate(String letra){
+    translate(String letra, int id){
       for(int i = 0; i<letra.length;i++){
-      // pressedBall1=false;
-      // pressedBall2=false;
-      // pressedBall3=false;
-      // pressedBall4=false;
-      // pressedBall5=false;
-      // pressedBall6=false;
+      pressedBall1=false;
+      pressedBall2=false;
+      pressedBall3=false;
+      pressedBall4=false;
+      pressedBall5=false;
+      pressedBall6=false;
       if (letra[i] =='a'){
-      pressedBall2=!pressedBall2;
-      pressedBall4=!pressedBall4;
+      pressedBall1=!pressedBall1;
+      pressedBall11=pressedBall1;
       }
     else if (letra[i]=="b"){
       pressedBall1=!pressedBall1;
       pressedBall3=!pressedBall3;
+      pressedBall11=pressedBall1;
+      pressedBall33=pressedBall3;
     }
     else if (letra[i]=="c"){
       pressedBall1=!pressedBall1;
