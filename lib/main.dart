@@ -46,7 +46,7 @@ class BrailleApp extends StatelessWidget{
           create: (_) => Fase(),
           ),
           ChangeNotifierProvider(
-          create: (_) => Ball(pressedBall1: true,pressedBall2: false,pressedBall3: false,pressedBall4: false,pressedBall5: false,pressedBall6: false),
+          create: (_) => Ball(),
           ),
         ChangeNotifierProvider(
           create: (_) => Passer1(),

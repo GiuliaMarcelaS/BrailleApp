@@ -33,7 +33,7 @@ class _TranslationState extends State<Translation> {
             onSubmitted: (valor) {
               ball.reset(letra);
               letra = valor;
-             // ball.translate(letra,cells.id);
+              ball.translate(letra,cells.id);
               cells.addCells(letra);
               cells.id = 0;
             },

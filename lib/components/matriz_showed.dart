@@ -33,10 +33,10 @@ class _MatrizShowedState extends State<MatrizShowed> {
               Row(
                 children: [
                   Icon(
-                    ballt.pressedBall1? Icons.circle : Icons.circle_outlined,
+                    ballt.balls1[i]? Icons.circle : Icons.circle_outlined,
                   ),
                   Icon(
-                    ballt.pressedBall2? Icons.circle : Icons.circle_outlined,
+                    ballt.balls2[i]? Icons.circle : Icons.circle_outlined,
                   ),
                     
                 ],
@@ -44,20 +44,20 @@ class _MatrizShowedState extends State<MatrizShowed> {
                Row(
                 children: [
                   Icon(
-                    ballt.pressedBall3? Icons.circle : Icons.circle_outlined,
+                   ballt.balls3[i]? Icons.circle : Icons.circle_outlined,
                   ),
                      Icon(
-                       ballt.pressedBall4? Icons.circle : Icons.circle_outlined,
+                       ballt.balls4[i]? Icons.circle : Icons.circle_outlined,
                      ),
                 ],
               ),
                Row(
                 children: [
                    Icon(
-                     ballt.pressedBall5? Icons.circle : Icons.circle_outlined,
+                     ballt.balls5[i]? Icons.circle : Icons.circle_outlined,
                    ),
                       Icon(
-                        ballt.pressedBall6? Icons.circle : Icons.circle_outlined,
+                        ballt.balls6[i]? Icons.circle : Icons.circle_outlined,
                       ),
                 ],
               ),

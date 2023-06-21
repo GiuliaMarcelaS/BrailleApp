@@ -19,15 +19,15 @@ class CellsList with ChangeNotifier{
       //id = 0;
       for(int i =0; i<phraseLength;i++)
       {
-       // _items.add(Ball());
-        if (frase[i] =='a'){
-      _items.add(Ball(pressedBall1: true,pressedBall2: false,pressedBall3: false, pressedBall4: false,pressedBall5: false,pressedBall6: false));
-      id=id+1;
-      }
-    else  if (frase[i] =='b'){
-      _items.add(Ball(pressedBall1: true,pressedBall2: false,pressedBall3: true, pressedBall4: false,pressedBall5: false,pressedBall6: false));
-      id=id+1;
-      }
+        _items.add(Ball());
+    //     if (frase[i] =='a'){
+    //   _items.add(Ball(pressedBall1: true,pressedBall2: false,pressedBall3: false, pressedBall4: false,pressedBall5: false,pressedBall6: false));
+    //   id=id+1;
+    //   }
+    // else  if (frase[i] =='b'){
+    //   _items.add(Ball(pressedBall1: true,pressedBall2: false,pressedBall3: true, pressedBall4: false,pressedBall5: false,pressedBall6: false));
+    //   id=id+1;
+    //   }
       }
     notifyListeners();
   }

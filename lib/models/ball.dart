@@ -18,12 +18,12 @@ class Ball with ChangeNotifier{
 
   Ball({
     this.id = 0,
-    required this.pressedBall1,
-    required this.pressedBall2,
-    required this.pressedBall3,
-    required this.pressedBall4,
-    required this.pressedBall5,
-    required this.pressedBall6,
+    this.pressedBall1 = false,
+    this.pressedBall2 = false,
+    this.pressedBall3 = false,
+    this.pressedBall4 = false,
+    this.pressedBall5 = false,
+    this.pressedBall6 = false,
     this.pressedBall11 = false,
     this.pressedBall22 = false,
     this.pressedBall33 = false,
@@ -31,7 +31,6 @@ class Ball with ChangeNotifier{
     this.pressedBall55 = false,
     this.pressedBall66 = false,
     this.translation = "",
-    
   });
    
     void pressBall(){
@@ -62,153 +61,155 @@ class Ball with ChangeNotifier{
   //  }
 
    List duasMatrizes = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'];
-
+   List balls1 = [false,false,false,false,false,false];
+   List balls2 = [false,false,false,false,false,false];
+   List balls3 = [false,false,false,false,false,false];
+   List balls4 = [false,false,false,false,false,false];
+   List balls5 = [false,false,false,false,false,false];
+   List balls6 = [false,false,false,false,false,false];
     translate(String letra, int id){
       for(int i = 0; i<letra.length;i++){
-      pressedBall1=false;
-      pressedBall2=false;
-      pressedBall3=false;
-      pressedBall4=false;
-      pressedBall5=false;
-      pressedBall6=false;
+        balls1[i] = false;
+        balls2[i] = false;
+        balls3[i] = false;
+        balls4[i] = false;
+        balls5[i] = false;
+        balls6[i] = false;
       if (letra[i] =='a'){
-      pressedBall1=!pressedBall1;
-      pressedBall11=pressedBall1;
+      balls1[i]=!balls1[i];
       }
     else if (letra[i]=="b"){
-      pressedBall1=!pressedBall1;
-      pressedBall3=!pressedBall3;
-      pressedBall11=pressedBall1;
-      pressedBall33=pressedBall3;
+      balls1[i]=!balls1[i];
+      balls3[i]=!balls3[i];
     }
     else if (letra[i]=="c"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
     }
     else if (letra[i]=="d"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall4=!pressedBall4;
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+      balls4[i]=!balls4[i];
     }
     else if (letra[i]=="e"){
-      pressedBall1=!pressedBall1;
-      pressedBall4=!pressedBall4;
+      balls1[i]=!balls1[i];
+      balls4[i]=!balls4[i];
     }
     else if (letra[i]=="f"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
     }
     else if (letra[i]=="g"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
-      pressedBall4=!pressedBall4;
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
+      balls4[i]=!balls4[i];
     }
     else if (letra[i]=="h"){
-      pressedBall1=!pressedBall1;
-      pressedBall3=!pressedBall3;
-      pressedBall4=!pressedBall4;
+      balls1[i]=!balls1[i];
+      balls3[i]=!balls3[i];
+      balls4[i]=!balls4[i];
     }
     else if (letra[i]=="i"){
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
     }
     else if (letra[i]=="j"){
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
-      pressedBall4=!pressedBall4;
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
+      balls4[i]=!balls4[i];
     }
     else if (letra[i]=="k"){
-      pressedBall1=!pressedBall1;
-      pressedBall5=!pressedBall5;
+      balls1[i]=!balls1[i];
+      balls5[i]=!balls5[i];
     }
     else if (letra[i]=="l"){
-      pressedBall1=!pressedBall1;
-      pressedBall3=!pressedBall3;
-      pressedBall5=!pressedBall5;
+      balls1[i]=!balls1[i];
+      balls3[i]=!balls3[i];
+      balls5[i]=!balls5[i];
     }
     else if (letra[i]=="m"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall5=!pressedBall5;
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+      balls5[i]=!balls5[i];
     }
     else if (letra[i]=="n"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall4=!pressedBall4;
-      pressedBall5=!pressedBall5;
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+      balls4[i]=!balls4[i];
+      balls5[i]=!balls5[i];
     }
     else if (letra[i]=="o"){
-      pressedBall1=!pressedBall1;
-      pressedBall4=!pressedBall4;
-      pressedBall5=!pressedBall5;
+      balls1[i]=!balls1[i];
+      balls4[i]=!balls4[i];
+      balls5[i]=!balls5[i];
     }
     else if (letra[i]=="p"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
-      pressedBall5=!pressedBall5;
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
+      balls5[i]=!balls5[i];
     }
     else if (letra[i]=="q"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
-      pressedBall4=!pressedBall4;
-      pressedBall5=!pressedBall5;
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
+      balls4[i]=!balls4[i];
+      balls5[i]=!balls5[i];
     }
     else if (letra[i]=="r"){
-      pressedBall1=!pressedBall1;
-      pressedBall3=!pressedBall3;
-      pressedBall4=!pressedBall4;
-      pressedBall5=!pressedBall5;
+      balls1[i]=!balls1[i];
+      balls3[i]=!balls3[i];
+      balls4[i]=!balls4[i];
+      balls5[i]=!balls5[i];
     }
     else if (letra[i]=="s"){
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
-      pressedBall5=!pressedBall5;
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
+      balls5[i]=!balls5[i];
     }
     else if (letra[i]=="t"){
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
-      pressedBall4=!pressedBall4;
-      pressedBall5=!pressedBall5;
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
+      balls4[i]=!balls4[i];
+      balls5[i]=!balls5[i];
     }
     else if (letra[i]=="u"){
-      pressedBall1=!pressedBall1;
-      pressedBall5=!pressedBall5;
-      pressedBall6=!pressedBall6;
+      balls1[i]=!balls1[i];
+      balls5[i]=!balls5[i];
+      balls6[i]=!balls6[i];
     }
     else if (letra[i]=="v"){
-      pressedBall1=!pressedBall1;
-      pressedBall3=!pressedBall3;
-      pressedBall5=!pressedBall5;
-      pressedBall6=!pressedBall6;
+      balls1[i]=!balls1[i];
+      balls3[i]=!balls3[i];
+      balls5[i]=!balls5[i];
+      balls6[i]=!balls6[i];
     }
     else if (letra[i]=="w"){
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
-      pressedBall4=!pressedBall4;
-      pressedBall6=!pressedBall6;
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
+      balls4[i]=!balls4[i];
+      balls6[i]=!balls6[i];
     }
     else if (letra[i]=="x"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall5=!pressedBall5;
-      pressedBall6=!pressedBall6;
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+      balls5[i]=!balls5[i];
+      balls6[i]=!balls6[i];
     }
     else if (letra[i]=="y"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall4=!pressedBall4;
-      pressedBall5=!pressedBall5;
-      pressedBall6=!pressedBall6;
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+      balls4[i]=!balls4[i];
+      balls5[i]=!balls5[i];
+      balls6[i]=!balls6[i];
     }
     else if (letra[i]=="z"){
-      pressedBall1=!pressedBall1;
-      pressedBall4=!pressedBall4;
-      pressedBall5=!pressedBall5;
-      pressedBall6=!pressedBall6;
+      balls1[i]=!balls1[i];
+      balls4[i]=!balls4[i];
+      balls5[i]=!balls5[i];
+      balls6[i]=!balls6[i];
     }
       }
     notifyListeners();
