@@ -19,19 +19,11 @@ class Passer with ChangeNotifier{
     }
   );
    // ignore: unused_element
-   void _incrementaFase (Fase fase){
+   void incrementaFaset (Fase fase){
     faseCompleta = fase.id+1;
     notifyListeners();
   }
 
-  
-  Future<void> loadPhase(String token, String userId) async{
-
-   final response = await http.put(
-    Uri.parse('${Constants.BASE_URL}/$userId/fase.json?auth=$token'));
-    // ignore: avoid_print
-    print(response.body);
-    }
 
   Future<void> incrementaFase(Fase fase, String token, String userId) async{
     faseCompleta = fase.id+1;

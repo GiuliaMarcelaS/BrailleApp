@@ -18,7 +18,8 @@ class _MatrizShowedState extends State<MatrizShowed> {
   Widget build(BuildContext context) {
      final provider = Provider.of<CellsList>(context);
      final List<Ball> loadedCells = provider.items;
-    final ball = Provider.of<Ball>(context);
+    final ballt = Provider.of<Ball>(context);
+   // final Ball ballt = ModalRoute.of(context)!.settings.arguments as Ball;
     return Expanded(
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
@@ -32,10 +33,10 @@ class _MatrizShowedState extends State<MatrizShowed> {
               Row(
                 children: [
                   Icon(
-                    ball.pressedBall1? Icons.circle : Icons.circle_outlined,
+                    ballt.pressedBall1? Icons.circle : Icons.circle_outlined,
                   ),
                   Icon(
-                    ball.pressedBall2? Icons.circle : Icons.circle_outlined,
+                    ballt.pressedBall2? Icons.circle : Icons.circle_outlined,
                   ),
                     
                 ],
@@ -43,20 +44,20 @@ class _MatrizShowedState extends State<MatrizShowed> {
                Row(
                 children: [
                   Icon(
-                    ball.pressedBall3? Icons.circle : Icons.circle_outlined,
+                    ballt.pressedBall3? Icons.circle : Icons.circle_outlined,
                   ),
                      Icon(
-                       ball.pressedBall4? Icons.circle : Icons.circle_outlined,
+                       ballt.pressedBall4? Icons.circle : Icons.circle_outlined,
                      ),
                 ],
               ),
                Row(
                 children: [
                    Icon(
-                     ball.pressedBall5? Icons.circle : Icons.circle_outlined,
+                     ballt.pressedBall5? Icons.circle : Icons.circle_outlined,
                    ),
                       Icon(
-                        ball.pressedBall6? Icons.circle : Icons.circle_outlined,
+                        ballt.pressedBall6? Icons.circle : Icons.circle_outlined,
                       ),
                 ],
               ),
