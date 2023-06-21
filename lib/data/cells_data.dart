@@ -1,6 +1,6 @@
 import 'package:braille_app/models/ball.dart';
 
 final cellsData = [
-  Ball(cellType: 1),
-  Ball(cellType: 2),
+  Ball(id: 1),
+  Ball(id: 2),
   ];
