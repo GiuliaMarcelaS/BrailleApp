@@ -61,12 +61,12 @@ class Ball with ChangeNotifier{
   //  }
 
    List duasMatrizes = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'];
-   List balls1 = [false,false,false,false,false,false];
-   List balls2 = [false,false,false,false,false,false];
-   List balls3 = [false,false,false,false,false,false];
-   List balls4 = [false,false,false,false,false,false];
-   List balls5 = [false,false,false,false,false,false];
-   List balls6 = [false,false,false,false,false,false];
+   List balls1 = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+   List balls2 = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+   List balls3 = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+   List balls4 = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+   List balls5 = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+   List balls6 = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
     translate(String letra, int id){
       for(int i = 0; i<letra.length;i++){
         balls1[i] = false;
