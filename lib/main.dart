@@ -8,9 +8,13 @@ import 'package:braille_app/models/fase_list.dart';
 import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/passer1.dart';
 import 'package:braille_app/models/passer_item.dart';
+import 'package:braille_app/screens/alphabet_translator_screen.dart';
 import 'package:braille_app/screens/auth_or_home_screen.dart';
+import 'package:braille_app/screens/expressions_translator_screen.dart';
 import 'package:braille_app/screens/fase_screen.dart';
-import 'package:braille_app/screens/traducao_screen.dart';
+import 'package:braille_app/screens/number_translator_screen.dart';
+import 'package:braille_app/screens/phrase_translator_screen.dart';
+import 'package:braille_app/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/modulos_screen.dart';
@@ -70,7 +74,11 @@ class BrailleApp extends StatelessWidget{
           '/': (ctx) => const AuthOrHomePage(),
           '/modulos-screen': (ctx) => const ModulosScreen(),
          '/interface-screen':(ctx) => const Interface(),
-          '/traducao-screen':(ctx)=> const TraducaoScreen(),
+         '/tabs-screen':(ctx) => const TabsScreen(),
+          '/phrase-translator-screen':(ctx)=> const PhraseTranslatorScreen(),
+          '/alphabet-translator-screen':(ctx)=> const AlphabetTranslatorScreen(),
+          '/number-translator-screen':(ctx)=> const NumberTranslatorScreen(),
+          '/expression-translator-screen':(ctx)=> const ExpressionTranslatorScreen(),
           '/fases-screen':(ctz) => const FaseScreen(),
         },
         ),

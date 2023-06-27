@@ -82,6 +82,10 @@ class Ball with ChangeNotifier{
       balls1[i]=!balls1[i];
       balls3[i]=!balls3[i];
     }
+    else if (letra[i]=="A"){
+      balls2[i]=!balls2[i];
+      balls6[i]=!balls6[i];
+    }
     else if (letra[i]=="c"){
       balls1[i]=!balls1[i];
       balls2[i]=!balls2[i];

@@ -24,7 +24,18 @@ class _TranslationState extends State<Translation> {
   Widget build(BuildContext context) {
     final ball = Provider.of<Ball>(context,);
     final cells = Provider.of<CellsList>(context,);
-    // final Ball ballt = ModalRoute.of(context)!.settings.arguments as Ball;
+    identifyUpperCase(String frase){
+      String fraseAlterada ='';
+       List duasMatrizes = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'];
+      for(int i =0; i<frase.length; i++){
+        if(duasMatrizes.contains(frase[i])){
+          fraseAlterada = fraseAlterada +'A${frase[i].toLowerCase()}'; 
+        }
+        else{
+          fraseAlterada=fraseAlterada+frase[i];
+        }
+      } return fraseAlterada;
+    }
     return Column(
       children: [
         Form(
@@ -32,7 +43,7 @@ class _TranslationState extends State<Translation> {
             decoration: const InputDecoration(labelText: 'insira uma letra'),
             onSubmitted: (valor) {
               ball.reset(letra);
-              letra = valor;
+              letra = identifyUpperCase(valor);
               ball.translate(letra,cells.id);
               cells.addCells(letra);
               cells.id = 0;
