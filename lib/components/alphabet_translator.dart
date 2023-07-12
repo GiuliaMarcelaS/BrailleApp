@@ -3,23 +3,16 @@ import 'package:braille_app/models/cells_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Translation extends StatefulWidget {
-  const Translation({super.key});
+class AlphabetTranslator extends StatefulWidget {
+  const AlphabetTranslator({super.key});
 
   @override
-  State<Translation> createState() => _TranslationState();
+  State<AlphabetTranslator> createState() => _TranslationState();
 }
 
-class _TranslationState extends State<Translation> {
+class _TranslationState extends State<AlphabetTranslator> {
   String letra = '';
 
-  //  refreshCells(BuildContext context,){
-  //   return Provider.of<CellsList>(
-  //     context,
-  //     listen: false,
-  //   ).addCells(letra, Ball());
-  // }
-  
   @override
   Widget build(BuildContext context) {
     final ball = Provider.of<Ball>(context,);
@@ -43,10 +36,10 @@ class _TranslationState extends State<Translation> {
             decoration: const InputDecoration(labelText: 'insira uma letra'),
             onSubmitted: (valor) {
               ball.reset(letra);
-              letra = identifyUpperCase(valor);
-              ball.translatePhrase(letra,cells.id);
-              cells.addCells(letra);
-              cells.id = 0;
+              letra = valor;
+              // letra = identifyUpperCase(valor);
+              ball.cells(letra);
+              cells.addOneCell(letra);
             },
             controller: TextEditingController(),
           ),

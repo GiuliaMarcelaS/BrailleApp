@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:braille_app/models/ball.dart';
 
-class MatrizShowed extends StatefulWidget {
+class MatrizAlphabet extends StatefulWidget {
 
-  const MatrizShowed({
+  const MatrizAlphabet({
     super.key,
     });
 
   @override
-  State<MatrizShowed> createState() => _MatrizShowedState();
+  State<MatrizAlphabet> createState() => _MatrizAlphabetState();
 }
 
-class _MatrizShowedState extends State<MatrizShowed> {
+class _MatrizAlphabetState extends State<MatrizAlphabet> {
   @override
   Widget build(BuildContext context) {
      final provider = Provider.of<CellsList>(context);
@@ -32,10 +32,10 @@ class _MatrizShowedState extends State<MatrizShowed> {
               Row(
                 children: [
                   Icon(
-                    ballt.balls1[i]? Icons.circle : Icons.circle_outlined,
+                    ballt.pressedBall1? Icons.circle : Icons.circle_outlined,
                   ),
                   Icon(
-                    ballt.balls2[i]? Icons.circle : Icons.circle_outlined,
+                    ballt.pressedBall2? Icons.circle : Icons.circle_outlined,
                   ),
                     
                 ],
@@ -43,20 +43,20 @@ class _MatrizShowedState extends State<MatrizShowed> {
                Row(
                 children: [
                   Icon(
-                   ballt.balls3[i]? Icons.circle : Icons.circle_outlined,
+                   ballt.pressedBall3? Icons.circle : Icons.circle_outlined,
                   ),
                      Icon(
-                       ballt.balls4[i]? Icons.circle : Icons.circle_outlined,
+                       ballt.pressedBall4? Icons.circle : Icons.circle_outlined,
                      ),
                 ],
               ),
                Row(
                 children: [
                    Icon(
-                     ballt.balls5[i]? Icons.circle : Icons.circle_outlined,
+                     ballt.pressedBall5? Icons.circle : Icons.circle_outlined,
                    ),
                       Icon(
-                        ballt.balls6[i]? Icons.circle : Icons.circle_outlined,
+                        ballt.pressedBall6? Icons.circle : Icons.circle_outlined,
                       ),
                 ],
               ),

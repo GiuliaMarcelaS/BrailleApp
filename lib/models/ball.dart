@@ -67,7 +67,7 @@ class Ball with ChangeNotifier{
    List balls4 = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
    List balls5 = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
    List balls6 = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
-    translate(String letra, int id){
+    translatePhrase(String letra, int id){
       for(int i = 0; i<letra.length;i++){
         balls1[i] = false;
         balls2[i] = false;
@@ -229,9 +229,8 @@ class Ball with ChangeNotifier{
    }
 
    void cells (String letra){
-    List matrix;
     if (letra =='a'){
-      matrix = [true,false,false,false,false,false];
+      pressedBall1=!pressedBall1;
       }
     else if (letra=="b"){
       pressedBall1=!pressedBall1;
