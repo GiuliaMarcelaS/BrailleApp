@@ -218,6 +218,68 @@ class Ball with ChangeNotifier{
       }
     notifyListeners();
    }
+    translateNumber(String letra, int id){
+      for(int i = 0; i<letra.length;i++){
+        balls1[i] = false;
+        balls2[i] = false;
+        balls3[i] = false;
+        balls4[i] = false;
+        balls5[i] = false;
+        balls6[i] = false;
+      if (letra[i] =='1'){
+      balls1[i]=!balls1[i];
+      }
+    else if (letra[i]=="2"){
+      balls1[i]=!balls1[i];
+      balls3[i]=!balls3[i];
+    }
+    else if (letra[i]=="A"){
+      balls2[i]=!balls2[i];
+      balls4[i]=!balls4[i];
+      balls5[i]=!balls5[i];
+      balls6[i]=!balls6[i];
+    }
+    else if (letra[i]=="3"){
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+    }
+    else if (letra[i]=="4"){
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+      balls4[i]=!balls4[i];
+    }
+    else if (letra[i]=="5"){
+      balls1[i]=!balls1[i];
+      balls4[i]=!balls4[i];
+    }
+    else if (letra[i]=="6"){
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
+    }
+    else if (letra[i]=="7"){
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
+      balls4[i]=!balls4[i];
+    }
+    else if (letra[i]=="8"){
+      balls1[i]=!balls1[i];
+      balls3[i]=!balls3[i];
+      balls4[i]=!balls4[i];
+    }
+    else if (letra[i]=="9"){
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
+    }
+    else if (letra[i]=="0"){
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
+      balls4[i]=!balls4[i];
+    }
+      }
+    notifyListeners();
+   }
 
    reset(String letra){
     pressedBall1 = false;
@@ -228,7 +290,7 @@ class Ball with ChangeNotifier{
     pressedBall6 = false;
    }
 
-   void cells (String letra){
+   void alphabet (String letra){
     if (letra =='a'){
       pressedBall1=!pressedBall1;
       }
@@ -364,6 +426,55 @@ class Ball with ChangeNotifier{
       pressedBall4=!pressedBall4;
       pressedBall5=!pressedBall5;
       pressedBall6=!pressedBall6;
+    }
+    notifyListeners();
+   }
+   void numbers (String numero){
+    pressedBall11 = false;
+    pressedBall22 = true;
+    pressedBall33 = false;
+    pressedBall44 = true;
+    pressedBall55 = true;
+    pressedBall66 = true;
+    if (numero =='1'){
+      pressedBall1=!pressedBall1;
+      }
+    else if (numero=="2"){
+      pressedBall1=!pressedBall1;
+      pressedBall3=!pressedBall3;
+    }
+    else if (numero=="3"){
+      pressedBall1=!pressedBall1;
+      pressedBall2=!pressedBall2;
+    }
+    else if (numero=="4"){
+      pressedBall1=!pressedBall1;
+      pressedBall2=!pressedBall2;
+      pressedBall4=!pressedBall4;
+    }
+    else if (numero=="5"){
+      pressedBall1=!pressedBall1;
+      pressedBall4=!pressedBall4;
+    }
+    else if (numero=="6"){
+      pressedBall1=!pressedBall1;
+      pressedBall2=!pressedBall2;
+      pressedBall3=!pressedBall3;
+    }
+    else if (numero=="7"){
+      pressedBall1=!pressedBall1;
+      pressedBall2=!pressedBall2;
+      pressedBall3=!pressedBall3;
+      pressedBall4=!pressedBall4;
+    }
+    else if (numero=="8"){
+      pressedBall1=!pressedBall1;
+      pressedBall3=!pressedBall3;
+      pressedBall4=!pressedBall4;
+    }
+    else if (numero=="9"){
+      pressedBall2=!pressedBall2;
+      pressedBall3=!pressedBall3;
     }
     notifyListeners();
    }

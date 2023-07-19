@@ -1,23 +1,24 @@
 import 'package:braille_app/models/alphabet_list.dart';
 import 'package:braille_app/models/cells_list.dart';
+import 'package:braille_app/models/number_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:braille_app/models/ball.dart';
 
-class MatrizAlphabet extends StatefulWidget {
+class MatrizNumber extends StatefulWidget {
 
-  const MatrizAlphabet({
+  const MatrizNumber({
     super.key,
     });
 
   @override
-  State<MatrizAlphabet> createState() => _MatrizAlphabetState();
+  State<MatrizNumber> createState() => _MatrizNumberState();
 }
 
-class _MatrizAlphabetState extends State<MatrizAlphabet> {
+class _MatrizNumberState extends State<MatrizNumber> {
   @override
   Widget build(BuildContext context) {
-     final provider = Provider.of<AlphabetList>(context);
+     final provider = Provider.of<NumberList>(context);
      final List<Ball> loadedCells = provider.items;
     final ballt = Provider.of<Ball>(context);
     return Expanded(

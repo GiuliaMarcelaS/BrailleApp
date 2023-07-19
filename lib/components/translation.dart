@@ -19,7 +19,12 @@ class _TranslationState extends State<Translation> {
   //     listen: false,
   //   ).addCells(letra, Ball());
   // }
-  
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    letra = " ";
+  }
   @override
   Widget build(BuildContext context) {
     final ball = Provider.of<Ball>(context,);
@@ -40,13 +45,14 @@ class _TranslationState extends State<Translation> {
       children: [
         Form(
           child: TextField(
-            decoration: const InputDecoration(labelText: 'insira uma letra'),
+            decoration: const InputDecoration(labelText: 'insira uma palavra'),
             onSubmitted: (valor) {
               ball.reset(letra);
               letra = identifyUpperCase(valor);
               ball.translatePhrase(letra,cells.id);
               cells.addCells(letra);
               cells.id = 0;
+              letra = "";
             },
             controller: TextEditingController(),
           ),
