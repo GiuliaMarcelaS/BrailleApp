@@ -67,6 +67,8 @@ class Ball with ChangeNotifier{
    List balls4 = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
    List balls5 = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
    List balls6 = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+
+   bool blank = false;
     translatePhrase(String letra, int id){
       for(int i = 0; i<letra.length;i++){
         balls1[i] = false;
@@ -75,6 +77,7 @@ class Ball with ChangeNotifier{
         balls4[i] = false;
         balls5[i] = false;
         balls6[i] = false;
+        blank = false;
       if (letra[i] =='a'){
       balls1[i]=!balls1[i];
       }
@@ -215,6 +218,9 @@ class Ball with ChangeNotifier{
       balls5[i]=!balls5[i];
       balls6[i]=!balls6[i];
     }
+    else if (letra[i]==" "){
+      blank = true;
+    }
       }
     notifyListeners();
    }
@@ -276,6 +282,102 @@ class Ball with ChangeNotifier{
       balls2[i]=!balls2[i];
       balls3[i]=!balls3[i];
       balls4[i]=!balls4[i];
+    }
+      }
+    notifyListeners();
+   }
+    translateExpressions(String letra, int id){
+      for(int i = 0; i<letra.length;i++){
+        balls1[i] = false;
+        balls2[i] = false;
+        balls3[i] = false;
+        balls4[i] = false;
+        balls5[i] = false;
+        balls6[i] = false;
+      if (letra[i] =='1'){
+      balls1[i]=!balls1[i];
+      }
+    else if (letra[i]=="2"){
+      balls1[i]=!balls1[i];
+      balls3[i]=!balls3[i];
+    }
+    else if (letra[i]=="A"){
+      balls2[i]=!balls2[i];
+      balls4[i]=!balls4[i];
+      balls5[i]=!balls5[i];
+      balls6[i]=!balls6[i];
+    }
+    else if (letra[i]=="3"){
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+    }
+    else if (letra[i]=="4"){
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+      balls4[i]=!balls4[i];
+    }
+    else if (letra[i]=="5"){
+      balls1[i]=!balls1[i];
+      balls4[i]=!balls4[i];
+    }
+    else if (letra[i]=="6"){
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
+    }
+    else if (letra[i]=="7"){
+      balls1[i]=!balls1[i];
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
+      balls4[i]=!balls4[i];
+    }
+    else if (letra[i]=="8"){
+      balls1[i]=!balls1[i];
+      balls3[i]=!balls3[i];
+      balls4[i]=!balls4[i];
+    }
+    else if (letra[i]=="9"){
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
+    }
+    else if (letra[i]=="0"){
+      balls2[i]=!balls2[i];
+      balls3[i]=!balls3[i];
+      balls4[i]=!balls4[i];
+    }
+    else if (letra[i]=="*"){
+      balls4[i]=!balls4[i];
+      balls5[i]=!balls5[i];
+    }
+    else if (letra[i]=="-"){
+      balls6[i]=!balls6[i];
+      balls5[i]=!balls5[i];
+    }
+    else if (letra[i]=="/"){
+      balls3[i]=!balls3[i];
+      balls4[i]=!balls4[i];
+      balls6[i]=!balls6[i];
+    }
+    else if (letra[i]=="+"){
+      balls3[i]=!balls3[i];
+      balls4[i]=!balls4[i];
+      balls5[i]=!balls5[i];
+    }
+    else if (letra[i]=="="){
+      balls3[i]=!balls3[i];
+      balls4[i]=!balls4[i];
+      balls5[i]=!balls5[i];
+      balls6[i]=!balls6[i];
+    }
+    else if (letra[i]=="("){
+      balls1[i]=!balls1[i];
+      balls3[i]=!balls3[i];
+      balls6[i]=!balls6[i];
+    }
+    else if (letra[i]=="("){
+      balls2[i]=!balls2[i];
+      balls4[i]=!balls4[i];
+      balls5[i]=!balls5[i];
     }
       }
     notifyListeners();

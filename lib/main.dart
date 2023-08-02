@@ -5,6 +5,7 @@ import 'package:braille_app/models/ball.dart';
 import 'package:braille_app/models/balls_list.dart';
 import 'package:braille_app/models/braillecell.dart';
 import 'package:braille_app/models/cells_list.dart';
+import 'package:braille_app/models/expressions_list.dart';
 import 'package:braille_app/models/fase_list.dart';
 import 'package:braille_app/models/number_list.dart';
 import 'package:braille_app/models/passer.dart';
@@ -53,6 +54,9 @@ class BrailleApp extends StatelessWidget{
           ),
           ChangeNotifierProvider(
           create: (_) => NumberList(),
+          ),
+          ChangeNotifierProvider(
+          create: (_) => ExpressionList(),
           ),
           ChangeNotifierProvider(
           create: (_) => Fase(),
