@@ -45,7 +45,7 @@ class _AlphabetTrabslatorState extends State<AlphabetTranslator> {
         Form(
           child: TextField(
             maxLength: 1,
-            decoration: const InputDecoration(labelText: 'insira uma palavra'),
+            decoration: const InputDecoration(labelText: 'insira uma letra'),
             onSubmitted: (valor) {
               ball.reset(letra);
               letra = identifyUpperCase(valor);

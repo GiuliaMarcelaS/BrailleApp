@@ -47,7 +47,8 @@ class _NumberTrabslatorState extends State<NumberTranslator> {
       children: [
         Form(
           child: TextField(
-            decoration: const InputDecoration(labelText: 'insira uma palavra'),
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(labelText: 'insira um número'),
             onSubmitted: (valor) {
               ball.reset(letra);
               letra = identifyUpperCase(valor);

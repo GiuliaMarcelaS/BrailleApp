@@ -33,10 +33,10 @@ class _MatrizAlphabetState extends State<MatrizAlphabet> {
               Row(
                 children: [
                   Icon(
-                    ballt.balls1[i]? Icons.circle : Icons.circle_outlined,
+                    ballt.balls1[i]==1? Icons.circle : Icons.circle_outlined,
                   ),
                   Icon(
-                    ballt.balls2[i]? Icons.circle : Icons.circle_outlined,
+                    ballt.balls2[i]==1? Icons.circle : Icons.circle_outlined,
                   ),
                     
                 ],
@@ -44,20 +44,20 @@ class _MatrizAlphabetState extends State<MatrizAlphabet> {
                Row(
                 children: [
                   Icon(
-                   ballt.balls3[i]? Icons.circle : Icons.circle_outlined,
+                   ballt.balls3[i]==1? Icons.circle : Icons.circle_outlined,
                   ),
                      Icon(
-                       ballt.balls4[i]? Icons.circle : Icons.circle_outlined,
+                       ballt.balls4[i]==1? Icons.circle : Icons.circle_outlined,
                      ),
                 ],
               ),
                Row(
                 children: [
                    Icon(
-                     ballt.balls5[i]? Icons.circle : Icons.circle_outlined,
+                     ballt.balls5[i]==1? Icons.circle : Icons.circle_outlined,
                    ),
                       Icon(
-                        ballt.balls6[i]? Icons.circle : Icons.circle_outlined,
+                        ballt.balls6[i]==1? Icons.circle : Icons.circle_outlined,
                       ),
                 ],
               ),
