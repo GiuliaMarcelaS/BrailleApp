@@ -45,7 +45,7 @@ class _TranslationState extends State<Translation> {
       children: [
         Form(
           child: TextField(
-            decoration: const InputDecoration(labelText: 'insira uma palavra'),
+            decoration: const InputDecoration(labelText: 'insira uma palavra ou frase'),
             onSubmitted: (valor) {
               ball.reset(letra);
               letra = identifyUpperCase(valor);

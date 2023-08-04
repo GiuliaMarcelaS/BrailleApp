@@ -22,9 +22,9 @@ class _MatrizNumberState extends State<MatrizNumber> {
      final List<Ball> loadedCells = provider.items;
     final ballt = Provider.of<Ball>(context);
     return Expanded(
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        separatorBuilder: (ctx, i)=> const VerticalDivider(width: 15,color: Colors.transparent,),
+      child: GridView.builder(
+        scrollDirection: Axis.vertical,
+       // separatorBuilder: (ctx, i)=> const VerticalDivider(width: 15,color: Colors.transparent,),
          padding: const EdgeInsets.all(10),
          itemCount: loadedCells.length,
         itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
@@ -64,6 +64,12 @@ class _MatrizNumberState extends State<MatrizNumber> {
               ),
             ],
           ),
+        ),
+         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 60.0,
+          childAspectRatio: 0.6,
+          crossAxisSpacing: 10.0,
+          mainAxisSpacing: 1.0
         ),
       ),
     );
