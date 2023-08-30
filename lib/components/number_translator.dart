@@ -5,6 +5,8 @@ import 'package:braille_app/models/number_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/auth.dart';
+
 class NumberTranslator extends StatefulWidget {
   const NumberTranslator({super.key});
 
@@ -31,6 +33,7 @@ class _NumberTrabslatorState extends State<NumberTranslator> {
   Widget build(BuildContext context) {
     final ball = Provider.of<Ball>(context,);
     final cells = Provider.of<NumberList>(context,);
+    final auth = Provider.of<Auth>(context);
     identifyUpperCase(String frase){
       String fraseAlterada ='A';
        List duasMatrizes = ['0','1','2','3','4','5','6','7','8','9'];
@@ -50,6 +53,7 @@ class _NumberTrabslatorState extends State<NumberTranslator> {
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(labelText: 'insira um número'),
             onSubmitted: (valor) {
+              cells.numberClicker(auth.token??'', auth.userId??'');
               ball.reset(letra);
               letra = identifyUpperCase(valor);
               ball.translateNumber(letra,cells.id);

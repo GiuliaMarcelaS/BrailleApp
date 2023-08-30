@@ -4,6 +4,8 @@ import 'package:braille_app/models/number_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/auth.dart';
+
 class ExpressionsTranslator extends StatefulWidget {
   const ExpressionsTranslator({super.key});
 
@@ -29,6 +31,7 @@ class _ExpressionsTranslatorState extends State<ExpressionsTranslator> {
   Widget build(BuildContext context) {
     final ball = Provider.of<Ball>(context,);
     final cells = Provider.of<ExpressionList>(context,);
+    final auth = Provider.of<Auth>(context);
     identifyUpperCase(String frase){
       String fraseAlterada ='A';
       List specialCharacters = ['*','/','+','-','='];
@@ -48,6 +51,7 @@ class _ExpressionsTranslatorState extends State<ExpressionsTranslator> {
           child: TextField(
             decoration: const InputDecoration(labelText: 'insira uma expressão matemática'),
             onSubmitted: (valor) {
+              cells.expressionsClicker(auth.token??'', auth.userId??'');
               ball.reset(letra);
               letra = identifyUpperCase(valor);
               ball.translateExpressions(letra,cells.id);

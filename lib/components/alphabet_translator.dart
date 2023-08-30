@@ -3,6 +3,8 @@ import 'package:braille_app/models/ball.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/auth.dart';
+
 class AlphabetTranslator extends StatefulWidget {
   const AlphabetTranslator({super.key});
 
@@ -28,6 +30,7 @@ class _AlphabetTrabslatorState extends State<AlphabetTranslator> {
   Widget build(BuildContext context) {
     final ball = Provider.of<Ball>(context,);
     final cells = Provider.of<AlphabetList>(context,);
+    final auth = Provider.of<Auth>(context);
     identifyUpperCase(String frase){
       String fraseAlterada ='';
        List duasMatrizes = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'];
@@ -47,6 +50,7 @@ class _AlphabetTrabslatorState extends State<AlphabetTranslator> {
             maxLength: 1,
             decoration: const InputDecoration(labelText: 'insira uma letra'),
             onSubmitted: (valor) {
+              cells.alphabetClicker(auth.token??'', auth.userId??'');
               ball.reset(letra);
               letra = identifyUpperCase(valor);
               ball.translatePhrase(letra,cells.id);
