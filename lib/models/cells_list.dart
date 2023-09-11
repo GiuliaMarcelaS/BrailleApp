@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 
 import '../utils/constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
+
 
 
 class CellsList with ChangeNotifier{
@@ -39,12 +41,14 @@ class CellsList with ChangeNotifier{
         notifyListeners();
       }
 
-  int numberOfClicks = 0;      
-  Future <void> wordsClicker(String token, String userId) async{
-    final response = await http.get(Uri.parse('${Constants.BASE_URL}/$userId/clicks_palavras.json?auth=$token'));
-    numberOfClicks = jsonDecode(response.body);
-    http.put(Uri.parse('${Constants.BASE_URL}/$userId/clicks_palavras.json?auth=$token'),
-    body: jsonEncode(numberOfClicks+1));
+  int numberOfClicks = 0;
+  DateTime date = DateTime.now();
+  String writtedDate = "";      
+   Future <void> wordsClicker(String token, String userId) async{
+    numberOfClicks++;
+    writtedDate = DateFormat("yyyy/MMMM/dd").format(date);
+    http.put(Uri.parse('${Constants.BASE_URL}/$userId/clicks/$writtedDate/palavras.json?auth=$token'),
+    body: jsonEncode(numberOfClicks));
     notifyListeners();
   }
 }

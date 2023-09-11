@@ -4,6 +4,7 @@ import 'package:braille_app/models/ball.dart';
 import 'package:braille_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class AlphabetList with ChangeNotifier{
   final List<Ball> _items = [];
@@ -30,12 +31,14 @@ class AlphabetList with ChangeNotifier{
   }
 
   int numberOfClicks = 0;
+  DateTime date = DateTime.now();
+  String writtedDate = "";
 
   Future <void> alphabetClicker(String token, String userId) async{
-    final response = await http.get(Uri.parse('${Constants.BASE_URL}/$userId/clicks_alfabeto.json?auth=$token'));
-    numberOfClicks = jsonDecode(response.body);
-    http.put(Uri.parse('${Constants.BASE_URL}/$userId/clicks_alfabeto.json?auth=$token'),
-    body: jsonEncode(numberOfClicks+1));
+    numberOfClicks++;
+    writtedDate = DateFormat("yyyy/MMMM/dd").format(date);
+    http.put(Uri.parse('${Constants.BASE_URL}/$userId/clicks/$writtedDate/alfabeto.json?auth=$token'),
+    body: jsonEncode(numberOfClicks));
     notifyListeners();
   }
 }

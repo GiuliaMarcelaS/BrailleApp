@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../utils/constants.dart';
+import 'package:intl/intl.dart';
+
 
 class ExpressionList with ChangeNotifier{
   final List<Ball> _items = [];
@@ -30,11 +32,14 @@ class ExpressionList with ChangeNotifier{
   }
 
   int numberOfClicks = 0;
-   Future <void> expressionsClicker(String token, String userId) async{
-    final response = await http.get(Uri.parse('${Constants.BASE_URL}/$userId/clicks_expressões.json?auth=$token'));
-    numberOfClicks = jsonDecode(response.body);
-    http.put(Uri.parse('${Constants.BASE_URL}/$userId/clicks_expressões.json?auth=$token'),
-    body: jsonEncode(numberOfClicks+1));
+  DateTime date = DateTime.now();
+  String writtedDate = "";
+
+    Future <void> expressionsClicker(String token, String userId) async{
+    numberOfClicks++;
+    writtedDate = DateFormat("yyyy/MMMM/dd").format(date);
+    http.put(Uri.parse('${Constants.BASE_URL}/$userId/clicks/$writtedDate/expressões.json?auth=$token'),
+    body: jsonEncode(numberOfClicks));
     notifyListeners();
   }
 }
