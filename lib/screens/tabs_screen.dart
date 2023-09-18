@@ -1,18 +1,34 @@
+import 'package:braille_app/models/graphic.dart';
 import 'package:braille_app/screens/alphabet_translator_screen.dart';
 import 'package:braille_app/screens/expressions_translator_screen.dart';
 import 'package:braille_app/screens/number_translator_screen.dart';
 import 'package:braille_app/screens/phrase_translator_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../models/auth.dart';
 class TabsScreen extends StatelessWidget {
   const TabsScreen({super.key});
+  void _graphic(BuildContext context){
+    Navigator.of(context).pushNamed('/graphic-screen');
+   }
 
   @override
   Widget build(BuildContext context) {
+    final graphic = Provider.of<Graphic>(context);
+    final auth = Provider.of<Auth>(context);
     return DefaultTabController(
       length: 4,
       child: Scaffold(
         appBar: AppBar(
           title: const Text("tradução"),
+          actions: [
+            IconButton(onPressed: () {
+              graphic.getClicks(auth.token??'', auth.userId??'');
+              _graphic(context);
+              },
+              icon: const Icon(Icons.bar_chart))
+          ],
           bottom: const TabBar(
             tabs: [
               Tab(

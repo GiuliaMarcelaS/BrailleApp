@@ -7,6 +7,7 @@ import 'package:braille_app/models/braillecell.dart';
 import 'package:braille_app/models/cells_list.dart';
 import 'package:braille_app/models/expressions_list.dart';
 import 'package:braille_app/models/fase_list.dart';
+import 'package:braille_app/models/graphic.dart';
 import 'package:braille_app/models/number_list.dart';
 import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/passer1.dart';
@@ -15,6 +16,7 @@ import 'package:braille_app/screens/alphabet_translator_screen.dart';
 import 'package:braille_app/screens/auth_or_home_screen.dart';
 import 'package:braille_app/screens/expressions_translator_screen.dart';
 import 'package:braille_app/screens/fase_screen.dart';
+import 'package:braille_app/screens/graphic_screen.dart';
 import 'package:braille_app/screens/number_translator_screen.dart';
 import 'package:braille_app/screens/phrase_translator_screen.dart';
 import 'package:braille_app/screens/tabs_screen.dart';
@@ -70,6 +72,9 @@ class BrailleApp extends StatelessWidget{
         ChangeNotifierProvider(
           create: (_) => PasserItem(),
           ),
+        ChangeNotifierProvider(
+          create: (_) => Graphic(),
+          ),
         ChangeNotifierProxyProvider<Auth,Cell>(
           create: (_) => Cell("", ''),
           update:(ctx, auth, previous){
@@ -92,6 +97,7 @@ class BrailleApp extends StatelessWidget{
           '/number-translator-screen':(ctx)=> const NumberTranslatorScreen(),
           '/expression-translator-screen':(ctx)=> const ExpressionTranslatorScreen(),
           '/fases-screen':(ctz) => const FaseScreen(),
+          '/graphic-screen':(ctz) => const GraphicScreen(),
         },
         ),
     );
