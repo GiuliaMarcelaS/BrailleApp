@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 
-class F1 extends StatefulWidget {
-   const F1({super.key});
+class OneCell extends StatefulWidget {
+   const OneCell({super.key});
 
   @override
-  State<F1> createState() => _F1State();
+  State<OneCell> createState() => _OneCellState();
 }
 
-class _F1State extends State<F1> {
+class _OneCellState extends State<OneCell> {
   @override
   void initState(){
     super.initState();

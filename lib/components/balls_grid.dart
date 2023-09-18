@@ -1,4 +1,4 @@
-// cria grid para celula interativa
+// cria grid de bolinhas para a célula interativa
 
 import 'package:braille_app/components/ball_item.dart';
 import 'package:braille_app/models/ball.dart';

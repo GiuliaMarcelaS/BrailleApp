@@ -1,4 +1,4 @@
-// criando uma classe para cada bola (para criar celula interativa que traduz letras)
+// classe de bolinhas interativas: ao clicar elas mudam de estado
 
 import 'package:braille_app/models/ball.dart';
 import 'package:flutter/material.dart';
