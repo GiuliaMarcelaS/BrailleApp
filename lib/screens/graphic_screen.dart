@@ -4,18 +4,40 @@ import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../models/graphic.dart';
 
-class GraphicScreen extends StatefulWidget {
-  const GraphicScreen({super.key});
+class GraphicScreen extends StatelessWidget {
+  GraphicScreen(//this.recentAlphabetClicks, 
+  {super.key});
 
-  @override
-  State<GraphicScreen> createState() => _GraphicScreenState();
-}
+ // final List recentAlphabetClicks;
+  final List tabs = ['alphabet','words','numbers', 'expressions'];
+  var aba;
+  var clicks;
+  List<Map<String, Object>> get groupedClicks {
+    return List.generate(
+      4,
+      (index) {
+        for(var tab in tabs){
+          aba = tab;
+        }
 
-class _GraphicScreenState extends State<GraphicScreen> {
+        getClicks (int providerClicks){
+          clicks = providerClicks;
+        }
+        return {'tab': aba, 'clicks': clicks};
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text('teste'),
+      body: Card(
+        elevation: 6,
+        margin: EdgeInsets.all(20),
+        child: Row(
+          children: [],
+        ),
+      ),
     );
   }
 }

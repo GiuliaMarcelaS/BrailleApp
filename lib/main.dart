@@ -97,7 +97,7 @@ class BrailleApp extends StatelessWidget{
           '/number-translator-screen':(ctx)=> const NumberTranslatorScreen(),
           '/expression-translator-screen':(ctx)=> const ExpressionTranslatorScreen(),
           '/fases-screen':(ctz) => const FaseScreen(),
-          '/graphic-screen':(ctz) => const GraphicScreen(),
+          '/graphic-screen':(ctz) => GraphicScreen(),
         },
         ),
     );

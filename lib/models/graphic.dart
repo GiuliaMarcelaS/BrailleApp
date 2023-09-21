@@ -18,7 +18,7 @@ class Graphic with ChangeNotifier {
     alphabet = 0;
    final response = await http.get(Uri.parse("${Constants.BASE_URL}/$userId/clicks/2023/September.json?auth=$token"));
   Map<dynamic, dynamic> dados = jsonDecode(response.body);
-  print(dados);
+ // print(dados);
   dias.clear();
   dados.forEach((id, dados){
     dias.add(id);
@@ -28,7 +28,7 @@ class Graphic with ChangeNotifier {
   for(var dia in dias){
     final response2 = await http.get(Uri.parse("${Constants.BASE_URL}/$userId/clicks/2023/September/$dia.json?auth=$token"));
     Map<dynamic, dynamic> dados2 = jsonDecode(response2.body);
-    print(dados2);
+ //   print(dados2);
     alphabet += dados2['alfabeto'];
 
   }
