@@ -1,3 +1,4 @@
+import 'package:braille_app/components/chart_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -7,7 +8,7 @@ import 'package:provider/provider.dart';
 import '../models/graphic.dart';
 
 class GraphicScreen extends StatelessWidget {
-  List sums = [1,2,3,4,5,6,7,8,9,10,11,12];
+  List<double> sums = [1,2,3,4,5,6,7,8,9,10,11,12];
   GraphicScreen(
   {super.key});
 
@@ -106,7 +107,11 @@ class GraphicScreen extends StatelessWidget {
         margin: EdgeInsets.all(20),
         child: Row(
           children: groupedAlphabetClicks.map((clicks){
-            return Text('${clicks['month']}:${clicks['AlphabetClicks']}');
+            return ChartBar(
+              month: clicks['month'] as String,
+              clicks: clicks['AlphabetClicks'] as double,
+              percentage: 0,
+            );
           }).toList(),
         ),
       ),
