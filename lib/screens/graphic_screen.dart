@@ -8,46 +8,46 @@ import 'package:provider/provider.dart';
 import '../models/graphic.dart';
 
 class GraphicScreen extends StatelessWidget {
-  List<double> sums = [1,2,3,4,5,6,7,8,9,10,11,12];
+  List<int> sums = [1,2,3,4,5,6,7,8,9,10,11,12];
   GraphicScreen(
   {super.key});
 
   monthNumberConvertor(int month){
     if(month == 1||month == -11){
-      return 'January';
+      return 'Janeiro';
     }
     else if(month == 2||month == -10){
-      return 'February';
+      return 'Fevereiro';
     }
     else if(month == 3||month == -9){
-      return 'March';
+      return 'Março';
     }
     else if(month == 4||month == -8){
-      return 'April';
+      return 'Abril';
     }
     else if(month == 5||month == -7){
-      return 'May';
+      return 'Maio';
     }
     else if(month == 6||month == -6){
-      return 'June';
+      return 'Junho';
     }
     else if(month == 7||month == -5){
-      return 'July';
+      return 'Julho';
     }
     else if(month == 8||month == -4){
-      return 'August';
+      return 'Agosto';
     }
     else if(month == 9||month == -3){
-      return 'September';
+      return 'Setembro';
     }
     else if(month == 10||month == -2){
-      return 'October';
+      return 'Outubro';
     }
     else if(month == 11||month == -1){
-      return 'November';
+      return 'Novembro';
     }
     else if(month == 12||month == 0){
-      return 'December';
+      return 'Dezembro';
     }
   }
   monthStringConvertor(String month){
@@ -89,7 +89,7 @@ class GraphicScreen extends StatelessWidget {
     }
   }
   List<Map<String, Object>> get groupedAlphabetClicks {
-    return List.generate(6, (index) {
+    return List.generate(2, (index) {
       final month = monthNumberConvertor((DateTime.now().month)-index);
       final alphabetClicks = sums[index];
      // print(month);
@@ -108,9 +108,9 @@ class GraphicScreen extends StatelessWidget {
         child: Row(
           children: groupedAlphabetClicks.map((clicks){
             return ChartBar(
-              month: clicks['month'] as String,
-              clicks: clicks['AlphabetClicks'] as double,
-              percentage: 0,
+              month: clicks['month'].toString(),
+              clicks: clicks['AlphabetClicks'] as int,
+              percentage: 0.5,
             );
           }).toList(),
         ),
