@@ -5,14 +5,26 @@ import 'package:flutter/src/widgets/placeholder.dart';
 class ChartBar extends StatelessWidget {
 
   final String month;
-  final int clicks;
-  final double percentage;
+  final int alphabetClicks;
+  final int wordClicks;
+  final int numberClicks;
+  final int expressionClicks;
+  final double percentage1;
+  final double percentage2;
+  final double percentage3;
+  final double percentage4;
 
   const ChartBar({
     super.key,
     this.month = '',
-    this.clicks = 0,
-    this.percentage = 0,
+    this.alphabetClicks = 0,
+    this.wordClicks = 0,
+    this.numberClicks = 0,
+    this.expressionClicks = 0,
+    this.percentage1 = 0,
+    this.percentage2 = 0,
+    this.percentage3 = 0,
+    this.percentage4 = 0,
     });
 
   @override
@@ -41,7 +53,7 @@ class ChartBar extends StatelessWidget {
                         ),
                       ),
                       FractionallySizedBox(
-                        heightFactor: 0.2,
+                        heightFactor: percentage1,
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.blue,
@@ -56,7 +68,7 @@ class ChartBar extends StatelessWidget {
                   ),
                 ),
                 Text('alfabeto',style: TextStyle(fontSize: 8),),
-                Text("(${clicks.toString()})",style: TextStyle(fontSize: 8),),
+                Text("(${alphabetClicks.toString()})",style: TextStyle(fontSize: 8),),
               ],
             ),
            SizedBox(width: 1,),
@@ -78,7 +90,7 @@ class ChartBar extends StatelessWidget {
                         ),
                       ),
                         FractionallySizedBox(
-                        heightFactor: 0.5,
+                        heightFactor: percentage2,
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.green,
@@ -93,7 +105,7 @@ class ChartBar extends StatelessWidget {
                   ),
                 ),
                 Text('palavras',style: TextStyle(fontSize: 8),),
-                Text("(${clicks.toString()})",style: TextStyle(fontSize: 8),),
+                Text("(${wordClicks.toString()})", style: TextStyle(fontSize: 8),),
               ],
             ),
            SizedBox(width: 1,),
@@ -115,7 +127,7 @@ class ChartBar extends StatelessWidget {
                         ),
                       ),
                         FractionallySizedBox(
-                        heightFactor: 0.8,
+                        heightFactor: percentage3,
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.red,
@@ -130,7 +142,7 @@ class ChartBar extends StatelessWidget {
                   ),
                 ),
                 Text('números',style: TextStyle(fontSize: 8),),
-                Text("(${clicks.toString()})",style: TextStyle(fontSize: 8),),
+                Text("(${numberClicks.toString()})",style: TextStyle(fontSize: 8),),
               ],
             ),
            SizedBox(width: 1,),
@@ -152,7 +164,7 @@ class ChartBar extends StatelessWidget {
                         ),
                       ),
                         FractionallySizedBox(
-                        heightFactor: 0.6,
+                        heightFactor: percentage4,
                         child: Container(
                           decoration: BoxDecoration(
                             color: Color.fromARGB(255, 207, 207, 17),
@@ -167,7 +179,7 @@ class ChartBar extends StatelessWidget {
                   ),
                 ),
                 Text('expressões',style: TextStyle(fontSize: 8),),
-                Text("(${clicks.toString()})",style: TextStyle(fontSize: 8),),
+                Text("(${expressionClicks.toString()})",style: TextStyle(fontSize: 8),),
               ],
             ),
           ],

@@ -5,10 +5,14 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../models/graphic.dart';
+//import '../models/graphic.dart';
 
+// ignore: must_be_immutable
 class GraphicScreen extends StatelessWidget {
-  List<int> sums = [1,2,3,4,5,6,7,8,9,10,11,12];
+  List<int> alphabetClicksSum = [2,1,3,4,5,6,7,8,9,10,11,12];
+  List<int> wordsClicksSum = [5,6,3,4,5,6,7,8,9,10,11,12];
+  List<int> numbersClicksSum = [4,8,3,4,5,6,7,8,9,10,11,12];
+  List<int> expressionsClicksSum = [2,5,3,4,5,6,7,8,9,10,11,12];
   GraphicScreen(
   {super.key});
 
@@ -88,15 +92,59 @@ class GraphicScreen extends StatelessWidget {
       return 12;
     }
   }
-  List<Map<String, Object>> get groupedAlphabetClicks {
+
+  List<Map<String, dynamic>> get groupedAlphabetClicks {
     return List.generate(2, (index) {
       final month = monthNumberConvertor((DateTime.now().month)-index);
-      final alphabetClicks = sums[index];
-     // print(month);
-     // print(alphabetClicks);
+      final alphabetClicks = alphabetClicksSum[index];
         return {'month': month, 'AlphabetClicks': alphabetClicks};
       },
     );
+  }
+  List<Map<String, dynamic>> get groupedWordClicks {
+    return List.generate(2, (index) {
+      final month = monthNumberConvertor((DateTime.now().month)-index);
+      final wordClicks = wordsClicksSum[index];
+        return {'month': month, 'wordClicks': wordClicks};
+      },
+    );
+  }
+  List<Map<String, dynamic>> get groupedNumberClicks {
+    return List.generate(2, (index) {
+      final month = monthNumberConvertor((DateTime.now().month)-index);
+      final numberClicks = numbersClicksSum[index];
+        return {'month': month, 'NumberClicks': numberClicks};
+      },
+    );
+  }
+  List<Map<String, dynamic>> get groupedExpressionClicks {
+    return List.generate(2, (index) {
+      final month = monthNumberConvertor((DateTime.now().month)-index);
+      final expressionClicks = expressionsClicksSum[index];
+        return {'month': month, 'ExpressionClicks': expressionClicks};
+      },
+    );
+  }
+
+  double get _monthsTotalAlphabetClicks{
+    return groupedAlphabetClicks.fold(0.0, (sum, alphabetClicks){
+      return sum + alphabetClicks['AlphabetClicks'];
+    });
+  }
+  double get _monthsTotalWordClicks{
+    return groupedWordClicks.fold(0.0, (sum, wordClicks){
+      return sum + wordClicks['WordClicks'];
+    });
+  }
+  double get _monthsTotalNumberClicks{
+    return groupedNumberClicks.fold(0.0, (sum, numberClicks){
+      return sum + numberClicks['NumberClicks'];
+    });
+  }
+  double get _monthsTotalExpressionClicks{
+    return groupedExpressionClicks.fold(0.0, (sum, expressionClicks){
+      return sum + expressionClicks['ExpressionClicks'];
+    });
   }
 
   @override
@@ -109,10 +157,17 @@ class GraphicScreen extends StatelessWidget {
           children: groupedAlphabetClicks.map((clicks){
             return ChartBar(
               month: clicks['month'].toString(),
-              clicks: clicks['AlphabetClicks'] as int,
-              percentage: 0.5,
+              alphabetClicks: clicks['AlphabetClicks'] as int,
+           //   wordClicks: clicks['WordClicks'] as int,
+            //  numberClicks: clicks['NumberClicks'] as int,
+             // expressionClicks: clicks['ExpressionClicks'] as int,
+              percentage1: (clicks['AlphabetClicks'] as double)/_monthsTotalAlphabetClicks,
+            //  percentage2: (clicks['WordClicks'] as double)/_monthsTotalWordClicks,
+           //   percentage3: (clicks['NumberClicks'] as double)/_monthsTotalNumberClicks,
+            //  percentage4: (clicks['ExpressionClicks'] as double)/_monthsTotalExpressionClicks,
             );
           }).toList(),
+          
         ),
       ),
     );
