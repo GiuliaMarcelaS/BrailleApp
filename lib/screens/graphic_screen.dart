@@ -24,11 +24,11 @@ class _GraphicScreenState extends State<GraphicScreen> {
 
   List<num> alphabetClicksSum = [2,9,3,4,5,6,7,8,9,10,11,12];
 
-  List<int> wordsClicksSum = [5,6,3,4,5,6,7,8,9,10,11,12];
+  List<num> wordsClicksSum = [72,6,3,4,5,6,7,8,9,10,11,12];
 
-  List<int> numbersClicksSum = [4,8,3,4,5,6,7,8,9,10,11,12];
+  List<num> numbersClicksSum = [4,8,3,4,5,6,7,8,9,10,11,12];
 
-  List<int> expressionsClicksSum = [2,1,3,4,5,6,7,8,9,10,11,12];
+  List<num> expressionsClicksSum = [2,1,3,4,5,6,7,8,9,10,11,12];
 
   monthNumberConvertor(int month){
     if(month == 1||month == -11){
@@ -171,17 +171,6 @@ class _GraphicScreenState extends State<GraphicScreen> {
       return sum + expressionClicks['ExpressionClicks'];
     });
   }
-
-  // void _putClicks() {
-  //   setState(() {
-  //     final auth = Provider.of<Auth>(context);
-  //     final graphic = Provider.of<Graphic>(context);
-  //     graphic.getClicks(auth.token??'', auth.userId??'');
-  //     alphabetClicksSum[0] = graphic.alphabet;
-  //     print('$alphabetClicksSum eba');
-  //   });
-  //}
-
  
 
   @override
@@ -189,8 +178,19 @@ class _GraphicScreenState extends State<GraphicScreen> {
     final graphic = Provider.of<Graphic>(context);
     final auth = Provider.of<Auth>(context);
     //graphic.getClicks2(auth.token??'', auth.userId??'');
-    alphabetClicksSum[0] = graphic.alphabet;
-   // alphabetClicksSum[1] = graphic.alphabet2;
+    alphabetClicksSum[0] = graphic.alphabet2Current;
+    alphabetClicksSum[1] = graphic.alphabet;
+
+    wordsClicksSum[0] = graphic.words2Current;
+    wordsClicksSum[1] = graphic.words;
+
+    numbersClicksSum[0] = graphic.numbers2Current;
+    numbersClicksSum[1] = graphic.numbers;
+
+    expressionsClicksSum[0] = graphic.expressions2Current;
+    expressionsClicksSum[1] = graphic.expressions;
+
+   double total = _monthsTotalAlphabetClicks+_monthsTotalExpressionClicks+_monthsTotalNumberClicks+_monthsTotalWordClicks;
     print('${graphic.alphabet} eba');
     return Scaffold(
       body: Card(
@@ -204,10 +204,10 @@ class _GraphicScreenState extends State<GraphicScreen> {
               wordClicks: clicks['wordClicks'] as int,
               numberClicks: clicks['NumberClicks'] as int,
               expressionClicks: clicks['ExpressionClicks'] as int,
-              percentage1: (clicks['AlphabetClicks'] as double)/_monthsTotalAlphabetClicks,
-              percentage2: (clicks['wordClicks'] as double)/_monthsTotalWordClicks,
-              percentage3: (clicks['NumberClicks'] as double)/_monthsTotalNumberClicks,
-              percentage4: (clicks['ExpressionClicks'] as double)/_monthsTotalExpressionClicks,
+              percentage1: (clicks['AlphabetClicks'] as double)/total,
+              percentage2: (clicks['wordClicks'] as double)/total,
+              percentage3: (clicks['NumberClicks'] as double)/total,
+              percentage4: (clicks['ExpressionClicks'] as double)/total,
             );
           }).toList(),
           

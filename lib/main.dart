@@ -87,6 +87,7 @@ class BrailleApp extends StatelessWidget{
           },),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         routes: {
           '/': (ctx) => const AuthOrHomePage(),
           '/modulos-screen': (ctx) => const ModulosScreen(),
