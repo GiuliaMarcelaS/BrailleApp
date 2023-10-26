@@ -12,6 +12,7 @@ import 'package:braille_app/models/number_list.dart';
 import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/passer1.dart';
 import 'package:braille_app/models/passer_item.dart';
+import 'package:braille_app/models/teste.dart';
 import 'package:braille_app/screens/alphabet_translator_screen.dart';
 import 'package:braille_app/screens/auth_or_home_screen.dart';
 import 'package:braille_app/screens/expressions_translator_screen.dart';
@@ -74,6 +75,9 @@ class BrailleApp extends StatelessWidget{
           ),
         ChangeNotifierProvider(
           create: (_) => Graphic(),
+          ),
+        ChangeNotifierProvider(
+          create: (_) => Teste(),
           ),
         ChangeNotifierProxyProvider<Auth,Cell>(
           create: (_) => Cell("", ''),
