@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 class Teste with ChangeNotifier{
 
   Future <void> teste(String token, String userId) async{
-    final response = await http.get(Uri.parse("${Constants.BASE_URL}/.json?auth=$token"));
+    final response = await http.get(Uri.parse("${Constants.BASE_URL}/users/.json?auth=$token"));
     Map<dynamic, dynamic> dados = jsonDecode(response.body);
 
     dados.forEach((id, dados){
