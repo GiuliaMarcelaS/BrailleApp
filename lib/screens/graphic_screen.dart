@@ -110,7 +110,7 @@ class _GraphicScreenState extends State<GraphicScreen> {
 
   List<Map<String, dynamic>> get groupedClicks {
     return List.generate(2, (index) {
-      final month = monthNumberConvertor((DateTime.now().month)-index);
+      final month = monthNumberConvertor((DateTime.now().month-1)-index);
       final alphabetClicks = alphabetClicksSum[index];
        final wordClicks = wordsClicksSum[index];
        final numberClicks = numbersClicksSum[index];
@@ -123,7 +123,7 @@ class _GraphicScreenState extends State<GraphicScreen> {
 
   List<Map<String, dynamic>> get groupedWordClicks {
     return List.generate(2, (index) {
-      final month = monthNumberConvertor((DateTime.now().month)-index);
+      final month = monthNumberConvertor((DateTime.now().month-1)-index);
       final wordClicks = wordsClicksSum[index];
         return {'month': month, 'wordClicks': wordClicks};
       },
@@ -132,7 +132,7 @@ class _GraphicScreenState extends State<GraphicScreen> {
 
   List<Map<String, dynamic>> get groupedNumberClicks {
     return List.generate(2, (index) {
-      final month = monthNumberConvertor((DateTime.now().month)-index);
+      final month = monthNumberConvertor((DateTime.now().month-1)-index);
       final numberClicks = numbersClicksSum[index];
         return {'month': month, 'NumberClicks': numberClicks};
       },
@@ -141,7 +141,7 @@ class _GraphicScreenState extends State<GraphicScreen> {
 
   List<Map<String, dynamic>> get groupedExpressionClicks {
     return List.generate(2, (index) {
-      final month = monthNumberConvertor((DateTime.now().month)-index);
+      final month = monthNumberConvertor((DateTime.now().month-1)-index);
       final expressionClicks = expressionsClicksSum[index];
         return {'month': month, 'ExpressionClicks': expressionClicks};
       },

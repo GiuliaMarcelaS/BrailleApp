@@ -32,11 +32,11 @@ class Graphic with ChangeNotifier {
     numbers2Current = 0;
     expressions = 0;
     expressions2Current = 0;
-   final response = await http.get(Uri.parse("${Constants.BASE_URL}/$userId/clicks/2023/September.json?auth=$token"));
-   final response10 = await http.get(Uri.parse("${Constants.BASE_URL}/$userId/clicks/2023/October.json?auth=$token"));
+   final response = await http.get(Uri.parse("${Constants.BASE_URL}/users/$userId/clicks/2023/September.json?auth=$token"));
+   final response10 = await http.get(Uri.parse("${Constants.BASE_URL}/users/$userId/clicks/2023/October.json?auth=$token"));
   Map<dynamic, dynamic> dados = jsonDecode(response.body);
   Map<dynamic, dynamic> dados10 = jsonDecode(response10.body);
- // print(dados);
+  print(dados);
   dias.clear();
   dados.forEach((id, dados){
     dias.add(id);
@@ -50,7 +50,7 @@ class Graphic with ChangeNotifier {
   print(dias10);
 
   for(var dia in dias){
-    final response2 = await http.get(Uri.parse("${Constants.BASE_URL}/$userId/clicks/2023/September/$dia.json?auth=$token"));
+    final response2 = await http.get(Uri.parse("${Constants.BASE_URL}/users/$userId/clicks/2023/September/$dia.json?auth=$token"));
     Map<dynamic, dynamic> dados2 = jsonDecode(response2.body);
     print('$dados2 esse formato');
 
@@ -68,7 +68,7 @@ class Graphic with ChangeNotifier {
 
   }
   for(var dia in dias10){
-    final response20 = await http.get(Uri.parse("${Constants.BASE_URL}/$userId/clicks/2023/October/$dia.json?auth=$token"));
+    final response20 = await http.get(Uri.parse("${Constants.BASE_URL}/users/$userId/clicks/2023/October/$dia.json?auth=$token"));
     Map<dynamic, dynamic> dados20 = jsonDecode(response20.body);
  //   print(dados2);
     if(dados20.containsKey('alfabeto') )

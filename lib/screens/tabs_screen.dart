@@ -1,4 +1,5 @@
 import 'package:braille_app/models/graphic.dart';
+import 'package:braille_app/models/teste.dart';
 import 'package:braille_app/screens/alphabet_translator_screen.dart';
 import 'package:braille_app/screens/expressions_translator_screen.dart';
 import 'package:braille_app/screens/number_translator_screen.dart';
@@ -16,6 +17,7 @@ class TabsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final graphic = Provider.of<Graphic>(context);
+    final teste = Provider.of<Teste>(context);
     final auth = Provider.of<Auth>(context);
     return DefaultTabController(
       length: 4,
@@ -24,7 +26,7 @@ class TabsScreen extends StatelessWidget {
           title: const Text("tradução"),
           actions: [
             IconButton(onPressed: () {
-              graphic.getClicks(auth.token??'', auth.userId??'');
+              teste.teste(auth.token??'', auth.userId??'');
               _graphic(context);
               },
               icon: const Icon(Icons.bar_chart))

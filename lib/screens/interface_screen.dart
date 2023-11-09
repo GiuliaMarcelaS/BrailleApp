@@ -1,4 +1,5 @@
 import 'package:braille_app/models/auth.dart';
+import 'package:braille_app/models/graphic.dart';
 import 'package:braille_app/models/teste.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,7 @@ class Interface extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final teste = Provider.of<Teste>(context);
+    final graphic = Provider.of<Graphic>(context);
     final auth = Provider.of<Auth>(context);
     return Scaffold(
         body: Column(
@@ -45,7 +47,7 @@ class Interface extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 125),
               child: ElevatedButton(onPressed: _isButtonDisabled ? null : (() {_traduzir(context);
-              teste.teste(auth.userId??'',auth.token??'');
+              graphic.getClicks(auth.userId??'',auth.token??'');
               }), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: const Size.fromWidth(350)), child: const Text('Realizar Tradução')
               ),
               ),
