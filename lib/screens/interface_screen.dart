@@ -47,7 +47,7 @@ class Interface extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 125),
               child: ElevatedButton(onPressed: _isButtonDisabled ? null : (() {_traduzir(context);
-              graphic.getClicks(auth.userId??'',auth.token??'');
+             // graphic.getClicks(auth.userId??'',auth.token??'');
               }), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: const Size.fromWidth(350)), child: const Text('Realizar Tradução')
               ),
               ),

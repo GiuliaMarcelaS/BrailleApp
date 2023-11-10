@@ -200,13 +200,16 @@ class _GraphicScreenState extends State<GraphicScreen> {
    double total = _monthsTotalAlphabetClicks+_monthsTotalExpressionClicks+_monthsTotalNumberClicks+_monthsTotalWordClicks;
     print('${graphic.alphabet} eba');
 
+     String uid = '';
+
     void dropdownCallback(int? selectedValue){
       if(selectedValue is int){
         setState(() {
           int _dropdownValue = selectedValue;
           if(selectedValue == 1){
-            String uid = 'TZoSmF7WtHTsU9SVDZ9SK3lRHZ03';
+            uid = 'TZoSmF7WtHTsU9SVDZ9SK3lRHZ03';
           }
+          graphic.getClicks(auth.token??'', auth.userId??'',uid);
         });
       }
     }
@@ -220,7 +223,8 @@ class _GraphicScreenState extends State<GraphicScreen> {
               DropdownMenuItem(child: Text("user 3"), value: 3,),
               DropdownMenuItem(child: Text("user 4"), value: 4,),
             ], 
-            onChanged: dropdownCallback),
+            onChanged: dropdownCallback
+            ),
           Card(
             elevation: 6,
             margin: EdgeInsets.all(20),
