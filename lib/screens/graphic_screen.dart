@@ -21,6 +21,14 @@ class GraphicScreen extends StatefulWidget {
 }
 
 class _GraphicScreenState extends State<GraphicScreen> {
+  List<dynamic> users = [];
+
+  @override
+  void initState(){
+    super.initState();
+    this.users.add({"id": 1, "label": "user 1"});
+    this.users.add({"id": 2, "label": "user 2"});
+  }
 
   List<num> alphabetClicksSum = [2,9,3,4,5,6,7,8,9,10,11,12];
 
@@ -177,7 +185,6 @@ class _GraphicScreenState extends State<GraphicScreen> {
   Widget build(BuildContext context) {
     final graphic = Provider.of<Graphic>(context);
     final auth = Provider.of<Auth>(context);
-    //graphic.getClicks2(auth.token??'', auth.userId??'');
     alphabetClicksSum[0] = graphic.alphabet2Current;
     alphabetClicksSum[1] = graphic.alphabet;
 
@@ -192,26 +199,49 @@ class _GraphicScreenState extends State<GraphicScreen> {
 
    double total = _monthsTotalAlphabetClicks+_monthsTotalExpressionClicks+_monthsTotalNumberClicks+_monthsTotalWordClicks;
     print('${graphic.alphabet} eba');
+
+    void dropdownCallback(int? selectedValue){
+      if(selectedValue is int){
+        setState(() {
+          int _dropdownValue = selectedValue;
+          if(selectedValue == 1){
+            String uid = 'TZoSmF7WtHTsU9SVDZ9SK3lRHZ03';
+          }
+        });
+      }
+    }
     return Scaffold(
-      body: Card(
-        elevation: 6,
-        margin: EdgeInsets.all(20),
-        child: Row(
-          children: groupedClicks.map((clicks){
-            return ChartBar(
-              month: clicks['month'].toString(),
-              alphabetClicks: clicks['AlphabetClicks'] as int,
-              wordClicks: clicks['wordClicks'] as int,
-              numberClicks: clicks['NumberClicks'] as int,
-              expressionClicks: clicks['ExpressionClicks'] as int,
-              percentage1: (clicks['AlphabetClicks'] as double)/total,
-              percentage2: (clicks['wordClicks'] as double)/total,
-              percentage3: (clicks['NumberClicks'] as double)/total,
-              percentage4: (clicks['ExpressionClicks'] as double)/total,
-            );
-          }).toList(),
-          
-        ),
+      body: Column(
+        children: [
+          DropdownButton(
+            items: [
+              DropdownMenuItem(child: Text("user 1"), value: 1),
+              DropdownMenuItem(child: Text("user 2"), value: 2,),
+              DropdownMenuItem(child: Text("user 3"), value: 3,),
+              DropdownMenuItem(child: Text("user 4"), value: 4,),
+            ], 
+            onChanged: dropdownCallback),
+          Card(
+            elevation: 6,
+            margin: EdgeInsets.all(20),
+            child: Row(
+              children: groupedClicks.map((clicks){
+                return ChartBar(
+                  month: clicks['month'].toString(),
+                  alphabetClicks: clicks['AlphabetClicks'] as int,
+                  wordClicks: clicks['wordClicks'] as int,
+                  numberClicks: clicks['NumberClicks'] as int,
+                  expressionClicks: clicks['ExpressionClicks'] as int,
+                  percentage1: (clicks['AlphabetClicks'] as double)/total,
+                  percentage2: (clicks['wordClicks'] as double)/total,
+                  percentage3: (clicks['NumberClicks'] as double)/total,
+                  percentage4: (clicks['ExpressionClicks'] as double)/total,
+                );
+              }).toList(),
+              
+            ),
+          ),
+        ],
       ),
     );
   }
