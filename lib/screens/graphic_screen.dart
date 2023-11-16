@@ -206,7 +206,7 @@ class _GraphicScreenState extends State<GraphicScreen> {
       if(selectedValue is int){
         setState(() {
           int _dropdownValue = selectedValue;
-          if(selectedValue == 1){
+          if(selectedValue == 2){
             uid = 'TZoSmF7WtHTsU9SVDZ9SK3lRHZ03';
           }
           graphic.getClicks(auth.token??'', auth.userId??'',uid);
