@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:braille_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class Graphic with ChangeNotifier {
   final String click;
@@ -21,6 +22,11 @@ class Graphic with ChangeNotifier {
   num numbers2Current = 0;
   num expressions = 0;
   num expressions2Current = 0;
+
+  List UIDs = [];
+  num totalAlphabet = 0;
+
+  List sixMonths = [];
 
    Future<void> getClicks(String token, String userId, String user) async{
 
@@ -86,4 +92,38 @@ print('$alphabet2Current teste');
   }
   notifyListeners();
 }
+   Future<void> getUIDs(String token, String userId) async{
+
+  final response = await http.get(Uri.parse("${Constants.BASE_URL}/users/2023.json?auth=$token"));
+  Map<dynamic, dynamic> dados = jsonDecode(response.body);
+  dias.clear();
+  dados.forEach((id, dados){
+    print(id);
+    UIDs.add(id);
+  });
+
+
+  dias.clear();
+  for(int i = 0; i<UIDs.length; i++)
+  {
+    var formatter = DateFormat.MMM().format(DateTime.now());
+  final response2 = await http.get(Uri.parse("${Constants.BASE_URL}/users/${UIDs[i]}/clicks/2023/$formatter.json?auth=$token"));
+  Map<dynamic, dynamic> dados2 = jsonDecode(response2.body);
+  dados.forEach((id, dados2){
+    dias.add(id);
+  });
+ 
+  for(var dia in dias)
+  {for(int i = 0; i<UIDs.length; i++)
+  {
+    var formatter = DateFormat.MMMM().format(DateTime.now());
+  final response3 = await http.get(Uri.parse("${Constants.BASE_URL}/users/${UIDs[i]}/clicks/2023/$formatter/$dia.json?auth=$token"));
+  Map<dynamic, dynamic> dados3 = jsonDecode(response3.body);
+
+  totalAlphabet+=dados3['alfabeto'];
+  }}
+
+
+  notifyListeners();
 }
+}}

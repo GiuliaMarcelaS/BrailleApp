@@ -180,6 +180,9 @@ class _GraphicScreenState extends State<GraphicScreen> {
     });
   }
  
+ void _usersChart(BuildContext context){
+    Navigator.of(context).pushNamed('/users-chart-screen');
+   }
 
   @override
   Widget build(BuildContext context) {
@@ -214,6 +217,14 @@ class _GraphicScreenState extends State<GraphicScreen> {
       }
     }
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          TextButton(onPressed: (){
+            _usersChart(context);
+            graphic.getUIDs(auth.token??'', auth.userId??'');
+            }, child: Text('gráfico geral', style: TextStyle(color: Colors.white),))
+        ],
+      ),
       body: Column(
         children: [
           DropdownButton(

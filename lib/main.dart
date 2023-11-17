@@ -21,6 +21,7 @@ import 'package:braille_app/screens/graphic_screen.dart';
 import 'package:braille_app/screens/number_translator_screen.dart';
 import 'package:braille_app/screens/phrase_translator_screen.dart';
 import 'package:braille_app/screens/tabs_screen.dart';
+import 'package:braille_app/screens/users_chart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/modulos_screen.dart';
@@ -103,6 +104,7 @@ class BrailleApp extends StatelessWidget{
           '/expression-translator-screen':(ctx)=> const ExpressionTranslatorScreen(),
           '/fases-screen':(ctz) => const FaseScreen(),
           '/graphic-screen':(ctz) => GraphicScreen(),
+          '/users-chart-screen':(ctz) => UsersChartScreen(),
         },
         ),
     );

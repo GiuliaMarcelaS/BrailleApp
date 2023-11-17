@@ -26,7 +26,7 @@ class TabsScreen extends StatelessWidget {
           title: const Text("tradução"),
           actions: [
             IconButton(onPressed: () {
-             // graphic.getClicks(auth.token??'', auth.userId??'');
+             // graphic.getClicks(auth.token??'', auth.userId??'')
               _graphic(context);
               },
               icon: const Icon(Icons.bar_chart))
