@@ -63,10 +63,20 @@ class _UsersChartScreenState extends State<UsersChartScreen> {
     );
   }
 
+  double alphabet = 2;
+
+    // @override
+    //  initState(){
+    //   super.initState();
+    //   //final graphic = Provider.of<Graphic>(context);
+    //   final auth = Provider.of<Auth>(context, listen: false);
+    //   Provider.of<Graphic>(context, listen: false).getUIDs(auth.token??'', auth.userId??'');
+    // }
   @override
   Widget build(BuildContext context) {
-    final graphic = Provider.of<Graphic>(context);
-    final auth = Provider.of<Auth>(context);
+   final graphic = Provider.of<Graphic>(context);
+    // final auth = Provider.of<Auth>(context);
+    
     return Scaffold(
       appBar: AppBar(
         title: Text("gráfico geral"),

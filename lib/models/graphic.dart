@@ -94,7 +94,7 @@ print('$alphabet2Current teste');
 }
    Future<void> getUIDs(String token, String userId) async{
 
-  final response = await http.get(Uri.parse("${Constants.BASE_URL}/users/2023.json?auth=$token"));
+  final response = await http.get(Uri.parse("${Constants.BASE_URL}/users.json?auth=$token"));
   Map<dynamic, dynamic> dados = jsonDecode(response.body);
   dias.clear();
   dados.forEach((id, dados){
@@ -103,25 +103,30 @@ print('$alphabet2Current teste');
   });
 
 
-  dias.clear();
   for(int i = 0; i<UIDs.length; i++)
   {
-    var formatter = DateFormat.MMM().format(DateTime.now());
+    var formatter = DateFormat.MMMM().format(DateTime.now());
+    print('isso: $formatter');
   final response2 = await http.get(Uri.parse("${Constants.BASE_URL}/users/${UIDs[i]}/clicks/2023/$formatter.json?auth=$token"));
   Map<dynamic, dynamic> dados2 = jsonDecode(response2.body);
-  dados.forEach((id, dados2){
+  dados2.forEach((id, dados2){
     dias.add(id);
+    print(id);
   });
  
-  for(var dia in dias)
-  {for(int i = 0; i<UIDs.length; i++)
-  {
-    var formatter = DateFormat.MMMM().format(DateTime.now());
-  final response3 = await http.get(Uri.parse("${Constants.BASE_URL}/users/${UIDs[i]}/clicks/2023/$formatter/$dia.json?auth=$token"));
+
+  
+  final availableDays = await http.get(Uri.parse("${Constants.BASE_URL}/users/${UIDs[i]}/clicks/2023/$formatter.json?auth=$token"));
+   Map<dynamic, dynamic> dadosDias = jsonDecode(availableDays.body);
+  dadosDias.forEach((id, dadosDias) async {
+  final response3 = await http.get(Uri.parse("${Constants.BASE_URL}/users/${UIDs[i]}/clicks/2023/$formatter/$id.json?auth=$token"));
   Map<dynamic, dynamic> dados3 = jsonDecode(response3.body);
 
   totalAlphabet+=dados3['alfabeto'];
-  }}
+  print('soma = $totalAlphabet');
+  });
+    
+
 
 
   notifyListeners();
