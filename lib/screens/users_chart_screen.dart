@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -63,20 +65,27 @@ class _UsersChartScreenState extends State<UsersChartScreen> {
     );
   }
 
-  double alphabet = 2;
+  double alphabet = 0;
 
     // @override
     //  initState(){
     //   super.initState();
-    //   //final graphic = Provider.of<Graphic>(context);
+    // //  final graphic = Provider.of<Graphic>(context);
     //   final auth = Provider.of<Auth>(context, listen: false);
-    //   Provider.of<Graphic>(context, listen: false).getUIDs(auth.token??'', auth.userId??'');
+    //  // alphabet = 0;
+    //   Provider.of<Graphic>(context).getUIDs(auth.token??'', auth.userId??'');
     // }
   @override
   Widget build(BuildContext context) {
    final graphic = Provider.of<Graphic>(context);
-    // final auth = Provider.of<Auth>(context);
-    
+    final auth = Provider.of<Auth>(context);
+   // Provider.of<Graphic>(context, listen: false).getUIDs(auth.token??'', auth.userId??'');
+   double retornaAlfabeto()
+    {setState(() { 
+    alphabet = graphic.totalAlphabet2.toDouble();
+    print('na tela: $alphabet');
+    });
+    return alphabet;}
     return Scaffold(
       appBar: AppBar(
         title: Text("gráfico geral"),
@@ -131,7 +140,7 @@ class _UsersChartScreenState extends State<UsersChartScreen> {
             lineBarsData: [
               LineChartBarData(
                 spots: [
-                  FlSpot(6, graphic.totalAlphabet.toDouble()),
+                  FlSpot(6, retornaAlfabeto()),
                   FlSpot(5, 0),
                   FlSpot(4, 0),
                   FlSpot(3, 0),

@@ -23,8 +23,9 @@ class Graphic with ChangeNotifier {
   num expressions = 0;
   num expressions2Current = 0;
 
-  List UIDs = [];
+  List uids = [];
   num totalAlphabet = 0;
+  num totalAlphabet2 = 0;
 
   List sixMonths = [];
 
@@ -42,7 +43,7 @@ class Graphic with ChangeNotifier {
    final response10 = await http.get(Uri.parse("${Constants.BASE_URL}/users/$user/clicks/2023/October.json?auth=$token"));
   Map<dynamic, dynamic> dados = jsonDecode(response.body);
   Map<dynamic, dynamic> dados10 = jsonDecode(response10.body);
-  print(dados);
+ // print(dados);
   dias.clear();
   dados.forEach((id, dados){
     dias.add(id);
@@ -52,13 +53,13 @@ class Graphic with ChangeNotifier {
   dados10.forEach((id, dados){
     dias10.add(id);
   });
-  print(dias);
-  print(dias10);
+//  print(dias);
+//  print(dias10);
 
   for(var dia in dias){
     final response2 = await http.get(Uri.parse("${Constants.BASE_URL}/users/$user/clicks/2023/September/$dia.json?auth=$token"));
     Map<dynamic, dynamic> dados2 = jsonDecode(response2.body);
-    print('$dados2 esse formato');
+ //   print('$dados2 esse formato');
 
     if(dados2.containsKey('alfabeto') )
     {alphabet += dados2['alfabeto'];}
@@ -88,7 +89,7 @@ class Graphic with ChangeNotifier {
     
      if(dados20.containsKey('expressões') )
     {expressions2Current += dados20['expressões'];}
-print('$alphabet2Current teste');
+//print('$alphabet2Current teste');
   }
   notifyListeners();
 }
@@ -98,37 +99,40 @@ print('$alphabet2Current teste');
   Map<dynamic, dynamic> dados = jsonDecode(response.body);
   dias.clear();
   dados.forEach((id, dados){
-    print(id);
-    UIDs.add(id);
+ //   print(id);
+   uids.add(id);
   });
 
-
-  for(int i = 0; i<UIDs.length; i++)
+  totalAlphabet = 0;
+  for(int i = 0; i<uids.length; i++)
   {
+    print('nome: ${uids[i]}');
     var formatter = DateFormat.MMMM().format(DateTime.now());
-    print('isso: $formatter');
-  final response2 = await http.get(Uri.parse("${Constants.BASE_URL}/users/${UIDs[i]}/clicks/2023/$formatter.json?auth=$token"));
+ //   print('isso: $formatter');
+  final response2 = await http.get(Uri.parse("${Constants.BASE_URL}/users/${uids[i]}/clicks/2023/$formatter.json?auth=$token"));
   Map<dynamic, dynamic> dados2 = jsonDecode(response2.body);
   dados2.forEach((id, dados2){
     dias.add(id);
-    print(id);
+ //   print(id);
   });
  
 
   
-  final availableDays = await http.get(Uri.parse("${Constants.BASE_URL}/users/${UIDs[i]}/clicks/2023/$formatter.json?auth=$token"));
+  final availableDays = await http.get(Uri.parse("${Constants.BASE_URL}/users/${uids[i]}/clicks/2023/$formatter.json?auth=$token"));
    Map<dynamic, dynamic> dadosDias = jsonDecode(availableDays.body);
   dadosDias.forEach((id, dadosDias) async {
-  final response3 = await http.get(Uri.parse("${Constants.BASE_URL}/users/${UIDs[i]}/clicks/2023/$formatter/$id.json?auth=$token"));
+  final response3 = await http.get(Uri.parse("${Constants.BASE_URL}/users/${uids[i]}/clicks/2023/$formatter/$id.json?auth=$token"));
   Map<dynamic, dynamic> dados3 = jsonDecode(response3.body);
 
   totalAlphabet+=dados3['alfabeto'];
+  print('uid = ${uids[i]}');
   print('soma = $totalAlphabet');
   });
     
 
 
-
   notifyListeners();
 }
+  totalAlphabet2 = totalAlphabet;
+  notifyListeners();
 }}

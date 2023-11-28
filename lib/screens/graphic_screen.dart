@@ -123,7 +123,7 @@ class _GraphicScreenState extends State<GraphicScreen> {
        final wordClicks = wordsClicksSum[index];
        final numberClicks = numbersClicksSum[index];
        final expressionClicks = expressionsClicksSum[index];
-       print(wordClicks);
+      // print(wordClicks);
         return {'month': month, 'AlphabetClicks': alphabetClicks, 'wordClicks': wordClicks, 'NumberClicks': numberClicks, 'ExpressionClicks': expressionClicks};
       },
     );
@@ -201,7 +201,7 @@ class _GraphicScreenState extends State<GraphicScreen> {
     expressionsClicksSum[1] = graphic.expressions;
 
    double total = _monthsTotalAlphabetClicks+_monthsTotalExpressionClicks+_monthsTotalNumberClicks+_monthsTotalWordClicks;
-    print('${graphic.alphabet} eba');
+   // print('${graphic.alphabet} eba');
 
      String uid = '';
 
@@ -212,7 +212,7 @@ class _GraphicScreenState extends State<GraphicScreen> {
           if(selectedValue == 2){
             uid = 'TZoSmF7WtHTsU9SVDZ9SK3lRHZ03';
           }
-          graphic.getClicks(auth.token??'', auth.userId??'',uid);
+          //graphic.getClicks(auth.token??'', auth.userId??'',uid);
         });
       }
     }
@@ -221,7 +221,9 @@ class _GraphicScreenState extends State<GraphicScreen> {
         actions: [
           TextButton(onPressed: (){
             _usersChart(context);
+            print('primeira');
             graphic.getUIDs(auth.token??'', auth.userId??'');
+           // graphic.totalAlphabet2;
             }, child: Text('gráfico geral', style: TextStyle(color: Colors.white),))
         ],
       ),
