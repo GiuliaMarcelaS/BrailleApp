@@ -221,8 +221,7 @@ class _GraphicScreenState extends State<GraphicScreen> {
         actions: [
           TextButton(onPressed: (){
             _usersChart(context);
-            print('primeira');
-            graphic.getUIDs(auth.token??'', auth.userId??'');
+            graphic.getUIDs(auth.token??'', auth.userId??'', 'Alphabet');
            // graphic.totalAlphabet2;
             }, child: Text('gráfico geral', style: TextStyle(color: Colors.white),))
         ],

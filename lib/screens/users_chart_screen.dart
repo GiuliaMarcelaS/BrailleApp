@@ -67,14 +67,6 @@ class _UsersChartScreenState extends State<UsersChartScreen> {
 
   double alphabetDecember = 0;
 
-    // @override
-    //  initState(){
-    //   super.initState();
-    // //  final graphic = Provider.of<Graphic>(context);
-    //   final auth = Provider.of<Auth>(context, listen: false);
-    //  // alphabetDecember = 0;
-    //   Provider.of<Graphic>(context).getUIDs(auth.token??'', auth.userId??'');
-    // }
   @override
   Widget build(BuildContext context) {
    final graphic = Provider.of<Graphic>(context);

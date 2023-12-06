@@ -120,7 +120,7 @@ class Graphic with ChangeNotifier {
   notifyListeners();
 }
 
-   Future<void> getUIDs(String token, String userId) async{
+   Future<void> getUIDs(String token, String userId, String aba) async{
 
   // salva as uids
   final response = await http.get(Uri.parse("${Constants.BASE_URL}/users.json?auth=$token"));
