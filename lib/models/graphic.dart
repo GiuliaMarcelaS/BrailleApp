@@ -25,8 +25,31 @@ class Graphic with ChangeNotifier {
 
   List uids = [];
   List salvaDias = [];
-  num totalAlphabet = 0;
-  num totalAlphabet2 = 0;
+  List salvaMeses = [];
+  num totalAlphabetJanuary = 0;
+  num totalAlphabetJanuary2 = 0;
+  num totalAlphabetFebruary = 0;
+  num totalAlphabetFebruary2 = 0;
+  num totalAlphabetMarch = 0;
+  num totalAlphabetMarch2 = 0;
+  num totalAlphabetApril = 0;
+  num totalAlphabetApril2 = 0;
+  num totalAlphabetMay = 0;
+  num totalAlphabetMay2 = 0;
+  num totalAlphabetJune = 0;
+  num totalAlphabetJune2 = 0;
+  num totalAlphabetJuly = 0;
+  num totalAlphabetJuly2 = 0;
+  num totalAlphabetAugust = 0;
+  num totalAlphabetAugust2 = 0;
+  num totalAlphabetSeptember = 0;
+  num totalAlphabetSeptember2 = 0;
+  num totalAlphabetOctober = 0;
+  num totalAlphabetOctober2 = 0;
+  num totalAlphabetNovember = 0;
+  num totalAlphabetNovember2 = 0;
+  num totalAlphabetDecember = 0;
+  num totalAlphabetDecember2 = 0;
 
   int sinal = 0;
 
@@ -96,43 +119,128 @@ class Graphic with ChangeNotifier {
   }
   notifyListeners();
 }
+
    Future<void> getUIDs(String token, String userId) async{
 
+  // salva as uids
   final response = await http.get(Uri.parse("${Constants.BASE_URL}/users.json?auth=$token"));
   Map<dynamic, dynamic> dados = jsonDecode(response.body);
   dias.clear();
+  uids.clear();
   dados.forEach((id, dados){
- //   print(id);
    uids.add(id);
   });
 
-  totalAlphabet = 0;
+  totalAlphabetJanuary = 0;
+  totalAlphabetFebruary = 0;
+  totalAlphabetMarch = 0;
+  totalAlphabetApril = 0;
+  totalAlphabetMay = 0;
+  totalAlphabetJune = 0;
+  totalAlphabetJuly = 0;
+  totalAlphabetAugust = 0;
+  totalAlphabetSeptember = 0;
+  totalAlphabetOctober = 0;
+  totalAlphabetNovember = 0;
+  totalAlphabetDecember = 0;
+
+  // para cada uid
   for(int i = 0; i<uids.length; i++)
   {
-    print('nome: ${uids[i]}');
-    var formatter = DateFormat.MMMM().format(DateTime.now());
- //   print('isso: $formatter');
-  final availableDays = await http.get(Uri.parse("${Constants.BASE_URL}/users/${uids[i]}/clicks/2023/$formatter.json?auth=$token"));
-   Map<dynamic, dynamic> dadosDias = jsonDecode(availableDays.body);
+    //pega os meses
+    final availableMonths = await http.get(Uri.parse("${Constants.BASE_URL}/users/${uids[i]}/clicks/2023/.json?auth=$token"));
+    Map<dynamic, dynamic> dadosMes = jsonDecode(availableMonths.body);
+
+    salvaMeses.clear();
+    dadosMes.forEach((id, dadosMes) {
+    salvaMeses.add(id);
+    });
+
+    //pega os dias do mes
+     for(int m = 0; m<salvaMeses.length; m++)
+    {
+      print(salvaMeses[m]);
+    final availableDays = await http.get(Uri.parse("${Constants.BASE_URL}/users/${uids[i]}/clicks/2023/${salvaMeses[m]}.json?auth=$token"));
+    Map<dynamic, dynamic> dadosDias = jsonDecode(availableDays.body);
     print("teste 2");
     
   salvaDias.clear();
   dadosDias.forEach((id, dadosDias) {
   salvaDias.add(id);
   });
-
+  //soma clicks para cada dia
   for(int b = 0; b<salvaDias.length; b++)
  {
   print('dia ${salvaDias[b]}');
   print('user ${uids[i]}');
-  final response3 = await http.get(Uri.parse("${Constants.BASE_URL}/users/${uids[i]}/clicks/2023/$formatter/${salvaDias[b]}.json?auth=$token"));
+  final response3 = await http.get(Uri.parse("${Constants.BASE_URL}/users/${uids[i]}/clicks/2023/${salvaMeses[m]}/${salvaDias[b]}.json?auth=$token"));
   Map<dynamic, dynamic> dados3 = jsonDecode(response3.body);
-  totalAlphabet+=dados3['alfabeto'];}
-  print('uid = ${uids[i]}');
-  print('soma = $totalAlphabet');
 
+  if(salvaMeses[m]=='January')
+  {
+    totalAlphabetJanuary+=dados3['alfabeto'];
+  }
+  else if(salvaMeses[m]=='February')
+  {
+    totalAlphabetFebruary+=dados3['alfabeto'];
+  }
+  else if(salvaMeses[m]=='March')
+  {
+    totalAlphabetMarch+=dados3['alfabeto'];
+  }
+  else if(salvaMeses[m]=='April')
+  {
+    totalAlphabetApril+=dados3['alfabeto'];
+  }
+  else if(salvaMeses[m]=='May')
+  {
+    totalAlphabetMay+=dados3['alfabeto'];
+  }
+  else if(salvaMeses[m]=='June')
+  {
+    totalAlphabetJune+=dados3['alfabeto'];
+  }
+  else if(salvaMeses[m]=='July')
+  {
+    totalAlphabetJuly+=dados3['alfabeto'];
+  }
+  else if(salvaMeses[m]=='August')
+  {
+    totalAlphabetAugust+=dados3['alfabeto'];
+  }
+  else if(salvaMeses[m]=='September')
+  {
+    totalAlphabetSeptember+=dados3['alfabeto'];
+  }
+  else if(salvaMeses[m]=='October')
+  {
+    totalAlphabetOctober+=dados3['alfabeto'];
+  }
+  else if(salvaMeses[m]=='November')
+  {
+    totalAlphabetNovember+=dados3['alfabeto'];
+  }
+  else if(salvaMeses[m]=='December')
+  {
+    totalAlphabetDecember+=dados3['alfabeto'];
+  }
+  }
+ 
   notifyListeners();
 }
-  totalAlphabet2 = totalAlphabet;
+}
+  totalAlphabetJanuary2 = totalAlphabetJanuary;
+  totalAlphabetFebruary2 = totalAlphabetFebruary;
+  totalAlphabetMarch2 = totalAlphabetMarch;
+  totalAlphabetApril2 = totalAlphabetApril;
+  totalAlphabetMay2 = totalAlphabetMay;
+  totalAlphabetJune2 = totalAlphabetJune;
+  totalAlphabetJuly2 = totalAlphabetJuly;
+  totalAlphabetAugust2 = totalAlphabetAugust;
+  totalAlphabetSeptember2 = totalAlphabetSeptember;
+  totalAlphabetOctober2 = totalAlphabetOctober;
+  totalAlphabetNovember2 = totalAlphabetNovember;
+  totalAlphabetDecember2 = totalAlphabetDecember;
+
   notifyListeners();
 }}

@@ -65,27 +65,20 @@ class _UsersChartScreenState extends State<UsersChartScreen> {
     );
   }
 
-  double alphabet = 0;
+  double alphabetDecember = 0;
 
     // @override
     //  initState(){
     //   super.initState();
     // //  final graphic = Provider.of<Graphic>(context);
     //   final auth = Provider.of<Auth>(context, listen: false);
-    //  // alphabet = 0;
+    //  // alphabetDecember = 0;
     //   Provider.of<Graphic>(context).getUIDs(auth.token??'', auth.userId??'');
     // }
   @override
   Widget build(BuildContext context) {
    final graphic = Provider.of<Graphic>(context);
     final auth = Provider.of<Auth>(context);
-   // Provider.of<Graphic>(context, listen: false).getUIDs(auth.token??'', auth.userId??'');
-   double retornaAlfabeto()
-    {setState(() { 
-    alphabet = graphic.totalAlphabet2.toDouble();
-    print('na tela: $alphabet');
-    });
-    return alphabet;}
     return Scaffold(
       appBar: AppBar(
         title: Text("gráfico geral"),
@@ -140,12 +133,12 @@ class _UsersChartScreenState extends State<UsersChartScreen> {
             lineBarsData: [
               LineChartBarData(
                 spots: [
-                  FlSpot(6, retornaAlfabeto()),
-                  FlSpot(5, 0),
-                  FlSpot(4, 0),
-                  FlSpot(3, 0),
-                  FlSpot(2, 0),
-                  FlSpot(1, 0),
+                  FlSpot(6, graphic.totalAlphabetDecember2.toDouble()),
+                  FlSpot(5, graphic.totalAlphabetNovember2.toDouble()),
+                  FlSpot(4, graphic.totalAlphabetOctober2.toDouble()),
+                  FlSpot(3, graphic.totalAlphabetSeptember2.toDouble()),
+                  FlSpot(2, graphic.totalAlphabetAugust2.toDouble()),
+                  FlSpot(1, graphic.totalAlphabetJuly2.toDouble()),
                 ]
               )
             ]
