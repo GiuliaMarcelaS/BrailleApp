@@ -38,7 +38,7 @@ class ExpressionList with ChangeNotifier{
     Future <void> expressionsClicker(String token, String userId) async{
     numberOfClicks++;
     writtedDate = DateFormat("yyyy/MMMM/dd").format(date);
-    http.put(Uri.parse('${Constants.BASE_URL}/$userId/clicks/$writtedDate/expressões.json?auth=$token'),
+    http.put(Uri.parse('${Constants.BASE_URL}/users/$userId/clicks/$writtedDate/expressões.json?auth=$token'),
     body: jsonEncode(numberOfClicks));
     notifyListeners();
   }

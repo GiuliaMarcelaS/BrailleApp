@@ -39,7 +39,7 @@ class NumberList with ChangeNotifier{
   Future <void> numberClicker(String token, String userId) async{
     numberOfClicks++;
         writtedDate = DateFormat("yyyy/MMMM/dd").format(date);
-    http.put(Uri.parse('${Constants.BASE_URL}/$userId/clicks/$writtedDate/números.json?auth=$token'),
+    http.put(Uri.parse('${Constants.BASE_URL}/users/$userId/clicks/$writtedDate/números.json?auth=$token'),
     body: jsonEncode(numberOfClicks));
     notifyListeners();
   }

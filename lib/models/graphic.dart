@@ -26,30 +26,30 @@ class Graphic with ChangeNotifier {
   List uids = [];
   List salvaDias = [];
   List salvaMeses = [];
-  num totalAlphabetJanuary = 0;
-  num totalAlphabetJanuary2 = 0;
-  num totalAlphabetFebruary = 0;
-  num totalAlphabetFebruary2 = 0;
-  num totalAlphabetMarch = 0;
-  num totalAlphabetMarch2 = 0;
-  num totalAlphabetApril = 0;
-  num totalAlphabetApril2 = 0;
-  num totalAlphabetMay = 0;
-  num totalAlphabetMay2 = 0;
-  num totalAlphabetJune = 0;
-  num totalAlphabetJune2 = 0;
-  num totalAlphabetJuly = 0;
-  num totalAlphabetJuly2 = 0;
-  num totalAlphabetAugust = 0;
-  num totalAlphabetAugust2 = 0;
-  num totalAlphabetSeptember = 0;
-  num totalAlphabetSeptember2 = 0;
-  num totalAlphabetOctober = 0;
-  num totalAlphabetOctober2 = 0;
-  num totalAlphabetNovember = 0;
-  num totalAlphabetNovember2 = 0;
-  num totalAlphabetDecember = 0;
-  num totalAlphabetDecember2 = 0;
+  List totalAlphabetJanuary = [0, 0, 0, 0];
+  List totalAlphabetJanuary2 = [0, 0, 0, 0];
+  List totalAlphabetFebruary = [0, 0, 0, 0];
+  List totalAlphabetFebruary2 = [0, 0, 0, 0];
+  List totalAlphabetMarch = [0, 0, 0, 0];
+  List totalAlphabetMarch2 = [0, 0, 0, 0];
+  List totalAlphabetApril = [0, 0, 0, 0];
+  List totalAlphabetApril2 = [0, 0, 0, 0];
+  List totalAlphabetMay = [0, 0, 0, 0];
+  List totalAlphabetMay2 = [0, 0, 0, 0];
+  List totalAlphabetJune = [0, 0, 0, 0];
+  List totalAlphabetJune2 = [0, 0, 0, 0];
+  List totalAlphabetJuly = [0, 0, 0, 0];
+  List totalAlphabetJuly2 = [0, 0, 0, 0];
+  List totalAlphabetAugust = [0, 0, 0, 0];
+  List totalAlphabetAugust2 = [0, 0, 0, 0];
+  List totalAlphabetSeptember = [0, 0, 0, 0];
+  List totalAlphabetSeptember2 = [0, 0, 0, 0];
+  List totalAlphabetOctober = [0, 0, 0, 0];
+  List totalAlphabetOctober2 = [0, 0, 0, 0];
+  List totalAlphabetNovember = [0, 0, 0, 0];
+  List totalAlphabetNovember2 = [0, 0, 0, 0];
+  List totalAlphabetDecember = [0, 0, 0, 0];
+  List totalAlphabetDecember2 = [0, 0, 0, 0];
 
   int sinal = 0;
 
@@ -131,18 +131,30 @@ class Graphic with ChangeNotifier {
    uids.add(id);
   });
 
-  totalAlphabetJanuary = 0;
-  totalAlphabetFebruary = 0;
-  totalAlphabetMarch = 0;
-  totalAlphabetApril = 0;
-  totalAlphabetMay = 0;
-  totalAlphabetJune = 0;
-  totalAlphabetJuly = 0;
-  totalAlphabetAugust = 0;
-  totalAlphabetSeptember = 0;
-  totalAlphabetOctober = 0;
-  totalAlphabetNovember = 0;
-  totalAlphabetDecember = 0;
+  totalAlphabetJanuary = [0, 0, 0, 0];
+  totalAlphabetJanuary2 = [0, 0, 0, 0];
+  totalAlphabetFebruary = [0, 0, 0, 0];
+  totalAlphabetFebruary2 = [0, 0, 0, 0];
+  totalAlphabetMarch = [0, 0, 0, 0];
+  totalAlphabetMarch2 = [0, 0, 0, 0];
+  totalAlphabetApril = [0, 0, 0, 0];
+  totalAlphabetApril2 = [0, 0, 0, 0];
+  totalAlphabetMay = [0, 0, 0, 0];
+  totalAlphabetMay2 = [0, 0, 0, 0];
+  totalAlphabetJune = [0, 0, 0, 0];
+  totalAlphabetJune2 = [0, 0, 0, 0];
+  totalAlphabetJuly = [0, 0, 0, 0];
+  totalAlphabetJuly2 = [0, 0, 0, 0];
+  totalAlphabetAugust = [0, 0, 0, 0];
+  totalAlphabetAugust2 = [0, 0, 0, 0];
+  totalAlphabetSeptember = [0, 0, 0, 0];
+  totalAlphabetSeptember2 = [0, 0, 0, 0];
+  totalAlphabetOctober = [0, 0, 0, 0];
+  totalAlphabetOctober2 = [0, 0, 0, 0];
+  totalAlphabetNovember = [0, 0, 0, 0];
+  totalAlphabetNovember2 = [0, 0, 0, 0];
+  totalAlphabetDecember = [0, 0, 0, 0];
+  totalAlphabetDecember2 = [0, 0, 0, 0];
 
   // para cada uid
   for(int i = 0; i<uids.length; i++)
@@ -178,51 +190,135 @@ class Graphic with ChangeNotifier {
 
   if(salvaMeses[m]=='January')
   {
-    totalAlphabetJanuary+=dados3['alfabeto'];
+    if(dados3['alfabeto'].runtimeType != Null)
+    {totalAlphabetJanuary[0]+=dados3['alfabeto'];}
+    if(dados3['palavras'].runtimeType != Null)
+    {totalAlphabetJanuary[1]+=dados3['palavras'];}
+    if(dados3['números'].runtimeType != Null)
+    {totalAlphabetJanuary[2]+=dados3['números'];}
+    if(dados3['expressões'].runtimeType != Null)
+    {totalAlphabetJanuary[3]+=dados3['expressões'];}
   }
   else if(salvaMeses[m]=='February')
   {
-    totalAlphabetFebruary+=dados3['alfabeto'];
+    if(dados3['alfabeto'].runtimeType != Null)
+    {totalAlphabetFebruary[0]+=dados3['alfabeto'];}
+    if(dados3['palavras'].runtimeType != Null)
+    {totalAlphabetFebruary[1]+=dados3['palavras'];}
+    if(dados3['números'].runtimeType != Null)
+    {totalAlphabetFebruary[2]+=dados3['números'];}
+    if(dados3['expressões'].runtimeType != Null)
+    {totalAlphabetFebruary[3]+=dados3['expressões'];}
   }
   else if(salvaMeses[m]=='March')
   {
-    totalAlphabetMarch+=dados3['alfabeto'];
+    if(dados3['alfabeto'].runtimeType != Null)
+    {totalAlphabetMarch[0]+=dados3['alfabeto'];}
+    if(dados3['palavras'].runtimeType != Null)
+    {totalAlphabetMarch[1]+=dados3['palavras'];}
+    if(dados3['números'].runtimeType != Null)
+    {totalAlphabetMarch[2]+=dados3['números'];}
+    if(dados3['expressões'].runtimeType != Null)
+    {totalAlphabetMarch[3]+=dados3['expressões'];}
   }
   else if(salvaMeses[m]=='April')
   {
-    totalAlphabetApril+=dados3['alfabeto'];
+    if(dados3['alfabeto'].runtimeType != Null)
+    {totalAlphabetApril[0]+=dados3['alfabeto'];}
+    if(dados3['palavras'].runtimeType != Null)
+    {totalAlphabetApril[1]+=dados3['palavras'];}
+    if(dados3['números'].runtimeType != Null)
+    {totalAlphabetApril[2]+=dados3['números'];}
+    if(dados3['expressões'].runtimeType != Null)
+    {totalAlphabetApril[3]+=dados3['expressões'];}
   }
   else if(salvaMeses[m]=='May')
   {
-    totalAlphabetMay+=dados3['alfabeto'];
+    if(dados3['alfabeto'].runtimeType != Null)
+    {totalAlphabetMay[0]+=dados3['alfabeto'];}
+    if(dados3['palavras'].runtimeType != Null)
+    {totalAlphabetMay[1]+=dados3['palavras'];}
+    if(dados3['números'].runtimeType != Null)
+    {totalAlphabetMay[2]+=dados3['números'];}
+    if(dados3['expressões'].runtimeType != Null)
+    {totalAlphabetMay[3]+=dados3['expressões'];}
   }
   else if(salvaMeses[m]=='June')
   {
-    totalAlphabetJune+=dados3['alfabeto'];
+    if(dados3['alfabeto'].runtimeType != Null)
+    {totalAlphabetJune[0]+=dados3['alfabeto'];}
+    if(dados3['palavras'].runtimeType != Null)
+    {totalAlphabetJune[1]+=dados3['palavras'];}
+    if(dados3['números'].runtimeType != Null)
+    {totalAlphabetJune[2]+=dados3['números'];}
+    if(dados3['expressões'].runtimeType != Null)
+    {totalAlphabetJune[3]+=dados3['expressões'];}
   }
   else if(salvaMeses[m]=='July')
   {
-    totalAlphabetJuly+=dados3['alfabeto'];
+    if(dados3['alfabeto'].runtimeType != Null)
+    {totalAlphabetJuly[0]+=dados3['alfabeto'];}
+    if(dados3['palavras'].runtimeType != Null)
+    {totalAlphabetJuly[1]+=dados3['palavras'];}
+    if(dados3['números'].runtimeType != Null)
+    {totalAlphabetJuly[2]+=dados3['números'];}
+    if(dados3['expressões'].runtimeType != Null)
+    {totalAlphabetJuly[3]+=dados3['expressões'];}
   }
   else if(salvaMeses[m]=='August')
   {
-    totalAlphabetAugust+=dados3['alfabeto'];
+    if(dados3['alfabeto'].runtimeType != Null)
+    {totalAlphabetAugust[0]+=dados3['alfabeto'];}
+    if(dados3['palavras'].runtimeType != Null)
+    {totalAlphabetAugust[1]+=dados3['palavras'];}
+    if(dados3['números'].runtimeType != Null)
+    {totalAlphabetAugust[2]+=dados3['números'];}
+    if(dados3['expressões'].runtimeType != Null)
+    {totalAlphabetAugust[3]+=dados3['expressões'];}
   }
   else if(salvaMeses[m]=='September')
   {
-    totalAlphabetSeptember+=dados3['alfabeto'];
+    if(dados3['alfabeto'].runtimeType != Null)
+    {totalAlphabetSeptember[0]+=dados3['alfabeto'];}
+    if(dados3['palavras'].runtimeType != Null)
+    {totalAlphabetSeptember[1]+=dados3['palavras'];}
+    if(dados3['números'].runtimeType != Null)
+    {totalAlphabetSeptember[2]+=dados3['números'];}
+    if(dados3['expressões'].runtimeType != Null)
+    {totalAlphabetSeptember[3]+=dados3['expressões'];}
   }
   else if(salvaMeses[m]=='October')
   {
-    totalAlphabetOctober+=dados3['alfabeto'];
+    if(dados3['alfabeto'].runtimeType != Null)
+    {totalAlphabetOctober[0]+=dados3['alfabeto'];}
+    if(dados3['palavras'].runtimeType != Null)
+    {totalAlphabetOctober[1]+=dados3['palavras'];}
+    if(dados3['números'].runtimeType != Null)
+    {totalAlphabetOctober[2]+=dados3['números'];}
+    if(dados3['expressões'].runtimeType != Null)
+    {totalAlphabetOctober[3]+=dados3['expressões'];}
   }
   else if(salvaMeses[m]=='November')
   {
-    totalAlphabetNovember+=dados3['alfabeto'];
+    if(dados3['alfabeto'].runtimeType != Null)
+    {totalAlphabetNovember[0]+=dados3['alfabeto'];}
+    if(dados3['palavras'].runtimeType != Null)
+    {totalAlphabetNovember[1]+=dados3['palavras'];}
+    if(dados3['números'].runtimeType != Null)
+    {totalAlphabetNovember[2]+=dados3['números'];}
+    if(dados3['expressões'].runtimeType != Null)
+    {totalAlphabetNovember[3]+=dados3['expressões'];}
   }
   else if(salvaMeses[m]=='December')
   {
-    totalAlphabetDecember+=dados3['alfabeto'];
+    if(dados3['alfabeto'].runtimeType != Null)
+    {totalAlphabetDecember[0]+=dados3['alfabeto'];}
+    if(dados3['palavras'].runtimeType != Null)
+    {totalAlphabetDecember[1]+=dados3['palavras'];}
+    if(dados3['números'].runtimeType != Null)
+    {totalAlphabetDecember[2]+=dados3['números'];}
+    if(dados3['expressões'].runtimeType != Null)
+    {totalAlphabetDecember[3]+=dados3['expressões'];}
   }
   }
  
