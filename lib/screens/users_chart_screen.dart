@@ -72,18 +72,18 @@ class _UsersChartScreenState extends State<UsersChartScreen> {
     final graphic = Provider.of<Graphic>(context);
     final auth = Provider.of<Auth>(context);
     int highestValue = 0;
-    List highestValueJanuary = [graphic.totalAlphabetJanuary2[0], graphic.totalAlphabetJanuary2[1], graphic.totalAlphabetJanuary2[2], graphic.totalAlphabetJanuary2[3]];
-    List highestValueFebruary = [graphic.totalAlphabetFebruary2[0], graphic.totalAlphabetFebruary2[1], graphic.totalAlphabetFebruary2[2], graphic.totalAlphabetFebruary2[3]];
-    List highestValueMarch = [graphic.totalAlphabetMarch2[0], graphic.totalAlphabetMarch2[1], graphic.totalAlphabetMarch2[2], graphic.totalAlphabetMarch2[3]];
-    List highestValueApril = [graphic.totalAlphabetApril2[0], graphic.totalAlphabetApril2[1], graphic.totalAlphabetApril2[2], graphic.totalAlphabetApril2[3]];
-    List highestValueMay = [graphic.totalAlphabetMay2[0], graphic.totalAlphabetMay2[1], graphic.totalAlphabetMay2[2], graphic.totalAlphabetMay2[3]];
-    List highestValueJune = [graphic.totalAlphabetJune2[0], graphic.totalAlphabetJune2[1], graphic.totalAlphabetJune2[2], graphic.totalAlphabetJune2[3]];
-    List highestValueJuly = [graphic.totalAlphabetJuly2[0], graphic.totalAlphabetJuly2[1], graphic.totalAlphabetJuly2[2], graphic.totalAlphabetJuly2[3]];
-    List highestValueAugust = [graphic.totalAlphabetAugust2[0], graphic.totalAlphabetAugust2[1], graphic.totalAlphabetAugust2[2], graphic.totalAlphabetAugust2[3]];
-    List highestValueSeptember = [graphic.totalAlphabetSeptember2[0], graphic.totalAlphabetSeptember2[1], graphic.totalAlphabetSeptember2[2], graphic.totalAlphabetSeptember2[3]];
-    List highestValueOctober = [graphic.totalAlphabetOctober2[0], graphic.totalAlphabetOctober2[1], graphic.totalAlphabetOctober2[2], graphic.totalAlphabetOctober2[3]];
-    List highestValueNovember = [graphic.totalAlphabetNovember2[0], graphic.totalAlphabetNovember2[1], graphic.totalAlphabetNovember2[2], graphic.totalAlphabetNovember2[3]];
-    List highestValueDecember = [graphic.totalAlphabetDecember2[0], graphic.totalAlphabetDecember2[1], graphic.totalAlphabetDecember2[2], graphic.totalAlphabetDecember2[3]];
+    List highestValueJanuary = [graphic.totalAlphabetJanuary2[0]];
+    List highestValueFebruary = graphic.totalAlphabetFebruary2[0];
+    List highestValueMarch = graphic.totalAlphabetMarch2[0];
+    List highestValueApril = graphic.totalAlphabetApril2[0];
+    List highestValueMay = graphic.totalAlphabetMay2[0];
+    List highestValueJune = graphic.totalAlphabetJune2[0];
+    List highestValueJuly = graphic.totalAlphabetJuly2[0];
+    List highestValueAugust = graphic.totalAlphabetAugust2[0];
+    List highestValueSeptember = graphic.totalAlphabetSeptember2[0];
+    List highestValueOctober = graphic.totalAlphabetApril2[0];
+    List highestValueNovember = graphic.totalAlphabetNovember2[0];
+    List highestValueDecember = graphic.totalAlphabetApril2[0];
     int returnHighestValue(){
       for(int i = 0; i<2; i++){
         if(graphic.totalAlphabetJanuary2[i+1]>graphic.totalAlphabetJanuary2[i]){
