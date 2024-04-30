@@ -1,4 +1,5 @@
 import 'package:braille_app/components/auth_form.dart';
+import 'package:braille_app/components/auth_switch.dart';
 import 'package:flutter/material.dart';
 
 class AuthScreen extends StatelessWidget {
@@ -10,21 +11,42 @@ class AuthScreen extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            decoration: const BoxDecoration(color: Color.fromARGB(255,13,110,69)),
+            decoration: const BoxDecoration(color: Color(0xFFDDE9DD)),
           ),
-          SizedBox(
+            SizedBox(
             width: double.infinity,
+            height: double.infinity,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                Text(
-                  'Muiraquitã Braille',
-                  style: TextStyle(
-                    fontSize: 45
+              children: [
+                 SizedBox(
+            width: 250,
+            child: Image.asset("assets/images/Isolation_Mode.png"),
+            ),
+                const SizedBox(
+                  width: 276,
+                  child: Text(
+                    'Vamos começar a decifrar o Braille?',
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w700,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
-                AuthForm(),
+                const SizedBox(
+                  width: 300,
+                  child: Text(
+                    'Desvende o mundo do Braille de forma divertida e interativa com Muiraquitã Braille!',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontFamily: 'Roboto',
+                      fontWeight: FontWeight.w400,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SwitchAuth(),
               ]),
           )
         ],
