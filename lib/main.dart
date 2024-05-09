@@ -1,4 +1,5 @@
 
+import 'package:braille_app/screens/login_screen.dart';
 import 'package:braille_app/models/alphabet_list.dart';
 import 'package:braille_app/models/auth.dart';
 import 'package:braille_app/models/ball.dart';
@@ -105,6 +106,7 @@ class BrailleApp extends StatelessWidget{
           '/fases-screen':(ctz) => const FaseScreen(),
           '/graphic-screen':(ctz) => GraphicScreen(),
           '/users-chart-screen':(ctz) => UsersChartScreen(),
+          '/login-screen':(ctz) => LoginScreen(),
         },
         ),
     );

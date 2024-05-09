@@ -72,6 +72,10 @@ class _AuthFormState extends State<AuthForm> {
     ));
   }
 
+  void _interface(BuildContext context){
+    Navigator.of(context).pushNamed('/interface-screen');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -126,7 +130,9 @@ class _AuthFormState extends State<AuthForm> {
           const CircularProgressIndicator()
           else
           ElevatedButton(
-            onPressed: _submit, 
+            onPressed: (){
+              _interface(context);
+              _submit;}, 
             child: Text(
               _authMode == AuthMode.login? 'ENTRAR': 'REGISTRAR',
             )),
