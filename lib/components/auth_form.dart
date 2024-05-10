@@ -1,5 +1,6 @@
 import 'package:braille_app/exceptions/auth_exception.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:braille_app/models/auth.dart';
 
@@ -26,7 +27,7 @@ class _AuthFormState extends State<AuthForm> {
     'email': '',
     'password': '',
   };
-
+  
   bool _isLogin() => _authMode == AuthMode.login;
   bool _isSignup() => _authMode == AuthMode.signup;
 
@@ -82,7 +83,9 @@ class _AuthFormState extends State<AuthForm> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
     return Card(
+    //  color: Color(0xFFDDE9DD),
       child: Form(
         key: _formKey,
         child:Column(children: [
@@ -103,7 +106,7 @@ class _AuthFormState extends State<AuthForm> {
                 return null;
               },
           ),
-          SizedBox(height: 10,),
+          Container(height: screenHeight*28/800, color: Color(0xFFDDE9DD),),
           TextFormField(
             decoration: const InputDecoration(
               labelText: 'Senha', 
@@ -138,17 +141,19 @@ class _AuthFormState extends State<AuthForm> {
               return null;
             },
           ),
-          const SizedBox(height: 20,),
+         Container(height: screenHeight*29/800, color: Color(0xFFDDE9DD), ),
           if(_isLoading)
           const CircularProgressIndicator()
           else
-          ElevatedButton(
-            onPressed: (){
-              _interface(context);
-              _submit;}, 
-            child: Text(
-              _authMode == AuthMode.login? 'ENTRAR': 'REGISTRAR',
-            )),
+          Container(
+            child: ElevatedButton(
+              onPressed: (){
+                _interface(context);
+                _submit;}, 
+              child: Text(
+                _authMode == AuthMode.login? 'ENTRAR': 'REGISTRAR',
+              )),
+          ),
             //Spacer(),
             TextButton(
               onPressed: _switchAuthMode, 

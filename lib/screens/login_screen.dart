@@ -9,9 +9,16 @@ class LoginScreen extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Color(0xFFDDE9DD),
+      appBar: AppBar(
+        backgroundColor: Color(0xFFDDE9DD),
+        title: Text('Login'), 
+        centerTitle: true,
+        shape: Border(bottom: BorderSide(color: Colors.black)),
+        ),
       body: Column(
         children: [
           Container(
+            margin: EdgeInsets.only(top:screenHeight*36/800),
             child: Image.asset('assets/images/group12.png'),
           ),
           AuthForm(),
