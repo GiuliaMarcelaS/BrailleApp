@@ -172,7 +172,57 @@ class _AuthFormState extends State<AuthForm> {
                     style: TextStyle(color: Colors.white),
                   )),
               ),
-              
+              SizedBox(height: screenHeight*1/40,),
+              Container(
+                width: screenWidth*328/360,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                  onPressed: (){}, 
+                  child: Text(
+                    'Continue com Google',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w800),
+                  )),
+              ),
+              SizedBox(height: screenHeight*1/40,),
+              Container(
+                width: screenWidth*328/360,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                  onPressed: (){}, 
+                  child: Text(
+                    'Continue com Facebook',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w800),
+                  )),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: screenHeight*30/800),
+                height: 0.5,
+                width: screenWidth*300/360, 
+                color: Colors.black,
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: screenHeight*68/800),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Primeira vez por aqui?',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500
+                        ),),
+                      TextButton(
+                        onPressed: _switchAuthMode, 
+                        child: Text(
+                          _isLogin() ? 'Crie uma conta': 'JÁ POSSUI CONTA?',
+                          style: TextStyle(color: Color(0xFF1CB9C5)),
+                        )),
+                    ],
+                  ),
+                )
             ],) ),
           )],
       ),
