@@ -6,8 +6,17 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: AuthForm(),
+      backgroundColor: Color(0xFFDDE9DD),
+      body: Column(
+        children: [
+          Container(
+            child: Image.asset('assets/images/group12.png'),
+          ),
+          AuthForm(),
+        ],
+      ),
     );
   }
 }

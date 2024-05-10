@@ -6,7 +6,11 @@ import 'package:braille_app/models/auth.dart';
 enum AuthMode{signup, login}
 
 class AuthForm extends StatefulWidget {
-  const AuthForm({super.key});
+  final double screenHeight;
+  const AuthForm({
+    super.key,
+    this.screenHeight = 0,
+    });
 
   @override
   State<AuthForm> createState() => _AuthFormState();
@@ -83,7 +87,11 @@ class _AuthFormState extends State<AuthForm> {
         key: _formKey,
         child:Column(children: [
           TextFormField(
-            decoration: const InputDecoration(labelText: 'E-mail'),
+            decoration: const InputDecoration(
+              labelText: 'E-mail',
+              hintText: 'Ex: joao@gmail.com',
+              border: OutlineInputBorder(),
+              ),
             keyboardType: TextInputType.emailAddress,
             onSaved: (email) => _authData['email'] = email ??'',
             // ignore: no_leading_underscores_for_local_identifiers
@@ -95,8 +103,13 @@ class _AuthFormState extends State<AuthForm> {
                 return null;
               },
           ),
+          SizedBox(height: 10,),
           TextFormField(
-            decoration: const InputDecoration(labelText: 'Senha'),
+            decoration: const InputDecoration(
+              labelText: 'Senha', 
+              hintText: 'Ex: senha123',
+              border: OutlineInputBorder(),
+              ),
             keyboardType: TextInputType.emailAddress,
             obscureText: true,
             controller: _passwordController,
