@@ -15,6 +15,11 @@ class LoginScreen extends StatelessWidget {
         title: Text('Login'), 
         centerTitle: true,
         shape: Border(bottom: BorderSide(color: Colors.black)),
+        actions: [Container(
+          child: Image.asset('assets/images/muiraq_preto.png'),
+          width: screenWidth*20/360,
+          margin: EdgeInsets.only(right: screenWidth*25/360),
+          )],
         ),
       body: Column(
         children: [
@@ -24,28 +29,49 @@ class LoginScreen extends StatelessWidget {
           ),
           AuthForm(),
               Container(
+                margin: EdgeInsets.only(top:screenHeight*20/800),
                 width: screenWidth*328/360,
+                height: screenHeight*50/800,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
                   onPressed: (){}, 
-                  child: Text(
-                    'Continue com Google',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w800),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: screenWidth*6/360),
+                        child: Image.asset('assets/images/google.png'),
+                      ),
+                      Text(
+                        'Continue com Google',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w800),
+                      ),
+                    ],
                   )),
               ),
               SizedBox(height: screenHeight*1/40,),
               Container(
                 width: screenWidth*328/360,
+                height: screenHeight*50/800,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
                   onPressed: (){}, 
-                  child: Text(
-                    'Continue com Facebook',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w800),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: screenWidth*6/360),
+                        child: Image.asset('assets/images/facebook.png'),
+                      ),
+                      Text(
+                        'Continue com Facebook',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w800),
+                      ),
+                    ],
                   )),
               ),
               Container(

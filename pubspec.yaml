@@ -68,6 +68,9 @@ flutter:
     - assets\images\muiraquita3.jpg
     - assets\images\Isolation_Mode.png
     - assets\images\group12.png
+    - assets\images\facebook.png
+    - assets\images\google.png
+    - assets\images\muiraq_preto.png
     #- images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

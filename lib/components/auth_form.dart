@@ -95,7 +95,9 @@ class _AuthFormState extends State<AuthForm> {
             key: _formKey,
             child:Column(children: [
               Container(
+                margin: EdgeInsets.only(top: screenHeight*22/800),
                 width: screenWidth*328/360,
+                height: screenHeight*70/800,
                 color: Colors.white,
                 child: TextFormField(
                   decoration: const InputDecoration(
@@ -116,8 +118,9 @@ class _AuthFormState extends State<AuthForm> {
                     },
                 ),
               ),
-              Container(height: screenHeight*28/800, color: Color(0xFFDDE9DD),),
               Container(
+                height: screenHeight*70/800,
+                margin: EdgeInsets.only(top:screenHeight*28/800),
                 width: screenWidth*328/360,
                 color: Colors.white,
                 child: TextFormField(
@@ -161,6 +164,7 @@ class _AuthFormState extends State<AuthForm> {
               const CircularProgressIndicator()
               else
               Container(
+                height: screenHeight*50/800,
                 width: screenWidth*328/360,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFACC9B8)),
