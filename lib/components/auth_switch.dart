@@ -12,6 +12,9 @@ class SwitchAuth extends StatelessWidget {
   void _login(BuildContext context){
     Navigator.of(context).pushNamed('/login-screen');
 }
+  void _register(BuildContext context){
+    Navigator.of(context).pushNamed('/register-screen');
+}
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class SwitchAuth extends StatelessWidget {
           width: screenWidth*0.91,
           height: screenHeight*50/800,
           child: ElevatedButton(
-            onPressed: (){}, 
+            onPressed: ()=>_register(context), 
             child: Text(
               "Criar conta",
               style: TextStyle(

@@ -1,4 +1,9 @@
 
+import 'package:braille_app/screens/register_screen.dart';
+import 'package:braille_app/screens/about_you_1_screen.dart';
+import 'package:braille_app/screens/about_you_2_screen.dart';
+import 'package:braille_app/screens/about_you_3_screen.dart';
+import 'package:braille_app/screens/account_created_screen.dart';
 import 'package:braille_app/screens/login_screen.dart';
 import 'package:braille_app/models/alphabet_list.dart';
 import 'package:braille_app/models/auth.dart';
@@ -21,6 +26,7 @@ import 'package:braille_app/screens/fase_screen.dart';
 import 'package:braille_app/screens/graphic_screen.dart';
 import 'package:braille_app/screens/number_translator_screen.dart';
 import 'package:braille_app/screens/phrase_translator_screen.dart';
+import 'package:braille_app/screens/ready_screen.dart';
 import 'package:braille_app/screens/tabs_screen.dart';
 import 'package:braille_app/screens/users_chart_screen.dart';
 import 'package:flutter/material.dart';
@@ -107,6 +113,12 @@ class BrailleApp extends StatelessWidget{
           '/graphic-screen':(ctz) => GraphicScreen(),
           '/users-chart-screen':(ctz) => UsersChartScreen(),
           '/login-screen':(ctz) => LoginScreen(),
+          '/register-screen':(ctz) => RegisterScreen(),
+          '/account-created-screen':(ctz) => AccountCreatedScreen(),
+          '/about-you-1-screen':(ctz) => AboutYou1Screen(),
+          '/about-you-2-screen':(ctz) => AboutYou2Screen(),
+          '/about-you-3-screen':(ctz) => AboutYou3Screen(),
+          '/ready-screen':(ctz) => ReadyScreen(),
         },
         ),
     );
