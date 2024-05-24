@@ -26,28 +26,62 @@ class RegisterScreen extends StatelessWidget {
           children: [
             AuthFormRegister(),
              Container(
-                margin: EdgeInsets.only(top:screenHeight*20/800),
-                width: screenWidth*328/360,
-                height: screenHeight*50/800,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                  onPressed: (){}, 
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(right: screenWidth*6/360),
-                        child: Image.asset('assets/images/google.png'),
-                      ),
-                      Text(
-                        'Continue com Google',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w800),
-                      ),
-                    ],
-                  )),
-              ),
+              margin: EdgeInsets.only(top: screenHeight*130/800),
+               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                   Container(
+                      margin: EdgeInsets.only(top:screenHeight*20/800),
+                      width: screenWidth*155/360,
+                      height: screenHeight*50/800,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                        onPressed: (){}, 
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(right: screenWidth*6/360),
+                              child: Image.asset('assets/images/google.png'),
+                            ),
+                            Text(
+                              'Google',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w800),
+                            ),
+                          ],
+                        )),
+                    ),
+                    SizedBox(
+                      width: screenWidth*29/360,
+                    ),
+                   Container(
+                      margin: EdgeInsets.only(top:screenHeight*20/800),
+                      width: screenWidth*155/360,
+                      height: screenHeight*50/800,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                        onPressed: (){}, 
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(right: screenWidth*6/360),
+                              child: Image.asset('assets/images/facebook.png'),
+                            ),
+                            Text(
+                              'Facebook',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w800),
+                            ),
+                          ],
+                        )),
+                    ),
+                 ],
+               ),
+             ),
           ],
         ),
         

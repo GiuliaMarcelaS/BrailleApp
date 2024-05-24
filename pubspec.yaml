@@ -71,6 +71,8 @@ flutter:
     - assets\images\facebook.png
     - assets\images\google.png
     - assets\images\muiraq_preto.png
+    - assets\images\Layer_1.png
+    - assets\images\Layer_2.png
     #- images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
