@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
+  void _register(BuildContext context){
+    Navigator.of(context).pushNamed('/register-screen');
+}
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -90,9 +94,8 @@ class LoginScreen extends StatelessWidget {
                           fontWeight: FontWeight.w500
                         ),),
                       TextButton(
-                        onPressed: (){}, 
-                        child: Text(
-                          true ? 'Crie uma conta': 'JÁ POSSUI CONTA?',
+                        onPressed: ()=>_register(context), 
+                        child: Text('Crie uma conta',
                           style: TextStyle(color: Color(0xFF1CB9C5)),
                         )),
                     ],

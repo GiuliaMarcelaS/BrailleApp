@@ -41,6 +41,7 @@ class AuthScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 ),
+               // AuthForm(),
                  Container(
                   padding: EdgeInsets.all(1/80*screenHeight),
                   width: screenWidth*331/360,

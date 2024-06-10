@@ -46,7 +46,9 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
       await auth.login(_authData['email']!, _authData['password']!,);
     }else{
       await auth.signup(_authData['email']!, _authData['password']!,);
-    }} on AuthException catch (error){
+    }
+    Navigator.of(context).pushNamed('/account-created-screen');
+    } on AuthException catch (error){
         _showErrorDialog(error.toString());
     } catch(error){
       _showErrorDialog('Ocorreu um erro inesperado!');
@@ -128,7 +130,7 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
                 color: Colors.white,
                 child: TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'Email',
+                    labelText: 'E-mail',
                     labelStyle: TextStyle(fontWeight: FontWeight.w800),
                     hintText: 'Ex: joao@gmail.com',
                     border: OutlineInputBorder(),
@@ -205,9 +207,7 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
                 width: screenWidth*328/360,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFACC9B8)),
-                  onPressed: (){
-                    _account_created(context);
-                    _submit;}, 
+                  onPressed:_submit,
                   child: Text(
                     _authMode == AuthMode.login? 'Entrar': 'REGISTRAR',
                     style: TextStyle(color: Colors.white),

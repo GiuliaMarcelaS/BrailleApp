@@ -12,14 +12,28 @@ class _AboutYou2ScreenState extends State<AboutYou2Screen> {
     Navigator.of(context).pushNamed('/about-you-3-screen');
   }
 
- int selected = 0;
+ bool selected1 = false;
+ bool selected2 = false;
+ bool selected3 = false;
 
-    select(int number){
+    select1(){
     setState(() {  
-        selected = number;
-        print(number);
+        selected1=!selected1;
       
-    });}
+    });
+    }
+    select2(){
+    setState(() {  
+        selected2=!selected2;
+      
+    });
+    }
+    select3(){
+    setState(() {  
+        selected3=!selected3;
+      
+    });
+    }
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -40,56 +54,83 @@ class _AboutYou2ScreenState extends State<AboutYou2Screen> {
         width: double.infinity,
         child: Column(
           children: [
-            Text('No que você tem interesse?'),
             Container(
+              margin: EdgeInsets.only(top:screenHeight*30/800),
+              child: Text(
+                'No que você tem interesse?',
+                 style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700
+                ),
+                )),
+            Container(
+              margin: EdgeInsets.only(top:screenHeight*20/800),
+              height: screenHeight*50/800,
               width: screenWidth*328/360,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                   shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  ),
                   foregroundColor: Colors.black,
-                  backgroundColor: selected==1?Color(0xFFBAE2CD):Colors.white),
-                onPressed:(){select(1);} , 
+                  backgroundColor: selected1==true?Color(0xFFBAE2CD):Colors.white),
+                onPressed:(){select1();} , 
                 child: Row(
                   children: [
-                    selected == 1?
+                    selected1==true?
                     Icon(Icons.check_box):Icon(Icons.square_outlined),
+                    SizedBox(width: screenWidth*8/360,),
                     Text('Traduzir caracteres em Braille'),
                   ],
                 )
                 ),
             ),
             Container(
+              margin: EdgeInsets.only(top:screenHeight*20/800),
+              height: screenHeight*50/800,
               width: screenWidth*328/360,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                   shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  ),
                   foregroundColor: Colors.black,
-                  backgroundColor: selected==2?Color(0xFFBAE2CD):Colors.white),
-                onPressed:(){select(2);} , 
+                  backgroundColor: selected2==true?Color(0xFFBAE2CD):Colors.white),
+                onPressed:(){select2();} , 
                 child: Row(
                   children: [
-                    selected == 2?
+                    selected2==true?
                     Icon(Icons.check_box):Icon(Icons.square_outlined),
+                    SizedBox(width: screenWidth*8/360,),
                     Text('Aprender sobre o Sistema Braille'),
                   ],
                 )
                 ),
             ),
             Container(
+              margin: EdgeInsets.only(top:screenHeight*20/800),
+              height: screenHeight*50/800,
               width: screenWidth*328/360,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                   shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  ),
                   foregroundColor: Colors.black,
-                  backgroundColor: selected==3?Color(0xFFBAE2CD):Colors.white),
-                onPressed:(){select(3);} , 
+                  backgroundColor: selected3==true?Color(0xFFBAE2CD):Colors.white),
+                onPressed:(){select3();} , 
                 child: Row(
                   children: [
-                    selected == 3?
+                    selected3==true?
                     Icon(Icons.check_box):Icon(Icons.square_outlined),
+                    SizedBox(width: screenWidth*8/360,),
                     Text('Praticar meus conhecimentos'),
                   ],
                 )
                 ),
             ),
             Container(
+                      margin: EdgeInsets.only(top:screenHeight*300/800),
                       height: screenHeight*50/800,
                       width: screenWidth*328/360,
                       child: ElevatedButton(

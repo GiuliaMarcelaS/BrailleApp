@@ -8,6 +8,7 @@ class ReadyScreen extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Color(0xFFDDE9DD),
       body: SizedBox(
         width: double.infinity,
         child: Column(

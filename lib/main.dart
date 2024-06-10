@@ -1,4 +1,5 @@
 
+import 'package:braille_app/screens/auth_screen.dart';
 import 'package:braille_app/screens/register_screen.dart';
 import 'package:braille_app/screens/about_you_1_screen.dart';
 import 'package:braille_app/screens/about_you_2_screen.dart';
@@ -101,7 +102,7 @@ class BrailleApp extends StatelessWidget{
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (ctx) => const AuthOrHomePage(),
+          '/': (ctx) => const AuthScreen(),
           '/modulos-screen': (ctx) => const ModulosScreen(),
          '/interface-screen':(ctx) => const Interface(),
          '/tabs-screen':(ctx) => const TabsScreen(),

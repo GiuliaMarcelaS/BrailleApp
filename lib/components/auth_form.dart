@@ -46,13 +46,16 @@ class _AuthFormState extends State<AuthForm> {
       await auth.login(_authData['email']!, _authData['password']!,);
     }else{
       await auth.signup(_authData['email']!, _authData['password']!,);
-    }} on AuthException catch (error){
+    }
+    Navigator.of(context).pushNamed('/interface-screen');
+    } on AuthException catch (error){
         _showErrorDialog(error.toString());
     } catch(error){
       _showErrorDialog('Ocorreu um erro inesperado!');
     }
     
     setState(() => _isLoading = false);
+    
   }
 
   void _switchAuthMode(){
@@ -159,6 +162,12 @@ class _AuthFormState extends State<AuthForm> {
                   return null;
                 },
               ),
+              Container(
+                width: screenWidth*300/360,
+                alignment: Alignment.bottomRight,
+                child: Text('Esqueceu sua senha?',
+                style: TextStyle(color: Color(0xFF1CB9C5)),),
+              ),
              Container(height: screenHeight*29/800, color: Color(0xFFDDE9DD), ),
               if(_isLoading)
               const CircularProgressIndicator()
@@ -168,9 +177,7 @@ class _AuthFormState extends State<AuthForm> {
                 width: screenWidth*328/360,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFACC9B8)),
-                  onPressed: (){
-                    _interface(context);
-                    _submit;}, 
+                  onPressed: _submit, 
                   child: Text(
                     _authMode == AuthMode.login? 'Entrar': 'REGISTRAR',
                     style: TextStyle(color: Colors.white),

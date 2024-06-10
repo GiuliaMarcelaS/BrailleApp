@@ -40,11 +40,24 @@ class _AboutYou3ScreenState extends State<AboutYou3Screen> {
         width: double.infinity,
         child: Column(
           children: [
-             Text('Podemos te ajudar a lembrar de praticar?'),
+             Container(
+               margin: EdgeInsets.only(top:screenHeight*30/800),
+              child: Text(
+                'Podemos te ajudar a lembrar de praticar?',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700
+                ),
+                )),
             Container(
+              margin: EdgeInsets.only(top:screenHeight*20/800),
+              height: screenHeight*50/800,
               width: screenWidth*328/360,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  ),
                   foregroundColor: Colors.black,
                   backgroundColor: selected==1?Color(0xFFBAE2CD):Colors.white),
                 onPressed:(){select(1);} , 
@@ -52,15 +65,21 @@ class _AboutYou3ScreenState extends State<AboutYou3Screen> {
                   children: [
                     selected == 1?
                     Icon(Icons.check_circle_outline_outlined):Icon(Icons.circle_outlined),
+                    SizedBox(width: screenWidth*8/360,),
                     Text('Sim, por favor!'),
                   ],
                 )
                 ),
             ),
             Container(
+              margin: EdgeInsets.only(top:screenHeight*20/800),
+              height: screenHeight*50/800,
               width: screenWidth*328/360,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  ),
                   foregroundColor: Colors.black,
                   backgroundColor: selected==2?Color(0xFFBAE2CD):Colors.white),
                 onPressed:(){select(2);} , 
@@ -68,12 +87,14 @@ class _AboutYou3ScreenState extends State<AboutYou3Screen> {
                   children: [
                     selected == 2?
                     Icon(Icons.check_circle_outline_outlined):Icon(Icons.circle_outlined),
+                    SizedBox(width: screenWidth*8/360,),
                     Text('Agora não'),
                   ],
                 )
                 ),
             ),
             Container(
+                      margin: EdgeInsets.only(top:screenHeight*350/800),
                       height: screenHeight*50/800,
                       width: screenWidth*328/360,
                       child: ElevatedButton(

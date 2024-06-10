@@ -42,11 +42,24 @@ class _AboutYou1ScreenState extends State<AboutYou1Screen> {
         width: double.infinity,
         child: Column(
           children: [
-            Text('O quanto você entende do sistema braille?'),
             Container(
+              margin: EdgeInsets.only(top:screenHeight*30/800),
+              child: Text(
+                'O quanto você entende do sistema braille?',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700
+                ),),
+            ),
+            Container(
+              margin: EdgeInsets.only(top:screenHeight*20/800),
+              height: screenHeight*50/800,
               width: screenWidth*328/360,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  ),
                   foregroundColor: Colors.black,
                   backgroundColor: selected==1?Color(0xFFBAE2CD):Colors.white),
                 onPressed:(){select(1);} , 
@@ -54,15 +67,21 @@ class _AboutYou1ScreenState extends State<AboutYou1Screen> {
                   children: [
                     selected == 1?
                     Icon(Icons.check_circle_outline_outlined):Icon(Icons.circle_outlined),
+                    SizedBox(width: screenWidth*8/360,),
                     Text('Não sei nada'),
                   ],
                 )
                 ),
             ),
             Container(
+              margin: EdgeInsets.only(top:screenHeight*15/800),
               width: screenWidth*328/360,
+              height: screenHeight*50/800,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  ),
                   foregroundColor: Colors.black,
                   backgroundColor: selected==2?Color(0xFFBAE2CD):Colors.white),
                 onPressed:(){select(2);} , 
@@ -70,15 +89,21 @@ class _AboutYou1ScreenState extends State<AboutYou1Screen> {
                   children: [
                     selected == 2?
                     Icon(Icons.check_circle_outline_outlined):Icon(Icons.circle_outlined),
+                    SizedBox(width: screenWidth*8/360,),
                     Text('Conheço alguns caracteres'),
                   ],
                 )
                 ),
             ),
             Container(
+              margin: EdgeInsets.only(top:screenHeight*15/800),
               width: screenWidth*328/360,
+              height: screenHeight*50/800,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  ),
                   foregroundColor: Colors.black,
                   backgroundColor: selected==3?Color(0xFFBAE2CD):Colors.white),
                 onPressed:(){select(3);} , 
@@ -86,15 +111,21 @@ class _AboutYou1ScreenState extends State<AboutYou1Screen> {
                   children: [
                     selected == 3?
                     Icon(Icons.check_circle_outline_outlined):Icon(Icons.circle_outlined),
+                    SizedBox(width: screenWidth*8/360,),
                     Text('Consigo ler com alguma ajuda'),
                   ],
                 )
                 ),
             ),
             Container(
+              margin: EdgeInsets.only(top:screenHeight*15/800),
               width: screenWidth*328/360,
+              height: screenHeight*50/800,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  ),
                   foregroundColor: Colors.black,
                   backgroundColor: selected==4?Color(0xFFBAE2CD):Colors.white),
                 onPressed:(){select(4);} , 
@@ -102,12 +133,14 @@ class _AboutYou1ScreenState extends State<AboutYou1Screen> {
                   children: [
                     selected == 4?
                     Icon(Icons.check_circle_outline_outlined):Icon(Icons.circle_outlined),
+                    SizedBox(width: screenWidth*8/360,),
                     Text('Leio sem nenhuma dificuldade'),
                   ],
                 )
                 ),
             ),
             Container(
+                      margin: EdgeInsets.only(top:screenHeight*250/800),
                       height: screenHeight*50/800,
                       width: screenWidth*328/360,
                       child: ElevatedButton(
