@@ -55,6 +55,35 @@ class Auth with ChangeNotifier{
     // ignore: avoid_print
     print(body);
   }
+  Future<void> _loginGoogle(String requestUri, String postBody) async {
+    final url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=AIzaSyAfqS96cMrj6TFdpqNtfMwmxxeiSrG9Y8k';
+    final response = await http.post(
+      Uri.parse(url),
+      body: jsonEncode({
+        'requestUri': requestUri,
+        'postBody': postBody,
+        'returnSecureToken': true,
+        'returnIdpCredential': true,
+      })
+    );
+    final body = jsonDecode(response.body);
+    print(body);
+
+    if(body['error'] != null){
+      throw AuthException(body['error']['message']);
+    }
+
+    _token = body['idToken'];
+    _email = body['email'];
+    _userId = body['localId'];
+    _expiryDate = DateTime.now().add(Duration(
+      seconds: int.parse(body['expiresIn']),
+    ),
+    );
+    notifyListeners();
+    // ignore: avoid_print
+    print(body);
+  }
 
   Future<void> signup(String email, String password) async{
    return _authenticate(email, password, 'signUp');
