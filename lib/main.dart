@@ -35,9 +35,13 @@ import 'package:provider/provider.dart';
 import 'screens/modulos_screen.dart';
 import 'package:braille_app/screens/interface_screen.dart';
 import 'package:braille_app/models/fases.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-main (){
- runApp(const BrailleApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(BrailleApp());
 }
 
 

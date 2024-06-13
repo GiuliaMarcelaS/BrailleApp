@@ -1,8 +1,10 @@
 import 'package:braille_app/exceptions/auth_exception.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:braille_app/models/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 enum AuthMode{signup, login}
 
@@ -58,11 +60,7 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
     
     setState(() => _isLoading = false);
   }
-  Future<void> _submitGoogle() async {
-    final isValid = _formKey.currentState?.validate() ?? false;
-    if(!isValid){
-      return;
-    }
+  Future<UserCredential?> _submitGoogle() async {
     setState(() => _isLoading = true);
 
     _formKey.currentState?.save();
@@ -70,7 +68,11 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
 
     try{
     if(_isLogin()){
-      await auth.login(_authData['requestUri']!, _authData['postBody']!,);
+      final googleUser = await GoogleSignIn().signIn();
+      final googleAuth = await googleUser?.authentication;
+      final cred = GoogleAuthProvider.credential(idToken: googleAuth?.idToken, accessToken: googleAuth?.accessToken);
+
+      return await FirebaseAuth.instance.signInWithCredential(cred);
     }else{
       await auth.signup(_authData['requestUri']!, _authData['postBody']!,);
     }
@@ -251,7 +253,7 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
                       height: screenHeight*50/800,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                        onPressed: (){}, 
+                        onPressed: _submitGoogle, 
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
