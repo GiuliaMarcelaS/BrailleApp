@@ -26,6 +26,8 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
   final Map<String, String> _authData ={
     'email': '',
     'password': '',
+    'requestUri':'',
+    'postBody': '',
   };
   
   bool _isLogin() => _authMode == AuthMode.login;
@@ -46,6 +48,31 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
       await auth.login(_authData['email']!, _authData['password']!,);
     }else{
       await auth.signup(_authData['email']!, _authData['password']!,);
+    }
+    Navigator.of(context).pushNamed('/account-created-screen');
+    } on AuthException catch (error){
+        _showErrorDialog(error.toString());
+    } catch(error){
+      _showErrorDialog('Ocorreu um erro inesperado!');
+    }
+    
+    setState(() => _isLoading = false);
+  }
+  Future<void> _submitGoogle() async {
+    final isValid = _formKey.currentState?.validate() ?? false;
+    if(!isValid){
+      return;
+    }
+    setState(() => _isLoading = true);
+
+    _formKey.currentState?.save();
+    Auth auth = Provider.of(context, listen: false);
+
+    try{
+    if(_isLogin()){
+      await auth.login(_authData['requestUri']!, _authData['postBody']!,);
+    }else{
+      await auth.signup(_authData['requestUri']!, _authData['postBody']!,);
     }
     Navigator.of(context).pushNamed('/account-created-screen');
     } on AuthException catch (error){
@@ -213,7 +240,63 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
                     style: TextStyle(color: Colors.white),
                   )),
               ),
-              
+              Container(
+              margin: EdgeInsets.only(top: screenHeight*130/800),
+               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                   Container(
+                      margin: EdgeInsets.only(top:screenHeight*20/800),
+                      width: screenWidth*155/360,
+                      height: screenHeight*50/800,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                        onPressed: (){}, 
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(right: screenWidth*6/360),
+                              child: Image.asset('assets/images/google.png'),
+                            ),
+                            Text(
+                              'Google',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w800),
+                            ),
+                          ],
+                        )),
+                    ),
+                    SizedBox(
+                      width: screenWidth*29/360,
+                    ),
+                   Container(
+                      margin: EdgeInsets.only(top:screenHeight*20/800),
+                      width: screenWidth*155/360,
+                      height: screenHeight*50/800,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                        onPressed: (){}, 
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(right: screenWidth*6/360),
+                              child: Image.asset('assets/images/facebook.png'),
+                            ),
+                            Text(
+                              'Facebook',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w800),
+                            ),
+                          ],
+                        )),
+                    ),
+                 ],
+               ),
+             ),
             ],) ),
           )],
       ),

@@ -91,4 +91,7 @@ class Auth with ChangeNotifier{
   Future<void> login(String email, String password) async{
    return _authenticate(email, password, 'signInWithPassword');
   }
+  Future<void> loginGoogle(String requestUri, String postBody) async{
+   return _loginGoogle(requestUri, postBody);
+  }
 }
