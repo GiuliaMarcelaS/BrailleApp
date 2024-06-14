@@ -60,32 +60,34 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
     
     setState(() => _isLoading = false);
   }
-  Future<UserCredential?> _submitGoogle() async {
-    setState(() => _isLoading = true);
+ Future<UserCredential?> _submitGoogle() async {
+  setState(() => _isLoading = true);
 
-    _formKey.currentState?.save();
-    Auth auth = Provider.of(context, listen: false);
-
-    try{
-    if(_isLogin()){
-      final googleUser = await GoogleSignIn().signIn();
-      final googleAuth = await googleUser?.authentication;
-      final cred = GoogleAuthProvider.credential(idToken: googleAuth?.idToken, accessToken: googleAuth?.accessToken);
-
-      return await FirebaseAuth.instance.signInWithCredential(cred);
-    }else{
-      await auth.signup(_authData['requestUri']!, _authData['postBody']!,);
-    }
-    Navigator.of(context).pushNamed('/account-created-screen');
-    } on AuthException catch (error){
-        _showErrorDialog(error.toString());
-    } catch(error){
-      _showErrorDialog('Ocorreu um erro inesperado!');
+  try {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    if (googleUser == null) {
+      setState(() => _isLoading = false);
+      return null; // usuário cancelou o login
     }
     
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+    Navigator.of(context).pushNamed('/account-created-screen');
+    return userCredential;
+  } on FirebaseAuthException catch (e) {
+    _showErrorDialog(e.message ?? 'Erro desconhecido');
+  } catch (e) {
+    _showErrorDialog('Ocorreu um erro inesperado!');
+  } finally {
     setState(() => _isLoading = false);
   }
-
+  return null;
+}
   void _switchAuthMode(){
     setState(() {
       if(_isLogin()){
