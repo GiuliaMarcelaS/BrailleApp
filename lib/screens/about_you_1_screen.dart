@@ -1,4 +1,7 @@
+import 'package:braille_app/models/auth.dart';
+import 'package:braille_app/models/information_1.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 class AboutYou1Screen extends StatefulWidget {
@@ -23,6 +26,8 @@ class _AboutYou1ScreenState extends State<AboutYou1Screen> {
     });}
   @override
   Widget build(BuildContext context) {
+    final information = Provider.of<Information1>(context);
+    final auth = Provider.of<Auth>(context);
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -147,7 +152,7 @@ class _AboutYou1ScreenState extends State<AboutYou1Screen> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xFF208B52),),
                         onPressed: (){
-                          _about_you_2(context);}, 
+                          _about_you_2(context); information.saveInformation1(auth.token??'', auth.userId??'', selected);}, 
                         child: Text(
                          'Continuar',
                           style: TextStyle(color: Colors.white),

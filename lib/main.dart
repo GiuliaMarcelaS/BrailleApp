@@ -1,5 +1,7 @@
 
+import 'package:braille_app/models/information_1.dart';
 import 'package:braille_app/screens/auth_screen.dart';
+import 'package:braille_app/screens/forgot_password.dart';
 import 'package:braille_app/screens/register_screen.dart';
 import 'package:braille_app/screens/about_you_1_screen.dart';
 import 'package:braille_app/screens/about_you_2_screen.dart';
@@ -41,7 +43,7 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(BrailleApp());
+  runApp(const BrailleApp());
 }
 
 
@@ -92,6 +94,9 @@ class BrailleApp extends StatelessWidget{
         ChangeNotifierProvider(
           create: (_) => Teste(),
           ),
+        ChangeNotifierProvider(
+          create: (_) => Information1(),
+          ),
         ChangeNotifierProxyProvider<Auth,Cell>(
           create: (_) => Cell("", ''),
           update:(ctx, auth, previous){
@@ -116,14 +121,15 @@ class BrailleApp extends StatelessWidget{
           '/expression-translator-screen':(ctx)=> const ExpressionTranslatorScreen(),
           '/fases-screen':(ctz) => const FaseScreen(),
           '/graphic-screen':(ctz) => GraphicScreen(),
-          '/users-chart-screen':(ctz) => UsersChartScreen(),
-          '/login-screen':(ctz) => LoginScreen(),
-          '/register-screen':(ctz) => RegisterScreen(),
-          '/account-created-screen':(ctz) => AccountCreatedScreen(),
-          '/about-you-1-screen':(ctz) => AboutYou1Screen(),
-          '/about-you-2-screen':(ctz) => AboutYou2Screen(),
-          '/about-you-3-screen':(ctz) => AboutYou3Screen(),
-          '/ready-screen':(ctz) => ReadyScreen(),
+          '/users-chart-screen':(ctz) => const UsersChartScreen(),
+          '/login-screen':(ctz) => const LoginScreen(),
+          '/register-screen':(ctz) => const RegisterScreen(),
+          '/account-created-screen':(ctz) => const AccountCreatedScreen(),
+          '/about-you-1-screen':(ctz) => const AboutYou1Screen(),
+          '/about-you-2-screen':(ctz) => const AboutYou2Screen(),
+          '/about-you-3-screen':(ctz) => const AboutYou3Screen(),
+          '/ready-screen':(ctz) => const ReadyScreen(),
+          '/forgot-password-screen':(ctx) => ForgotPasswordScreen()
         },
         ),
     );

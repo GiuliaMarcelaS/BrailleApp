@@ -84,6 +84,10 @@ class _AuthFormState extends State<AuthForm> {
     Navigator.of(context).pushNamed('/interface-screen');
   }
 
+  void _forgotPassword(BuildContext context) {
+    Navigator.of(context).pushNamed('/forgot-password-screen');
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -165,8 +169,11 @@ class _AuthFormState extends State<AuthForm> {
               Container(
                 width: screenWidth*300/360,
                 alignment: Alignment.bottomRight,
-                child: Text('Esqueceu sua senha?',
-                style: TextStyle(color: Color(0xFF1CB9C5)),),
+                child: TextButton(
+                  onPressed: (){_forgotPassword(context);},
+                  child: Text('Esqueceu sua senha?',
+                  style: TextStyle(color: Color(0xFF1CB9C5)),),
+                ),
               ),
              Container(height: screenHeight*29/800, color: Color(0xFFDDE9DD), ),
               if(_isLoading)

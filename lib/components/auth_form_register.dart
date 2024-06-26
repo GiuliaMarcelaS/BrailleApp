@@ -1,6 +1,7 @@
 import 'package:braille_app/exceptions/auth_exception.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:braille_app/models/auth.dart';
@@ -31,6 +32,10 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
     'requestUri':'',
     'postBody': '',
   };
+
+  Map<String, dynamic>? _userData;
+
+  String welcome = 'Facebook';
   
   bool _isLogin() => _authMode == AuthMode.login;
   bool _isSignup() => _authMode == AuthMode.signup;
@@ -87,6 +92,30 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
     setState(() => _isLoading = false);
   }
   return null;
+}
+ Future<UserCredential?> _submitFacebook() async {
+  setState(() => _isLoading = true);
+
+    final LoginResult loginResult = await FacebookAuth.instance.login(permissions: ['email']);
+
+    if(loginResult == LoginStatus.success){
+      final userData = await FacebookAuth.instance.getUserData();
+      Navigator.of(context).pushNamed('/account-created-screen');
+
+      _userData = userData;
+    }else{
+      print(loginResult.message);
+    }
+
+    setState(() {
+      welcome = _userData!['email'];
+    });
+
+    final OAuthCredential oAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+
+    return FirebaseAuth.instance.signInWithCredential(oAuthCredential);
+    
+  
 }
   void _switchAuthMode(){
     setState(() {
@@ -281,7 +310,7 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
                       height: screenHeight*50/800,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-                        onPressed: (){}, 
+                        onPressed: _submitFacebook, 
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
