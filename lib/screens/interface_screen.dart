@@ -45,25 +45,30 @@ class Interface extends StatelessWidget {
               child: const Text('Muiraquitã em Braille',style: TextStyle(color: Colors.white)),
               ),
             Container(
-              margin: const EdgeInsets.only(top: 125),
+              margin: const EdgeInsets.only(top: 10),
               child: ElevatedButton(onPressed: _isButtonDisabled ? null : (() {_traduzir(context);
              // graphic.getClicks(auth.userId??'',auth.token??'');
-              }), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: const Size.fromWidth(350)), child: const Text('Realizar Tradução')
+              }), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: const Size.fromWidth(350)), child: const Text('Traduzir')
               ),
               ),
              Container(
                 margin: const EdgeInsets.only(top: 10),
-                child: ElevatedButton(onPressed: (() => _modulos(context)), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: const Size.fromWidth(350)), child: const Text('Aprender Braille')
+                child: ElevatedButton(onPressed: (() => _modulos(context)), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: const Size.fromWidth(350)), child: const Text('Praticar')
+                ),
+                ),
+             Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: ElevatedButton(onPressed: (() => _modulos(context)), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: const Size.fromWidth(350)), child: const Text('Aprender')
                 ),
                 ),
             
               Container(
-                margin: const EdgeInsets.only(top:70),
+                margin: const EdgeInsets.only(top:10),
                 child: const Text('Bem-Vindo!', style: TextStyle(color: Colors.white),),
                 )
           ],
         ),
-        backgroundColor: const Color.fromARGB(255,13,110,69),
+        backgroundColor: Color(0xFFDDE9DD),
         );
   }
 }
