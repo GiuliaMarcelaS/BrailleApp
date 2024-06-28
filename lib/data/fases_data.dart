@@ -2,10 +2,6 @@ import 'package:braille_app/models/fases.dart';
 
 
 final fasesData = [
-  Fase(id: 1, title: 'Fase 1' ),
-  Fase(id: 2, title: 'Fase 2' ),
-  Fase(id: 3, title: 'Fase 3' ),
-  Fase(id: 4, title: 'Fase 4' ),
-  Fase(id: 5, title: 'Fase 5' ),
-  Fase(id: 6, title: 'Fase 6' ),
+  Fase(id: 1, title: 'Módulo 1', imageUrl: 'assets/images/modulo1.png', frase: "Introdução ao Braille"),
+  Fase(id: 2, title: 'Módulo 2', imageUrl: 'assets/images/modulo2.png', frase: 'Alfabeto Braille x Alfabeto Tradicional' ),
   ];

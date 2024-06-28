@@ -8,10 +8,14 @@ import 'package:provider/provider.dart';
 class Interface extends StatelessWidget {
  const Interface({super.key});
 
+
   void _modulos(BuildContext context){
     Navigator.of(context).pushNamed('/modulos-screen');
 }
 
+  void _learn(BuildContext context){
+    Navigator.of(context).pushNamed('/learn-screen');
+}
   void _traduzir(BuildContext context){
     Navigator.of(context).pushNamed('/tabs-screen');
 }
@@ -53,7 +57,7 @@ class Interface extends StatelessWidget {
               ),
              Container(
                 margin: const EdgeInsets.only(top: 10),
-                child: ElevatedButton(onPressed: (() => _modulos(context)), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: const Size.fromWidth(350)), child: const Text('Praticar')
+                child: ElevatedButton(onPressed: (() => _learn(context)), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: const Size.fromWidth(350)), child: const Text('Praticar')
                 ),
                 ),
              Container(

@@ -39,6 +39,7 @@ dependencies:
   google_sign_in: ^6.2.1
   firebase_auth: ^5.1.0
   flutter_facebook_auth: ^7.0.0
+  video_player: ^2.2.8 
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -77,6 +78,11 @@ flutter:
     - assets\images\muiraq_preto.png
     - assets\images\Layer_1.png
     - assets\images\Layer_2.png
+    - assets\images\modulo1.png
+    - assets\images\modulo2.png
+    - assets\images\Group40.png
+    - assets\images\Group143.png
+    - assets\videos\video1.mp4
     #- images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

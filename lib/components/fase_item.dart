@@ -11,14 +11,29 @@ class FaseItem extends StatelessWidget {
   final fase = Provider.of<Fase>(context);
   final passer = Provider.of<Passer>(context);
     return GridTile(
+      header: Container(
+        height: 35,
+        child: Icon(passer.faseCompleta >= fase.id?Icons.play_circle: Icons.lock,size: 25, color: passer.faseCompleta >= fase.id? Color(0xFF208B52):Colors.grey)),
       footer: GridTileBar(
-        title: Text(
-          fase.title),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              fase.title,
+              style: TextStyle(color: Colors.black),),
+            Text(
+              fase.frase,
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w800),),
+          ],
+        ),
       ),
       child: GestureDetector(
         onTap: (passer.faseCompleta >= fase.id? () => Navigator.of(context).pushNamed('/fases-screen', arguments: fase) : null),
         child: Card(
-        color:(passer.faseCompleta >= fase.id? Colors.green : Colors.grey),
+          child: Image.network(fase.imageUrl,),
+          color:(Colors.white),
         ),
       ),
       );

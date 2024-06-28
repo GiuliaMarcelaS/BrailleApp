@@ -9,12 +9,16 @@ class Fase with ChangeNotifier{
   int id;
   final String title;
   bool faseHabilitada;
+  final String imageUrl;
+  final String frase;
 
   Fase({
     this.fase = 1,
     this.id = 0,
     this.title = "",
     this.faseHabilitada = false,
+    this.imageUrl = "",
+    this.frase = "",
     
   });
    

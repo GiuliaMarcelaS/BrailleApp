@@ -1,7 +1,10 @@
 
 import 'package:braille_app/models/information_1.dart';
+import 'package:braille_app/screens/acertos_screen.dart';
 import 'package:braille_app/screens/auth_screen.dart';
 import 'package:braille_app/screens/forgot_password.dart';
+import 'package:braille_app/screens/learn_screen.dart';
+import 'package:braille_app/screens/quest_1_screen.dart';
 import 'package:braille_app/screens/register_screen.dart';
 import 'package:braille_app/screens/about_you_1_screen.dart';
 import 'package:braille_app/screens/about_you_2_screen.dart';
@@ -31,6 +34,9 @@ import 'package:braille_app/screens/number_translator_screen.dart';
 import 'package:braille_app/screens/phrase_translator_screen.dart';
 import 'package:braille_app/screens/ready_screen.dart';
 import 'package:braille_app/screens/tabs_screen.dart';
+import 'package:braille_app/screens/testar_screen.dart';
+import 'package:braille_app/screens/topic_1_screen.dart';
+import 'package:braille_app/screens/topico_1_conteudo_screen.dart';
 import 'package:braille_app/screens/users_chart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -129,7 +135,13 @@ class BrailleApp extends StatelessWidget{
           '/about-you-2-screen':(ctz) => const AboutYou2Screen(),
           '/about-you-3-screen':(ctz) => const AboutYou3Screen(),
           '/ready-screen':(ctz) => const ReadyScreen(),
-          '/forgot-password-screen':(ctx) => ForgotPasswordScreen()
+          '/forgot-password-screen':(ctx) => ForgotPasswordScreen(),
+          '/learn-screen':(ctx) => LearnScreen(),
+          '/topic-1-screen':(ctx) => Topic1Screen(),
+          '/topico-1-conteudo-screen':(ctx) => Topico1ConteudoScreen(),
+          '/testar-screen':(ctx) => TestarScreen(),
+          '/quest-1-screen':(ctx) => Quest1Screen(),
+          '/acertos-screen':(ctx) => AcertosScreen(),
         },
         ),
     );
