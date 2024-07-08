@@ -136,8 +136,9 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     super.initState();
     _controller = VideoPlayerController.asset(widget.videoPath);
     _initializeVideoPlayerFuture = _controller.initialize();
-    _controller.setLooping(true); // Opcional: Reprodução em loop
-    _controller.play(); // Inicia a reprodução automaticamente
+    _controller.setLooping(true);
+    _controller.setVolume(0.0); // Set the volume to zero
+    _controller.play();
   }
 
   @override
@@ -156,7 +157,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             aspectRatio: _controller.value.aspectRatio,
             child: _controller.value.isInitialized
                 ? VideoPlayer(_controller)
-                : Container(), // Evita erro se o vídeo não estiver inicializado
+                : Container(),
           );
         } else if (snapshot.hasError) {
           return Text('Erro ao carregar o vídeo: ${snapshot.error}');
