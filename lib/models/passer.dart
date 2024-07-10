@@ -24,6 +24,14 @@ class Passer with ChangeNotifier{
     notifyListeners();
   }
 
+  Future<void> getModulo(String token, String userId) async{
+    print("deu certo");
+    print(userId);
+    final response = await http.get(Uri.parse("${Constants.BASE_URL}/users/$userId/modulo.json?auth=$token"));
+    Map <dynamic, dynamic> dados = jsonDecode(response.body);
+    print(dados);
+  }
+
 
   Future<void> incrementaFase(Fase fase, String token, String userId) async{
     faseCompleta = fase.id+1;

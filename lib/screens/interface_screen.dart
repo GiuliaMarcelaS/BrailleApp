@@ -1,5 +1,6 @@
 import 'package:braille_app/models/auth.dart';
 import 'package:braille_app/models/graphic.dart';
+import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/teste.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +15,9 @@ class Interface extends StatelessWidget {
 }
 
   void _learn(BuildContext context){
+    final modulo = Provider.of<Passer>(context);
+    final auth = Provider.of<Auth>(context);
+    modulo.getModulo(auth.token??'', auth.userId??"");
     Navigator.of(context).pushNamed('/learn-screen');
 }
   void _traduzir(BuildContext context){
@@ -48,6 +52,16 @@ class Interface extends StatelessWidget {
               height: 20,
               child: const Text('Muiraquitã em Braille',style: TextStyle(color: Colors.white)),
               ),
+             Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: ElevatedButton(onPressed: (() => _modulos(context)), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: const Size.fromWidth(350)), child: const Text('Aprender')
+                ),
+                ),
+             Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: ElevatedButton(onPressed: (() => _learn(context)), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: const Size.fromWidth(350)), child: const Text('Praticar')
+                ),
+                ),
             Container(
               margin: const EdgeInsets.only(top: 10),
               child: ElevatedButton(onPressed: _isButtonDisabled ? null : (() {_traduzir(context);
@@ -55,16 +69,6 @@ class Interface extends StatelessWidget {
               }), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: const Size.fromWidth(350)), child: const Text('Traduzir')
               ),
               ),
-             Container(
-                margin: const EdgeInsets.only(top: 10),
-                child: ElevatedButton(onPressed: (() => _learn(context)), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: const Size.fromWidth(350)), child: const Text('Praticar')
-                ),
-                ),
-             Container(
-                margin: const EdgeInsets.only(top: 10),
-                child: ElevatedButton(onPressed: (() => _modulos(context)), style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: Colors.black, fixedSize: const Size.fromWidth(350)), child: const Text('Aprender')
-                ),
-                ),
             
               Container(
                 margin: const EdgeInsets.only(top:10),
