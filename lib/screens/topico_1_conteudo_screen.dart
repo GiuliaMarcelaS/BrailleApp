@@ -1,3 +1,4 @@
+import 'package:braille_app/models/fases.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -5,7 +6,8 @@ class Topico1ConteudoScreen extends StatelessWidget {
   const Topico1ConteudoScreen({Key? key}) : super(key: key);
 
   void _testar(BuildContext context) {
-    Navigator.of(context).pushNamed('/testar-screen');
+    final Fase faset = ModalRoute.of(context)!.settings.arguments as Fase;
+    Navigator.of(context).pushNamed('/testar-screen', arguments: faset);
   }
 
   void _voltar(BuildContext context) {

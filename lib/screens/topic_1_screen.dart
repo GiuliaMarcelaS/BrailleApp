@@ -1,10 +1,12 @@
+import 'package:braille_app/models/fases.dart';
 import 'package:flutter/material.dart';
 
 class Topic1Screen extends StatelessWidget {
   const Topic1Screen({super.key});
 
   void _topico1conteudo(BuildContext context){
-    Navigator.of(context).pushNamed('/topico-1-conteudo-screen');
+    final Fase faset = ModalRoute.of(context)!.settings.arguments as Fase;
+    Navigator.of(context).pushNamed('/topico-1-conteudo-screen', arguments: faset);
   }
 
 

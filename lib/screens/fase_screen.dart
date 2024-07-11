@@ -9,7 +9,8 @@ class FaseScreen extends StatelessWidget {
   const FaseScreen({super.key});
 
   void _topic1(BuildContext context) {
-    Navigator.of(context).pushNamed('/topic-1-screen');
+    final Fase faset = ModalRoute.of(context)!.settings.arguments as Fase;
+    Navigator.of(context).pushNamed('/topic-1-screen', arguments: faset);
   }
 
   @override

@@ -1,10 +1,12 @@
+import 'package:braille_app/models/fases.dart';
 import 'package:flutter/material.dart';
 
 class TestarScreen extends StatelessWidget {
   const TestarScreen({super.key});
 
   void _quest_1(BuildContext context){
-    Navigator.of(context).pushNamed('/quest-1-screen');
+    final Fase faset = ModalRoute.of(context)!.settings.arguments as Fase;
+    Navigator.of(context).pushNamed('/quest-1-screen', arguments: faset);
   }
 
   @override

@@ -11,7 +11,8 @@ class Quest1Screen extends StatefulWidget {
 
 class _Quest1ScreenState extends State<Quest1Screen> {
   void _acertos(BuildContext context){
-    Navigator.of(context).pushNamed('/acertos-screen', );
+    final Fase faset = ModalRoute.of(context)!.settings.arguments as Fase;
+    Navigator.of(context).pushNamed('/acertos-screen', arguments: faset);
   }
   int selected = 0;
 

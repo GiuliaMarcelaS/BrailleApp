@@ -6,7 +6,10 @@ import 'package:provider/provider.dart';
 class AcertosScreen extends StatelessWidget {
   const AcertosScreen({super.key});
   void _fase(BuildContext context){
-    Navigator.of(context).pushNamed('/fases-screen', arguments: Provider.of<Fase>(context));
+    final fase = Provider.of<Passer>(context, listen: false);
+    final Fase faset = ModalRoute.of(context)!.settings.arguments as Fase;
+    fase.incrementaFaset(faset);
+    Navigator.of(context).popUntil(ModalRoute.withName('/modulos-screen',));
 }
 
   @override

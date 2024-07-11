@@ -4,7 +4,7 @@ import 'package:braille_app/models/fases.dart';
 import 'package:provider/provider.dart';
 class FaseItem extends StatelessWidget {
 
-  const FaseItem({super.key});
+  const   FaseItem({super.key});
 
   @override
   Widget build(BuildContext context) {
