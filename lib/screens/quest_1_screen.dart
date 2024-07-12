@@ -1,4 +1,5 @@
 import 'package:braille_app/models/fases.dart';
+import 'package:braille_app/models/topico.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,9 +11,11 @@ class Quest1Screen extends StatefulWidget {
 }
 
 class _Quest1ScreenState extends State<Quest1Screen> {
-  void _acertos(BuildContext context){
-    final Fase faset = ModalRoute.of(context)!.settings.arguments as Fase;
-    Navigator.of(context).pushNamed('/acertos-screen', arguments: faset);
+  void _acertos(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final Fase fase = args['fase'];
+    final Topico topico = args['topico'];
+    Navigator.of(context).pushNamed('/acertos-screen', arguments: {'fase': fase,"topico": topico});
   }
   int selected = 0;
 
@@ -31,7 +34,7 @@ class _Quest1ScreenState extends State<Quest1Screen> {
        backgroundColor: Color(0xFFDDE9DD),
       appBar: AppBar(
         backgroundColor: Color(0xFFDDE9DD),
-        title: Text("Sobre você"),
+        title: Text("Questionário"),
         centerTitle: true,
         shape: Border(bottom: BorderSide(color: Colors.black)),
         actions: [Container(
@@ -47,7 +50,7 @@ class _Quest1ScreenState extends State<Quest1Screen> {
             Container(
               margin: EdgeInsets.only(top:screenHeight*30/800),
               child: Text(
-                'O quanto você entende do sistema braille?',
+                'Como o Braille contribui para a autonomia de indivíduos com deficiência visual?',
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w700
@@ -70,7 +73,7 @@ class _Quest1ScreenState extends State<Quest1Screen> {
                     selected == 1?
                     Icon(Icons.check_circle_outline_outlined):Icon(Icons.circle_outlined),
                     SizedBox(width: screenWidth*8/360,),
-                    Text('Não sei nada'),
+                    Text('Limitando suas habilidades'),
                   ],
                 )
                 ),
@@ -92,7 +95,7 @@ class _Quest1ScreenState extends State<Quest1Screen> {
                     selected == 2?
                     Icon(Icons.check_circle_outline_outlined):Icon(Icons.circle_outlined),
                     SizedBox(width: screenWidth*8/360,),
-                    Text('Conheço alguns caracteres'),
+                    Text('Facilitando o acesso independente à informação'),
                   ],
                 )
                 ),
@@ -114,7 +117,7 @@ class _Quest1ScreenState extends State<Quest1Screen> {
                     selected == 3?
                     Icon(Icons.check_circle_outline_outlined):Icon(Icons.circle_outlined),
                     SizedBox(width: screenWidth*8/360,),
-                    Text('Consigo ler com alguma ajuda'),
+                    Text('Tornando-os dependentes de uma ajuda externa'),
                   ],
                 )
                 ),
@@ -136,7 +139,7 @@ class _Quest1ScreenState extends State<Quest1Screen> {
                     selected == 4?
                     Icon(Icons.check_circle_outline_outlined):Icon(Icons.circle_outlined),
                     SizedBox(width: screenWidth*8/360,),
-                    Text('Leio sem nenhuma dificuldade'),
+                    Text('Não tem impacto na autonomia'),
                   ],
                 )
                 ),

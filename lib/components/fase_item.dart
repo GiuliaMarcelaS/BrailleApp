@@ -1,4 +1,5 @@
 import 'package:braille_app/models/passer.dart';
+import 'package:braille_app/models/topico.dart';
 import 'package:flutter/material.dart';
 import 'package:braille_app/models/fases.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,7 @@ class FaseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
   final fase = Provider.of<Fase>(context);
+  final topico = Provider.of<Topico>(context);
   final passer = Provider.of<Passer>(context);
     return GridTile(
       header: Container(
@@ -30,7 +32,7 @@ class FaseItem extends StatelessWidget {
         ),
       ),
       child: GestureDetector(
-        onTap: (passer.faseCompleta >= fase.id? () => Navigator.of(context).pushNamed('/fases-screen', arguments: fase) : null),
+        onTap: (passer.faseCompleta >= fase.id? () => Navigator.of(context).pushNamed('/fases-screen', arguments: {'fase': fase,"topico": topico}) : null),
         child: Card(
           child: Image.network(fase.imageUrl,),
           color:(Colors.white),

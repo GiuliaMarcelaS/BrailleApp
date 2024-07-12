@@ -1,4 +1,5 @@
 import 'package:braille_app/models/fases.dart';
+import 'package:braille_app/models/topico.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:braille_app/utils/constants.dart';
@@ -11,16 +12,22 @@ class Passer with ChangeNotifier{
   // ignore: unused_field
   final String _userId;
   int faseCompleta;
+  int topicoCompleto;
 
   Passer(
     this._token,
     this._userId,
     {this.faseCompleta = 1,
+    this.topicoCompleto = 1,
     }
   );
    // ignore: unused_element
    void incrementaFaset (Fase fase){
     faseCompleta = fase.id+1;
+    notifyListeners();
+  }
+   void incrementaTopico (Topico topico){
+    topicoCompleto = topico.id+1;
     notifyListeners();
   }
 

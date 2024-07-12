@@ -1,5 +1,6 @@
 
 import 'package:braille_app/models/information_1.dart';
+import 'package:braille_app/models/topico.dart';
 import 'package:braille_app/screens/acertos_screen.dart';
 import 'package:braille_app/screens/auth_screen.dart';
 import 'package:braille_app/screens/forgot_password.dart';
@@ -84,6 +85,9 @@ class BrailleApp extends StatelessWidget{
           ),
           ChangeNotifierProvider(
           create: (_) => Fase(),
+          ),
+          ChangeNotifierProvider(
+          create: (_) => Topico(),
           ),
           ChangeNotifierProvider(
           create: (_) => Ball(),
