@@ -1,7 +1,9 @@
 import 'dart:js_interop';
 
+import 'package:braille_app/models/information_1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import '../components/fase_grid.dart';
 
 
@@ -10,6 +12,7 @@ class ModulosScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dados = Provider.of<Information1>(context);
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -30,7 +33,7 @@ class ModulosScreen extends StatelessWidget {
                   children: [
                     Container(
                       margin: EdgeInsets.only(left: 20, top: 10),
-                      child: Text('Olá, Giulia Marcela!',
+                      child: Text('Olá, ${dados.nome}!',
                       style: TextStyle(color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.w800),),

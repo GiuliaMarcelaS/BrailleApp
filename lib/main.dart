@@ -1,6 +1,7 @@
 
 import 'package:braille_app/models/information_1.dart';
 import 'package:braille_app/models/topico.dart';
+import 'package:braille_app/models/user_data.dart';
 import 'package:braille_app/screens/acertos_screen.dart';
 import 'package:braille_app/screens/auth_screen.dart';
 import 'package:braille_app/screens/forgot_password.dart';
@@ -116,6 +117,11 @@ class BrailleApp extends StatelessWidget{
           create: (_) => Passer("", ''),
           update:(ctx, auth, previous){
             return Passer(auth.token??'', auth.userId ?? '');
+          },),
+        ChangeNotifierProxyProvider<Auth,UserData>(
+          create: (_) => UserData("", ''),
+          update:(ctx, auth, previous){
+            return UserData(auth.token??'', auth.userId ?? '');
           },),
       ],
       child: MaterialApp(

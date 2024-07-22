@@ -1,4 +1,5 @@
 import 'package:braille_app/exceptions/auth_exception.dart';
+import 'package:braille_app/models/user_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -53,6 +54,10 @@ class _AuthFormState extends State<AuthForm> {
     } catch(error){
       _showErrorDialog('Ocorreu um erro inesperado!');
     }
+
+    final userdata = Provider.of<UserData>(context, listen: false);
+
+    userdata.getModulo();
     
     setState(() => _isLoading = false);
     

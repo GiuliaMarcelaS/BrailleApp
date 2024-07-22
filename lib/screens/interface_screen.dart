@@ -1,15 +1,27 @@
 import 'package:braille_app/models/auth.dart';
 import 'package:braille_app/models/graphic.dart';
+import 'package:braille_app/models/information_1.dart';
 import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/teste.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 
-class Interface extends StatelessWidget {
+class Interface extends StatefulWidget {
  const Interface({super.key});
 
+  @override
+  State<Interface> createState() => _InterfaceState();
+}
 
+class _InterfaceState extends State<Interface> {
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final auth = Provider.of<Auth>(context, listen: false);
+    Provider.of<Information1>(context, listen: false).getDados(auth.token ?? "", auth.userId ?? "");
+  }
   void _modulos(BuildContext context){
     Navigator.of(context).pushNamed('/modulos-screen');
 }
@@ -20,9 +32,11 @@ class Interface extends StatelessWidget {
     modulo.getModulo(auth.token??'', auth.userId??"");
     Navigator.of(context).pushNamed('/learn-screen');
 }
+
   void _traduzir(BuildContext context){
     Navigator.of(context).pushNamed('/tabs-screen');
 }
+
   final bool _isButtonDisabled = false;
 
   @override

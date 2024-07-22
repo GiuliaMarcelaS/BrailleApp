@@ -1,4 +1,5 @@
 import 'package:braille_app/exceptions/auth_exception.dart';
+import 'package:braille_app/models/information_1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -143,13 +144,17 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
     Navigator.of(context).pushNamed('/interface-screen');
   }
   void _account_created(BuildContext context){
-    Navigator.of(context).pushNamed('/account-created-screen');
+    final arg = ModalRoute.of(context)!.settings.arguments as Information1;
+    Navigator.of(context).pushNamed('/account-created-screen', arguments: arg);
   }
 
+  String nome = '';
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    final auth = Provider.of<Auth>(context,listen: false);
+    final name = Provider.of<Information1>(context);
     return Container(
       child: Stack(
         children: [
@@ -172,15 +177,7 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
                     border: OutlineInputBorder(),
                     ),
                   keyboardType: TextInputType.emailAddress,
-                 // onSaved: (email) => _authData['email'] = email ??'',
-                  // ignore: no_leading_underscores_for_local_identifiers
-                  // validator: (_email) {
-                  //   final email = _email ?? '';
-                  //   if (email.trim().isEmpty|| !email.contains('@')){
-                  //     return 'Informe um e-mail válido';
-                  //     }
-                  //     return null;
-                  //   },
+                 onSaved: (rec) => name.nome = rec??'teste',
                 ),
               ),
               Container(
