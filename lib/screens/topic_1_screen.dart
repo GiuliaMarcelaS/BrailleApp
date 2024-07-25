@@ -1,6 +1,9 @@
 import 'package:braille_app/models/fases.dart';
+import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/topico.dart';
+import 'package:braille_app/screens/modulos_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Topic1Screen extends StatelessWidget {
   const Topic1Screen({super.key});
@@ -9,7 +12,9 @@ class Topic1Screen extends StatelessWidget {
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
-    Navigator.of(context).pushNamed('/topico-1-conteudo-screen', arguments: {'fase': fase,"topico": topico});
+    final Passer passer = args['passer'];
+    passer.incrementaFracao(passer);
+    Navigator.of(context).pushNamed('/topico-1-conteudo-screen', arguments: {'fase': fase,"topico": topico, "passer":passer});
   }
 
 

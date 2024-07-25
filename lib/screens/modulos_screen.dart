@@ -7,8 +7,12 @@ import 'package:provider/provider.dart';
 import '../components/fase_grid.dart';
 
 
-class ModulosScreen extends StatelessWidget {
-  const ModulosScreen({super.key});
+class ModulosScreen extends StatelessWidget with ChangeNotifier{
+  num fracao;
+
+  ModulosScreen({super.key,
+  this.fracao = 0,
+  });
 
   @override
   Widget build(BuildContext context) {

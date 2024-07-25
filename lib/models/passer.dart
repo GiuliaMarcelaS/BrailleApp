@@ -13,12 +13,14 @@ class Passer with ChangeNotifier{
   final String _userId;
   int faseCompleta;
   int topicoCompleto;
+  num fracao;
 
   Passer(
     this._token,
     this._userId,
     {this.faseCompleta = 1,
     this.topicoCompleto = 1,
+    this.fracao = 0
     }
   );
    // ignore: unused_element
@@ -30,10 +32,12 @@ class Passer with ChangeNotifier{
     topicoCompleto = topico.id+1;
     notifyListeners();
   }
+  void incrementaFracao (Passer passer){
+    fracao+=1;
+    notifyListeners();
+  }
 
   Future<void> getModulo(String token, String userId) async{
-    print("deu certo");
-    print(userId);
     final response = await http.get(Uri.parse("${Constants.BASE_URL}/users/$userId/modulo.json?auth=$token"));
     Map <dynamic, dynamic> dados = jsonDecode(response.body);
     print(dados);

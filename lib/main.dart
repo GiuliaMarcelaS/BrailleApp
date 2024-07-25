@@ -108,6 +108,9 @@ class BrailleApp extends StatelessWidget{
         ChangeNotifierProvider(
           create: (_) => Information1(),
           ),
+        ChangeNotifierProvider(
+          create: (_) => ModulosScreen(),
+          ),
         ChangeNotifierProxyProvider<Auth,Cell>(
           create: (_) => Cell("", ''),
           update:(ctx, auth, previous){
@@ -128,7 +131,7 @@ class BrailleApp extends StatelessWidget{
         debugShowCheckedModeBanner: false,
         routes: {
           '/': (ctx) => const AuthScreen(),
-          '/modulos-screen': (ctx) => const ModulosScreen(),
+          '/modulos-screen': (ctx) => ModulosScreen(),
          '/interface-screen':(ctx) => const Interface(),
          '/tabs-screen':(ctx) => const TabsScreen(),
           '/phrase-translator-screen':(ctx)=> const PhraseTranslatorScreen(),

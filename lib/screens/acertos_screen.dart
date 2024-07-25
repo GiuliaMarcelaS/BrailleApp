@@ -2,6 +2,7 @@ import 'package:braille_app/models/fases.dart';
 import 'package:braille_app/models/finished.dart';
 import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/topico.dart';
+import 'package:braille_app/screens/modulos_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,8 @@ void _topicos(BuildContext context) {
     final passer = Provider.of<Passer>(context, listen: false);
     passer.incrementaFaset(fase);
     passer.incrementaTopico(topico);
+    final Passer passer2 = args['passer'];
+    passer2.incrementaFracao(passer);
     Navigator.of(context).popUntil(ModalRoute.withName('/fases-screen'));
   }
 

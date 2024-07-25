@@ -2,6 +2,7 @@ import 'package:braille_app/models/fases.dart';
 import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/passer1.dart';
 import 'package:braille_app/models/topico.dart';
+import 'package:braille_app/screens/modulos_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:braille_app/models/auth.dart';
@@ -13,7 +14,9 @@ class FaseScreen extends StatelessWidget {
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
-    Navigator.of(context).pushNamed('/topic-1-screen', arguments: {'fase': fase,"topico": topico});
+    final Passer passer = args['passer'];
+    passer.incrementaFracao(passer);
+    Navigator.of(context).pushNamed('/topic-1-screen', arguments: {'fase': fase,"topico": topico, "passer":passer});
   }
 
 
@@ -22,6 +25,7 @@ class FaseScreen extends StatelessWidget {
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
+    final fracao = Provider.of<Passer>(context);
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
@@ -79,7 +83,7 @@ class FaseScreen extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(top: 10, bottom: 30),
                         child: Text(
-                          '25% concluído',
+                          '${((fracao.fracao)/6)*100}% concluído',
                           style: TextStyle(
                             color: Color(0xFF208B52),
                             fontSize: 14,
@@ -93,10 +97,24 @@ class FaseScreen extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            color: Colors.white,
-            height: 10,
-          ),
+         Container(
+  color: Colors.white,
+  height: 10,
+  child: Stack(
+    children: [
+      Container(
+        color: Colors.white,
+      ),
+      FractionallySizedBox(
+        alignment: Alignment.centerLeft,
+        widthFactor: fracao.fracao/6, // Assuming fracao is a percentage value (0 to 100)
+        child: Container(
+          color: Colors.green,
+        ),
+      ),
+    ],
+  ),
+),
           Topico(id: 1, number: '01', title: 'História e Origens do Braille', rota:()=>_topic1f(context),),
           Topico(id: 2, number: '02', title: 'Significado e Impacto Social do Sistema Braille', rota: (){},),
           Topico(id: 3, number: '03', title: 'Evolução do Sistema Braille', rota: (){},),

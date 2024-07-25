@@ -1,11 +1,12 @@
 import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/topico.dart';
+import 'package:braille_app/screens/modulos_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:braille_app/models/fases.dart';
 import 'package:provider/provider.dart';
 class FaseItem extends StatelessWidget {
 
-  const   FaseItem({super.key});
+  const FaseItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class FaseItem extends StatelessWidget {
         ),
       ),
       child: GestureDetector(
-        onTap: (passer.faseCompleta >= fase.id? () => Navigator.of(context).pushNamed('/fases-screen', arguments: {'fase': fase,"topico": topico}) : null),
+        onTap: (passer.faseCompleta >= fase.id? () => Navigator.of(context).pushNamed('/fases-screen', arguments: {'fase': fase,"topico": topico, "passer":passer}) : null),
         child: Card(
           child: Image.network(fase.imageUrl,),
           color:(Colors.white),
