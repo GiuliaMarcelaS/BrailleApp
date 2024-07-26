@@ -14,7 +14,8 @@ class TestarScreen extends StatelessWidget {
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
-    passer.incrementaFracao(passer);
+    if(passer.topicoCompleto<=topico.id)
+    {passer.incrementaFracao(passer);}
     Navigator.of(context).pushNamed('/quest-1-screen', arguments: {'fase': fase,"topico": topico,'passer':passer});
   }
 

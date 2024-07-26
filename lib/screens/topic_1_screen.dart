@@ -13,7 +13,8 @@ class Topic1Screen extends StatelessWidget {
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
-    passer.incrementaFracao(passer);
+    if(passer.topicoCompleto<=topico.id)
+    {passer.incrementaFracao(passer);}
     Navigator.of(context).pushNamed('/topico-1-conteudo-screen', arguments: {'fase': fase,"topico": topico, "passer":passer});
   }
 

@@ -22,7 +22,6 @@ void _topicos(BuildContext context) {
     passer.incrementaFaset(fase);
     passer.incrementaTopico(topico);
     final Passer passer2 = args['passer'];
-    passer2.incrementaFracao(passer);
     Navigator.of(context).popUntil(ModalRoute.withName('/fases-screen'));
   }
 

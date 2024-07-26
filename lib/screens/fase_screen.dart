@@ -15,13 +15,13 @@ class FaseScreen extends StatelessWidget {
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
-    passer.incrementaFracao(passer);
     Navigator.of(context).pushNamed('/topic-1-screen', arguments: {'fase': fase,"topico": topico, "passer":passer});
   }
 
 
   @override
   Widget build(BuildContext context) {
+    int telas = 4;
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
@@ -83,7 +83,7 @@ class FaseScreen extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(top: 10, bottom: 30),
                         child: Text(
-                          '${((fracao.fracao)/6)*100}% concluído',
+                          '${(((fracao.fracao)/telas)*100).toInt()}% concluído',
                           style: TextStyle(
                             color: Color(0xFF208B52),
                             fontSize: 14,
@@ -107,7 +107,7 @@ class FaseScreen extends StatelessWidget {
       ),
       FractionallySizedBox(
         alignment: Alignment.centerLeft,
-        widthFactor: fracao.fracao/6, // Assuming fracao is a percentage value (0 to 100)
+        widthFactor: fracao.fracao/telas, // Assuming fracao is a percentage value (0 to 100)
         child: Container(
           color: Colors.green,
         ),

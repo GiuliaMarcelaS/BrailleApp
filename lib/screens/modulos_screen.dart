@@ -1,8 +1,10 @@
 import 'dart:js_interop';
 
 import 'package:braille_app/models/information_1.dart';
+import 'package:braille_app/models/passer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../components/fase_grid.dart';
 
@@ -16,7 +18,10 @@ class ModulosScreen extends StatelessWidget with ChangeNotifier{
 
   @override
   Widget build(BuildContext context) {
+    final data = DateFormat('dd/MM/yyyy').format(DateTime.now());
+    final telasTotal = 8;
     final dados = Provider.of<Information1>(context);
+    final fracao = Provider.of<Passer>(context);
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -47,17 +52,27 @@ class ModulosScreen extends StatelessWidget with ChangeNotifier{
                       height: 10,
                       width: 350,
                       color: Colors.white,
+                      child: Stack(
+                        children: [
+                          Container(color: Colors.white,),
+                          FractionallySizedBox(
+                            alignment: Alignment.centerLeft,
+                            widthFactor: fracao.fracao/telasTotal,
+                            child: Container(color: Colors.green,),
+                          )
+                        ],
+                        ),
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 20, top: 10),
-                      child: Text('Aulas 10% concluídas',
+                      child: Text('Aulas ${((fracao.fracao/telasTotal)*100).toInt()}% concluídas',
                       style: TextStyle(color: Colors.white,
                       fontSize: 12,
                       fontWeight: FontWeight.w800),),
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 20,top: 7),
-                      child: Text('Última prática: 12/03/24',
+                      child: Text('Última prática: $data',
                       style: TextStyle(color: Colors.white,
                       fontSize: 12,
                       fontWeight: FontWeight.w400),),

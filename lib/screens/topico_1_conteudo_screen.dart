@@ -1,20 +1,28 @@
+import 'package:braille_app/components/video_player_screen.dart';
 import 'package:braille_app/models/fases.dart';
 import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/topico.dart';
 import 'package:braille_app/screens/modulos_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+//import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:video_player/video_player.dart';
 
-class Topico1ConteudoScreen extends StatelessWidget {
+class Topico1ConteudoScreen extends StatefulWidget {
   const Topico1ConteudoScreen({Key? key}) : super(key: key);
 
+  @override
+  State<Topico1ConteudoScreen> createState() => _Topico1ConteudoScreenState();
+}
+
+class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
   void _testar(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
-    passer.incrementaFracao(passer);
+    if(passer.topicoCompleto<=topico.id)
+    {passer.incrementaFracao(passer);}
     Navigator.of(context).pushNamed('/testar-screen', arguments: {'fase': fase,"topico": topico,"passer":passer});
   }
 
@@ -56,10 +64,7 @@ class Topico1ConteudoScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Inserir o vídeo aqui
-                      Container(
-                        height: 200,
-                        child: VideoPlayerWidget(videoPath: 'assets/videos/video1.mp4')),
+                     
                     ],
                   ),
                 ],

@@ -18,7 +18,8 @@ class _Quest1ScreenState extends State<Quest1Screen> {
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
-    passer.incrementaFracao(passer);
+    if(passer.topicoCompleto<=topico.id)
+    {passer.incrementaFracao(passer);}
     Navigator.of(context).pushNamed('/acertos-screen', arguments: {'fase': fase,"topico": topico,"passer":passer});
   }
   int selected = 0;
