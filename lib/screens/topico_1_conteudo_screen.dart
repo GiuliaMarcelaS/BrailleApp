@@ -6,7 +6,7 @@ import 'package:braille_app/screens/modulos_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 //import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:video_player/video_player.dart';
+//import 'package:video_player/video_player.dart';
 
 class Topico1ConteudoScreen extends StatefulWidget {
   const Topico1ConteudoScreen({Key? key}) : super(key: key);
@@ -133,53 +133,53 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
   }
 }
 
-class VideoPlayerWidget extends StatefulWidget {
-  final String videoPath;
+// class VideoPlayerWidget extends StatefulWidget {
+//   final String videoPath;
 
-  const VideoPlayerWidget({Key? key, required this.videoPath}) : super(key: key);
+//   const VideoPlayerWidget({Key? key, required this.videoPath}) : super(key: key);
 
-  @override
-  _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();
-}
+//   @override
+//   _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();
+// }
 
-class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
-  late VideoPlayerController _controller;
-  late Future<void> _initializeVideoPlayerFuture;
+// class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
+//   late VideoPlayerController _controller;
+//   late Future<void> _initializeVideoPlayerFuture;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = VideoPlayerController.asset(widget.videoPath);
-    _initializeVideoPlayerFuture = _controller.initialize();
-    _controller.setLooping(true);
-    _controller.setVolume(0.0); // Set the volume to zero
-    _controller.play();
-  }
+//   @override
+//   void initState() {
+//     super.initState();
+//     _controller = VideoPlayerController.asset(widget.videoPath);
+//     _initializeVideoPlayerFuture = _controller.initialize();
+//     _controller.setLooping(true);
+//     _controller.setVolume(0.0); // Set the volume to zero
+//     _controller.play();
+//   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+//   @override
+//   void dispose() {
+//     _controller.dispose();
+//     super.dispose();
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _initializeVideoPlayerFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return AspectRatio(
-            aspectRatio: _controller.value.aspectRatio,
-            child: _controller.value.isInitialized
-                ? VideoPlayer(_controller)
-                : Container(),
-          );
-        } else if (snapshot.hasError) {
-          return Text('Erro ao carregar o vídeo: ${snapshot.error}');
-        } else {
-          return Center(child: CircularProgressIndicator());
-        }
-      },
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return FutureBuilder(
+//       future: _initializeVideoPlayerFuture,
+//       builder: (context, snapshot) {
+//         if (snapshot.connectionState == ConnectionState.done) {
+//           return AspectRatio(
+//             aspectRatio: _controller.value.aspectRatio,
+//             child: _controller.value.isInitialized
+//                 ? VideoPlayer(_controller)
+//                 : Container(),
+//           );
+//         } else if (snapshot.hasError) {
+//           return Text('Erro ao carregar o vídeo: ${snapshot.error}');
+//         } else {
+//           return Center(child: CircularProgressIndicator());
+//         }
+//       },
+//     );
+//   }
+// }

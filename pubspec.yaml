@@ -85,7 +85,7 @@ flutter:
     - assets\images\Group143.png
     - assets\images\Group46.png
     - assets\images\Group48.png
-    - assets\videos\video1.mp4
+   # - assets\videos\video1.mp4
     #- images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

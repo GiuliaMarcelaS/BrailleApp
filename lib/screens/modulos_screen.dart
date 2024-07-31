@@ -1,4 +1,4 @@
-import 'dart:js_interop';
+//import 'dart:js_interop';
 
 import 'package:braille_app/models/information_1.dart';
 import 'package:braille_app/models/passer.dart';
