@@ -21,7 +21,7 @@ class FaseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int telas = 4;
+    int telas = 16;
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
