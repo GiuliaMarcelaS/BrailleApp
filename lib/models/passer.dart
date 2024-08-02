@@ -39,8 +39,10 @@ class Passer with ChangeNotifier{
 
   Future<void> getModulo(String token, String userId) async{
     final response = await http.get(Uri.parse("${Constants.BASE_URL}/users/$userId/modulo.json?auth=$token"));
-    Map <dynamic, dynamic> dados = jsonDecode(response.body);
-    print(dados);
+    var dados = jsonDecode(response.body);
+    faseCompleta = dados;
+    notifyListeners();
+    print(faseCompleta);
   }
 
 

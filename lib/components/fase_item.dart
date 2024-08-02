@@ -1,5 +1,6 @@
 import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/topico.dart';
+import 'package:braille_app/models/user_data.dart';
 import 'package:braille_app/screens/modulos_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:braille_app/models/fases.dart';
@@ -13,6 +14,8 @@ class FaseItem extends StatelessWidget {
   final fase = Provider.of<Fase>(context);
   final topico = Provider.of<Topico>(context);
   final passer = Provider.of<Passer>(context);
+  // final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+  // final UserData userdata = args['userdata'];
     return GridTile(
       header: Container(
         height: 35,

@@ -40,7 +40,7 @@ dependencies:
   firebase_auth: ^5.1.0
   flutter_facebook_auth: ^7.0.0
   video_player: ^2.2.8 
-  # youtube_player_flutter: ^9.0.0
+  youtube_player_flutter: ^9.0.0
 
 
   # The following adds the Cupertino Icons font to your application.

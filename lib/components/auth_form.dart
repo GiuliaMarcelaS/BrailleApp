@@ -1,4 +1,5 @@
 import 'package:braille_app/exceptions/auth_exception.dart';
+import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/user_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -48,6 +49,7 @@ class _AuthFormState extends State<AuthForm> {
     }else{
       await auth.signup(_authData['email']!, _authData['password']!,);
     }
+    
     Navigator.of(context).pushNamed('/interface-screen');
     } on AuthException catch (error){
         _showErrorDialog(error.toString());
@@ -55,10 +57,10 @@ class _AuthFormState extends State<AuthForm> {
       _showErrorDialog('Ocorreu um erro inesperado!');
     }
 
-    final userdata = Provider.of<UserData>(context, listen: false);
-
-    userdata.getModulo();
-    
+    // final userdata = Provider.of<UserData>(context, listen: false);
+    // final passer = Provider.of<Passer>(context, listen: false);
+    // userdata.getModulo();
+    // passer.faseCompleta = userdata.modulo;
     setState(() => _isLoading = false);
     
   }

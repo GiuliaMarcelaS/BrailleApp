@@ -1,12 +1,8 @@
-import 'package:braille_app/components/video_player_screen.dart';
 import 'package:braille_app/models/fases.dart';
 import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/topico.dart';
-import 'package:braille_app/screens/modulos_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-//import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-//import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Topico1ConteudoScreen extends StatefulWidget {
   const Topico1ConteudoScreen({Key? key}) : super(key: key);
@@ -16,14 +12,35 @@ class Topico1ConteudoScreen extends StatefulWidget {
 }
 
 class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
+  late YoutubePlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = YoutubePlayerController(
+      initialVideoId: 'LTjXF4rJd9o',
+      flags: YoutubePlayerFlags(
+        autoPlay: false,
+        mute: false,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   void _testar(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
-    if(passer.topicoCompleto<=topico.id)
-    {passer.incrementaFracao(passer);}
-    Navigator.of(context).pushNamed('/testar-screen', arguments: {'fase': fase,"topico": topico,"passer":passer});
+    if (passer.topicoCompleto <= topico.id) {
+      passer.incrementaFracao(passer);
+    }
+    Navigator.of(context).pushNamed('/testar-screen', arguments: {'fase': fase, "topico": topico, "passer": passer});
   }
 
   void _voltar(BuildContext context) {
@@ -35,10 +52,10 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Color(0xFFDDE9DD),
+      backgroundColor: const Color(0xFFDDE9DD),
       appBar: AppBar(
-        backgroundColor: Color(0xFFF1FEF1),
-        title: Text("Tópico 1"),
+        backgroundColor: const Color(0xFFF1FEF1),
+        title: const Text("Tópico 1"),
         centerTitle: true,
         actions: [
           Container(
@@ -55,39 +72,40 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
               border: Border(bottom: BorderSide(color: Colors.black)),
             ),
             child: Container(
-              color: Color(0xFFF1FEF1),
-              padding: EdgeInsets.all(16),
+              color: const Color(0xFFF1FEF1),
+              padding: const EdgeInsets.all(16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                     
-                    ],
-                  ),
-                ],
+                children: const [],
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+          Container(
+            width: screenWidth,
+            child: YoutubePlayer(
+              controller: _controller,
+              showVideoProgressIndicator: true,
+              progressIndicatorColor: Color.fromRGBO(164, 228, 245, 1),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
             child: Text(
               'Autonomia e empoderamento',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
               textAlign: TextAlign.justify,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
             child: Text(
               'A integração do Braille na vida cotidiana desempenha um papel fundamental na promoção da autonomia e independência. Ao dominar esse sistema tátil, indivíduos cegos ou com deficiência visual têm a capacidade de ler, escrever e acessar informações de maneira autônoma. A alfabetização em Braille não apenas amplia as oportunidades educacionais, mas também permite que essas pessoas participem ativamente em atividades profissionais e sociais, contribuindo para uma vida mais independente e plena.',
               style: TextStyle(fontSize: 12),
               textAlign: TextAlign.justify,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -102,7 +120,7 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
                   onPressed: () {
                     _voltar(context);
                   },
-                  child: Text(
+                  child: const Text(
                     'Voltar',
                     style: TextStyle(color: Colors.black),
                   ),
@@ -114,12 +132,12 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
                 width: screenWidth * 150 / 360,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF208B52),
+                    backgroundColor: const Color(0xFF208B52),
                   ),
                   onPressed: () {
                     _testar(context);
                   },
-                  child: Text(
+                  child: const Text(
                     'Continuar',
                     style: TextStyle(color: Colors.white),
                   ),
@@ -132,54 +150,3 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
     );
   }
 }
-
-// class VideoPlayerWidget extends StatefulWidget {
-//   final String videoPath;
-
-//   const VideoPlayerWidget({Key? key, required this.videoPath}) : super(key: key);
-
-//   @override
-//   _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();
-// }
-
-// class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
-//   late VideoPlayerController _controller;
-//   late Future<void> _initializeVideoPlayerFuture;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _controller = VideoPlayerController.asset(widget.videoPath);
-//     _initializeVideoPlayerFuture = _controller.initialize();
-//     _controller.setLooping(true);
-//     _controller.setVolume(0.0); // Set the volume to zero
-//     _controller.play();
-//   }
-
-//   @override
-//   void dispose() {
-//     _controller.dispose();
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return FutureBuilder(
-//       future: _initializeVideoPlayerFuture,
-//       builder: (context, snapshot) {
-//         if (snapshot.connectionState == ConnectionState.done) {
-//           return AspectRatio(
-//             aspectRatio: _controller.value.aspectRatio,
-//             child: _controller.value.isInitialized
-//                 ? VideoPlayer(_controller)
-//                 : Container(),
-//           );
-//         } else if (snapshot.hasError) {
-//           return Text('Erro ao carregar o vídeo: ${snapshot.error}');
-//         } else {
-//           return Center(child: CircularProgressIndicator());
-//         }
-//       },
-//     );
-//   }
-// }
