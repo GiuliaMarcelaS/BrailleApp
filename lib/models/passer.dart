@@ -40,7 +40,15 @@ class Passer with ChangeNotifier{
   Future<void> getModulo(String token, String userId) async{
     final response = await http.get(Uri.parse("${Constants.BASE_URL}/users/$userId/modulo.json?auth=$token"));
     var dados = jsonDecode(response.body);
-    faseCompleta = dados;
+    faseCompleta = dados['id'];
+    notifyListeners();
+    print(faseCompleta);
+  }
+
+  Future<void> getTopico(String token, String userId) async{
+    final response = await http.get(Uri.parse("${Constants.BASE_URL}/users/$userId/modulo.json?auth=$token"));
+    var dados = jsonDecode(response.body);
+    topicoCompleto = dados['topico'];
     notifyListeners();
     print(faseCompleta);
   }

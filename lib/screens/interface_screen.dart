@@ -30,6 +30,7 @@ class _InterfaceState extends State<Interface> {
     final modulo = Provider.of<Passer>(context,listen: false);
     final auth = Provider.of<Auth>(context, listen: false);
     modulo.getModulo(auth.token??'', auth.userId??"");
+    modulo.getTopico(auth.token??'', auth.userId??"");
     Navigator.of(context).pushNamed('/modulos-screen',);
 }
 
