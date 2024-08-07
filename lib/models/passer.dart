@@ -32,6 +32,7 @@ class Passer with ChangeNotifier{
     topicoCompleto = topico.id+1;
     notifyListeners();
   }
+
   void incrementaFracao (Passer passer){
     fracao+=1;
     notifyListeners();
@@ -60,6 +61,12 @@ class Passer with ChangeNotifier{
     await http.put(
     Uri.parse('${Constants.BASE_URL}/$userId/fase.json?auth=$token'),
     body: jsonEncode({"fase":faseCompleta}),);
+  }
+  Future<void> salvaTopico(Topico topico, String token, String userId) async{
+    await http.patch(
+    Uri.parse('${Constants.BASE_URL}/users/$userId/modulo.json?auth=$token'),
+    body: jsonEncode({"topico":topicoCompleto}),);
+    notifyListeners();
   }
 
 }
