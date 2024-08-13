@@ -1,3 +1,4 @@
+import 'package:braille_app/models/fases.dart';
 import 'package:braille_app/models/passer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,17 +9,26 @@ class Topico extends StatelessWidget with ChangeNotifier{
   String number;
   String title;
   VoidCallback? rota;
+  String conteudo;
 
    Topico ({super.key,
    this.id = 1,
    this. number = '',
-   this.title = '',
+   this.title = 'teste',
    this.rota,
+   this.conteudo = ''
    });
 
   @override
   Widget build(BuildContext context) {
     final passer = Provider.of<Passer>(context);
+    void _topic1f(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final Fase fase = args['fase'];
+    final Topico topico = args['topico'];
+    final Passer passer = args['passer'];
+    Navigator.of(context).pushNamed('/topic-1-screen', arguments: {'fase': fase,"topico": topico, "passer":passer});
+  }
     return Container(
             margin: EdgeInsets.only(top: 30),
             child: Row(
@@ -45,7 +55,7 @@ class Topico extends StatelessWidget with ChangeNotifier{
                 Container(
                   margin: EdgeInsets.only(left: 20),
                   child: passer.topicoCompleto>=id? IconButton(
-                    onPressed: rota,
+                    onPressed: ()=>_topic1f(context),
                     icon: Icon(
                       Icons.play_circle,
                       color: Color(0xFF208B52),

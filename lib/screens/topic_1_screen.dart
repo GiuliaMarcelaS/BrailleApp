@@ -24,11 +24,15 @@ class Topic1Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final Fase fase = args['fase'];
+    final Topico topico = args['topico'];
+    final Passer passer = args['passer'];
     return Scaffold(
       backgroundColor: Color(0xFFDDE9DD),
       appBar: AppBar(
         backgroundColor: Color(0xFFF1FEF1),
-        title: Text("Tópico 1"),
+        title: Text(topico.title),
         centerTitle: true,
         actions: [Container(
           child: Image.asset('assets/images/muiraq_preto.png'),
@@ -59,7 +63,7 @@ class Topic1Screen extends StatelessWidget {
                         margin: EdgeInsets.only(left: 30),
                         width: 200,
                         child: Text(
-                          "Significado e Impacto Social do Sistema Braille",
+                          topico.title,
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w800,
@@ -77,7 +81,7 @@ class Topic1Screen extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(top: 40),
                         width: 380,
-                        child: Text('Neste tópico, exploraremos a significância do Braille na vida das pessoas com deficiência visual. Ao concluir este tópico, você terá uma compreensão aprofundada do impacto social do Braille, compreendendo como esse sistema tátil promove independência e participação plena na sociedade para pessoas com deficiência visual.'),
+                        child: Text(topico.conteudo),
                       ),
                   Container(
                               margin: EdgeInsets.only(top:screenHeight*150/800),

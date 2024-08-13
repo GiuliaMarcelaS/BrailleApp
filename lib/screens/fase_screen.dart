@@ -1,3 +1,4 @@
+import 'package:braille_app/data/topicos_data.dart';
 import 'package:braille_app/models/fases.dart';
 import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/passer1.dart';
@@ -18,9 +19,9 @@ class FaseScreen extends StatelessWidget {
     Navigator.of(context).pushNamed('/topic-1-screen', arguments: {'fase': fase,"topico": topico, "passer":passer});
   }
 
-
   @override
   Widget build(BuildContext context) {
+    final List<List <Topico>> topicos = topicos_data;
     int telas = 16;
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
@@ -115,10 +116,10 @@ class FaseScreen extends StatelessWidget {
     ],
   ),
 ),
-          Topico(id: 1, number: '01', title: 'História e Origens do Braille', rota:()=>_topic1f(context),),
-          Topico(id: 2, number: '02', title: 'Significado e Impacto Social do Sistema Braille', rota: (){},),
-          Topico(id: 3, number: '03', title: 'Evolução do Sistema Braille', rota: (){},),
-          Topico(id: 4, number: '04', title: 'Desafios e Oportunidades na Aprendizagem do Braille', rota: (){},),
+          topicos[fase.id-1][0],
+          topicos[fase.id-1][1],
+          topicos[fase.id-1][2],
+          topicos[fase.id-1][3],
         ],
       ),
     );
