@@ -14,7 +14,7 @@ class Topico extends StatelessWidget with ChangeNotifier{
    Topico ({super.key,
    this.id = 1,
    this. number = '',
-   this.title = 'teste',
+   this.title = '',
    this.rota,
    this.conteudo = ''
    });
@@ -25,9 +25,9 @@ class Topico extends StatelessWidget with ChangeNotifier{
     void _topic1f(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
-    final Topico topico = args['topico'];
+    final Topico topico = this;
     final Passer passer = args['passer'];
-    Navigator.of(context).pushNamed('/topic-1-screen', arguments: {'fase': fase,"topico": topico, "passer":passer});
+    Navigator.of(context).pushNamed('/topic-1-screen', arguments: {'fase': fase, 'topico': topico, "passer":passer});
   }
     return Container(
             margin: EdgeInsets.only(top: 30),

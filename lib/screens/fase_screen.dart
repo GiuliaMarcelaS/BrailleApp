@@ -24,7 +24,7 @@ class FaseScreen extends StatelessWidget {
     final List<List <Topico>> topicos = topicos_data;
     int telas = 16;
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final Fase fase = args['fase'];
+    final Fase modulo = args['fase'];
     final Topico topico = args['topico'];
     final fracao = Provider.of<Passer>(context);
     double screenHeight = MediaQuery.of(context).size.height;
@@ -116,10 +116,10 @@ class FaseScreen extends StatelessWidget {
     ],
   ),
 ),
-          topicos[fase.id-1][0],
-          topicos[fase.id-1][1],
-          topicos[fase.id-1][2],
-          topicos[fase.id-1][3],
+          topicos[modulo.id-1][0],
+          topicos[modulo.id-1][1],
+          topicos[modulo.id-1][2],
+          topicos[modulo.id-1][3],
         ],
       ),
     );
