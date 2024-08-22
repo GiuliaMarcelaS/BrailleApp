@@ -1,3 +1,4 @@
+import 'package:braille_app/models/auth.dart';
 import 'package:braille_app/models/fases.dart';
 import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/topico.dart';
@@ -18,8 +19,10 @@ class _Quest1ScreenState extends State<Quest1Screen> {
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
-    if(passer.topicoCompleto<=topico.id)
-    {passer.incrementaFracao(passer);}
+    final auth = Provider.of<Auth>(context, listen: false);
+    if (passer.topicoCompleto <= topico.id) {
+      passer.incrementaFracao(passer, auth.token??'', auth.userId??"");
+    }
     Navigator.of(context).pushNamed('/acertos-screen', arguments: {'fase': fase,"topico": topico,"passer":passer});
   }
   int selected = 0;

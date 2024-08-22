@@ -1,7 +1,9 @@
+import 'package:braille_app/models/auth.dart';
 import 'package:braille_app/models/fases.dart';
 import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/topico.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Topico1ConteudoScreen extends StatefulWidget {
@@ -13,13 +15,18 @@ class Topico1ConteudoScreen extends StatefulWidget {
 
 class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
   late YoutubePlayerController _controller;
+  int indice = 0;
 
-  @override
-  void initState() {
-    super.initState();
+   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final Fase fase = args['fase'];
+    final Topico topico = args['topico'];
+
     _controller = YoutubePlayerController(
-      initialVideoId: 'LTjXF4rJd9o',
-      flags: YoutubePlayerFlags(
+      initialVideoId: topico.videos[indice],
+      flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
       ),
@@ -37,8 +44,9 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
+    final auth = Provider.of<Auth>(context, listen: false);
     if (passer.topicoCompleto <= topico.id) {
-      passer.incrementaFracao(passer);
+      passer.incrementaFracao(passer, auth.token??'', auth.userId??"");
     }
     Navigator.of(context).pushNamed('/testar-screen', arguments: {'fase': fase, "topico": topico, "passer": passer});
   }
@@ -49,13 +57,24 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final Fase fase = args['fase'];
+    final Topico topico = args['topico'];
+    final Passer passer = args['passer'];
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    int incrementaLista(){
+      setState(() {
+        indice++;
+        _controller.load(topico.videos[indice]);
+      });
+      return indice;
+    }
     return Scaffold(
       backgroundColor: const Color(0xFFDDE9DD),
       appBar: AppBar(
         backgroundColor: const Color(0xFFF1FEF1),
-        title: const Text("Tópico 1"),
+        title: Text("Tópico ${topico.number}"),
         centerTitle: true,
         actions: [
           Container(
@@ -89,18 +108,18 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
               progressIndicatorColor: Color.fromRGBO(164, 228, 245, 1),
             ),
           ),
-          const Padding(
+           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
             child: Text(
-              'Autonomia e empoderamento',
+              topico.titulos[indice],
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
               textAlign: TextAlign.justify,
             ),
           ),
-          const Padding(
+           Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
             child: Text(
-              'A integração do Braille na vida cotidiana desempenha um papel fundamental na promoção da autonomia e independência. Ao dominar esse sistema tátil, indivíduos cegos ou com deficiência visual têm a capacidade de ler, escrever e acessar informações de maneira autônoma. A alfabetização em Braille não apenas amplia as oportunidades educacionais, mas também permite que essas pessoas participem ativamente em atividades profissionais e sociais, contribuindo para uma vida mais independente e plena.',
+              topico.conteudos[indice],
               style: TextStyle(fontSize: 12),
               textAlign: TextAlign.justify,
             ),
@@ -135,7 +154,12 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
                     backgroundColor: const Color(0xFF208B52),
                   ),
                   onPressed: () {
+                    if(indice+1==topico.titulos.length){
                     _testar(context);
+                    }
+                    else{
+                      incrementaLista();
+                    }
                   },
                   child: const Text(
                     'Continuar',

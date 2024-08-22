@@ -33,8 +33,9 @@ class Passer with ChangeNotifier{
     notifyListeners();
   }
 
-  void incrementaFracao (Passer passer){
+  void incrementaFracao (Passer passer, String token, String userId){
     fracao+=1;
+    salvaTela(token, userId);
     notifyListeners();
   }
 
@@ -66,6 +67,13 @@ class Passer with ChangeNotifier{
     await http.patch(
     Uri.parse('${Constants.BASE_URL}/users/$userId/modulo.json?auth=$token'),
     body: jsonEncode({"topico":topicoCompleto}),);
+    notifyListeners();
+  }
+
+  Future<void> salvaTela(String token, String userId) async{
+    await http.patch(
+    Uri.parse('${Constants.BASE_URL}/users/$userId/modulo.json?auth=$token'),
+    body: jsonEncode({"tela":fracao}),);
     notifyListeners();
   }
 

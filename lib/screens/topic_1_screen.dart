@@ -1,3 +1,4 @@
+import 'package:braille_app/models/auth.dart';
 import 'package:braille_app/models/fases.dart';
 import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/topico.dart';
@@ -13,8 +14,10 @@ class Topic1Screen extends StatelessWidget {
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
-    if(passer.topicoCompleto<=topico.id)
-    {passer.incrementaFracao(passer);}
+    final auth = Provider.of<Auth>(context, listen: false);
+    if (passer.topicoCompleto <= topico.id) {
+      passer.incrementaFracao(passer, auth.token??'', auth.userId??"");
+    }
     Navigator.of(context).pushNamed('/topico-1-conteudo-screen', arguments: {'fase': fase,"topico": topico, "passer":passer});
   }
 

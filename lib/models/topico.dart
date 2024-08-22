@@ -10,13 +10,20 @@ class Topico extends StatelessWidget with ChangeNotifier{
   String title;
   VoidCallback? rota;
   String conteudo;
+  List videos;
+  List titulos;
+  List conteudos;
 
-   Topico ({super.key,
+   Topico (
+    {super.key,
    this.id = 1,
    this. number = '',
    this.title = '',
    this.rota,
-   this.conteudo = ''
+   this.conteudo = '',
+   this.videos = const [],
+   this.titulos = const [],
+   this.conteudos = const []
    });
 
   @override
