@@ -32,9 +32,13 @@ void _topicos(BuildContext context) {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    final auth = Provider.of<Auth>(context, listen: false);
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final Fase fase = args['fase'];
+    final Topico topico = args['topico'];
     return Finished(
       image: 'assets/images/Group48.png',
-      negrito: 'Você acertou 4 de 5 perguntas!',
+      negrito: 'Você acertou ${topico.acertou} de ${topico.perguntas.length} perguntas!',
       texto: 'Parabéns!',
       botao: 'Concluir',
       rota: ()=> _topicos(context),

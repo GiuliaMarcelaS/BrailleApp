@@ -13,6 +13,9 @@ class Topico extends StatelessWidget with ChangeNotifier{
   List videos;
   List titulos;
   List conteudos;
+  List perguntas;
+  List respostas;
+  List acertos;
 
    Topico (
     {super.key,
@@ -23,8 +26,15 @@ class Topico extends StatelessWidget with ChangeNotifier{
    this.conteudo = '',
    this.videos = const [],
    this.titulos = const [],
-   this.conteudos = const []
+   this.conteudos = const [],
+   this.perguntas = const [],
+   this.respostas = const [],
+   this.acertos = const [],
    });
+    int acertou = 0;
+    void qnt_acertos(){
+    acertou++;
+  }
 
   @override
   Widget build(BuildContext context) {
