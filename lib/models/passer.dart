@@ -14,17 +14,20 @@ class Passer with ChangeNotifier{
   int faseCompleta;
   int topicoCompleto;
   num fracao;
+  num fracaoT;
 
   Passer(
     this._token,
     this._userId,
     {this.faseCompleta = 1,
     this.topicoCompleto = 1,
-    this.fracao = 0
+    this.fracao = 0,
+    this.fracaoT = 0,
     }
   );
-   // ignore: unused_element
-   void incrementaFaset (Fase fase){
+
+  
+   void incrementaFaset (Fase fase, Topico topico, String token, String userId){
     faseCompleta = fase.id+1;
     notifyListeners();
   }
@@ -33,18 +36,27 @@ class Passer with ChangeNotifier{
     notifyListeners();
   }
 
-  void incrementaFracao (Passer passer, String token, String userId){
+  void incrementaFracao (Passer passer, Topico topico, String token, String userId){
     fracao+=1;
-    salvaTela(token, userId);
+    topico.avanco+=1;
+    fracaoT=topico.avanco;
+    salvaTela(topico,token, userId);
     notifyListeners();
   }
+
 
   Future<void> getModulo(String token, String userId) async{
     final response = await http.get(Uri.parse("${Constants.BASE_URL}/users/$userId/modulo.json?auth=$token"));
     var dados = jsonDecode(response.body);
-    faseCompleta = dados['id'];
+    faseCompleta = dados['modulo'];
     notifyListeners();
     print(faseCompleta);
+  }
+  Future<void> getTelaM(String token, String userId) async{
+    final response = await http.get(Uri.parse("${Constants.BASE_URL}/users/$userId/modulo.json?auth=$token"));
+    var dados = jsonDecode(response.body);
+    fracao = dados['telam'];
+    notifyListeners();
   }
 
   Future<void> getTopico(String token, String userId) async{
@@ -63,18 +75,26 @@ class Passer with ChangeNotifier{
     Uri.parse('${Constants.BASE_URL}/$userId/fase.json?auth=$token'),
     body: jsonEncode({"fase":faseCompleta}),);
   }
+
   Future<void> salvaTopico(Topico topico, String token, String userId) async{
     await http.patch(
     Uri.parse('${Constants.BASE_URL}/users/$userId/modulo.json?auth=$token'),
     body: jsonEncode({"topico":topicoCompleto}),);
     notifyListeners();
   }
-
-  Future<void> salvaTela(String token, String userId) async{
+  Future<void> salvaModulo(Fase fase, String token, String userId) async{
     await http.patch(
     Uri.parse('${Constants.BASE_URL}/users/$userId/modulo.json?auth=$token'),
-    body: jsonEncode({"tela":fracao}),);
+    body: jsonEncode({"modulo":faseCompleta}),);
     notifyListeners();
   }
+
+  Future<void> salvaTela(Topico topico,String token, String userId) async{
+    await http.patch(
+    Uri.parse('${Constants.BASE_URL}/users/$userId/modulo.json?auth=$token'),
+    body: jsonEncode({"tela":fracao, "telaT":topico.avanco}),);
+    notifyListeners();
+  }
+
 
 }

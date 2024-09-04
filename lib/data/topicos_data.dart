@@ -31,6 +31,7 @@ var topicos_data =[ [
                 ]
               ],
               acertos: const [1, 2],
+              numTelas: 6,
             ),
           Topico(
             id: 2, 
@@ -48,6 +49,7 @@ var topicos_data =[ [
               ['Tornando-se obsoleto na cultura moderna atual'],
             ],
             acertos: const [3],
+            numTelas: 5,
             ),
           Topico(
             id: 3, 

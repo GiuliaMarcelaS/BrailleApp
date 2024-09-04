@@ -19,7 +19,7 @@ class ModulosScreen extends StatelessWidget with ChangeNotifier{
   @override
   Widget build(BuildContext context) {
     final data = DateFormat('dd/MM/yyyy').format(DateTime.now());
-    final telasTotal = 8;
+    final telasTotal = 30;
     final dados = Provider.of<Information1>(context);
     final fracao = Provider.of<Passer>(context);
     double screenHeight = MediaQuery.of(context).size.height;
@@ -57,7 +57,7 @@ class ModulosScreen extends StatelessWidget with ChangeNotifier{
                           Container(color: Colors.white,),
                           FractionallySizedBox(
                             alignment: Alignment.centerLeft,
-                            widthFactor: fracao.fracao/telasTotal,
+                            widthFactor: fracao.fracaoT/telasTotal,
                             child: Container(color: Colors.green,),
                           )
                         ],

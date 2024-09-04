@@ -22,7 +22,7 @@ class FaseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<List <Topico>> topicos = topicos_data;
-    int telas = 8;
+    int telas = 11;
     final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase modulo = args['fase'];
     final Topico topico = args['topico'];
@@ -108,7 +108,7 @@ class FaseScreen extends StatelessWidget {
       ),
       FractionallySizedBox(
         alignment: Alignment.centerLeft,
-        widthFactor: fracao.fracao/telas, // Assuming fracao is a percentage value (0 to 100)
+        widthFactor: fracao.fracao/telas,
         child: Container(
           color: Colors.green,
         ),

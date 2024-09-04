@@ -27,7 +27,7 @@ class _Quest1ScreenState extends State<Quest1Screen> {
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
     if (passer.topicoCompleto <= topico.id) {
-      passer.incrementaFracao(passer, auth.token??'', auth.userId??"");
+      passer.incrementaFracao(passer, topico, auth.token??'', auth.userId??"");
     }
     Navigator.of(context).pushNamed('/acertos-screen', arguments: {'fase': fase,"topico": topico,"passer":passer});
   }

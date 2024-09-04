@@ -16,6 +16,8 @@ class Topico extends StatelessWidget with ChangeNotifier{
   List perguntas;
   List respostas;
   List acertos;
+  int numTelas;
+  num avanco;
 
    Topico (
     {super.key,
@@ -30,6 +32,8 @@ class Topico extends StatelessWidget with ChangeNotifier{
    this.perguntas = const [],
    this.respostas = const [],
    this.acertos = const [],
+   this.numTelas = 0,
+   this.avanco = 0,
    });
     int acertou = 0;
     void qnt_acertos(){
