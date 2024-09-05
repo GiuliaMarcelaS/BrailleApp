@@ -16,7 +16,7 @@ class Topic1Screen extends StatelessWidget {
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
     if (passer.topicoCompleto <= topico.id) {
-      passer.incrementaFracao(passer, topico, auth.token??'', auth.userId??"");
+      passer.incrementaFracao(passer, topico, fase, auth.token??'', auth.userId??"");
     }
     Navigator.of(context).pushNamed('/topico-1-conteudo-screen', arguments: {'fase': fase,"topico": topico, "passer":passer});
   }

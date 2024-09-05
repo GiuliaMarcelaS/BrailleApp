@@ -57,7 +57,7 @@ class ModulosScreen extends StatelessWidget with ChangeNotifier{
                           Container(color: Colors.white,),
                           FractionallySizedBox(
                             alignment: Alignment.centerLeft,
-                            widthFactor: fracao.fracaoT/telasTotal,
+                            widthFactor: fracao.fracao/telasTotal,
                             child: Container(color: Colors.green,),
                           )
                         ],

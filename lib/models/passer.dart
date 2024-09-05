@@ -36,11 +36,12 @@ class Passer with ChangeNotifier{
     notifyListeners();
   }
 
-  void incrementaFracao (Passer passer, Topico topico, String token, String userId){
+  void incrementaFracao (Passer passer, Topico topico, Fase fase, String token, String userId){
     fracao+=1;
     topico.avanco+=1;
     fracaoT=topico.avanco;
     salvaTela(topico,token, userId);
+    salvaTelaTopico(fase, token, userId);
     notifyListeners();
   }
 
@@ -55,7 +56,15 @@ class Passer with ChangeNotifier{
   Future<void> getTelaM(String token, String userId) async{
     final response = await http.get(Uri.parse("${Constants.BASE_URL}/users/$userId/modulo.json?auth=$token"));
     var dados = jsonDecode(response.body);
-    fracao = dados['telam'];
+    fracao = dados['tela'];
+    notifyListeners();
+  }
+  Future<void> getTelaT(Fase fase, String token, String userId) async{
+    fracaoT = 0;
+    final response = await http.get(Uri.parse("${Constants.BASE_URL}/users/$userId/modulos/${(fase.id).toString()}.json?auth=$token"));
+    var dados = jsonDecode(response.body);
+    print("oi ${dados['telaT']}");
+    fracaoT = dados['telaT'];
     notifyListeners();
   }
 
@@ -92,9 +101,15 @@ class Passer with ChangeNotifier{
   Future<void> salvaTela(Topico topico,String token, String userId) async{
     await http.patch(
     Uri.parse('${Constants.BASE_URL}/users/$userId/modulo.json?auth=$token'),
-    body: jsonEncode({"tela":fracao, "telaT":topico.avanco}),);
+    body: jsonEncode({"tela":fracao}),);
     notifyListeners();
   }
 
+  Future<void> salvaTelaTopico(Fase fase,String token, String userId) async{
+    await http.patch(
+    Uri.parse('${Constants.BASE_URL}/users/$userId/modulos/${fase.id}.json?auth=$token'),
+    body: jsonEncode({"telaT":fracaoT}),);
+    notifyListeners();
+  }
 
 }
