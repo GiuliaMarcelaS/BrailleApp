@@ -18,25 +18,29 @@ class _Quest1ScreenState extends State<Quest1Screen> {
   int selected = 0;
   bool isAnswered = false;
   int acertou = 0;
-  
 
   void _acertos(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
     if (passer.topicoCompleto <= topico.id) {
-      passer.incrementaFracao(passer, topico, fase, auth.token??'', auth.userId??"");
+      passer.incrementaFracao(
+          passer, topico, fase, auth.token ?? '', auth.userId ?? "");
     }
-    Navigator.of(context).pushNamed('/acertos-screen', arguments: {'fase': fase,"topico": topico,"passer":passer});
+    passer.salvaAcerto(
+        fase, topico, auth.token ?? '', auth.userId ?? "", topico.acertou);
+    Navigator.of(context).pushNamed('/acertos-screen',
+        arguments: {'fase': fase, "topico": topico, "passer": passer});
   }
 
   void select(int number, Topico topico) {
     setState(() {
       selected = number;
       isAnswered = true;
-       if (topico.acertos[indice] == (number - 1)) {
+      if (topico.acertos[indice] == (number - 1)) {
         topico.qnt_acertos();
       }
     });
@@ -53,7 +57,8 @@ class _Quest1ScreenState extends State<Quest1Screen> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
@@ -97,9 +102,8 @@ class _Quest1ScreenState extends State<Quest1Screen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     foregroundColor: Colors.black,
-                    backgroundColor: selected == i
-                        ? Color(0xFFBAE2CD)
-                        : Colors.white,
+                    backgroundColor:
+                        selected == i ? Color(0xFFBAE2CD) : Colors.white,
                   ),
                   onPressed: isAnswered ? null : () => select(i, topico),
                   child: Row(
@@ -110,7 +114,7 @@ class _Quest1ScreenState extends State<Quest1Screen> {
                             : Icon(Icons.close),
                       if (selected != i) Icon(Icons.circle_outlined),
                       SizedBox(width: screenWidth * 8 / 360),
-                      Text(topico.respostas[indice][i-1]),
+                      Text(topico.respostas[indice][i - 1]),
                     ],
                   ),
                 ),

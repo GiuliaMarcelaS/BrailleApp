@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Topico extends StatelessWidget with ChangeNotifier{
+class Topico extends StatelessWidget with ChangeNotifier {
   int id;
   String number;
   String title;
@@ -19,24 +19,24 @@ class Topico extends StatelessWidget with ChangeNotifier{
   int numTelas;
   num avanco;
 
-   Topico (
-    {super.key,
-   this.id = 1,
-   this. number = '',
-   this.title = '',
-   this.rota,
-   this.conteudo = '',
-   this.videos = const [],
-   this.titulos = const [],
-   this.conteudos = const [],
-   this.perguntas = const [],
-   this.respostas = const [],
-   this.acertos = const [],
-   this.numTelas = 0,
-   this.avanco = 0,
-   });
-    int acertou = 0;
-    void qnt_acertos(){
+  Topico({
+    super.key,
+    this.id = 1,
+    this.number = '',
+    this.title = '',
+    this.rota,
+    this.conteudo = '',
+    this.videos = const [],
+    this.titulos = const [],
+    this.conteudos = const [],
+    this.perguntas = const [],
+    this.respostas = const [],
+    this.acertos = const [],
+    this.numTelas = 0,
+    this.avanco = 0,
+  });
+  int acertou = 0;
+  void qnt_acertos() {
     acertou++;
   }
 
@@ -44,45 +44,50 @@ class Topico extends StatelessWidget with ChangeNotifier{
   Widget build(BuildContext context) {
     final passer = Provider.of<Passer>(context);
     void _topic1f(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final Fase fase = args['fase'];
-    final Topico topico = this;
-    final Passer passer = args['passer'];
-    Navigator.of(context).pushNamed('/topic-1-screen', arguments: {'fase': fase, 'topico': topico, "passer":passer});
-  }
+      final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      final Fase fase = args['fase'];
+      final Topico topico = this;
+      final Passer passer = args['passer'];
+      Navigator.of(context).pushNamed('/topic-1-screen',
+          arguments: {'fase': fase, 'topico': topico, "passer": passer});
+    }
+
     return Container(
-            margin: EdgeInsets.only(top: 30),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 50,
-                  margin: EdgeInsets.only(right: 20, left: 30),
-                  child: Text(
-                    number,
-                    style: TextStyle(
-                      color: Color(0xFF00210E),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    title,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 20),
-                  child: passer.topicoCompleto>=id? IconButton(
-                    onPressed: ()=>_topic1f(context),
+      margin: EdgeInsets.only(top: 30),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 50,
+            margin: EdgeInsets.only(right: 20, left: 30),
+            child: Text(
+              number,
+              style: TextStyle(
+                color: Color(0xFF00210E),
+                fontSize: 20,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              title,
+              style: TextStyle(fontSize: 16),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 20),
+            child: passer.topicoCompleto >= id
+                ? IconButton(
+                    onPressed: () => _topic1f(context),
                     icon: Icon(
                       Icons.play_circle,
                       color: Color(0xFF208B52),
                       size: 30,
                     ),
-                  ):IconButton(
+                  )
+                : IconButton(
                     onPressed: null,
                     icon: Icon(
                       Icons.lock,
@@ -90,9 +95,9 @@ class Topico extends StatelessWidget with ChangeNotifier{
                       size: 30,
                     ),
                   ),
-                )
-              ],
-            ),
-          );
+          )
+        ],
+      ),
+    );
   }
 }
