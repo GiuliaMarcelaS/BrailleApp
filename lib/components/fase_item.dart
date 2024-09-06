@@ -38,7 +38,7 @@ class FaseItem extends StatelessWidget {
       child: GestureDetector(
         onTap: (passer.faseCompleta >= fase.id? () => Navigator.of(context).pushNamed('/fases-screen', arguments: {'fase': fase,"topico": topico, "passer":passer}) : null),
         child: Card(
-          child: Image.network(fase.imageUrl,),
+          child: Image.asset(fase.imageUrl,),
           color:(Colors.white),
         ),
       ),

@@ -33,17 +33,15 @@ class _FaseScreenState extends State<FaseScreen> {
     final Fase modulo = args['fase'];
     final Topico topico = args['topico'];
 
-    // Chama o método que atualiza o estado
     fracao.getTelaT(modulo, auth.token ?? '', auth.userId ?? '');
   }
 
   @override
   Widget build(BuildContext context) {
-    // Observe as mudanças em fracao usando Consumer
     return Scaffold(
       backgroundColor: Color(0xFFDDE9DD),
       appBar: AppBar(
-        title: Text('Fase: ${ModalRoute.of(context)!.settings.arguments != null ? (ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>)['fase'].title : 'Fase'}'),
+        title: Text('${ModalRoute.of(context)!.settings.arguments != null ? (ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>)['fase'].title : 'Fase'}'),
         backgroundColor: Color(0xFFF1FEF1),
         centerTitle: true,
         actions: [

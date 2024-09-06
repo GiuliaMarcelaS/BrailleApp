@@ -25,6 +25,9 @@ class ModulosScreen extends StatelessWidget with ChangeNotifier{
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFF405547),
+      ),
       backgroundColor: Color(0xFFDDE9DD),
       body: Column(
         children: [
@@ -50,7 +53,7 @@ class ModulosScreen extends StatelessWidget with ChangeNotifier{
                     Container(
                       margin: EdgeInsets.only(left: 20,top: 10),
                       height: 10,
-                      width: 350,
+                      width: 300,
                       color: Colors.white,
                       child: Stack(
                         children: [
