@@ -38,7 +38,7 @@ class Passer with ChangeNotifier {
       Passer passer, Topico topico, Fase fase, String token, String userId) {
     fracaoT += 1;
     topico.avanco += 1;
-    fracao = topico.avanco;
+    fracao+=1;
     salvaTela(topico, token, userId);
     salvaTelaTopico(fase, token, userId);
     notifyListeners();

@@ -77,6 +77,15 @@ var topicos_data =[ [
             videos: const ['Fpn1imb9qZg', 'YykjpeuMNEk'],
             titulos: const ['titulo 1', 'titulo 2'],
             conteudos: const ['conteudo 1', 'conteudo 2'],
+            perguntas: const ['Como o Braille contribui para a preservação da herança cultural?'],
+            respostas: const [
+              ['Não tem impacto algum na preservação cultural',
+              'Limitando o acesso a todas informação cultural',
+              'Facilitando a leitura de obras culturais em ambientes públicos',
+              'Tornando-se obsoleto na cultura moderna atual'],
+            ],
+            acertos: const [3],
+            numTelas: 5,
             ),
 ], 
 
