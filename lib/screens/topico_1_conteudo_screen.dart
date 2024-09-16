@@ -17,10 +17,11 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
   late YoutubePlayerController _controller;
   int indice = 0;
 
-   @override
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
 
@@ -40,15 +41,18 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
   }
 
   void _testar(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
     if (passer.topicoCompleto <= topico.id) {
-      passer.incrementaFracao(passer, topico, fase, auth.token??'', auth.userId??"");
+      passer.incrementaFracao(
+          passer, topico, fase, auth.token ?? '', auth.userId ?? "");
     }
-    Navigator.of(context).pushNamed('/testar-screen', arguments: {'fase': fase, "topico": topico, "passer": passer});
+    Navigator.of(context).pushNamed('/testar-screen',
+        arguments: {'fase': fase, "topico": topico, "passer": passer});
   }
 
   void _voltar(BuildContext context) {
@@ -57,19 +61,21 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    int incrementaLista(){
+    int incrementaLista() {
       setState(() {
         indice++;
         _controller.load(topico.videos[indice]);
       });
       return indice;
     }
+
     return Scaffold(
       backgroundColor: const Color(0xFFDDE9DD),
       appBar: AppBar(
@@ -108,7 +114,7 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
               progressIndicatorColor: Color.fromRGBO(164, 228, 245, 1),
             ),
           ),
-           Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
             child: Text(
               topico.titulos[indice],
@@ -116,7 +122,7 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
               textAlign: TextAlign.justify,
             ),
           ),
-           Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
             child: Text(
               topico.conteudos[indice],
@@ -129,7 +135,8 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                margin: EdgeInsets.only(bottom: screenHeight * 50 / 800, right: 20),
+                margin:
+                    EdgeInsets.only(bottom: screenHeight * 50 / 800, right: 20),
                 height: screenHeight * 50 / 800,
                 width: screenWidth * 150 / 360,
                 child: ElevatedButton(
@@ -154,10 +161,9 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
                     backgroundColor: const Color(0xFF208B52),
                   ),
                   onPressed: () {
-                    if(indice+1==topico.titulos.length){
-                    _testar(context);
-                    }
-                    else{
+                    if (indice + 1 == topico.titulos.length) {
+                      _testar(context);
+                    } else {
                       incrementaLista();
                     }
                   },
