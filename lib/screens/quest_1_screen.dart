@@ -2,7 +2,6 @@ import 'package:braille_app/models/auth.dart';
 import 'package:braille_app/models/fases.dart';
 import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/topico.dart';
-import 'package:braille_app/screens/modulos_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +16,8 @@ class _Quest1ScreenState extends State<Quest1Screen> {
   int indice = 0;
   int selected = 0;
   bool isAnswered = false;
-  int acertou = 0;
+  bool isCorrect = false;
+  bool showContinueButton = false;
 
   void _acertos(BuildContext context) {
     final args =
@@ -39,8 +39,15 @@ class _Quest1ScreenState extends State<Quest1Screen> {
   void select(int number, Topico topico) {
     setState(() {
       selected = number;
+    });
+  }
+
+  void analiseAcerto(int number, Topico topico) {
+    setState(() {
       isAnswered = true;
-      if (topico.acertos[indice] == (number - 1)) {
+      isCorrect = topico.acertos[indice] == (number - 1);
+      showContinueButton = true;
+      if (isCorrect) {
         topico.qnt_acertos();
       }
     });
@@ -51,14 +58,14 @@ class _Quest1ScreenState extends State<Quest1Screen> {
       indice++;
       isAnswered = false;
       selected = 0;
+      showContinueButton = false;
     });
     return indice;
   }
 
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
@@ -108,8 +115,8 @@ class _Quest1ScreenState extends State<Quest1Screen> {
                   onPressed: isAnswered ? null : () => select(i, topico),
                   child: Row(
                     children: [
-                      if (selected == i)
-                        topico.acertos[indice] == (i - 1)
+                      if (selected == i && isAnswered)
+                        isCorrect
                             ? Icon(Icons.check_circle_outline_outlined)
                             : Icon(Icons.close),
                       if (selected != i) Icon(Icons.circle_outlined),
@@ -119,27 +126,60 @@ class _Quest1ScreenState extends State<Quest1Screen> {
                   ),
                 ),
               ),
-            Container(
-              margin: EdgeInsets.only(top: screenHeight * 250 / 800),
-              height: screenHeight * 50 / 800,
-              width: screenWidth * 328 / 360,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF208B52),
-                ),
-                onPressed: () {
-                  if (indice + 1 == topico.perguntas.length) {
-                    _acertos(context);
-                  } else {
-                    incrementaLista();
-                  }
-                },
-                child: Text(
-                  'Continuar',
-                  style: TextStyle(color: Colors.white),
+            if (!isAnswered)
+              Container(
+                margin: EdgeInsets.only(top: screenHeight * 15 / 800),
+                height: screenHeight * 50 / 800,
+                width: screenWidth * 328 / 360,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF208B52),
+                  ),
+                  onPressed: selected != 0
+                      ? () => analiseAcerto(selected, topico)
+                      : null,
+                  child: Text(
+                    'Confirmar',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
-            ),
+            if (showContinueButton)
+              Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: screenHeight * 15 / 800),
+                    child: Text(
+                      isCorrect ? 'Resposta correta!' : 'Resposta incorreta!',
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: isCorrect ? Colors.green : Colors.red),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: screenHeight * 15 / 800),
+                    height: screenHeight * 50 / 800,
+                    width: screenWidth * 328 / 360,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFF208B52),
+                      ),
+                      onPressed: () {
+                        if (indice + 1 == topico.perguntas.length) {
+                          _acertos(context);
+                        } else {
+                          incrementaLista();
+                        }
+                      },
+                      child: Text(
+                        'Continuar',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
           ],
         ),
       ),
