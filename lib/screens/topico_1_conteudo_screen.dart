@@ -4,7 +4,7 @@ import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/topico.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+// import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Topico1ConteudoScreen extends StatefulWidget {
   const Topico1ConteudoScreen({Key? key}) : super(key: key);
@@ -14,31 +14,31 @@ class Topico1ConteudoScreen extends StatefulWidget {
 }
 
 class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
-  late YoutubePlayerController _controller;
+  // late YoutubePlayerController _controller;
   int indice = 0;
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final Fase fase = args['fase'];
-    final Topico topico = args['topico'];
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   final args =
+  //       ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+  //   final Fase fase = args['fase'];
+  //   final Topico topico = args['topico'];
 
-    _controller = YoutubePlayerController(
-      initialVideoId: topico.videos[indice],
-      flags: const YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-      ),
-    );
-  }
+  //   _controller = YoutubePlayerController(
+  //     initialVideoId: topico.videos[indice],
+  //     flags: const YoutubePlayerFlags(
+  //       autoPlay: false,
+  //       mute: false,
+  //     ),
+  //   );
+  // }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _controller.dispose();
+  //   super.dispose();
+  // }
 
   void _testar(BuildContext context) {
     final args =
@@ -71,7 +71,7 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
     int incrementaLista() {
       setState(() {
         indice++;
-        _controller.load(topico.videos[indice]);
+        // _controller.load(topico.videos[indice]);
       });
       return indice;
     }
@@ -106,14 +106,14 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
               ),
             ),
           ),
-          Container(
-            width: screenWidth,
-            child: YoutubePlayer(
-              controller: _controller,
-              showVideoProgressIndicator: true,
-              progressIndicatorColor: Color.fromRGBO(164, 228, 245, 1),
-            ),
-          ),
+          // Container(
+          //   width: screenWidth,
+          //   child: YoutubePlayer(
+          //     controller: _controller,
+          //     showVideoProgressIndicator: true,
+          //     progressIndicatorColor: Color.fromRGBO(164, 228, 245, 1),
+          //   ),
+          // ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
             child: Text(

@@ -47,21 +47,34 @@ class _TranslationState extends State<Translation> {
     }
     return Column(
       children: [
-        Form(
-          child: TextField(
-            decoration: const InputDecoration(labelText: 'insira uma palavra ou frase'),
-            onSubmitted: (valor) {
-              cells.wordsClicker(auth.token??'', auth.userId??'');
-              ball.reset(letra);
-              letra = identifyUpperCase(valor);
-              ball.translatePhrase(letra,cells.id);
-              cells.addCells(letra);
-              cells.id = 0;
-              letra = "";
-            },
-            controller: TextEditingController(),
-          ),
+       Form(
+  child: TextField(
+    decoration: InputDecoration(
+      labelText: 'Escreva seu texto', 
+      hintText: 'Escreva seu texto',  
+      filled: true,  
+      fillColor: Colors.white, 
+      contentPadding: EdgeInsets.all(10), 
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12), 
+        borderSide: BorderSide(
+          color: Colors.grey, 
+          width: 1, 
         ),
+      ),
+    ),
+    onSubmitted: (valor) {
+      cells.wordsClicker(auth.token ?? '', auth.userId ?? '');
+      ball.reset(letra);
+      letra = identifyUpperCase(valor);
+      ball.translatePhrase(letra, cells.id);
+      cells.addCells(letra);
+      cells.id = 0;
+      letra = "";
+    },
+    controller: TextEditingController(),
+  ),
+)
       ],
     );
   }

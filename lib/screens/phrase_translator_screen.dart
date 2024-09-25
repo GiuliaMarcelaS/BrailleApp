@@ -9,8 +9,8 @@ class PhraseTranslatorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
         children: const [
+          Translation(),
           MatrizShowed(),
-          Translation()
         ],
     );
   }

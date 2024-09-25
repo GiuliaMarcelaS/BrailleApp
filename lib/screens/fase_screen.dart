@@ -55,7 +55,7 @@ class _FaseScreenState extends State<FaseScreen> {
       body: Consumer<Passer>(builder: (ctx, fracao, child) {
         double screenHeight = MediaQuery.of(context).size.height;
         double screenWidth = MediaQuery.of(context).size.width;
-        int telas = 16;
+        int telas = 15;
         final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
         final Fase modulo = args['fase'];
         final Topico topico = args['topico'];
