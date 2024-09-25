@@ -8,12 +8,12 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../components/fase_grid.dart';
 
-
-class ModulosScreen extends StatelessWidget with ChangeNotifier{
+class ModulosScreen extends StatelessWidget with ChangeNotifier {
   num fracao;
 
-  ModulosScreen({super.key,
-  this.fracao = 0,
+  ModulosScreen({
+    super.key,
+    this.fracao = 0,
   });
 
   @override
@@ -25,14 +25,11 @@ class ModulosScreen extends StatelessWidget with ChangeNotifier{
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF405547),
-      ),
       backgroundColor: Color(0xFFDDE9DD),
       body: Column(
         children: [
           Container(
-            height: 160,
+            height: 160 / 800 * screenHeight,
             color: Color(0xFF405547),
             child: Row(
               children: [
@@ -45,40 +42,53 @@ class ModulosScreen extends StatelessWidget with ChangeNotifier{
                   children: [
                     Container(
                       margin: EdgeInsets.only(left: 20, top: 10),
-                      child: Text('Olá, ${dados.nome}!',
-                      style: TextStyle(color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800),),
+                      child: Text(
+                        'Olá, ${dados.nome}!',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w800),
+                      ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 20,top: 10),
+                      margin: EdgeInsets.only(left: 20, top: 10),
                       height: 10,
                       width: 300,
                       color: Colors.white,
                       child: Stack(
                         children: [
-                          Container(color: Colors.white,),
+                          Container(
+                            color: Colors.white,
+                          ),
                           FractionallySizedBox(
                             alignment: Alignment.centerLeft,
-                            widthFactor: fracao.fracao/telasTotal,
-                            child: Container(color: Colors.green,),
+                            widthFactor: fracao.fracao / telasTotal,
+                            child: Container(
+                              color: Colors.green,
+                            ),
                           )
                         ],
-                        ),
+                      ),
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 20, top: 10),
-                      child: Text('Aulas ${((fracao.fracao/telasTotal)*100).toInt()}% concluídas',
-                      style: TextStyle(color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w800),),
+                      child: Text(
+                        'Aulas ${((fracao.fracao / telasTotal) * 100).toInt()}% concluídas',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w800),
+                      ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 20,top: 7),
-                      child: Text('Última prática: $data',
-                      style: TextStyle(color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400),),
+                      margin: EdgeInsets.only(left: 20, top: 7),
+                      child: Text(
+                        'Última prática: $data',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400),
+                      ),
                     ),
                   ],
                 )
@@ -88,7 +98,6 @@ class ModulosScreen extends StatelessWidget with ChangeNotifier{
           Expanded(child: FaseGrid()),
         ],
       ),
-      
     );
   }
 }
