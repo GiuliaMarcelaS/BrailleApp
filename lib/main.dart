@@ -130,6 +130,10 @@ class BrailleApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          scaffoldBackgroundColor: Color(0xFFDDE9DD),
+          appBarTheme: AppBarTheme(color: Color(0xFFDDE9DD))
+        ),
         routes: {
           '/': (ctx) => const AuthScreen(),
           '/modulos-screen': (ctx) => ModulosScreen(),

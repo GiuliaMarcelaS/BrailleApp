@@ -59,8 +59,8 @@ class TabsScreen2 extends StatelessWidget {
               text: "Perfil",
             ),
           ],
-          labelColor: Colors.black,
-          unselectedLabelColor: Colors.grey,
+          labelColor: Color(0xFF208B52),
+          unselectedLabelColor: Color(0xFF4AB37B),
         ),
       ),
     );

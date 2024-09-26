@@ -17,7 +17,7 @@ class FaseGrid extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       itemCount: loadedFases.length,
       itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
-        value: loadedFases[i], // Use .value to ensure the correct handling of existing instances.
+        value: loadedFases[i],
         child: const FaseItem(),
       ),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

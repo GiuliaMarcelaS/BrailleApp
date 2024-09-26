@@ -16,11 +16,19 @@ class FaseItem extends StatelessWidget {
         final passer = Provider.of<Passer>(context);
         return GridTile(
           header: Container(
-            height: 35,
-            child: Icon(
-              passer.faseCompleta >= fase.id ? Icons.play_circle : Icons.lock,
-              size: 25,
-              color: passer.faseCompleta >= fase.id ? Color(0xFF208B52) : Colors.grey,
+            margin: EdgeInsets.only(top: 10, right: 15),
+            alignment: Alignment.topRight,
+            child: Container(
+              padding: EdgeInsets.all(3),
+              decoration: BoxDecoration(
+                color: passer.faseCompleta >= fase.id ? Color(0xFF208B52) : Color(0xFFB0C4B1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                passer.faseCompleta >= fase.id ? Icons.play_arrow : Icons.lock,
+                size: 20, 
+                color: Colors.white,
+              ),
             ),
           ),
           footer: GridTileBar(
@@ -44,6 +52,7 @@ class FaseItem extends StatelessWidget {
                     })
                 : null,
             child: Card(
+              elevation: 8,
               child: Image.asset(fase.imageUrl),
               color: Colors.white,
             ),
