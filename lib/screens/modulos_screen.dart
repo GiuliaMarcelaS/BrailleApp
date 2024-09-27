@@ -29,11 +29,12 @@ class ModulosScreen extends StatelessWidget with ChangeNotifier {
       body: Column(
         children: [
           Container(
-            height: 160 / 800 * screenHeight,
+            height: 195 / 800 * screenHeight,
             color: Color(0xFF405547),
             child: Row(
               children: [
                 Container(
+                  height: 90/800*screenHeight,
                   margin: EdgeInsets.only(left: 20),
                   child: Image.asset('assets/images/Group40.png'),
                 ),
@@ -41,17 +42,17 @@ class ModulosScreen extends StatelessWidget with ChangeNotifier {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 20, top: 10),
+                      margin: EdgeInsets.only(left: 20, top: 82/800*screenHeight),
                       child: Text(
                         'Olá, ${dados.nome}!',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 18,
+                            fontSize: 18/800*screenHeight,
                             fontWeight: FontWeight.w800),
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 20, top: 10),
+                      margin: EdgeInsets.only(left: 20, top: 12/800*screenHeight),
                       height: 10,
                       width: 300,
                       color: Colors.white,
@@ -71,22 +72,22 @@ class ModulosScreen extends StatelessWidget with ChangeNotifier {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 20, top: 10),
+                      margin: EdgeInsets.only(left: 20, top: 3/800*screenHeight),
                       child: Text(
                         'Aulas ${((fracao.fracao / telasTotal) * 100).toInt()}% concluídas',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 12,
+                            fontSize: 12/800*screenHeight,
                             fontWeight: FontWeight.w800),
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 20, top: 7),
+                      margin: EdgeInsets.only(left: 20, top: 2/800*screenHeight),
                       child: Text(
                         'Última prática: $data',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 12,
+                            fontSize: 12/800*screenHeight,
                             fontWeight: FontWeight.w400),
                       ),
                     ),

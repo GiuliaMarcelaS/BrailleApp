@@ -17,7 +17,8 @@ class TabsScreen2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Recupera os argumentos da navegação
+     double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final initialIndex = args?['initialIndex'] ?? 0;
@@ -26,6 +27,7 @@ class TabsScreen2 extends StatelessWidget {
       length: 4,
       initialIndex: initialIndex,
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Column(
           children: [
             Expanded(
@@ -34,28 +36,36 @@ class TabsScreen2 extends StatelessWidget {
                   TabsScreen(),
                   ModulosScreen(),
                   LearnScreen(),
-                  Container(), // Perfil ou outro conteúdo
+                  Container(),
                 ],
               ),
             ),
+           Container(
+              height: 1.0, 
+              color: Colors.black, 
+            ),
           ],
         ),
-        bottomNavigationBar: const TabBar(
+        bottomNavigationBar: TabBar(
+          indicatorColor: Color(0xFF208B52),
+          labelStyle: TextStyle(
+            fontSize: 12/800*screenHeight,
+          ),
           tabs: [
             Tab(
-              icon: Icon(Icons.translate),
+              icon: Icon(Icons.translate, size: 23/800*screenHeight,),
               text: "Traduzir",
             ),
             Tab(
-              icon: Icon(Icons.menu_book_sharp),
+              icon: Icon(Icons.menu_book_sharp, size: 23/800*screenHeight),
               text: "Aprender",
             ),
             Tab(
-              icon: Icon(Icons.auto_fix_high),
+              icon: Icon(Icons.auto_fix_high, size: 23/800*screenHeight),
               text: "Praticar",
             ),
             Tab(
-              icon: Icon(Icons.person),
+              icon: Icon(Icons.person, size: 23/800*screenHeight),
               text: "Perfil",
             ),
           ],

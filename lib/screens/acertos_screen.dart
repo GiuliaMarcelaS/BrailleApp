@@ -25,7 +25,9 @@ void _topicos(BuildContext context) {
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final passer = Provider.of<Passer>(context, listen: false);
+    if(passer.topicoCompleto<topico.id){
     passer.incrementaTopico(topico);
+    }
     passer.salvaTopico(topico, auth.token??'', auth.userId??'');
     if(topicos_data[passer.faseCompleta-1].length+1==passer.topicoCompleto){
       passer.incrementaFaset(fase, topico, auth.token??"",auth.userId??'');
