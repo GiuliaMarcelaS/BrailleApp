@@ -65,7 +65,8 @@ class _Quest1ScreenState extends State<Quest1Screen> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
@@ -87,101 +88,128 @@ class _Quest1ScreenState extends State<Quest1Screen> {
           )
         ],
       ),
-      body: SizedBox(
-        width: double.infinity,
-        child: Column(
-          children: [
+      body: Column(
+        children: [
+          // Texto da pergunta
+          Container(
+            width: screenWidth * 310 / 360,
+            margin: EdgeInsets.only(top: screenHeight * 30 / 800),
+            child: Text(
+              topico.perguntas[indice],
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+            ),
+          ),
+
+          // Lista de opções
+          Expanded(
+            child: ListView.builder(
+              padding: EdgeInsets.only(top: screenHeight * 15 / 800),
+              itemCount: 4,
+              itemBuilder: (context, i) {
+                int buttonIndex = i + 1;
+                return Container(
+                  margin: EdgeInsets.only(
+                      bottom: screenHeight * 15 / 800,
+                      left: 16 / 360 * screenWidth,
+                      right: 16 / 360 * screenWidth),
+                  width: screenWidth * 328 / 360,
+                  height: screenHeight * 50 / 800,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          side: BorderSide(width: 1)),
+                      foregroundColor: Colors.black,
+                      backgroundColor: selected == buttonIndex
+                          ? Color(0xFFBAE2CD)
+                          : Colors.white,
+                    ),
+                    onPressed:
+                        isAnswered ? null : () => select(buttonIndex, topico),
+                    child: Row(
+                      children: [
+                        if (selected == buttonIndex && isAnswered)
+                          isCorrect
+                              ? Icon(Icons.check_box_rounded)
+                              : Icon(Icons.close),
+                        if (selected != buttonIndex)
+                          Icon(
+                            Icons.circle_outlined,
+                            size: 20 / 360 * screenWidth,
+                          ),
+                        SizedBox(width: screenWidth * 8 / 360),
+                        SizedBox(
+                          width: screenWidth * 260 / 360,
+                          child: Text(
+                            topico.respostas[indice][i],
+                            style: TextStyle(
+                                fontWeight: FontWeight.w800, fontSize: 16),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+
+          if (!isAnswered)
             Container(
-              margin: EdgeInsets.only(top: screenHeight * 30 / 800),
-              child: Text(
-                topico.perguntas[indice],
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+              margin: EdgeInsets.only(
+                  top: screenHeight * 15 / 800,
+                  bottom: 80 / 800 * screenHeight),
+              height: screenHeight * 50 / 800,
+              width: screenWidth * 328 / 360,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF208B52),
+                ),
+                onPressed: selected != 0
+                    ? () => analiseAcerto(selected, topico)
+                    : null,
+                child: Text(
+                  'Confirmar',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
-            for (int i = 1; i <= 4; i++)
-              Container(
-                margin: EdgeInsets.only(top: screenHeight * 15 / 800),
-                width: screenWidth * 328 / 360,
-                height: screenHeight * 50 / 800,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    foregroundColor: Colors.black,
-                    backgroundColor:
-                        selected == i ? Color(0xFFBAE2CD) : Colors.white,
-                  ),
-                  onPressed: isAnswered ? null : () => select(i, topico),
-                  child: Row(
-                    children: [
-                      if (selected == i && isAnswered)
-                        isCorrect
-                            ? Icon(Icons.check_circle_outline_outlined)
-                            : Icon(Icons.close),
-                      if (selected != i) Icon(Icons.circle_outlined),
-                      SizedBox(width: screenWidth * 8 / 360),
-                      Text(topico.respostas[indice][i - 1]),
-                    ],
-                  ),
+          if (showContinueButton)
+            Container(
+              margin: EdgeInsets.only(
+                  top: screenHeight * 15 / 800,
+                  bottom: 20 / 800 * screenHeight),
+              child: Text(
+                isCorrect ? 'Resposta correta!' : 'Resposta incorreta!',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: isCorrect ? Colors.green : Colors.red),
+              ),
+            ),
+          if (showContinueButton)
+            Container(
+              margin: EdgeInsets.only(bottom: screenHeight * 80 / 800),
+              height: screenHeight * 50 / 800,
+              width: screenWidth * 328 / 360,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF208B52),
+                ),
+                onPressed: () {
+                  if (indice + 1 == topico.perguntas.length) {
+                    _acertos(context);
+                  } else {
+                    incrementaLista();
+                  }
+                },
+                child: Text(
+                  'Continuar',
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
-            if (!isAnswered)
-              Container(
-                margin: EdgeInsets.only(top: screenHeight * 15 / 800),
-                height: screenHeight * 50 / 800,
-                width: screenWidth * 328 / 360,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF208B52),
-                  ),
-                  onPressed: selected != 0
-                      ? () => analiseAcerto(selected, topico)
-                      : null,
-                  child: Text(
-                    'Confirmar',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            if (showContinueButton)
-              Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(top: screenHeight * 15 / 800),
-                    child: Text(
-                      isCorrect ? 'Resposta correta!' : 'Resposta incorreta!',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: isCorrect ? Colors.green : Colors.red),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: screenHeight * 15 / 800),
-                    height: screenHeight * 50 / 800,
-                    width: screenWidth * 328 / 360,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF208B52),
-                      ),
-                      onPressed: () {
-                        if (indice + 1 == topico.perguntas.length) {
-                          _acertos(context);
-                        } else {
-                          incrementaLista();
-                        }
-                      },
-                      child: Text(
-                        'Continuar',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }

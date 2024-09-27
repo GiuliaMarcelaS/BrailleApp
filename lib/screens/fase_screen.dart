@@ -17,11 +17,13 @@ class FaseScreen extends StatefulWidget {
 
 class _FaseScreenState extends State<FaseScreen> {
   void _topic1f(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
-    Navigator.of(context).pushReplacementNamed('/topic-1-screen', arguments: {'fase': fase, "topico": topico, "passer": passer});
+    Navigator.of(context).pushReplacementNamed('/topic-1-screen',
+        arguments: {'fase': fase, "topico": topico, "passer": passer});
   }
 
   @override
@@ -29,7 +31,8 @@ class _FaseScreenState extends State<FaseScreen> {
     super.didChangeDependencies();
     final fracao = Provider.of<Passer>(context, listen: false);
     final auth = Provider.of<Auth>(context, listen: false);
-    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase modulo = args['fase'];
     final Topico topico = args['topico'];
 
@@ -41,14 +44,16 @@ class _FaseScreenState extends State<FaseScreen> {
     return Scaffold(
       backgroundColor: Color(0xFFDDE9DD),
       appBar: AppBar(
-        title: Text('${ModalRoute.of(context)!.settings.arguments != null ? (ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>)['fase'].title : 'Fase'}'),
+        title: Text(
+            '${ModalRoute.of(context)!.settings.arguments != null ? (ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>)['fase'].title : 'Fase'}'),
         backgroundColor: Color(0xFFF1FEF1),
         centerTitle: true,
         actions: [
           Container(
             child: Image.asset('assets/images/muiraq_preto.png'),
             width: MediaQuery.of(context).size.width * 20 / 360,
-            margin: EdgeInsets.only(right: MediaQuery.of(context).size.width * 25 / 360),
+            margin: EdgeInsets.only(
+                right: MediaQuery.of(context).size.width * 25 / 360),
           )
         ],
       ),
@@ -56,7 +61,8 @@ class _FaseScreenState extends State<FaseScreen> {
         double screenHeight = MediaQuery.of(context).size.height;
         double screenWidth = MediaQuery.of(context).size.width;
         int telas = 15;
-        final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+        final args =
+            ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
         final Fase modulo = args['fase'];
         final Topico topico = args['topico'];
         final List<List<Topico>> topicos = topicos_data;
