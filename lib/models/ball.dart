@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Ball with ChangeNotifier{
+class Ball with ChangeNotifier {
   int id;
   bool pressedBall1;
   bool pressedBall2;
@@ -32,518 +32,822 @@ class Ball with ChangeNotifier{
     this.pressedBall66 = 0,
     this.translation = "",
   });
-   
-    void pressBall(){
-      if (id==1){
-        pressedBall1=!pressedBall1;
-      }
-      if (id==2){
-        pressedBall2=!pressedBall2;
-      }
-      if (id==3){
-        pressedBall3=!pressedBall3;
-      }
-      if (id==4){
-        pressedBall4=!pressedBall4;
-      }
-      if (id==5){
-        pressedBall5=!pressedBall5;
-      }
-      if (id==6){
-        pressedBall6=!pressedBall6;
-      }
-      
-   }
+
+  void pressBall() {
+    if (id == 1) {
+      pressedBall1 = !pressedBall1;
+    }
+    if (id == 2) {
+      pressedBall2 = !pressedBall2;
+    }
+    if (id == 3) {
+      pressedBall3 = !pressedBall3;
+    }
+    if (id == 4) {
+      pressedBall4 = !pressedBall4;
+    }
+    if (id == 5) {
+      pressedBall5 = !pressedBall5;
+    }
+    if (id == 6) {
+      pressedBall6 = !pressedBall6;
+    }
+  }
 
   //  phraseLenght(String letra){
   //    int length = letra.length;
   //    notifyListeners();
   //  }
 
-   List duasMatrizes = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'];
-   List balls2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-   List balls1 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-   List balls3 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-   List balls4 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-   List balls5 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-   List balls6 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  List duasMatrizes = [
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'I',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N',
+    'O',
+    'P',
+    'Q',
+    'R',
+    'S',
+    'T',
+    'U',
+    'V',
+    'W',
+    'X',
+    'Y',
+    'Z',
+    '0',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9'
+  ];
+  List balls2 = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ];
+  List balls1 = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ];
+  List balls3 = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ];
+  List balls4 = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ];
+  List balls5 = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ];
+  List balls6 = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ];
 
-   bool blank = false;
-    translatePhrase(String letra, int id){
-      for(int i = 0; i<letra.length;i++){
-        balls1[i] = 0;
-        balls2[i] = 0;
-        balls3[i] = 0;
-        balls4[i] = 0;
-        balls5[i] = 0;
-        balls6[i] = 0;
-        blank = false;
-      if (letra[i] =='a'){
-      balls1[i]=1;
+  bool blank = false;
+  translatePhrase(String letra, int id) {
+    for (int i = 0; i < letra.length; i++) {
+      balls1[i] = 0;
+      balls2[i] = 0;
+      balls3[i] = 0;
+      balls4[i] = 0;
+      balls5[i] = 0;
+      balls6[i] = 0;
+      blank = false;
+      if (letra[i] == 'a') {
+        balls1[i] = 1;
+      } else if (letra[i] == "b") {
+        balls1[i] = 1;
+        balls3[i] = 1;
+      } else if (letra[i] == "A") {
+        balls2[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == "c") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+      } else if (letra[i] == "d") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "e") {
+        balls1[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "f") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls3[i] = 1;
+      } else if (letra[i] == "g") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls3[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "h") {
+        balls1[i] = 1;
+        balls3[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "i") {
+        balls2[i] = 1;
+        balls3[i] = 1;
+      } else if (letra[i] == "j") {
+        balls2[i] = 1;
+        balls3[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "k") {
+        balls1[i] = 1;
+        balls5[i] = 1;
+      } else if (letra[i] == "l") {
+        balls1[i] = 1;
+        balls3[i] = 1;
+        balls5[i] = 1;
+      } else if (letra[i] == "m") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls5[i] = 1;
+      } else if (letra[i] == "n") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls4[i] = 1;
+        balls5[i] = 1;
+      } else if (letra[i] == "o") {
+        balls1[i] = 1;
+        balls4[i] = 1;
+        balls5[i] = 1;
+      } else if (letra[i] == "p") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls3[i] = 1;
+        balls5[i] = 1;
+      } else if (letra[i] == "q") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls3[i] = 1;
+        balls4[i] = 1;
+        balls5[i] = 1;
+      } else if (letra[i] == "r") {
+        balls1[i] = 1;
+        balls3[i] = 1;
+        balls4[i] = 1;
+        balls5[i] = 1;
+      } else if (letra[i] == "s") {
+        balls2[i] = 1;
+        balls3[i] = 1;
+        balls5[i] = 1;
+      } else if (letra[i] == "t") {
+        balls2[i] = 1;
+        balls3[i] = 1;
+        balls4[i] = 1;
+        balls5[i] = 1;
+      } else if (letra[i] == "u") {
+        balls1[i] = 1;
+        balls5[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == "v") {
+        balls1[i] = 1;
+        balls3[i] = 1;
+        balls5[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == "w") {
+        balls2[i] = 1;
+        balls3[i] = 1;
+        balls4[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == "x") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls5[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == "y") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls4[i] = 1;
+        balls5[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == "z") {
+        balls1[i] = 1;
+        balls4[i] = 1;
+        balls5[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == " ") {
+        balls1[i] = 2;
+        balls2[i] = 2;
+        balls3[i] = 2;
+        balls4[i] = 2;
+        balls5[i] = 2;
+        balls6[i] = 2;
+      } else if (letra[i] == '1') {
+        balls1[i] = 1;
+      } else if (letra[i] == "2") {
+        balls1[i] = 1;
+        balls3[i] = 1;
+      } else if (letra[i] == "A") {
+        balls2[i] = 1;
+        balls4[i] = 1;
+        balls5[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == "3") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+      } else if (letra[i] == "4") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "5") {
+        balls1[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "6") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls3[i] = 1;
+      } else if (letra[i] == "7") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls3[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "8") {
+        balls1[i] = 1;
+        balls3[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "9") {
+        balls2[i] = 1;
+        balls3[i] = 1;
+      } else if (letra[i] == "0") {
+        balls2[i] = 1;
+        balls3[i] = 1;
+        balls4[i] = 1;
       }
-    else if (letra[i]=="b"){
-      balls1[i]=1;
-      balls3[i]=1;
     }
-    else if (letra[i]=="A"){
-      balls2[i]=1;
-      balls6[i]=1;
-    }
-    else if (letra[i]=="c"){
-      balls1[i]=1;
-      balls2[i]=1;
-    }
-    else if (letra[i]=="d"){
-      balls1[i]=1;
-      balls2[i]=1;
-      balls4[i]=1;
-    }
-    else if (letra[i]=="e"){
-      balls1[i]=1;
-      balls4[i]=1;
-    }
-    else if (letra[i]=="f"){
-      balls1[i]=1;
-      balls2[i]=1;
-      balls3[i]=1;
-    }
-    else if (letra[i]=="g"){
-      balls1[i]=1;
-      balls2[i]=1;
-      balls3[i]=1;
-      balls4[i]=1;
-    }
-    else if (letra[i]=="h"){
-      balls1[i]=1;
-      balls3[i]=1;
-      balls4[i]=1;
-    }
-    else if (letra[i]=="i"){
-      balls2[i]=1;
-      balls3[i]=1;
-    }
-    else if (letra[i]=="j"){
-      balls2[i]=1;
-      balls3[i]=1;
-      balls4[i]=1;
-    }
-    else if (letra[i]=="k"){
-      balls1[i]=1;
-      balls5[i]=1;
-    }
-    else if (letra[i]=="l"){
-      balls1[i]=1;
-      balls3[i]=1;
-      balls5[i]=1;
-    }
-    else if (letra[i]=="m"){
-      balls1[i]=1;
-      balls2[i]=1;
-      balls5[i]=1;
-    }
-    else if (letra[i]=="n"){
-      balls1[i]=1;
-      balls2[i]=1;
-      balls4[i]=1;
-      balls5[i]=1;
-    }
-    else if (letra[i]=="o"){
-      balls1[i]=1;
-      balls4[i]=1;
-      balls5[i]=1;
-    }
-    else if (letra[i]=="p"){
-      balls1[i]=1;
-      balls2[i]=1;
-      balls3[i]=1;
-      balls5[i]=1;
-    }
-    else if (letra[i]=="q"){
-      balls1[i]=1;
-      balls2[i]=1;
-      balls3[i]=1;
-      balls4[i]=1;
-      balls5[i]=1;
-    }
-    else if (letra[i]=="r"){
-      balls1[i]=1;
-      balls3[i]=1;
-      balls4[i]=1;
-      balls5[i]=1;
-    }
-    else if (letra[i]=="s"){
-      balls2[i]=1;
-      balls3[i]=1;
-      balls5[i]=1;
-    }
-    else if (letra[i]=="t"){
-      balls2[i]=1;
-      balls3[i]=1;
-      balls4[i]=1;
-      balls5[i]=1;
-    }
-    else if (letra[i]=="u"){
-      balls1[i]=1;
-      balls5[i]=1;
-      balls6[i]=1;
-    }
-    else if (letra[i]=="v"){
-      balls1[i]=1;
-      balls3[i]=1;
-      balls5[i]=1;
-      balls6[i]=1;
-    }
-    else if (letra[i]=="w"){
-      balls2[i]=1;
-      balls3[i]=1;
-      balls4[i]=1;
-      balls6[i]=1;
-    }
-    else if (letra[i]=="x"){
-      balls1[i]=1;
-      balls2[i]=1;
-      balls5[i]=1;
-      balls6[i]=1;
-    }
-    else if (letra[i]=="y"){
-      balls1[i]=1;
-      balls2[i]=1;
-      balls4[i]=1;
-      balls5[i]=1;
-      balls6[i]=1;
-    }
-    else if (letra[i]=="z"){
-      balls1[i]=1;
-      balls4[i]=1;
-      balls5[i]=1;
-      balls6[i]=1;
-    }
-    else if (letra[i]==" "){
-      balls1[i]=2;
-      balls2[i]=2;
-      balls3[i]=2;
-      balls4[i]=2;
-      balls5[i]=2;
-      balls6[i]=2;
-    }
-      }
     notifyListeners();
-   }
-    translateNumber(String letra, int id){
-      for(int i = 0; i<letra.length;i++){
-        balls1[i] = 0;
-        balls2[i] = 0;
-        balls3[i] = 0;
-        balls4[i] = 0;
-        balls5[i] = 0;
-        balls6[i] = 0;
-      if (letra[i] =='1'){
-      balls1[i]=1;
-      }
-    else if (letra[i]=="2"){
-      balls1[i]=1;
-      balls3[i]=1;
-    }
-    else if (letra[i]=="A"){
-      balls2[i]=1;
-      balls4[i]=1;
-      balls5[i]=1;
-      balls6[i]=1;
-    }
-    else if (letra[i]=="3"){
-      balls1[i]=1;
-      balls2[i]=1;
-    }
-    else if (letra[i]=="4"){
-      balls1[i]=1;
-      balls2[i]=1;
-      balls4[i]=1;
-    }
-    else if (letra[i]=="5"){
-      balls1[i]=1;
-      balls4[i]=1;
-    }
-    else if (letra[i]=="6"){
-      balls1[i]=1;
-      balls2[i]=1;
-      balls3[i]=1;
-    }
-    else if (letra[i]=="7"){
-      balls1[i]=1;
-      balls2[i]=1;
-      balls3[i]=1;
-      balls4[i]=1;
-    }
-    else if (letra[i]=="8"){
-      balls1[i]=1;
-      balls3[i]=1;
-      balls4[i]=1;
-    }
-    else if (letra[i]=="9"){
-      balls2[i]=1;
-      balls3[i]=1;
-    }
-    else if (letra[i]=="0"){
-      balls2[i]=1;
-      balls3[i]=1;
-      balls4[i]=1;
-    }
-      }
-    notifyListeners();
-   }
-    translateExpressions(String letra, int id){
-      for(int i = 0; i<letra.length;i++){
-        balls1[i] = 0;
-        balls2[i] = 0;
-        balls3[i] = 0;
-        balls4[i] = 0;
-        balls5[i] = 0;
-        balls6[i] = 0;
-      if (letra[i] =='1'){
-      balls1[i]=1;
-      }
-    else if (letra[i]=="2"){
-      balls1[i]=1;
-      balls3[i]=1;
-    }
-    else if (letra[i]=="A"){
-      balls2[i]=1;
-      balls4[i]=1;
-      balls5[i]=1;
-      balls6[i]=1;
-    }
-    else if (letra[i]=="3"){
-      balls1[i]=1;
-      balls2[i]=1;
-    }
-    else if (letra[i]=="4"){
-      balls1[i]=1;
-      balls2[i]=1;
-      balls4[i]=1;
-    }
-    else if (letra[i]=="5"){
-      balls1[i]=1;
-      balls4[i]=1;
-    }
-    else if (letra[i]=="6"){
-      balls1[i]=1;
-      balls2[i]=1;
-      balls3[i]=1;
-    }
-    else if (letra[i]=="7"){
-      balls1[i]=1;
-      balls2[i]=1;
-      balls3[i]=1;
-      balls4[i]=1;
-    }
-    else if (letra[i]=="8"){
-      balls1[i]=1;
-      balls3[i]=1;
-      balls4[i]=1;
-    }
-    else if (letra[i]=="9"){
-      balls2[i]=1;
-      balls3[i]=1;
-    }
-    else if (letra[i]=="0"){
-      balls2[i]=1;
-      balls3[i]=1;
-      balls4[i]=1;
-    }
-    else if (letra[i]=="*"){
-      balls4[i]=1;
-      balls5[i]=1;
-    }
-    else if (letra[i]=="-"){
-      balls6[i]=1;
-      balls5[i]=1;
-    }
-    else if (letra[i]=="/"){
-      balls3[i]=1;
-      balls4[i]=1;
-      balls6[i]=1;
-    }
-    else if (letra[i]=="+"){
-      balls3[i]=1;
-      balls4[i]=1;
-      balls5[i]=1;
-    }
-    else if (letra[i]=="="){
-      balls3[i]=1;
-      balls4[i]=1;
-      balls5[i]=1;
-      balls6[i]=1;
-    }
-    else if (letra[i]=="("){
-      balls1[i]=1;
-      balls3[i]=1;
-      balls6[i]=1;
-    }
-    else if (letra[i]==")"){
-      balls2[i]=1;
-      balls4[i]=1;
-      balls5[i]=1;
-    }
-    else if (letra[i]==" "){
-      balls1[i]=2;
-      balls2[i]=2;
-      balls3[i]=2;
-      balls4[i]=2;
-      balls5[i]=2;
-      balls6[i]=2;
-    }
-      }
-    notifyListeners();
-   }
+  }
 
-   reset(String letra){
+  translateNumber(String letra, int id) {
+    for (int i = 0; i < letra.length; i++) {
+      balls1[i] = 0;
+      balls2[i] = 0;
+      balls3[i] = 0;
+      balls4[i] = 0;
+      balls5[i] = 0;
+      balls6[i] = 0;
+      if (letra[i] == '1') {
+        balls1[i] = 1;
+      } else if (letra[i] == "2") {
+        balls1[i] = 1;
+        balls3[i] = 1;
+      } else if (letra[i] == "A") {
+        balls2[i] = 1;
+        balls4[i] = 1;
+        balls5[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == "3") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+      } else if (letra[i] == "4") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "5") {
+        balls1[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "6") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls3[i] = 1;
+      } else if (letra[i] == "7") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls3[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "8") {
+        balls1[i] = 1;
+        balls3[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "9") {
+        balls2[i] = 1;
+        balls3[i] = 1;
+      } else if (letra[i] == "0") {
+        balls2[i] = 1;
+        balls3[i] = 1;
+        balls4[i] = 1;
+      }
+    }
+    notifyListeners();
+  }
+
+  translateExpressions(String letra, int id) {
+    for (int i = 0; i < letra.length; i++) {
+      balls1[i] = 0;
+      balls2[i] = 0;
+      balls3[i] = 0;
+      balls4[i] = 0;
+      balls5[i] = 0;
+      balls6[i] = 0;
+      if (letra[i] == '1') {
+        balls1[i] = 1;
+      } else if (letra[i] == "2") {
+        balls1[i] = 1;
+        balls3[i] = 1;
+      } else if (letra[i] == "A") {
+        balls2[i] = 1;
+        balls4[i] = 1;
+        balls5[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == "3") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+      } else if (letra[i] == "4") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "5") {
+        balls1[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "6") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls3[i] = 1;
+      } else if (letra[i] == "7") {
+        balls1[i] = 1;
+        balls2[i] = 1;
+        balls3[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "8") {
+        balls1[i] = 1;
+        balls3[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "9") {
+        balls2[i] = 1;
+        balls3[i] = 1;
+      } else if (letra[i] == "0") {
+        balls2[i] = 1;
+        balls3[i] = 1;
+        balls4[i] = 1;
+      } else if (letra[i] == "*") {
+        balls4[i] = 1;
+        balls5[i] = 1;
+      } else if (letra[i] == "-") {
+        balls6[i] = 1;
+        balls5[i] = 1;
+      } else if (letra[i] == "/") {
+        balls3[i] = 1;
+        balls4[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == "+") {
+        balls3[i] = 1;
+        balls4[i] = 1;
+        balls5[i] = 1;
+      } else if (letra[i] == "=") {
+        balls3[i] = 1;
+        balls4[i] = 1;
+        balls5[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == "(") {
+        balls1[i] = 1;
+        balls3[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == ")") {
+        balls2[i] = 1;
+        balls4[i] = 1;
+        balls5[i] = 1;
+      } else if (letra[i] == " ") {
+        balls1[i] = 2;
+        balls2[i] = 2;
+        balls3[i] = 2;
+        balls4[i] = 2;
+        balls5[i] = 2;
+        balls6[i] = 2;
+      }
+    }
+    notifyListeners();
+  }
+
+  reset(String letra) {
     pressedBall1 = false;
     pressedBall2 = false;
     pressedBall3 = false;
     pressedBall4 = false;
     pressedBall5 = false;
     pressedBall6 = false;
-   }
+  }
 
-   void alphabet (String letra){
-    if (letra =='a'){
-      pressedBall1=!pressedBall1;
-      }
-    else if (letra=="b"){
-      pressedBall1=!pressedBall1;
-      pressedBall3=!pressedBall3;
-    }
-    else if (letra=="c"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-    }
-    else if (letra=="d"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall4=!pressedBall4;
-    }
-    else if (letra=="e"){
-      pressedBall1=!pressedBall1;
-      pressedBall4=!pressedBall4;
-    }
-    else if (letra=="f"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
-    }
-    else if (letra=="g"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
-      pressedBall4=!pressedBall4;
-    }
-    else if (letra=="h"){
-      pressedBall1=!pressedBall1;
-      pressedBall3=!pressedBall3;
-      pressedBall4=!pressedBall4;
-    }
-    else if (letra=="i"){
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
-    }
-    else if (letra=="j"){
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
-      pressedBall4=!pressedBall4;
-    }
-    else if (letra=="k"){
-      pressedBall1=!pressedBall1;
-      pressedBall5=!pressedBall5;
-    }
-    else if (letra=="l"){
-      pressedBall1=!pressedBall1;
-      pressedBall3=!pressedBall3;
-      pressedBall5=!pressedBall5;
-    }
-    else if (letra=="m"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall5=!pressedBall5;
-    }
-    else if (letra=="n"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall4=!pressedBall4;
-      pressedBall5=!pressedBall5;
-    }
-    else if (letra=="o"){
-      pressedBall1=!pressedBall1;
-      pressedBall4=!pressedBall4;
-      pressedBall5=!pressedBall5;
-    }
-    else if (letra=="p"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
-      pressedBall5=!pressedBall5;
-    }
-    else if (letra=="q"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
-      pressedBall4=!pressedBall4;
-      pressedBall5=!pressedBall5;
-    }
-    else if (letra=="r"){
-      pressedBall1=!pressedBall1;
-      pressedBall3=!pressedBall3;
-      pressedBall4=!pressedBall4;
-      pressedBall5=!pressedBall5;
-    }
-    else if (letra=="s"){
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
-      pressedBall5=!pressedBall5;
-    }
-    else if (letra=="t"){
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
-      pressedBall4=!pressedBall4;
-      pressedBall5=!pressedBall5;
-    }
-    else if (letra=="u"){
-      pressedBall1=!pressedBall1;
-      pressedBall5=!pressedBall5;
-      pressedBall6=!pressedBall6;
-    }
-    else if (letra=="v"){
-      pressedBall1=!pressedBall1;
-      pressedBall3=!pressedBall3;
-      pressedBall5=!pressedBall5;
-      pressedBall6=!pressedBall6;
-    }
-    else if (letra=="w"){
-      pressedBall2=!pressedBall2;
-      pressedBall3=!pressedBall3;
-      pressedBall4=!pressedBall4;
-      pressedBall6=!pressedBall6;
-    }
-    else if (letra=="x"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall5=!pressedBall5;
-      pressedBall6=!pressedBall6;
-    }
-    else if (letra=="y"){
-      pressedBall1=!pressedBall1;
-      pressedBall2=!pressedBall2;
-      pressedBall4=!pressedBall4;
-      pressedBall5=!pressedBall5;
-      pressedBall6=!pressedBall6;
-    }
-    else if (letra=="z"){
-      pressedBall1=!pressedBall1;
-      pressedBall4=!pressedBall4;
-      pressedBall5=!pressedBall5;
-      pressedBall6=!pressedBall6;
+  void alphabet(String letra) {
+    if (letra == 'a') {
+      pressedBall1 = !pressedBall1;
+    } else if (letra == "b") {
+      pressedBall1 = !pressedBall1;
+      pressedBall3 = !pressedBall3;
+    } else if (letra == "c") {
+      pressedBall1 = !pressedBall1;
+      pressedBall2 = !pressedBall2;
+    } else if (letra == "d") {
+      pressedBall1 = !pressedBall1;
+      pressedBall2 = !pressedBall2;
+      pressedBall4 = !pressedBall4;
+    } else if (letra == "e") {
+      pressedBall1 = !pressedBall1;
+      pressedBall4 = !pressedBall4;
+    } else if (letra == "f") {
+      pressedBall1 = !pressedBall1;
+      pressedBall2 = !pressedBall2;
+      pressedBall3 = !pressedBall3;
+    } else if (letra == "g") {
+      pressedBall1 = !pressedBall1;
+      pressedBall2 = !pressedBall2;
+      pressedBall3 = !pressedBall3;
+      pressedBall4 = !pressedBall4;
+    } else if (letra == "h") {
+      pressedBall1 = !pressedBall1;
+      pressedBall3 = !pressedBall3;
+      pressedBall4 = !pressedBall4;
+    } else if (letra == "i") {
+      pressedBall2 = !pressedBall2;
+      pressedBall3 = !pressedBall3;
+    } else if (letra == "j") {
+      pressedBall2 = !pressedBall2;
+      pressedBall3 = !pressedBall3;
+      pressedBall4 = !pressedBall4;
+    } else if (letra == "k") {
+      pressedBall1 = !pressedBall1;
+      pressedBall5 = !pressedBall5;
+    } else if (letra == "l") {
+      pressedBall1 = !pressedBall1;
+      pressedBall3 = !pressedBall3;
+      pressedBall5 = !pressedBall5;
+    } else if (letra == "m") {
+      pressedBall1 = !pressedBall1;
+      pressedBall2 = !pressedBall2;
+      pressedBall5 = !pressedBall5;
+    } else if (letra == "n") {
+      pressedBall1 = !pressedBall1;
+      pressedBall2 = !pressedBall2;
+      pressedBall4 = !pressedBall4;
+      pressedBall5 = !pressedBall5;
+    } else if (letra == "o") {
+      pressedBall1 = !pressedBall1;
+      pressedBall4 = !pressedBall4;
+      pressedBall5 = !pressedBall5;
+    } else if (letra == "p") {
+      pressedBall1 = !pressedBall1;
+      pressedBall2 = !pressedBall2;
+      pressedBall3 = !pressedBall3;
+      pressedBall5 = !pressedBall5;
+    } else if (letra == "q") {
+      pressedBall1 = !pressedBall1;
+      pressedBall2 = !pressedBall2;
+      pressedBall3 = !pressedBall3;
+      pressedBall4 = !pressedBall4;
+      pressedBall5 = !pressedBall5;
+    } else if (letra == "r") {
+      pressedBall1 = !pressedBall1;
+      pressedBall3 = !pressedBall3;
+      pressedBall4 = !pressedBall4;
+      pressedBall5 = !pressedBall5;
+    } else if (letra == "s") {
+      pressedBall2 = !pressedBall2;
+      pressedBall3 = !pressedBall3;
+      pressedBall5 = !pressedBall5;
+    } else if (letra == "t") {
+      pressedBall2 = !pressedBall2;
+      pressedBall3 = !pressedBall3;
+      pressedBall4 = !pressedBall4;
+      pressedBall5 = !pressedBall5;
+    } else if (letra == "u") {
+      pressedBall1 = !pressedBall1;
+      pressedBall5 = !pressedBall5;
+      pressedBall6 = !pressedBall6;
+    } else if (letra == "v") {
+      pressedBall1 = !pressedBall1;
+      pressedBall3 = !pressedBall3;
+      pressedBall5 = !pressedBall5;
+      pressedBall6 = !pressedBall6;
+    } else if (letra == "w") {
+      pressedBall2 = !pressedBall2;
+      pressedBall3 = !pressedBall3;
+      pressedBall4 = !pressedBall4;
+      pressedBall6 = !pressedBall6;
+    } else if (letra == "x") {
+      pressedBall1 = !pressedBall1;
+      pressedBall2 = !pressedBall2;
+      pressedBall5 = !pressedBall5;
+      pressedBall6 = !pressedBall6;
+    } else if (letra == "y") {
+      pressedBall1 = !pressedBall1;
+      pressedBall2 = !pressedBall2;
+      pressedBall4 = !pressedBall4;
+      pressedBall5 = !pressedBall5;
+      pressedBall6 = !pressedBall6;
+    } else if (letra == "z") {
+      pressedBall1 = !pressedBall1;
+      pressedBall4 = !pressedBall4;
+      pressedBall5 = !pressedBall5;
+      pressedBall6 = !pressedBall6;
     }
     notifyListeners();
-   }
+  }
   //  void numbers (String numero){
   //   pressedBall11 = false;
   //   pressedBall22 = true;
@@ -593,7 +897,4 @@ class Ball with ChangeNotifier{
   //   }
   //   notifyListeners();
   //  }
-
-
-
 }

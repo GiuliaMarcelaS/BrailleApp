@@ -38,14 +38,14 @@ class _MatrizShowedState extends State<MatrizShowed> {
                 Row(
                   children: [
                     Icon(
-                      color: Colors.grey,
+                      color: Colors.black,
                       size: 6,
                       ballt.balls1[i] == 1
                           ? Icons.circle
                           : (ballt.balls1[i] == 2 ? null : null),
                     ),
                     Icon(
-                      color: Colors.grey,
+                      color: Colors.black,
                       size: 6,
                       ballt.balls2[i] == 1
                           ? Icons.circle
@@ -56,14 +56,14 @@ class _MatrizShowedState extends State<MatrizShowed> {
                 Row(
                   children: [
                     Icon(
-                      color: Colors.grey,
+                      color: Colors.black,
                       size: 6,
                       ballt.balls3[i] == 1
                           ? Icons.circle
                           : (ballt.balls3[i] == 2 ? null : null),
                     ),
                     Icon(
-                      color: Colors.grey,
+                      color: Colors.black,
                       size: 6,
                       ballt.balls4[i] == 1
                           ? Icons.circle
@@ -74,14 +74,14 @@ class _MatrizShowedState extends State<MatrizShowed> {
                 Row(
                   children: [
                     Icon(
-                      color: Colors.grey,
+                      color: Colors.black,
                       size: 6,
                       ballt.balls5[i] == 1
                           ? Icons.circle
                           : (ballt.balls5[i] == 2 ? null : null),
                     ),
                     Icon(
-                      color: Colors.grey,
+                      color: Colors.black,
                       size: 6,
                       ballt.balls6[i] == 1
                           ? Icons.circle
