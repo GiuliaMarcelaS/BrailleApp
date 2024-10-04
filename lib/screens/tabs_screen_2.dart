@@ -33,7 +33,7 @@ class TabsScreen2 extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  TabsScreen(),
+                  PhraseTranslatorScreen(),
                   ModulosScreen(),
                   LearnScreen(),
                   Container(),

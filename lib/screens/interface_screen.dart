@@ -34,21 +34,21 @@ class _InterfaceState extends State<Interface> {
       '/tabs-screen-2',
       arguments: {
         'initialIndex': 1
-      }, // Passa o índice da aba desejada e outros argumentos, se necessário
+      }, 
     );
   }
 
   void _learn(BuildContext context) {
     Navigator.of(context).pushNamed(
       '/tabs-screen-2',
-      arguments: {'initialIndex': 2}, // Passa o índice da aba desejada
+      arguments: {'initialIndex': 2}, 
     );
   }
 
   void _traduzir(BuildContext context) {
     Navigator.of(context).pushNamed(
       '/tabs-screen-2',
-      arguments: {'initialIndex': 0}, // Passa o índice da aba desejada
+      arguments: {'initialIndex': 0}, 
     );
   }
 

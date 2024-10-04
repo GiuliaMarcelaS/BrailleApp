@@ -33,48 +33,17 @@ class _TranslationState extends State<Translation> {
 
     identifyUpperCase(String frase) {
       String fraseAlterada = '';
-      List duasMatrizes = [
-        'A',
-        'B',
-        'C',
-        'D',
-        'E',
-        'F',
-        'G',
-        'H',
-        'I',
-        'J',
-        'K',
-        'L',
-        'M',
-        'N',
-        'O',
-        'P',
-        'Q',
-        'R',
-        'S',
-        'T',
-        'U',
-        'V',
-        'W',
-        'X',
-        'Y',
-        'Z',
-        '0',
-        '1',
-        '2',
-        '3',
-        '4',
-        '5',
-        '6',
-        '7',
-        '8',
-        '9'
+      List duasMatrizes = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
+      ];
+      List numerosMatrizes = ['0','1','2','3','4','5','6','7','8','9'
       ];
       for (int i = 0; i < frase.length; i++) {
         if (duasMatrizes.contains(frase[i])) {
           fraseAlterada = fraseAlterada + 'A${frase[i].toLowerCase()}';
-        } else {
+        } else if (numerosMatrizes.contains(frase[i])&&(i == 0||numerosMatrizes.contains(frase[i-1])==false)){
+          fraseAlterada = fraseAlterada + 'B${frase[i]}';
+        }
+        else {
           fraseAlterada = fraseAlterada + frase[i];
         }
       }
@@ -103,7 +72,9 @@ class _TranslationState extends State<Translation> {
               cells.wordsClicker(auth.token ?? '', auth.userId ?? '');
               ball.reset(letra);
               letra = identifyUpperCase(valor);
+              print(letra);
               ball.translatePhrase(letra, cells.id);
+              print(letra.length);
               cells.addCells(letra);
               cells.id = 0;
               letra = "";

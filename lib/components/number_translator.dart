@@ -38,10 +38,11 @@ class _NumberTrabslatorState extends State<NumberTranslator> {
       String fraseAlterada ='A';
        List duasMatrizes = ['0','1','2','3','4','5','6','7','8','9'];
       for(int i =0; i<frase.length; i++){
-        if(frase[i] == " "){
-          fraseAlterada=fraseAlterada+frase[i]+"A";
-        }
-        else{
+        // if(frase[i] == " "){
+        //   fraseAlterada=fraseAlterada+frase[i]+"A";
+        // }
+        // else
+        {
           fraseAlterada=fraseAlterada+frase[i];
         }
       } return fraseAlterada;
