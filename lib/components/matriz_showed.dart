@@ -47,9 +47,9 @@ class _MatrizShowedState extends State<MatrizShowed> {
                     Icon(
                       color: Colors.black,
                       size: 6,
-                      ballt.balls2[i] == 1
+                      ballt.balls4[i] == 1
                           ? Icons.circle
-                          : (ballt.balls2[i] == 2 ? null : null),
+                          : (ballt.balls4[i] == 2 ? null : null),
                     ),
                   ],
                 ),
@@ -58,16 +58,16 @@ class _MatrizShowedState extends State<MatrizShowed> {
                     Icon(
                       color: Colors.black,
                       size: 6,
-                      ballt.balls3[i] == 1
+                      ballt.balls2[i] == 1
                           ? Icons.circle
-                          : (ballt.balls3[i] == 2 ? null : null),
+                          : (ballt.balls2[i] == 2 ? null : null),
                     ),
                     Icon(
                       color: Colors.black,
                       size: 6,
-                      ballt.balls4[i] == 1
+                      ballt.balls5[i] == 1
                           ? Icons.circle
-                          : (ballt.balls4[i] == 2 ? null : null),
+                          : (ballt.balls5[i] == 2 ? null : null),
                     ),
                   ],
                 ),
@@ -95,8 +95,8 @@ class _MatrizShowedState extends State<MatrizShowed> {
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 12.0,
               childAspectRatio: 0.6,
-              crossAxisSpacing: 5.0,
-              mainAxisSpacing: 4.0),
+              crossAxisSpacing: 10.0,
+              mainAxisSpacing: 7.0),
         ),
       ),
     );

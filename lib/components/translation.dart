@@ -2,7 +2,6 @@ import 'package:braille_app/models/ball.dart';
 import 'package:braille_app/models/cells_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../models/auth.dart';
 
 class Translation extends StatefulWidget {
@@ -14,6 +13,8 @@ class Translation extends StatefulWidget {
 
 class _TranslationState extends State<Translation> {
   String letra = '';
+  final TextEditingController _controller = TextEditingController();
+  final int maxCharacters = 500;
 
   @override
   void initState() {
@@ -93,35 +94,41 @@ class _TranslationState extends State<Translation> {
     return Column(
       children: [
         Form(
-          child: TextField(
-            decoration: InputDecoration(
-              labelText: 'Escreva seu texto',
-              hintText: 'Escreva seu texto',
-              filled: true,
-              fillColor: Colors.white,
-              contentPadding: EdgeInsets.all(10),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(
-                  color: Colors.grey,
-                  width: 1,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                controller: _controller,
+                maxLength: maxCharacters,
+                decoration: InputDecoration(
+                  labelText: 'Escreva seu texto',
+                  hintText: 'Escreva seu texto',
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: EdgeInsets.all(10),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: Colors.grey,
+                      width: 1,
+                    ),
+                  ),
                 ),
+                onSubmitted: (valor) {
+                  cells.wordsClicker(auth.token ?? '', auth.userId ?? '');
+                  ball.reset(letra);
+                  letra = identifyUpperCase(valor);
+                  print(letra);
+                  ball.translatePhrase(letra, cells.id);
+                  print(letra.length);
+                  cells.addCells(letra);
+                  cells.id = 0;
+                  letra = "";
+                },
               ),
-            ),
-            onSubmitted: (valor) {
-              cells.wordsClicker(auth.token ?? '', auth.userId ?? '');
-              ball.reset(letra);
-              letra = identifyUpperCase(valor);
-              print(letra);
-              ball.translatePhrase(letra, cells.id);
-              print(letra.length);
-              cells.addCells(letra);
-              cells.id = 0;
-              letra = "";
-            },
-            controller: TextEditingController(),
+            ],
           ),
-        )
+        ),
       ],
     );
   }

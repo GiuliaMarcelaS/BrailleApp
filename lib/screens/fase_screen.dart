@@ -39,8 +39,33 @@ class _FaseScreenState extends State<FaseScreen> {
     fracao.getTelaT(modulo, auth.token ?? '', auth.userId ?? '');
   }
 
+  int calcularTotalTelasPorModulo(List<Topico> modulo) {
+    int totalVideos = 0;
+    int totalPerguntas = 0;
+
+    for (var topico in modulo) {
+      totalVideos += topico.videos.length;
+      totalPerguntas += topico.perguntas?.length ?? 0; // Se perguntas for null, usa 0
+    }
+
+    // Retorna a soma dos vídeos e perguntas como o total de telas
+    return totalVideos + totalPerguntas;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final Fase modulo = args['fase'];
+    final Topico topico = args['topico'];
+    final List<List<Topico>> topicos = topicos_data;
+     // Calcular o total de telas do módulo específico
+    int telas = calcularTotalTelasPorModulo(topicos[modulo.id - 1]);
+
+    // Garantindo que telas não seja zero
+    if (telas == 0) {
+      telas = 1; // Defina um valor padrão para evitar divisão por zero
+    }
     return Scaffold(
       backgroundColor: Color(0xFFDDE9DD),
       appBar: AppBar(
@@ -60,7 +85,6 @@ class _FaseScreenState extends State<FaseScreen> {
       body: Consumer<Passer>(builder: (ctx, fracao, child) {
         double screenHeight = MediaQuery.of(context).size.height;
         double screenWidth = MediaQuery.of(context).size.width;
-        int telas = 15;
         final args =
             ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
         final Fase modulo = args['fase'];
