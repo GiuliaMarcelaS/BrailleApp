@@ -3,33 +3,28 @@ import 'package:braille_app/models/graphic.dart';
 import 'package:braille_app/models/information_1.dart';
 import 'package:braille_app/models/passer.dart';
 import 'package:braille_app/models/teste.dart';
-import 'package:braille_app/models/topico.dart'; // Certifique-se de que está importando Topico
+import 'package:braille_app/models/topico.dart';
 import 'package:braille_app/models/user_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:braille_app/data/topicos_data.dart';
-// Função para calcular a soma dos vídeos e perguntas de cada tópico
+
 Map<String, int> calcularTotalVideosEPerguntas(List<List<Topico>> topicosData) {
   int totalVideos = 0;
   int totalPerguntas = 0;
 
-  // Itera sobre a lista de listas de tópicos
   for (var listaTopicos in topicosData) {
-    // Itera sobre cada tópico individualmente
     for (var topico in listaTopicos) {
-      // Adiciona a quantidade de vídeos e perguntas ao total
       totalVideos += topico.videos.length;
-      totalPerguntas += topico.perguntas.length; // Se perguntas for null, usa 0
+      totalPerguntas += topico.perguntas.length;
     }
   }
 
-  // Retorna um mapa com os resultados
   return {
     'totalVideos': totalVideos,
     'totalPerguntas': totalPerguntas,
   };
 }
-
 
 class Interface extends StatefulWidget {
   const Interface({super.key});
@@ -56,28 +51,28 @@ class _InterfaceState extends State<Interface> {
     var resultado = calcularTotalVideosEPerguntas(topicos_data);
     int totalVideos = resultado['totalVideos'] ?? 0;
     int totalPerguntas = resultado['totalPerguntas'] ?? 0;
-    print(totalPerguntas+totalVideos);
+    print(totalPerguntas + totalVideos);
     Navigator.of(context).pushNamed(
       '/tabs-screen-2',
       arguments: {
         'initialIndex': 1,
         'totalVideos': totalVideos,
         'totalPerguntas': totalPerguntas,
-      }, 
+      },
     );
   }
 
   void _learn(BuildContext context) {
     Navigator.of(context).pushNamed(
       '/tabs-screen-2',
-      arguments: {'initialIndex': 2}, 
+      arguments: {'initialIndex': 2},
     );
   }
 
   void _traduzir(BuildContext context) {
     Navigator.of(context).pushNamed(
       '/tabs-screen-2',
-      arguments: {'initialIndex': 0}, 
+      arguments: {'initialIndex': 0},
     );
   }
 
@@ -119,15 +114,6 @@ class _InterfaceState extends State<Interface> {
                     color: Colors.black,
                     fontWeight: FontWeight.w700,
                     fontSize: 26)),
-          ),
-          // Mostra o total de vídeos e perguntas
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 10),
-            child: Text('Total de vídeos: $totalVideos'),
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 10),
-            child: Text('Total de perguntas: $totalPerguntas'),
           ),
           Container(
             width: screenWidth * 0.80,

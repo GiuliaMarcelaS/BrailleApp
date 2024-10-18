@@ -47,11 +47,11 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
-    if (passer.topicoCompleto <= topico.id) {
-      for(int i = 0; i<=indice; i++)
-      {passer.incrementaFracao(
-          passer, topico, fase, auth.token ?? '', auth.userId ?? "");}
-    }
+    // if (passer.topicoCompleto <= topico.id) {
+    //   for(int i = 0; i<=indice; i++)
+    //   {passer.incrementaFracao(
+    //       passer, topico, fase, auth.token ?? '', auth.userId ?? "");}
+    // }
     Navigator.of(context).pushNamed('/testar-screen',
         arguments: {'fase': fase, "topico": topico, "passer": passer});
   }
@@ -67,11 +67,14 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
+    final auth = Provider.of<Auth>(context, listen: false);
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     int incrementaLista() {
       setState(() {
         indice++;
+        // passer.incrementaFracao(
+        //     passer, topico, fase, auth.token ?? '', auth.userId ?? "");
         // _controller.load(topico.videos[indice]);
       });
       return indice;
@@ -162,6 +165,8 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
                     backgroundColor: const Color(0xFF208B52),
                   ),
                   onPressed: () {
+                    passer.incrementaFracao(passer, topico, fase,
+                        auth.token ?? '', auth.userId ?? "");
                     if (indice + 1 == topico.titulos.length) {
                       _testar(context);
                     } else {

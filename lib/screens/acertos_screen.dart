@@ -10,30 +10,35 @@ import 'package:provider/provider.dart';
 
 class AcertosScreen extends StatelessWidget {
   const AcertosScreen({super.key});
-  void _fase(BuildContext context){
-     final auth = Provider.of<Auth>(context, listen: false);
+  void _fase(BuildContext context) {
+    final auth = Provider.of<Auth>(context, listen: false);
     final fase = Provider.of<Passer>(context, listen: false);
-    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase faset = args['fase'];
     final Topico topico = args['topico'];
-    fase.incrementaFaset(faset, topico, auth.token??"",auth.userId??'');
-    Navigator.of(context).popUntil(ModalRoute.withName('/modulos-screen',));
-}
-void _topicos(BuildContext context) {
+    fase.incrementaFaset(faset, topico, auth.token ?? "", auth.userId ?? '');
+    Navigator.of(context).popUntil(ModalRoute.withName(
+      '/modulos-screen',
+    ));
+  }
+
+  void _topicos(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
-    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final passer = Provider.of<Passer>(context, listen: false);
-    print("ai"+passer.topicoCompleto.toString());
-    if(passer.topicoCompleto==topico.id){
-    passer.incrementaTopico(topico);
+    print("ai" + passer.topicoCompleto.toString());
+    if (passer.topicoCompleto == topico.id) {
+      passer.incrementaTopico(topico);
     }
-    passer.salvaTopico(topico, auth.token??'', auth.userId??'');
+    passer.salvaTopico(topico, auth.token ?? '', auth.userId ?? '');
 
-    if(topicos_data[passer.faseCompleta-1].length+1==passer.topicoCompleto+1){
-      passer.incrementaFaset(fase, topico, auth.token??"",auth.userId??'');
-      passer.salvaModulo(fase, auth.token??"", auth.userId??"");
+    if (topicos_data[passer.faseCompleta - 1].length == passer.topicoCompleto) {
+      passer.incrementaFaset(fase, topico, auth.token ?? "", auth.userId ?? '');
+      passer.salvaModulo(fase, auth.token ?? "", auth.userId ?? "");
     }
     final Passer passer2 = args['passer'];
     Navigator.of(context).popUntil(ModalRoute.withName('/fases-screen'));
@@ -44,15 +49,17 @@ void _topicos(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     final auth = Provider.of<Auth>(context, listen: false);
-    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     return Finished(
       image: 'assets/images/Group48.png',
-      negrito: 'Você acertou ${topico.acertou} de ${topico.perguntas.length} perguntas!',
+      negrito:
+          'Você acertou ${topico.acertou} de ${topico.perguntas.length} perguntas!',
       texto: 'Parabéns!',
       botao: 'Concluir',
-      rota: ()=> _topicos(context),
+      rota: () => _topicos(context),
     );
   }
 }

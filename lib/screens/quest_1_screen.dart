@@ -26,13 +26,6 @@ class _Quest1ScreenState extends State<Quest1Screen> {
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
-    print(passer.topicoCompleto);
-    print(topico.id);
-    if (passer.topicoCompleto <= topico.id) {
-      for (int i =0; i<=indice; i++)
-      {passer.incrementaFracao(
-          passer, topico, fase, auth.token ?? '', auth.userId ?? "");}
-    }
     passer.salvaAcerto(
         fase, topico, auth.token ?? '', auth.userId ?? "", topico.acertou);
     Navigator.of(context).pushNamed('/acertos-screen',
@@ -75,6 +68,25 @@ class _Quest1ScreenState extends State<Quest1Screen> {
     final Passer passer = args['passer'];
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    final auth = Provider.of<Auth>(context, listen: false);
+
+    print("topico id" + topico.id.toString());
+    if (topico.perguntas.isEmpty || topico.respostas.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color(0xFFDDE9DD),
+          title: Text("Questionário"),
+          centerTitle: true,
+          shape: Border(bottom: BorderSide(color: Colors.black)),
+        ),
+        body: Center(
+          child: Text(
+            'Nenhuma pergunta disponível.',
+            style: TextStyle(fontSize: 18),
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
       backgroundColor: Color(0xFFDDE9DD),
@@ -93,7 +105,6 @@ class _Quest1ScreenState extends State<Quest1Screen> {
       ),
       body: Column(
         children: [
-          // Texto da pergunta
           Container(
             width: screenWidth * 310 / 360,
             margin: EdgeInsets.only(top: screenHeight * 30 / 800),
@@ -102,8 +113,6 @@ class _Quest1ScreenState extends State<Quest1Screen> {
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
             ),
           ),
-
-          // Lista de opções
           Expanded(
             child: ListView.builder(
               padding: EdgeInsets.only(top: screenHeight * 15 / 800),
@@ -156,7 +165,6 @@ class _Quest1ScreenState extends State<Quest1Screen> {
               },
             ),
           ),
-
           if (!isAnswered)
             Container(
               margin: EdgeInsets.only(
@@ -200,6 +208,8 @@ class _Quest1ScreenState extends State<Quest1Screen> {
                   backgroundColor: Color(0xFF208B52),
                 ),
                 onPressed: () {
+                  passer.incrementaFracao(passer, topico, fase,
+                      auth.token ?? '', auth.userId ?? "");
                   if (indice + 1 == topico.perguntas.length) {
                     _acertos(context);
                   } else {

@@ -51,6 +51,8 @@ class Topico extends StatelessWidget with ChangeNotifier {
       final Passer passer = args['passer'];
       Navigator.of(context).pushNamed('/topic-1-screen',
           arguments: {'fase': fase, 'topico': topico, "passer": passer});
+      print("teste1" + passer.topicoCompleto.toString());
+      print("teste2" + id.toString());
     }
 
     return Container(

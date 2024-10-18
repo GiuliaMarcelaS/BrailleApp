@@ -117,306 +117,306 @@ class Ball with ChangeNotifier {
         balls1[i] = 1;
       } else if (letra[i] == "b") {
         balls1[i] = 1;
-        balls3[i] = 1;
-      } else if (letra[i] == "A") {
         balls2[i] = 1;
+      } else if (letra[i] == "A") {
+        balls4[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "c") {
         balls1[i] = 1;
-        balls2[i] = 1;
+        balls4[i] = 1;
       } else if (letra[i] == "d") {
         balls1[i] = 1;
-        balls2[i] = 1;
         balls4[i] = 1;
+        balls5[i] = 1;
       } else if (letra[i] == "e") {
         balls1[i] = 1;
-        balls4[i] = 1;
+        balls5[i] = 1;
       } else if (letra[i] == "f") {
         balls1[i] = 1;
+        balls4[i] = 1;
         balls2[i] = 1;
-        balls3[i] = 1;
       } else if (letra[i] == "g") {
         balls1[i] = 1;
-        balls2[i] = 1;
-        balls3[i] = 1;
         balls4[i] = 1;
+        balls2[i] = 1;
+        balls5[i] = 1;
       } else if (letra[i] == "h") {
         balls1[i] = 1;
-        balls3[i] = 1;
-        balls4[i] = 1;
+        balls2[i] = 1;
+        balls5[i] = 1;
       } else if (letra[i] == "i") {
-        balls2[i] = 1;
-        balls3[i] = 1;
-      } else if (letra[i] == "j") {
-        balls2[i] = 1;
-        balls3[i] = 1;
         balls4[i] = 1;
+        balls2[i] = 1;
+      } else if (letra[i] == "j") {
+        balls4[i] = 1;
+        balls2[i] = 1;
+        balls5[i] = 1;
       } else if (letra[i] == "k") {
         balls1[i] = 1;
-        balls5[i] = 1;
+        balls3[i] = 1;
       } else if (letra[i] == "l") {
         balls1[i] = 1;
+        balls2[i] = 1;
         balls3[i] = 1;
-        balls5[i] = 1;
       } else if (letra[i] == "m") {
         balls1[i] = 1;
-        balls2[i] = 1;
-        balls5[i] = 1;
+        balls4[i] = 1;
+        balls3[i] = 1;
       } else if (letra[i] == "n") {
         balls1[i] = 1;
-        balls2[i] = 1;
         balls4[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
       } else if (letra[i] == "o") {
         balls1[i] = 1;
-        balls4[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
       } else if (letra[i] == "p") {
         balls1[i] = 1;
+        balls4[i] = 1;
         balls2[i] = 1;
         balls3[i] = 1;
-        balls5[i] = 1;
       } else if (letra[i] == "q") {
         balls1[i] = 1;
-        balls2[i] = 1;
-        balls3[i] = 1;
         balls4[i] = 1;
+        balls2[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
       } else if (letra[i] == "r") {
         balls1[i] = 1;
-        balls3[i] = 1;
-        balls4[i] = 1;
+        balls2[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
       } else if (letra[i] == "s") {
-        balls2[i] = 1;
-        balls3[i] = 1;
-        balls5[i] = 1;
-      } else if (letra[i] == "t") {
-        balls2[i] = 1;
-        balls3[i] = 1;
         balls4[i] = 1;
+        balls2[i] = 1;
+        balls3[i] = 1;
+      } else if (letra[i] == "t") {
+        balls4[i] = 1;
+        balls2[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
       } else if (letra[i] == "u") {
         balls1[i] = 1;
-        balls5[i] = 1;
+        balls3[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "v") {
         balls1[i] = 1;
-        balls3[i] = 1;
-        balls5[i] = 1;
-        balls6[i] = 1;
-      } else if (letra[i] == "w") {
         balls2[i] = 1;
         balls3[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == "w") {
         balls4[i] = 1;
+        balls2[i] = 1;
+        balls5[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "x") {
         balls1[i] = 1;
-        balls2[i] = 1;
-        balls5[i] = 1;
+        balls4[i] = 1;
+        balls3[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "y") {
         balls1[i] = 1;
-        balls2[i] = 1;
         balls4[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "z") {
         balls1[i] = 1;
-        balls4[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == " ") {
         balls1[i] = 2;
-        balls2[i] = 2;
-        balls3[i] = 2;
         balls4[i] = 2;
+        balls2[i] = 2;
         balls5[i] = 2;
+        balls3[i] = 2;
         balls6[i] = 2;
       } else if (letra[i] == '1') {
         balls1[i] = 1;
       } else if (letra[i] == "2") {
         balls1[i] = 1;
-        balls3[i] = 1;
+        balls2[i] = 1;
       } else if (letra[i] == "3") {
         balls1[i] = 1;
-        balls2[i] = 1;
+        balls4[i] = 1;
       } else if (letra[i] == "4") {
         balls1[i] = 1;
-        balls2[i] = 1;
         balls4[i] = 1;
+        balls5[i] = 1;
       } else if (letra[i] == "5") {
         balls1[i] = 1;
-        balls4[i] = 1;
+        balls5[i] = 1;
       } else if (letra[i] == "6") {
         balls1[i] = 1;
+        balls4[i] = 1;
         balls2[i] = 1;
-        balls3[i] = 1;
       } else if (letra[i] == "7") {
         balls1[i] = 1;
-        balls2[i] = 1;
-        balls3[i] = 1;
         balls4[i] = 1;
+        balls2[i] = 1;
+        balls5[i] = 1;
       } else if (letra[i] == "8") {
         balls1[i] = 1;
-        balls3[i] = 1;
-        balls4[i] = 1;
+        balls2[i] = 1;
+        balls5[i] = 1;
       } else if (letra[i] == "9") {
-        balls2[i] = 1;
-        balls3[i] = 1;
-      } else if (letra[i] == "0") {
-        balls2[i] = 1;
-        balls3[i] = 1;
         balls4[i] = 1;
-      } else if (letra[i] == "B") {
         balls2[i] = 1;
+      } else if (letra[i] == "0") {
+        balls4[i] = 1;
+        balls2[i] = 1;
+        balls5[i] = 1;
+      } else if (letra[i] == "B") {
         balls4[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "*") {
-        balls4[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
       } else if (letra[i] == "-") {
         balls6[i] = 1;
-        balls5[i] = 1;
-      } else if (letra[i] == "/") {
         balls3[i] = 1;
-        balls4[i] = 1;
+      } else if (letra[i] == "/") {
+        balls2[i] = 1;
+        balls5[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "+") {
-        balls3[i] = 1;
-        balls4[i] = 1;
+        balls2[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
       } else if (letra[i] == "=") {
-        balls3[i] = 1;
-        balls4[i] = 1;
+        balls2[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "(") {
         balls1[i] = 1;
-        balls3[i] = 1;
+        balls2[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == ")") {
-        balls2[i] = 1;
         balls4[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
       } else if (letra[i] == "á") {
         balls1[i] = 1;
-        balls3[i] = 1;
-        balls4[i] = 1;
+        balls2[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "é") {
         balls1[i] = 1;
-        balls2[i] = 1;
-        balls3[i] = 1;
         balls4[i] = 1;
+        balls2[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "í") {
-        balls2[i] = 1;
-        balls5[i] = 1;
+        balls4[i] = 1;
+        balls3[i] = 1;
       } else if (letra[i] == "ó") {
-        balls2[i] = 1;
-        balls5[i] = 1;
+        balls4[i] = 1;
+        balls3[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "ú") {
-        balls2[i] = 1;
-        balls3[i] = 1;
         balls4[i] = 1;
+        balls2[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "à") {
         balls1[i] = 1;
+        balls4[i] = 1;
         balls2[i] = 1;
-        balls3[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "â") {
         balls1[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "ê") {
         balls1[i] = 1;
-        balls3[i] = 1;
+        balls2[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "ô") {
         balls1[i] = 1;
-        balls2[i] = 1;
-        balls4[i] = 1;
-        balls6[i] = 1;
-      } else if (letra[i] == "ã") {
-        balls2[i] = 1;
         balls4[i] = 1;
         balls5[i] = 1;
-      } else if (letra[i] == "õ") {
-        balls2[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == "ã") {
+        balls4[i] = 1;
+        balls5[i] = 1;
         balls3[i] = 1;
+      } else if (letra[i] == "õ") {
+        balls4[i] = 1;
+        balls2[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "ç") {
         balls1[i] = 1;
+        balls4[i] = 1;
         balls2[i] = 1;
         balls3[i] = 1;
-        balls5[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == ",") {
-        balls3[i] = 1;
+        balls2[i] = 1;
       } else if (letra[i] == ";") {
+        balls2[i] = 1;
         balls3[i] = 1;
-        balls5[i] = 1;
       } else if (letra[i] == ":") {
-        balls3[i] = 1;
-        balls4[i] = 1;
-      } else if (letra[i] == ".") {
+        balls2[i] = 1;
         balls5[i] = 1;
-      } else if (letra[i] == "?") {
+      } else if (letra[i] == ".") {
         balls3[i] = 1;
+      } else if (letra[i] == "?") {
+        balls2[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "!") {
-        balls3[i] = 1;
-        balls4[i] = 1;
+        balls2[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
       } else if (letra[i] == "-") {
         balls6[i] = 1;
-        balls5[i] = 1;
+        balls3[i] = 1;
       } else if (letra[i] == "&") {
         balls1[i] = 1;
+        balls4[i] = 1;
         balls2[i] = 1;
         balls3[i] = 1;
-        balls5[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "|") {
-        balls2[i] = 1;
         balls4[i] = 1;
+        balls5[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == ">") {
         balls1[i] = 1;
-        balls4[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
       } else if (letra[i] == "<") {
+        balls4[i] = 1;
+        balls2[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == "°") {
+        balls5[i] = 1;
+        balls3[i] = 1;
+        balls6[i] = 1;
+      } else if (letra[i] == '"') {
         balls2[i] = 1;
         balls3[i] = 1;
         balls6[i] = 1;
-      } else if (letra[i] == "°") {
-        balls4[i] = 1;
-        balls5[i] = 1;
-        balls6[i] = 1;
-      } else if (letra[i] == '"') {
-        balls3[i] = 1;
-        balls5[i] = 1;
-        balls6[i] = 1;
       } else if (letra[i] == '\$') {
-        balls4[i] = 1;
+        balls5[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "[") {
         balls1[i] = 1;
-        balls3[i] = 1;
-        balls4[i] = 1;
+        balls2[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "]") {
-        balls2[i] = 1;
-        balls3[i] = 1;
         balls4[i] = 1;
+        balls2[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
         balls6[i] = 1;
       }
     }
@@ -488,51 +488,51 @@ class Ball with ChangeNotifier {
         balls1[i] = 1;
       } else if (letra[i] == "2") {
         balls1[i] = 1;
-        balls3[i] = 1;
-      } else if (letra[i] == "A") {
         balls2[i] = 1;
+      } else if (letra[i] == "A") {
         balls4[i] = 1;
         balls5[i] = 1;
+        balls3[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "3") {
         balls1[i] = 1;
-        balls2[i] = 1;
+        balls4[i] = 1;
       } else if (letra[i] == "4") {
         balls1[i] = 1;
-        balls2[i] = 1;
         balls4[i] = 1;
+        balls5[i] = 1;
       } else if (letra[i] == "5") {
         balls1[i] = 1;
-        balls4[i] = 1;
+        balls5[i] = 1;
       } else if (letra[i] == "6") {
         balls1[i] = 1;
+        balls4[i] = 1;
         balls2[i] = 1;
-        balls3[i] = 1;
       } else if (letra[i] == "7") {
         balls1[i] = 1;
-        balls2[i] = 1;
-        balls3[i] = 1;
         balls4[i] = 1;
+        balls2[i] = 1;
+        balls5[i] = 1;
       } else if (letra[i] == "8") {
         balls1[i] = 1;
-        balls3[i] = 1;
-        balls4[i] = 1;
-      } else if (letra[i] == "9") {
         balls2[i] = 1;
-        balls3[i] = 1;
-      } else if (letra[i] == "0") {
-        balls2[i] = 1;
-        balls3[i] = 1;
-        balls4[i] = 1;
-      } else if (letra[i] == "*") {
-        balls4[i] = 1;
         balls5[i] = 1;
+      } else if (letra[i] == "9") {
+        balls4[i] = 1;
+        balls2[i] = 1;
+      } else if (letra[i] == "0") {
+        balls4[i] = 1;
+        balls2[i] = 1;
+        balls5[i] = 1;
+      } else if (letra[i] == "*") {
+        balls5[i] = 1;
+        balls3[i] = 1;
       } else if (letra[i] == "-") {
         balls6[i] = 1;
-        balls5[i] = 1;
-      } else if (letra[i] == "/") {
         balls3[i] = 1;
-        balls4[i] = 1;
+      } else if (letra[i] == "/") {
+        balls2[i] = 1;
+        balls5[i] = 1;
         balls6[i] = 1;
       } else if (letra[i] == "+") {
         balls3[i] = 1;
