@@ -39,6 +39,7 @@ class Passer with ChangeNotifier {
     fracaoT += 1;
     topico.avanco += 1;
     fracao+=1;
+    print("era p 13"+fracao.toString());
     salvaTela(topico, token, userId);
     salvaTelaTopico(fase, token, userId);
     notifyListeners();

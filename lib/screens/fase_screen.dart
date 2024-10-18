@@ -66,6 +66,7 @@ class _FaseScreenState extends State<FaseScreen> {
     if (telas == 0) {
       telas = 1; // Defina um valor padrão para evitar divisão por zero
     }
+    print("telas"+telas.toString());
     return Scaffold(
       backgroundColor: Color(0xFFDDE9DD),
       appBar: AppBar(

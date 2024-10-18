@@ -26,9 +26,12 @@ class _Quest1ScreenState extends State<Quest1Screen> {
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
+    print(passer.topicoCompleto);
+    print(topico.id);
     if (passer.topicoCompleto <= topico.id) {
-      passer.incrementaFracao(
-          passer, topico, fase, auth.token ?? '', auth.userId ?? "");
+      for (int i =0; i<=indice; i++)
+      {passer.incrementaFracao(
+          passer, topico, fase, auth.token ?? '', auth.userId ?? "");}
     }
     passer.salvaAcerto(
         fase, topico, auth.token ?? '', auth.userId ?? "", topico.acertou);
