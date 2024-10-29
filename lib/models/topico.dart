@@ -44,15 +44,20 @@ class Topico extends StatelessWidget with ChangeNotifier {
   Widget build(BuildContext context) {
     final passer = Provider.of<Passer>(context);
     void _topic1f(BuildContext context) {
+      String caminho = '/topic-1-screen';
+      int checkpoint = 0;
+      if (checkpoint == 1) {
+        caminho = '/topico-1-conteudo-screen';
+      } else {
+        caminho = '/topic-1-screen';
+      }
       final args =
           ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       final Fase fase = args['fase'];
       final Topico topico = this;
       final Passer passer = args['passer'];
-      Navigator.of(context).pushNamed('/topic-1-screen',
+      Navigator.of(context).pushNamed(caminho,
           arguments: {'fase': fase, 'topico': topico, "passer": passer});
-      print("teste1" + passer.topicoCompleto.toString());
-      print("teste2" + id.toString());
     }
 
     return Container(
