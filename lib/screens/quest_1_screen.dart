@@ -27,7 +27,7 @@ class _Quest1ScreenState extends State<Quest1Screen> {
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
     topico.checkpoint = 0;
-   passer.salvaLugar(
+    passer.salvaLugar(
         fase, topico, auth.token ?? '', auth.userId ?? "", topico.checkpoint);
     Navigator.of(context).pushNamed('/acertos-screen',
         arguments: {'fase': fase, "topico": topico, "passer": passer});
@@ -209,8 +209,10 @@ class _Quest1ScreenState extends State<Quest1Screen> {
                   backgroundColor: Color(0xFF208B52),
                 ),
                 onPressed: () {
-                  passer.incrementaFracao(passer, topico, fase,
-                      auth.token ?? '', auth.userId ?? "");
+                  if (passer.topicoCompleto <= topico.id) {
+                    passer.incrementaFracao(passer, topico, fase,
+                        auth.token ?? '', auth.userId ?? "");
+                  }
                   if (indice + 1 == topico.perguntas.length) {
                     _acertos(context);
                   } else {

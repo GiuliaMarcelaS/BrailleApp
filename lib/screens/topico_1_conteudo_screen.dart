@@ -15,7 +15,6 @@ class Topico1ConteudoScreen extends StatefulWidget {
 
 class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
   // late YoutubePlayerController _controller;
-  int indice = 0;
 
   // @override
   // void didChangeDependencies() {
@@ -60,6 +59,7 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
     Navigator.pop(context);
   }
 
+  int indice = 0;
   @override
   Widget build(BuildContext context) {
     final args =
@@ -71,8 +71,12 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     int incrementaLista() {
+      indice = passer.indice;
       setState(() {
         indice++;
+        print("i2" + indice.toString());
+        passer.salvaIndice(
+            fase, topico, auth.token ?? "", auth.userId ?? '', indice);
         // passer.incrementaFracao(
         //     passer, topico, fase, auth.token ?? '', auth.userId ?? "");
         // _controller.load(topico.videos[indice]);
@@ -165,8 +169,10 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
                     backgroundColor: const Color(0xFF208B52),
                   ),
                   onPressed: () {
-                    passer.incrementaFracao(passer, topico, fase,
-                        auth.token ?? '', auth.userId ?? "");
+                    if (passer.topicoCompleto <= topico.id) {
+                      passer.incrementaFracao(passer, topico, fase,
+                          auth.token ?? '', auth.userId ?? "");
+                    }
                     if (indice + 1 == topico.titulos.length) {
                       _testar(context);
                     } else {
