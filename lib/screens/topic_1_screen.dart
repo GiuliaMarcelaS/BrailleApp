@@ -16,7 +16,7 @@ class Topic1Screen extends StatelessWidget {
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
     topico.checkpoint = 1;
-     passer.salvaLugar(
+    passer.salvaLugar(
         fase, topico, auth.token ?? '', auth.userId ?? "", topico.checkpoint);
     Navigator.of(context).pushNamed('/topico-1-conteudo-screen',
         arguments: {'fase': fase, "topico": topico, "passer": passer});

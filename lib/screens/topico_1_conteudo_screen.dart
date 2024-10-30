@@ -59,7 +59,14 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
     Navigator.pop(context);
   }
 
-  int indice = 0;
+  // int indice = 0;
+  @override
+  void initState() {
+    super.initState();
+    final passer = Provider.of<Passer>(context, listen: false);
+    // indice = passer.indice; // Carrega o valor inicial do índice
+  }
+
   @override
   Widget build(BuildContext context) {
     final args =
@@ -70,18 +77,19 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
     final auth = Provider.of<Auth>(context, listen: false);
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+    print("i1" + passer.indice.toString());
     int incrementaLista() {
-      indice = passer.indice;
+      print("i1" + passer.indice.toString());
       setState(() {
-        indice++;
-        print("i2" + indice.toString());
+        passer.indice++;
+        print("i2" + passer.indice.toString());
         passer.salvaIndice(
-            fase, topico, auth.token ?? "", auth.userId ?? '', indice);
+            fase, topico, auth.token ?? "", auth.userId ?? '', passer.indice);
         // passer.incrementaFracao(
         //     passer, topico, fase, auth.token ?? '', auth.userId ?? "");
         // _controller.load(topico.videos[indice]);
       });
-      return indice;
+      return passer.indice;
     }
 
     return Scaffold(
@@ -125,7 +133,7 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
             child: Text(
-              topico.titulos[indice],
+              topico.titulos[passer.indice],
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
               textAlign: TextAlign.justify,
             ),
@@ -133,7 +141,7 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
             child: Text(
-              topico.conteudos[indice],
+              topico.conteudos[passer.indice],
               style: TextStyle(fontSize: 12),
               textAlign: TextAlign.justify,
             ),
@@ -173,7 +181,7 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
                       passer.incrementaFracao(passer, topico, fase,
                           auth.token ?? '', auth.userId ?? "");
                     }
-                    if (indice + 1 == topico.titulos.length) {
+                    if (passer.indice + 1 == topico.titulos.length) {
                       _testar(context);
                     } else {
                       incrementaLista();

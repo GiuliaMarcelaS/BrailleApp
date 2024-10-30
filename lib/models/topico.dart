@@ -63,10 +63,10 @@ class Topico extends StatelessWidget with ChangeNotifier {
       } else {
         caminho = '/topic-1-screen';
       }
+      await passer.getIndice(fase, topico, auth.token ?? '', auth.userId ?? '');
+      print("i1" + passer.indice.toString());
       Navigator.of(context).pushNamed(caminho,
           arguments: {'fase': fase, 'topico': topico, "passer": passer});
-
-      passer.getIndice(fase, topico, auth.token ?? '', auth.userId ?? '');
     }
 
     return Container(
