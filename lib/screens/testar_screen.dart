@@ -16,6 +16,9 @@ class TestarScreen extends StatelessWidget {
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
+    topico.checkpoint = 2;
+    passer.salvaLugar(
+        fase, topico, auth.token ?? '', auth.userId ?? "", topico.checkpoint);
     // if (passer.topicoCompleto <= topico.id) {
     //   passer.incrementaFracao(passer, topico, fase, auth.token??'', auth.userId??"");
     // }

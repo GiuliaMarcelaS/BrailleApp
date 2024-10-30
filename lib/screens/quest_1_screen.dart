@@ -26,8 +26,9 @@ class _Quest1ScreenState extends State<Quest1Screen> {
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
-    passer.salvaAcerto(
-        fase, topico, auth.token ?? '', auth.userId ?? "", topico.acertou);
+    topico.checkpoint = 0;
+   passer.salvaLugar(
+        fase, topico, auth.token ?? '', auth.userId ?? "", topico.checkpoint);
     Navigator.of(context).pushNamed('/acertos-screen',
         arguments: {'fase': fase, "topico": topico, "passer": passer});
   }

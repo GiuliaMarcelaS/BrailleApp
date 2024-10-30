@@ -14,6 +14,7 @@ class Passer with ChangeNotifier {
   int topicoCompleto;
   num fracao;
   num fracaoT;
+  int chek = 0;
 
   Passer(
     this._token,
@@ -39,7 +40,6 @@ class Passer with ChangeNotifier {
     fracaoT += 1;
     topico.avanco += 1;
     fracao+=1;
-    print("era p 13"+fracao.toString());
     salvaTela(topico, token, userId);
     salvaTelaTopico(fase, token, userId);
     notifyListeners();
@@ -51,7 +51,6 @@ class Passer with ChangeNotifier {
     var dados = jsonDecode(response.body);
     faseCompleta = dados['modulo'];
     notifyListeners();
-    print(faseCompleta);
   }
 
   Future<void> getTelaM(String token, String userId) async {
@@ -69,6 +68,7 @@ class Passer with ChangeNotifier {
     var dados = jsonDecode(response.body);
     print("oi ${dados['telaT']}");
     fracaoT = dados['telaT'];
+    print("fracaO"+fracaoT.toString());
     notifyListeners();
   }
 
@@ -132,4 +132,26 @@ class Passer with ChangeNotifier {
     );
     notifyListeners();
   }
+
+  Future<void> salvaLugar(Fase fase, Topico topico, String token,
+      String userId, int numero) async {
+    await http.patch(
+      Uri.parse(
+          '${Constants.BASE_URL}/users/$userId/modulos/${fase.id}/${topico.id}.json?auth=$token'),
+      body: jsonEncode({"lugar": numero}),
+    );
+    notifyListeners();
+  }
+
+  Future<void> getLugar(Fase fase, Topico topico, String token, String userId) async {
+  final response = await http.get(Uri.parse(
+    "${Constants.BASE_URL}/users/$userId/modulos/${fase.id}/${topico.id}.json?auth=$token"
+  ));
+  
+  var dados = jsonDecode(response.body);
+  chek = dados["lugar"] ?? 0; // Se 'lugar' não existir, define como 0
+  print('teste1' + chek.toString());
+  
+  notifyListeners();
+}
 }

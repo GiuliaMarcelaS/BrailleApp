@@ -1,3 +1,4 @@
+import 'package:braille_app/models/auth.dart';
 import 'package:braille_app/models/fases.dart';
 import 'package:braille_app/models/passer.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,6 +19,7 @@ class Topico extends StatelessWidget with ChangeNotifier {
   List acertos;
   int numTelas;
   num avanco;
+  int checkpoint = 0;
 
   Topico({
     super.key,
@@ -43,23 +45,27 @@ class Topico extends StatelessWidget with ChangeNotifier {
   @override
   Widget build(BuildContext context) {
     final passer = Provider.of<Passer>(context);
-    void _topic1f(BuildContext context) {
-      String caminho = '/topic-1-screen';
-      int checkpoint = 0;
-      if (checkpoint == 1) {
-        caminho = '/topico-1-conteudo-screen';
-      } else {
-        caminho = '/topic-1-screen';
-      }
+    void _topic1f(BuildContext context) async {
       final args =
           ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
       final Fase fase = args['fase'];
       final Topico topico = this;
       final Passer passer = args['passer'];
+      final auth = Provider.of<Auth>(context, listen: false);
+    await passer.getLugar(fase, topico, auth.token??'', auth.userId??'');
+      String caminho = '/topic-1-screen';
+      checkpoint = passer.chek;
+      print("teste2"+passer.chek.toString());
+      if (checkpoint == 1) {
+        caminho = '/topico-1-conteudo-screen';
+      } else if(checkpoint==2){
+        caminho = '/quest-1-screen';
+      } else {
+        caminho = '/topic-1-screen';
+      }
       Navigator.of(context).pushNamed(caminho,
           arguments: {'fase': fase, 'topico': topico, "passer": passer});
     }
-
     return Container(
       margin: EdgeInsets.only(top: 30),
       child: Row(
