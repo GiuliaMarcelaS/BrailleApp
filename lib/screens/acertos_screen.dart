@@ -36,7 +36,7 @@ class AcertosScreen extends StatelessWidget {
     }
     passer.salvaTopico(topico, auth.token ?? '', auth.userId ?? '');
 
-    if (topicos_data[passer.faseCompleta - 1].length == passer.topicoCompleto) {
+    if (topicos_data[passer.faseCompleta - 1].length < passer.topicoCompleto) {
       passer.incrementaFaset(fase, topico, auth.token ?? "", auth.userId ?? '');
       passer.salvaModulo(fase, auth.token ?? "", auth.userId ?? "");
     }

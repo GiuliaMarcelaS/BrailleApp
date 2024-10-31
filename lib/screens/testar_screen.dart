@@ -11,18 +11,17 @@ class TestarScreen extends StatelessWidget {
   const TestarScreen({super.key});
 
   void _quest_1(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
-    topico.checkpoint = 2;
-    passer.salvaLugar(
-        fase, topico, auth.token ?? '', auth.userId ?? "", topico.checkpoint);
     // if (passer.topicoCompleto <= topico.id) {
     //   passer.incrementaFracao(passer, topico, fase, auth.token??'', auth.userId??"");
     // }
-    Navigator.of(context).pushNamed('/quest-1-screen', arguments: {'fase': fase,"topico": topico,'passer':passer});
+    Navigator.of(context).pushNamed('/quest-1-screen',
+        arguments: {'fase': fase, "topico": topico, 'passer': passer});
   }
 
   @override
@@ -34,7 +33,7 @@ class TestarScreen extends StatelessWidget {
       negrito: 'Agora vamos testar seus conhecimentos!',
       texto: 'Pronto para o questionário final?',
       botao: 'Continuar',
-      rota: ()=>_quest_1(context),
+      rota: () => _quest_1(context),
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:braille_app/screens/modulos_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:braille_app/models/fases.dart';
 import 'package:provider/provider.dart';
+
 class FaseItem extends StatelessWidget {
   const FaseItem({super.key});
 
@@ -21,12 +22,14 @@ class FaseItem extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(3),
               decoration: BoxDecoration(
-                color: passer.faseCompleta >= fase.id ? Color(0xFF208B52) : Color(0xFFB0C4B1),
+                color: passer.faseCompleta >= fase.id
+                    ? Color(0xFF208B52)
+                    : Color(0xFFB0C4B1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 passer.faseCompleta >= fase.id ? Icons.play_arrow : Icons.lock,
-                size: 20, 
+                size: 20,
                 color: Colors.white,
               ),
             ),
@@ -38,14 +41,16 @@ class FaseItem extends StatelessWidget {
                 Text(fase.title, style: TextStyle(color: Colors.black)),
                 Text(
                   fase.frase,
-                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800),
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.w800),
                 ),
               ],
             ),
           ),
           child: GestureDetector(
             onTap: passer.faseCompleta >= fase.id
-                ? () => Navigator.of(context).pushNamed('/fases-screen', arguments: {
+                ? () => Navigator.of(context)
+                        .pushNamed('/fases-screen', arguments: {
                       'fase': fase,
                       'topico': topico,
                       'passer': passer,

@@ -46,6 +46,9 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
+    topico.checkpoint = 2;
+    passer.salvaLugar(
+        fase, topico, auth.token ?? '', auth.userId ?? "", topico.checkpoint);
     // if (passer.topicoCompleto <= topico.id) {
     //   for(int i = 0; i<=indice; i++)
     //   {passer.incrementaFracao(
@@ -77,12 +80,9 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
     final auth = Provider.of<Auth>(context, listen: false);
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    print("i1" + passer.indice.toString());
     int incrementaLista() {
-      print("i1" + passer.indice.toString());
       setState(() {
         passer.indice++;
-        print("i2" + passer.indice.toString());
         passer.salvaIndice(
             fase, topico, auth.token ?? "", auth.userId ?? '', passer.indice);
         // passer.incrementaFracao(
@@ -182,6 +182,9 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
                           auth.token ?? '', auth.userId ?? "");
                     }
                     if (passer.indice + 1 == topico.titulos.length) {
+                      passer.indice = 0;
+                      passer.salvaIndice(fase, topico, auth.token ?? "",
+                          auth.userId ?? "", passer.indice);
                       _testar(context);
                     } else {
                       incrementaLista();

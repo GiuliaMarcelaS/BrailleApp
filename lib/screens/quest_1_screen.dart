@@ -13,7 +13,7 @@ class Quest1Screen extends StatefulWidget {
 }
 
 class _Quest1ScreenState extends State<Quest1Screen> {
-  int indice = 0;
+  // int indice = 0;
   int selected = 0;
   bool isAnswered = false;
   bool isCorrect = false;
@@ -40,24 +40,22 @@ class _Quest1ScreenState extends State<Quest1Screen> {
   }
 
   void analiseAcerto(int number, Topico topico) {
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final Fase fase = args['fase'];
+    final Topico topico = args['topico'];
+    final Passer passer = args['passer'];
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    final auth = Provider.of<Auth>(context, listen: false);
     setState(() {
       isAnswered = true;
-      isCorrect = topico.acertos[indice] == (number - 1);
+      isCorrect = topico.acertos[passer.indice] == (number - 1);
       showContinueButton = true;
       if (isCorrect) {
         topico.qnt_acertos();
       }
     });
-  }
-
-  int incrementaLista() {
-    setState(() {
-      indice++;
-      isAnswered = false;
-      selected = 0;
-      showContinueButton = false;
-    });
-    return indice;
   }
 
   @override
@@ -70,8 +68,18 @@ class _Quest1ScreenState extends State<Quest1Screen> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     final auth = Provider.of<Auth>(context, listen: false);
+    int incrementaLista() {
+      setState(() {
+        passer.indice++;
+        isAnswered = false;
+        selected = 0;
+        showContinueButton = false;
+        passer.salvaIndice(
+            fase, topico, auth.token ?? "", auth.userId ?? '', passer.indice);
+      });
+      return passer.indice;
+    }
 
-    print("topico id" + topico.id.toString());
     if (topico.perguntas.isEmpty || topico.respostas.isEmpty) {
       return Scaffold(
         appBar: AppBar(
@@ -110,7 +118,7 @@ class _Quest1ScreenState extends State<Quest1Screen> {
             width: screenWidth * 310 / 360,
             margin: EdgeInsets.only(top: screenHeight * 30 / 800),
             child: Text(
-              topico.perguntas[indice],
+              topico.perguntas[passer.indice],
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
             ),
           ),
@@ -154,7 +162,7 @@ class _Quest1ScreenState extends State<Quest1Screen> {
                         SizedBox(
                           width: screenWidth * 260 / 360,
                           child: Text(
-                            topico.respostas[indice][i],
+                            topico.respostas[passer.indice][i],
                             style: TextStyle(
                                 fontWeight: FontWeight.w800, fontSize: 16),
                           ),
@@ -213,7 +221,10 @@ class _Quest1ScreenState extends State<Quest1Screen> {
                     passer.incrementaFracao(passer, topico, fase,
                         auth.token ?? '', auth.userId ?? "");
                   }
-                  if (indice + 1 == topico.perguntas.length) {
+                  if (passer.indice + 1 == topico.perguntas.length) {
+                    passer.indice = 0;
+                    passer.salvaIndice(fase, topico, auth.token ?? "",
+                        auth.userId ?? "", passer.indice);
                     _acertos(context);
                   } else {
                     incrementaLista();
