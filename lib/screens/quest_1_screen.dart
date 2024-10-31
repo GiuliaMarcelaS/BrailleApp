@@ -130,11 +130,12 @@ class _Quest1ScreenState extends State<Quest1Screen> {
                 int buttonIndex = i + 1;
                 return Container(
                   margin: EdgeInsets.only(
-                      bottom: screenHeight * 15 / 800,
                       left: 16 / 360 * screenWidth,
                       right: 16 / 360 * screenWidth),
                   width: screenWidth * 328 / 360,
-                  height: screenHeight * 50 / 800,
+                  constraints:
+                      BoxConstraints(minHeight: screenHeight * 50 / 800),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -159,12 +160,14 @@ class _Quest1ScreenState extends State<Quest1Screen> {
                             size: 20 / 360 * screenWidth,
                           ),
                         SizedBox(width: screenWidth * 8 / 360),
-                        SizedBox(
-                          width: screenWidth * 260 / 360,
-                          child: Text(
-                            topico.respostas[passer.indice][i],
-                            style: TextStyle(
-                                fontWeight: FontWeight.w800, fontSize: 16),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 15),
+                            child: Text(
+                              topico.respostas[passer.indice][i],
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w800, fontSize: 16),
+                            ),
                           ),
                         ),
                       ],
