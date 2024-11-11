@@ -64,29 +64,48 @@ class _TranslationState extends State<Translation> {
       ];
       List numerosMatrizes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
       bool caplock = false;
+      bool palavraMai = false;
+
       if (frase == frase.toUpperCase() && frase.length > 1) {
         frase = frase.toLowerCase();
         caplock = true;
       }
-      for (int i = 0; i < frase.length; i++) {
-        if (caplock == true) {
-          fraseAlterada = ":AA" + fraseAlterada;
-          caplock = false;
+
+      List<String> palavras = frase.split(' ');
+
+      for (int j = 0; j < palavras.length; j++) {
+        String palavra = palavras[j];
+
+        if (palavra == palavra.toUpperCase() &&
+            palavra.length > 1 &&
+            palavra.split('').every((char) => duasMatrizes.contains(char))) {
+          palavra = palavra.toLowerCase();
+          palavra = "AA$palavra";
+          palavraMai = true;
         }
-        if (duasMatrizes.contains(frase[i])) {
-          fraseAlterada = fraseAlterada + 'A${frase[i].toLowerCase()}';
-        } else if (numerosMatrizes.contains(frase[i]) &&
-            (i == 0 || numerosMatrizes.contains(frase[i - 1]) == false)) {
-          fraseAlterada = fraseAlterada + 'B${frase[i]}';
-        } else if (frase[i] == "'") {
-          fraseAlterada += '."';
-        } else if (frase[i] == "<" || frase[i] == ">") {
-          fraseAlterada += '\$"';
-        } else if (frase[i] == "_") {
-          fraseAlterada += "--";
-        } else {
-          fraseAlterada = fraseAlterada + frase[i];
+
+        for (int i = 0; i < palavra.length; i++) {
+          if (caplock == true) {
+            fraseAlterada = ":AA" + fraseAlterada;
+            caplock = false;
+          }
+
+          if (duasMatrizes.contains(palavra[i]) && palavraMai == false) {
+            fraseAlterada += 'A${palavra[i].toLowerCase()}';
+          } else if (numerosMatrizes.contains(palavra[i]) &&
+              (i == 0 || !numerosMatrizes.contains(palavra[i - 1]))) {
+            fraseAlterada += 'B${palavra[i]}';
+          } else if (palavra[i] == "'") {
+            fraseAlterada += '."';
+          } else if (palavra[i] == "<" || palavra[i] == ">") {
+            fraseAlterada += '\$"';
+          } else if (palavra[i] == "_") {
+            fraseAlterada += "--";
+          } else {
+            fraseAlterada += palavra[i];
+          }
         }
+        if (j < palavras.length - 1) fraseAlterada += ' ';
       }
       return fraseAlterada;
     }
@@ -126,6 +145,27 @@ class _TranslationState extends State<Translation> {
                   letra = "";
                 },
               ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      _controller.clear();
+                    },
+                    child: Text(
+                      'Limpar',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFF208B52),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8))),
+                  )
+                ],
+              )
             ],
           ),
         ),

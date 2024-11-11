@@ -76,9 +76,9 @@ class _MatrizShowedState extends State<MatrizShowed> {
                     Icon(
                       color: Colors.black,
                       size: 6,
-                      ballt.balls5[i] == 1
+                      ballt.balls3[i] == 1
                           ? Icons.circle
-                          : (ballt.balls5[i] == 2 ? null : null),
+                          : (ballt.balls3[i] == 2 ? null : null),
                     ),
                     Icon(
                       color: Colors.black,
