@@ -24,12 +24,8 @@ class _TranslationState extends State<Translation> {
 
   @override
   Widget build(BuildContext context) {
-    final ball = Provider.of<Ball>(
-      context,
-    );
-    final cells = Provider.of<CellsList>(
-      context,
-    );
+    final ball = Provider.of<Ball>(context);
+    final cells = Provider.of<CellsList>(context);
     final auth = Provider.of<Auth>(context);
 
     identifyUpperCase(String frase) {
@@ -60,7 +56,19 @@ class _TranslationState extends State<Translation> {
         'W',
         'X',
         'Y',
-        'Z'
+        'Z',
+        'Á',
+        'É',
+        'Í',
+        'Ó',
+        'Ú',
+        'À',
+        'Â',
+        'Ê',
+        'Ô',
+        'Ã',
+        'Õ',
+        'Ç'
       ];
       List numerosMatrizes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
       bool caplock = false;
@@ -86,7 +94,7 @@ class _TranslationState extends State<Translation> {
 
         for (int i = 0; i < palavra.length; i++) {
           if (caplock == true) {
-            fraseAlterada = ":AA" + fraseAlterada;
+            fraseAlterada = ":AA " + fraseAlterada;
             caplock = false;
           }
 
@@ -111,63 +119,95 @@ class _TranslationState extends State<Translation> {
     }
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Form(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        // Linha com a label e contador estilizados
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextField(
-                controller: _controller,
-                maxLength: maxCharacters,
-                decoration: InputDecoration(
-                  labelText: 'Escreva seu texto',
-                  hintText: 'Escreva seu texto',
-                  filled: true,
-                  fillColor: Colors.white,
-                  contentPadding: EdgeInsets.all(10),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                      color: Colors.grey,
-                      width: 1,
-                    ),
-                  ),
+              Text(
+                "Português (PT/BR)", // Label no canto superior esquerdo
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
                 ),
-                onSubmitted: (valor) {
-                  cells.wordsClicker(auth.token ?? '', auth.userId ?? '');
-                  ball.reset(letra);
-                  letra = identifyUpperCase(valor);
-                  print(letra);
-                  ball.translatePhrase(letra, cells.id);
-                  print(letra.length);
-                  cells.addCells(letra);
-                  cells.id = 0;
-                  letra = "";
-                },
               ),
-              SizedBox(
-                height: 10,
+              Text(
+                "${_controller.text.length}/$maxCharacters", // Contador no canto superior direito
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      _controller.clear();
-                    },
-                    child: Text(
-                      'Limpar',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF208B52),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8))),
-                  )
-                ],
-              )
             ],
           ),
+        ),
+        SizedBox(height: 5),
+        Container(
+          height: 200, // Define a altura desejada
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Colors.black, width: 1),
+          ),
+          child: TextField(
+            controller: _controller,
+            maxLength: maxCharacters,
+            maxLines: null,
+            expands: true,
+            textAlignVertical: TextAlignVertical.top,
+            textAlign: TextAlign.start,
+            decoration: InputDecoration(
+              hintText: 'Escreva seu texto',
+              filled: true,
+              fillColor: Colors.white,
+              contentPadding: EdgeInsets.all(10),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide.none,
+              ),
+              counterText: "", // Remove o contador padrão
+            ),
+            onChanged: (valor) {
+              setState(() {}); // Atualiza o contador quando o texto muda
+            },
+            onSubmitted: (valor) {
+              cells.wordsClicker(auth.token ?? '', auth.userId ?? '');
+              ball.reset(letra);
+              letra = identifyUpperCase(valor);
+              ball.translatePhrase(letra, cells.id);
+              cells.addCells(letra);
+              cells.id = 0;
+              letra = "";
+            },
+          ),
+        ),
+        SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                _controller.clear();
+                setState(() {}); // Atualiza o contador quando o texto é limpo
+              },
+              child: Text(
+                'Limpar',
+                style: TextStyle(color: Colors.white),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF208B52),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );

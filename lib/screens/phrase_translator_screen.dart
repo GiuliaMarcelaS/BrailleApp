@@ -7,11 +7,14 @@ class PhraseTranslatorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Scaffold(
+      backgroundColor: Color(0xFFDDE9DD),
+      body: Column(
         children: const [
           Translation(),
           MatrizShowed(),
         ],
+      ),
     );
   }
 }
