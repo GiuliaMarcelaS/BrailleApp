@@ -1,9 +1,7 @@
 import 'package:braille_app/data/topicos_data.dart';
 import 'package:braille_app/models/fases.dart';
 import 'package:braille_app/models/passer.dart';
-import 'package:braille_app/models/passer1.dart';
 import 'package:braille_app/models/topico.dart';
-import 'package:braille_app/screens/modulos_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:braille_app/models/auth.dart';
@@ -34,7 +32,6 @@ class _FaseScreenState extends State<FaseScreen> {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase modulo = args['fase'];
-    final Topico topico = args['topico'];
 
     fracao.getTelaT(modulo, auth.token ?? '', auth.userId ?? '');
   }
@@ -45,10 +42,9 @@ class _FaseScreenState extends State<FaseScreen> {
 
     for (var topico in modulo) {
       totalVideos += topico.videos.length;
-      totalPerguntas += topico.perguntas?.length ?? 0; // Se perguntas for null, usa 0
+      totalPerguntas += topico.perguntas?.length ?? 0;
     }
 
-    // Retorna a soma dos vídeos e perguntas como o total de telas
     return totalVideos + totalPerguntas;
   }
 
@@ -57,16 +53,14 @@ class _FaseScreenState extends State<FaseScreen> {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final Fase modulo = args['fase'];
-    final Topico topico = args['topico'];
     final List<List<Topico>> topicos = topicos_data;
-     // Calcular o total de telas do módulo específico
     int telas = calcularTotalTelasPorModulo(topicos[modulo.id - 1]);
 
-    // Garantindo que telas não seja zero
     if (telas == 0) {
-      telas = 1; // Defina um valor padrão para evitar divisão por zero
+      telas = 1;
     }
-    print("telas"+telas.toString());
+    print("telas" + telas.toString());
+
     return Scaffold(
       backgroundColor: Color(0xFFDDE9DD),
       appBar: AppBar(
@@ -86,11 +80,7 @@ class _FaseScreenState extends State<FaseScreen> {
       body: Consumer<Passer>(builder: (ctx, fracao, child) {
         double screenHeight = MediaQuery.of(context).size.height;
         double screenWidth = MediaQuery.of(context).size.width;
-        final args =
-            ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-        final Fase modulo = args['fase'];
-        final Topico topico = args['topico'];
-        final List<List<Topico>> topicos = topicos_data;
+        final List<Topico> topicosModulo = topicos[modulo.id - 1];
 
         return Column(
           children: [
@@ -164,10 +154,15 @@ class _FaseScreenState extends State<FaseScreen> {
                 ],
               ),
             ),
-            topicos[modulo.id - 1][0],
-            topicos[modulo.id - 1][1],
-            topicos[modulo.id - 1][2],
-            topicos[modulo.id - 1][3],
+            Expanded(
+              child: ListView.builder(
+                padding: EdgeInsets.all(10),
+                itemCount: topicosModulo.length,
+                itemBuilder: (context, index) {
+                  return topicosModulo[index];
+                },
+              ),
+            ),
           ],
         );
       }),

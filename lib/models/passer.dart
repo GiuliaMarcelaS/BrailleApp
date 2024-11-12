@@ -131,6 +131,8 @@ class Passer with ChangeNotifier {
           '${Constants.BASE_URL}/users/$userId/modulos/${fase.id}/${topico.id}.json?auth=$token'),
       body: jsonEncode({"acertos": "$acertos/${topico.perguntas.length}"}),
     );
+
+    acertos = 0;
     notifyListeners();
   }
 

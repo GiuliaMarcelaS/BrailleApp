@@ -31,6 +31,9 @@ class _Quest1ScreenState extends State<Quest1Screen> {
         fase, topico, auth.token ?? '', auth.userId ?? "", topico.checkpoint);
     Navigator.of(context).pushNamed('/acertos-screen',
         arguments: {'fase': fase, "topico": topico, "passer": passer});
+
+    passer.salvaAcerto(
+        fase, topico, auth.token ?? '', auth.userId ?? '', topico.acertou);
   }
 
   void select(int number, Topico topico) {

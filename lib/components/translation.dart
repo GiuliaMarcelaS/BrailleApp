@@ -22,102 +22,119 @@ class _TranslationState extends State<Translation> {
     letra = " ";
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final ball = Provider.of<Ball>(context);
-    final cells = Provider.of<CellsList>(context);
-    final auth = Provider.of<Auth>(context);
+  void _submitText() {
+    final ball = Provider.of<Ball>(context, listen: false);
+    final cells = Provider.of<CellsList>(context, listen: false);
+    final auth = Provider.of<Auth>(context, listen: false);
 
-    identifyUpperCase(String frase) {
-      String fraseAlterada = '';
-      List duasMatrizes = [
-        'A',
-        'B',
-        'C',
-        'D',
-        'E',
-        'F',
-        'G',
-        'H',
-        'I',
-        'J',
-        'K',
-        'L',
-        'M',
-        'N',
-        'O',
-        'P',
-        'Q',
-        'R',
-        'S',
-        'T',
-        'U',
-        'V',
-        'W',
-        'X',
-        'Y',
-        'Z',
-        'Á',
-        'É',
-        'Í',
-        'Ó',
-        'Ú',
-        'À',
-        'Â',
-        'Ê',
-        'Ô',
-        'Ã',
-        'Õ',
-        'Ç'
-      ];
-      List numerosMatrizes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-      bool caplock = false;
-      bool palavraMai = false;
+    String valor = _controller.text.trim();
+    if (valor.isEmpty)
+      return; // Verifica se o texto está vazio antes de prosseguir
 
-      if (frase == frase.toUpperCase() && frase.length > 1) {
-        frase = frase.toLowerCase();
-        caplock = true;
-      }
+    cells.wordsClicker(auth.token ?? '', auth.userId ?? '');
+    ball.reset(letra);
+    letra = identifyUpperCase(valor);
+    print(letra);
+    ball.translatePhrase(letra, cells.id);
+    print(letra.length);
+    cells.addCells(letra);
+    cells.id = 0;
+    letra = "";
+    _controller.clear(); // Limpa o campo de texto após a submissão
+  }
 
-      List<String> palavras = frase.split(' ');
+  String identifyUpperCase(String frase) {
+    String fraseAlterada = '';
+    List duasMatrizes = [
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'O',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'U',
+      'V',
+      'W',
+      'X',
+      'Y',
+      'Z',
+      'Á',
+      'É',
+      'Í',
+      'Ó',
+      'Ú',
+      'À',
+      'Â',
+      'Ê',
+      'Ô',
+      'Ã',
+      'Õ',
+      'Ç'
+    ];
+    List numerosMatrizes = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    bool caplock = false;
+    bool palavraMai = false;
 
-      for (int j = 0; j < palavras.length; j++) {
-        String palavra = palavras[j];
-
-        if (palavra == palavra.toUpperCase() &&
-            palavra.length > 1 &&
-            palavra.split('').every((char) => duasMatrizes.contains(char))) {
-          palavra = palavra.toLowerCase();
-          palavra = "AA$palavra";
-          palavraMai = true;
-        }
-
-        for (int i = 0; i < palavra.length; i++) {
-          if (caplock == true) {
-            fraseAlterada = ":AA " + fraseAlterada;
-            caplock = false;
-          }
-
-          if (duasMatrizes.contains(palavra[i]) && palavraMai == false) {
-            fraseAlterada += 'A${palavra[i].toLowerCase()}';
-          } else if (numerosMatrizes.contains(palavra[i]) &&
-              (i == 0 || !numerosMatrizes.contains(palavra[i - 1]))) {
-            fraseAlterada += 'B${palavra[i]}';
-          } else if (palavra[i] == "'") {
-            fraseAlterada += '."';
-          } else if (palavra[i] == "<" || palavra[i] == ">") {
-            fraseAlterada += '\$"';
-          } else if (palavra[i] == "_") {
-            fraseAlterada += "--";
-          } else {
-            fraseAlterada += palavra[i];
-          }
-        }
-        if (j < palavras.length - 1) fraseAlterada += ' ';
-      }
-      return fraseAlterada;
+    if (frase == frase.toUpperCase() && frase.length > 1) {
+      frase = frase.toLowerCase();
+      caplock = true;
     }
 
+    List<String> palavras = frase.split(' ');
+
+    for (int j = 0; j < palavras.length; j++) {
+      String palavra = palavras[j];
+
+      if (palavra == palavra.toUpperCase() &&
+          palavra.length > 1 &&
+          palavra.split('').every((char) => duasMatrizes.contains(char))) {
+        palavra = palavra.toLowerCase();
+        palavra = "AA$palavra";
+        palavraMai = true;
+      }
+
+      for (int i = 0; i < palavra.length; i++) {
+        if (caplock == true) {
+          fraseAlterada = ":AA " + fraseAlterada;
+          caplock = false;
+        }
+
+        if (duasMatrizes.contains(palavra[i]) && palavraMai == false) {
+          fraseAlterada += 'A${palavra[i].toLowerCase()}';
+        } else if (numerosMatrizes.contains(palavra[i]) &&
+            (i == 0 || !numerosMatrizes.contains(palavra[i - 1]))) {
+          fraseAlterada += 'B${palavra[i]}';
+        } else if (palavra[i] == "'") {
+          fraseAlterada += '."';
+        } else if (palavra[i] == "<" || palavra[i] == ">") {
+          fraseAlterada += '\$"';
+        } else if (palavra[i] == "_") {
+          fraseAlterada += "--";
+        } else {
+          fraseAlterada += palavra[i];
+        }
+      }
+      if (j < palavras.length - 1) fraseAlterada += ' ';
+    }
+    return fraseAlterada;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -128,7 +145,7 @@ class _TranslationState extends State<Translation> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Português (PT/BR)", // Label no canto superior esquerdo
+                "Português (PT/BR)",
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -136,7 +153,7 @@ class _TranslationState extends State<Translation> {
                 ),
               ),
               Text(
-                "${_controller.text.length}/$maxCharacters", // Contador no canto superior direito
+                "${_controller.text.length}/$maxCharacters",
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -148,7 +165,7 @@ class _TranslationState extends State<Translation> {
         ),
         SizedBox(height: 5),
         Container(
-          height: 200, // Define a altura desejada
+          height: 200,
           margin: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -171,19 +188,10 @@ class _TranslationState extends State<Translation> {
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide.none,
               ),
-              counterText: "", // Remove o contador padrão
+              counterText: "", // Oculta o contador padrão do TextField
             ),
             onChanged: (valor) {
-              setState(() {}); // Atualiza o contador quando o texto muda
-            },
-            onSubmitted: (valor) {
-              cells.wordsClicker(auth.token ?? '', auth.userId ?? '');
-              ball.reset(letra);
-              letra = identifyUpperCase(valor);
-              ball.translatePhrase(letra, cells.id);
-              cells.addCells(letra);
-              cells.id = 0;
-              letra = "";
+              setState(() {}); // Atualiza o contador
             },
           ),
         ),
@@ -194,10 +202,24 @@ class _TranslationState extends State<Translation> {
             ElevatedButton(
               onPressed: () {
                 _controller.clear();
-                setState(() {}); // Atualiza o contador quando o texto é limpo
+                setState(() {});
               },
               child: Text(
                 'Limpar',
+                style: TextStyle(color: Colors.white),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF208B52),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+            ),
+            SizedBox(width: 10),
+            ElevatedButton(
+              onPressed: _submitText, // Submete ao clicar em "Submeter"
+              child: Text(
+                'Submeter',
                 style: TextStyle(color: Colors.white),
               ),
               style: ElevatedButton.styleFrom(

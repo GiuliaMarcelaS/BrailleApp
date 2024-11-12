@@ -30,16 +30,15 @@ class AcertosScreen extends StatelessWidget {
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final passer = Provider.of<Passer>(context, listen: false);
-    print("ai" + passer.topicoCompleto.toString());
     if (passer.topicoCompleto == topico.id) {
       passer.incrementaTopico(topico);
     }
     passer.salvaTopico(topico, auth.token ?? '', auth.userId ?? '');
 
-    if (topicos_data[passer.faseCompleta - 1].length == passer.topicoCompleto) {
-      passer.salvaModulo(fase, auth.token ?? "", auth.userId ?? "");
-    }
-    if (topicos_data[passer.faseCompleta - 1].length < passer.topicoCompleto) {
+    passer.salvaModulo(fase, auth.token ?? "", auth.userId ?? "");
+
+    if (topicos_data[passer.faseCompleta - 1].length ==
+        int.parse(topico.number)) {
       passer.incrementaFaset(fase, topico, auth.token ?? "", auth.userId ?? '');
     }
     final Passer passer2 = args['passer'];
