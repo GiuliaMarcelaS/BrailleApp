@@ -13,7 +13,6 @@ class Quest1Screen extends StatefulWidget {
 }
 
 class _Quest1ScreenState extends State<Quest1Screen> {
-  // int indice = 0;
   int selected = 0;
   bool isAnswered = false;
   bool isCorrect = false;
@@ -48,8 +47,6 @@ class _Quest1ScreenState extends State<Quest1Screen> {
     final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
     final auth = Provider.of<Auth>(context, listen: false);
     setState(() {
       isAnswered = true;
@@ -131,6 +128,11 @@ class _Quest1ScreenState extends State<Quest1Screen> {
               itemCount: 4,
               itemBuilder: (context, i) {
                 int buttonIndex = i + 1;
+                bool isSelected = selected == buttonIndex;
+                bool isCurrentCorrect = isAnswered && isSelected && isCorrect;
+                bool isCurrentIncorrect =
+                    isAnswered && isSelected && !isCorrect;
+
                 return Container(
                   margin: EdgeInsets.only(
                       left: 16 / 360 * screenWidth,
@@ -144,24 +146,28 @@ class _Quest1ScreenState extends State<Quest1Screen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                           side: BorderSide(width: 1)),
+                      backgroundColor: isCurrentCorrect
+                          ? Colors.green
+                          : isCurrentIncorrect
+                              ? Colors.red
+                              : Colors.white,
                       foregroundColor: Colors.black,
-                      backgroundColor: selected == buttonIndex
-                          ? Color(0xFFBAE2CD)
-                          : Colors.white,
                     ),
                     onPressed:
                         isAnswered ? null : () => select(buttonIndex, topico),
                     child: Row(
                       children: [
-                        if (selected == buttonIndex && isAnswered)
-                          isCorrect
-                              ? Icon(Icons.check_box_rounded)
-                              : Icon(Icons.close),
-                        if (selected != buttonIndex)
-                          Icon(
-                            Icons.circle_outlined,
-                            size: 20 / 360 * screenWidth,
-                          ),
+                        Icon(
+                          // Display filled circle when selected, otherwise outlined
+                          isSelected ? Icons.circle : Icons.circle_outlined,
+                          color: isAnswered
+                              ? (isCurrentCorrect
+                                  ? Colors.black
+                                  : (isCurrentIncorrect
+                                      ? Colors.black
+                                      : Colors.black))
+                              : Colors.black,
+                        ),
                         SizedBox(width: screenWidth * 8 / 360),
                         Expanded(
                           child: Padding(

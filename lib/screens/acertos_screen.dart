@@ -58,7 +58,7 @@ class AcertosScreen extends StatelessWidget {
       image: 'assets/images/Group48.png',
       negrito:
           'Você acertou ${topico.acertou} de ${topico.perguntas.length} perguntas!',
-      texto: 'Parabéns!',
+      texto: '',
       botao: 'Concluir',
       rota: () => _topicos(context),
     );
