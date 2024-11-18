@@ -35,12 +35,11 @@ class AcertosScreen extends StatelessWidget {
     }
     passer.salvaTopico(topico, auth.token ?? '', auth.userId ?? '');
 
-    passer.salvaModulo(fase, auth.token ?? "", auth.userId ?? "");
-
     if (topicos_data[passer.faseCompleta - 1].length ==
         int.parse(topico.number)) {
       passer.incrementaFaset(fase, topico, auth.token ?? "", auth.userId ?? '');
     }
+    passer.salvaModulo(fase, auth.token ?? "", auth.userId ?? "");
     final Passer passer2 = args['passer'];
     Navigator.of(context).popUntil(ModalRoute.withName('/fases-screen'));
   }

@@ -40,7 +40,6 @@ class _TranslationState extends State<Translation> {
     cells.addCells(letra);
     cells.id = 0;
     letra = "";
-    _controller.clear(); // Limpa o campo de texto após a submissão
   }
 
   String identifyUpperCase(String frase) {
