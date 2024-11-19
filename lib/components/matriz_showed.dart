@@ -28,7 +28,7 @@ class _MatrizShowedState extends State<MatrizShowed> {
               return pw.Padding(
                 padding: const pw.EdgeInsets.all(2),
                 child: pw.Text(
-                  "●", // Simboliza uma célula Braille
+                  "●",
                   style: pw.TextStyle(fontSize: 24),
                 ),
               );
@@ -38,12 +38,10 @@ class _MatrizShowedState extends State<MatrizShowed> {
       ),
     );
 
-    // Salve o PDF no dispositivo
     final output = await getTemporaryDirectory();
     final file = File('${output.path}/braille.pdf');
     await file.writeAsBytes(await pdf.save());
 
-    // Compartilhar ou imprimir o PDF
     await Printing.sharePdf(bytes: await pdf.save(), filename: 'braille.pdf');
   }
 
