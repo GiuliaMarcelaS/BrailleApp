@@ -34,9 +34,7 @@ class _TranslationState extends State<Translation> {
     cells.wordsClicker(auth.token ?? '', auth.userId ?? '');
     ball.reset(letra);
     letra = identifyUpperCase(valor);
-    print(letra);
     ball.translatePhrase(letra, cells.id);
-    print(letra.length);
     cells.addCells(letra);
     cells.id = 0;
     letra = "";
@@ -137,7 +135,6 @@ class _TranslationState extends State<Translation> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Linha com a label e contador estilizados
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Row(
@@ -216,7 +213,7 @@ class _TranslationState extends State<Translation> {
             ),
             SizedBox(width: 10),
             ElevatedButton(
-              onPressed: _submitText, // Submete ao clicar em "Submeter"
+              onPressed: _submitText,
               child: Text(
                 'Submeter',
                 style: TextStyle(color: Colors.white),
