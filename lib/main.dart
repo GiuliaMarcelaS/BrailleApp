@@ -1,4 +1,6 @@
 import 'package:braille_app/components/translation.dart';
+import 'package:braille_app/models/historico.dart';
+import 'package:braille_app/models/historico_list.dart';
 import 'package:braille_app/models/information_1.dart';
 import 'package:braille_app/models/topico.dart';
 import 'package:braille_app/models/user_data.dart';
@@ -110,10 +112,19 @@ class BrailleApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => ModulosScreen(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => Historico(),
+        ),
         ChangeNotifierProxyProvider<Auth, Cell>(
           create: (_) => Cell("", ''),
           update: (ctx, auth, previous) {
             return Cell(auth.token ?? '', auth.userId ?? '');
+          },
+        ),
+        ChangeNotifierProxyProvider<Auth, HistoricoList>(
+          create: (_) => HistoricoList("", ''),
+          update: (ctx, auth, previous) {
+            return HistoricoList(auth.token ?? '', auth.userId ?? '');
           },
         ),
         ChangeNotifierProxyProvider<Auth, Passer>(
@@ -132,13 +143,12 @@ class BrailleApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          scaffoldBackgroundColor: Color(0xFFDDE9DD),
-          appBarTheme: AppBarTheme(color: Color(0xFFDDE9DD)),
-          tabBarTheme: TabBarTheme(
-            indicatorColor: Colors.black,
-            labelColor: Colors.black,
-          )
-        ),
+            scaffoldBackgroundColor: Color(0xFFDDE9DD),
+            appBarTheme: AppBarTheme(color: Color(0xFFDDE9DD)),
+            tabBarTheme: TabBarTheme(
+              indicatorColor: Colors.black,
+              labelColor: Colors.black,
+            )),
         routes: {
           '/': (ctx) => const AuthScreen(),
           '/modulos-screen': (ctx) => ModulosScreen(),

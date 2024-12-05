@@ -1,12 +1,13 @@
 import 'package:braille_app/models/ball.dart';
 import 'package:braille_app/models/cells_list.dart';
+import 'package:braille_app/models/historico_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/auth.dart';
 import 'package:flutter/services.dart';
 
-class Translation extends StatefulWidget{
-   Translation({super.key});
+class Translation extends StatefulWidget {
+  Translation({super.key});
 
   @override
   State<Translation> createState() => _TranslationState();
@@ -27,20 +28,22 @@ class _TranslationState extends State<Translation> {
     final ball = Provider.of<Ball>(context, listen: false);
     final cells = Provider.of<CellsList>(context, listen: false);
     final auth = Provider.of<Auth>(context, listen: false);
+    final historicoList = Provider.of<HistoricoList>(context, listen: false);
 
     String valor = _controller.text.trim();
-    if (valor.isEmpty)
-      return; 
+    if (valor.isEmpty) return;
 
     cells.wordsClicker(auth.token ?? '', auth.userId ?? '');
     ball.reset(letra);
 
     setState(() {
-    letra = identifyUpperCase(valor);
-    letra = ball.braille_translator(letra);
-    // letra = "";
-      
+      letra = identifyUpperCase(valor);
+      letra = ball.braille_translator(letra);
+      // letra = "";
     });
+
+    historicoList.salvaHistorico(
+        auth.token ?? '', auth.userId ?? '', '22/05', valor, letra);
   }
 
   String identifyUpperCase(String frase) {
@@ -133,7 +136,7 @@ class _TranslationState extends State<Translation> {
     return fraseAlterada;
   }
 
-   void _copyToClipboard() {
+  void _copyToClipboard() {
     Clipboard.setData(ClipboardData(text: letra));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Texto copiado para a área de transferência!')),
@@ -201,7 +204,7 @@ class _TranslationState extends State<Translation> {
                   counterText: "",
                 ),
                 onChanged: (valor) {
-                  setState(() {}); 
+                  setState(() {});
                 },
               ),
             ),
@@ -241,36 +244,36 @@ class _TranslationState extends State<Translation> {
                 ),
               ],
             ),
-             Padding(
-               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-               child: Row(
-                 children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Row(
+                children: [
                   Text(
-                      "Braille",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
+                    "Braille",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                  Spacer(),
+                  Container(
+                    child: IconButton(
+                      onPressed: _copyToClipboard,
+                      icon: Icon(Icons.copy),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
                     ),
-                    Spacer(),
-                   Container(
-                     child: IconButton(
-                            onPressed: _copyToClipboard,
-                            icon: Icon(Icons.copy),
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
-                          ),
-                   ),
-                 ],
-               ),
-             ),
+                  ),
+                ],
+              ),
+            ),
             Container(
-               height: 200,
-               width: screenWidth,
+              height: 200,
+              width: screenWidth,
               margin: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -288,7 +291,8 @@ class _TranslationState extends State<Translation> {
                 ),
               ),
             ),
-            ElevatedButton(onPressed: (){}, child: Text('Histórico de Pesquisa'))
+            ElevatedButton(
+                onPressed: () {}, child: Text('Histórico de Pesquisa'))
           ],
         ),
       ),
