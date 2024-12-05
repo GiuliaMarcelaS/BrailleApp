@@ -3,9 +3,10 @@ import 'package:braille_app/models/cells_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/auth.dart';
+import 'package:flutter/services.dart';
 
-class Translation extends StatefulWidget {
-  const Translation({super.key});
+class Translation extends StatefulWidget{
+   Translation({super.key});
 
   @override
   State<Translation> createState() => _TranslationState();
@@ -29,15 +30,17 @@ class _TranslationState extends State<Translation> {
 
     String valor = _controller.text.trim();
     if (valor.isEmpty)
-      return; // Verifica se o texto está vazio antes de prosseguir
+      return; 
 
     cells.wordsClicker(auth.token ?? '', auth.userId ?? '');
     ball.reset(letra);
+
+    setState(() {
     letra = identifyUpperCase(valor);
-    ball.translatePhrase(letra, cells.id);
-    cells.addCells(letra);
-    cells.id = 0;
-    letra = "";
+    letra = ball.braille_translator(letra);
+    // letra = "";
+      
+    });
   }
 
   String identifyUpperCase(String frase) {
@@ -130,104 +133,165 @@ class _TranslationState extends State<Translation> {
     return fraseAlterada;
   }
 
+   void _copyToClipboard() {
+    Clipboard.setData(ClipboardData(text: letra));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Texto copiado para a área de transferência!')),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Português (PT/BR)",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                ),
-              ),
-              Text(
-                "${_controller.text.length}/$maxCharacters",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                ),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(height: 5),
-        Container(
-          height: 200,
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.black, width: 1),
-          ),
-          child: TextField(
-            controller: _controller,
-            maxLength: maxCharacters,
-            maxLines: null,
-            expands: true,
-            textAlignVertical: TextAlignVertical.top,
-            textAlign: TextAlign.start,
-            decoration: InputDecoration(
-              hintText: 'Escreva seu texto',
-              filled: true,
-              fillColor: Colors.white,
-              contentPadding: EdgeInsets.all(10),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide.none,
-              ),
-              counterText: "", // Oculta o contador padrão do TextField
-            ),
-            onChanged: (valor) {
-              setState(() {}); // Atualiza o contador
-            },
-          ),
-        ),
-        SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                _controller.clear();
-                setState(() {});
-              },
-              child: Text(
-                'Limpar',
-                style: TextStyle(color: Colors.white),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Português (PT/BR)",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                  Text(
+                    "${_controller.text.length}/$maxCharacters",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
               ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF208B52),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+            ),
+            SizedBox(height: 5),
+            Container(
+              height: 200,
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.black, width: 1),
+              ),
+              child: TextField(
+                controller: _controller,
+                maxLength: maxCharacters,
+                maxLines: null,
+                expands: true,
+                textAlignVertical: TextAlignVertical.top,
+                textAlign: TextAlign.start,
+                decoration: InputDecoration(
+                  hintText: 'Escreva seu texto',
+                  filled: true,
+                  fillColor: Colors.white,
+                  contentPadding: EdgeInsets.all(10),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                  counterText: "",
+                ),
+                onChanged: (valor) {
+                  setState(() {}); 
+                },
+              ),
+            ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    _controller.clear();
+                    setState(() {});
+                  },
+                  child: Text(
+                    'Limpar',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF208B52),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: _submitText,
+                  child: Text(
+                    'Submeter',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF208B52),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+             Padding(
+               padding: const EdgeInsets.symmetric(horizontal: 10.0),
+               child: Row(
+                 children: [
+                  Text(
+                      "Braille",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                    Spacer(),
+                   Container(
+                     child: IconButton(
+                            onPressed: _copyToClipboard,
+                            icon: Icon(Icons.copy),
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                          ),
+                   ),
+                 ],
+               ),
+             ),
+            Container(
+               height: 200,
+               width: screenWidth,
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.black, width: 1),
+              ),
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                child: SelectableText(
+                  letra,
+                  style: TextStyle(
+                    fontSize: 25,
+                    // fontFamily: 'Braille',
+                  ),
                 ),
               ),
             ),
-            SizedBox(width: 10),
-            ElevatedButton(
-              onPressed: _submitText,
-              child: Text(
-                'Submeter',
-                style: TextStyle(color: Colors.white),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF208B52),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-            ),
+            ElevatedButton(onPressed: (){}, child: Text('Histórico de Pesquisa'))
           ],
         ),
-      ],
+      ),
     );
   }
 }

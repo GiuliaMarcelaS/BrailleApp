@@ -11,11 +11,15 @@ class PhraseTranslatorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ball = Provider.of<Ball>(context);
-    var texto = ball.braille_translator('teste');
+    // var texto = ball.braille_translator('teste');
     return Scaffold(
       backgroundColor: Color(0xFFDDE9DD),
       body: Column(
-        children: [Translation(), MatrizShowed(), CaracterTranslator()],
+        children: [
+         Translation(),
+        //  MatrizShowed(),
+        //  CaracterTranslator()
+         ],
       ),
     );
   }

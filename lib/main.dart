@@ -1,3 +1,4 @@
+import 'package:braille_app/components/translation.dart';
 import 'package:braille_app/models/information_1.dart';
 import 'package:braille_app/models/topico.dart';
 import 'package:braille_app/models/user_data.dart';

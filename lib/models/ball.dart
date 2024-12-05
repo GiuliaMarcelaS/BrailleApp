@@ -715,7 +715,7 @@ class Ball with ChangeNotifier {
       'x': '⠭',
       'y': '⠽',
       'z': '⠵',
-      ' ': ' ',
+      ' ': '  ',
       'A': '⠨',
       'B': '⠼',
       '1': '⠁',
@@ -753,7 +753,7 @@ class Ball with ChangeNotifier {
 
     String brailleText = '';
     for (int i = 0; i < texto.length; i++) {
-      brailleText += brailleMap[texto[i].toLowerCase()] ?? '';
+      brailleText += brailleMap[texto[i]] ?? '';
     }
 
     return brailleText;
