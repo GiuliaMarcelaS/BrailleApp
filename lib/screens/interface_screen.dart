@@ -76,6 +76,13 @@ class _InterfaceState extends State<Interface> {
     );
   }
 
+  void _escrever(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      '/tabs-screen-2',
+      arguments: {'initialIndex': 3},
+    );
+  }
+
   final bool _isButtonDisabled = false;
 
   @override
@@ -140,6 +147,19 @@ class _InterfaceState extends State<Interface> {
                     elevation: 20,
                     shadowColor: Colors.black),
                 child: const Text('Praticar')),
+          ),
+          Container(
+            width: screenWidth * 0.80,
+            height: screenHeight * 50 / 800,
+            margin: const EdgeInsets.only(top: 10),
+            child: ElevatedButton(
+                onPressed: (() => _escrever(context)),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF208B52),
+                    foregroundColor: Colors.white,
+                    elevation: 20,
+                    shadowColor: Colors.black),
+                child: const Text('Escrever')),
           ),
           Container(
             width: screenWidth * 0.80,

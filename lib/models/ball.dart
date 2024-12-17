@@ -808,4 +808,36 @@ class Ball with ChangeNotifier {
   //   }
   //   notifyListeners();
   //  }
+
+  cell_translator(List isClicked) {
+    Map<List, String> cellMap = {
+      [true, false, false, false, false, false]: 'a',
+      [true, true, false, false, false, false]: 'b',
+      [true, false, false, true, false, false]: 'c',
+      [true, false, false, true, true, false]: 'd',
+      [true, false, false, false, true, false]: 'e',
+      [true, true, false, true, false, false]: 'f',
+      [true, true, false, true, true, false]: 'g',
+      [true, true, false, false, true, false]: 'h',
+      [false, true, false, true, false, false]: 'i',
+      [false, true, false, true, true, false]: 'j',
+      [true, false, true, false, false, false]: 'k',
+      [true, true, true, false, false, false]: 'l',
+      [true, false, true, true, false, false]: 'm',
+      [true, false, true, true, true, false]: 'n',
+      [true, false, true, false, true, false]: 'o',
+      [true, true, true, true, false, false]: 'p',
+      [true, true, true, true, true, false]: 'q',
+      [true, true, true, false, true, false]: 'r',
+      [false, true, true, true, false, false]: 's',
+      [false, true, true, true, true, false]: 't',
+      [true, false, true, false, false, true]: 'u',
+      [true, true, true, false, false, true]: 'v',
+      [false, true, false, true, true, true]: 'w',
+      [true, false, true, true, false, true]: 'x',
+      [true, false, true, true, true, true]: 'y',
+      [true, false, true, false, true, true]: 'z',
+      [false, false, false, false, false, false]: '',
+    };
+  }
 }

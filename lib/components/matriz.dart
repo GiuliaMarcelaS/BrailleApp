@@ -7,7 +7,6 @@ import 'package:braille_app/models/ball.dart';
 class Matriz extends StatelessWidget {
   const Matriz({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     final cell = Provider.of<Cell>(context);
@@ -18,37 +17,44 @@ class Matriz extends StatelessWidget {
         Row(
           children: [
             IconButton(
-              onPressed: () => cell.toggleBall1(cell,auth.token ?? '',auth.userId ?? ''),
-              icon: Icon(cell.isClicked1? Icons.circle : Icons.circle_outlined,)
-            ),
-               IconButton(
-                 onPressed: () => ball.pressBall,
-                 icon: Icon(cell.isClicked2? Icons.circle : Icons.circle_outlined,)
-               ),
+                onPressed: () =>
+                    cell.toggleBall1(cell, auth.token ?? '', auth.userId ?? ''),
+                icon: Icon(
+                  cell.isClicked1 ? Icons.circle : Icons.circle_outlined,
+                )),
+            IconButton(
+                onPressed: () => cell.toggleBall4(cell),
+                icon: Icon(
+                  cell.isClicked4 ? Icons.circle : Icons.circle_outlined,
+                )),
           ],
         ),
-         Row(
+        Row(
           children: [
             IconButton(
-              onPressed: () => cell.toggleBall3(cell),
-              icon: Icon(cell.isClicked3? Icons.circle : Icons.circle_outlined,)
-            ),
-               IconButton(
-                 onPressed: () => cell.toggleBall4(cell),
-                 icon: Icon(cell.isClicked4? Icons.circle : Icons.circle_outlined,)
-               ),
+                onPressed: () => cell.toggleBall2(cell),
+                icon: Icon(
+                  cell.isClicked2 ? Icons.circle : Icons.circle_outlined,
+                )),
+            IconButton(
+                onPressed: () => cell.toggleBall5(cell),
+                icon: Icon(
+                  cell.isClicked5 ? Icons.circle : Icons.circle_outlined,
+                )),
           ],
         ),
-         Row(
+        Row(
           children: [
             IconButton(
-              onPressed: () => cell.toggleBall5(cell),
-              icon: Icon(cell.isClicked5? Icons.circle : Icons.circle_outlined,)
-            ),
-               IconButton(
-                 onPressed: () => cell.toggleBall6(cell),
-                 icon: Icon(cell.isClicked6? Icons.circle : Icons.circle_outlined,)
-               ),
+                onPressed: () => cell.toggleBall3(cell),
+                icon: Icon(
+                  cell.isClicked3 ? Icons.circle : Icons.circle_outlined,
+                )),
+            IconButton(
+                onPressed: () => cell.toggleBall6(cell),
+                icon: Icon(
+                  cell.isClicked6 ? Icons.circle : Icons.circle_outlined,
+                )),
           ],
         ),
       ],

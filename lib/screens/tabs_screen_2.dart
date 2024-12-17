@@ -1,6 +1,7 @@
 import 'package:braille_app/models/graphic.dart';
 import 'package:braille_app/models/teste.dart';
 import 'package:braille_app/screens/alphabet_translator_screen.dart';
+import 'package:braille_app/screens/escrever_screen.dart';
 import 'package:braille_app/screens/expressions_translator_screen.dart';
 import 'package:braille_app/screens/learn_screen.dart';
 import 'package:braille_app/screens/modulos_screen.dart';
@@ -17,7 +18,7 @@ class TabsScreen2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     double screenHeight = MediaQuery.of(context).size.height;
+    double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
@@ -36,36 +37,44 @@ class TabsScreen2 extends StatelessWidget {
                   PhraseTranslatorScreen(),
                   ModulosScreen(),
                   LearnScreen(),
+                  EscreverScreen(),
                   Container(),
                 ],
               ),
             ),
-           Container(
-              height: 1.0, 
-              color: Colors.black, 
+            Container(
+              height: 1.0,
+              color: Colors.black,
             ),
           ],
         ),
         bottomNavigationBar: TabBar(
           indicatorColor: Color(0xFF208B52),
           labelStyle: TextStyle(
-            fontSize: 12/800*screenHeight,
+            fontSize: 12 / 800 * screenHeight,
           ),
           tabs: [
             Tab(
-              icon: Icon(Icons.translate, size: 23/800*screenHeight,),
+              icon: Icon(
+                Icons.translate,
+                size: 23 / 800 * screenHeight,
+              ),
               text: "Traduzir",
             ),
             Tab(
-              icon: Icon(Icons.menu_book_sharp, size: 23/800*screenHeight),
+              icon: Icon(Icons.menu_book_sharp, size: 23 / 800 * screenHeight),
               text: "Aprender",
             ),
             Tab(
-              icon: Icon(Icons.auto_fix_high, size: 23/800*screenHeight),
+              icon: Icon(Icons.auto_fix_high, size: 23 / 800 * screenHeight),
               text: "Praticar",
             ),
             Tab(
-              icon: Icon(Icons.person, size: 23/800*screenHeight),
+              icon: Icon(Icons.text_snippet, size: 23 / 800 * screenHeight),
+              text: "Escrever",
+            ),
+            Tab(
+              icon: Icon(Icons.person, size: 23 / 800 * screenHeight),
               text: "Perfil",
             ),
           ],
