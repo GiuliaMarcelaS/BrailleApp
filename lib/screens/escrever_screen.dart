@@ -18,14 +18,16 @@ class EscreverScreen extends StatelessWidget {
       body: Column(
         children: [
           Matriz(),
-          Text(ball.cell_translator([
-            cell.isClicked1,
-            cell.isClicked2,
-            cell.isClicked3,
-            cell.isClicked4,
-            cell.isClicked5,
-            cell.isClicked6
-          ])),
+          Text(
+            ball.cell_translator(
+                cell.isClicked1,
+                cell.isClicked2,
+                cell.isClicked3,
+                cell.isClicked4,
+                cell.isClicked5,
+                cell.isClicked6),
+            style: TextStyle(fontSize: 20),
+          ),
         ],
       ),
     );

@@ -809,35 +809,200 @@ class Ball with ChangeNotifier {
   //   notifyListeners();
   //  }
 
-  cell_translator(List isClicked) {
-    Map<List, String> cellMap = {
-      [true, false, false, false, false, false]: 'a',
-      [true, true, false, false, false, false]: 'b',
-      [true, false, false, true, false, false]: 'c',
-      [true, false, false, true, true, false]: 'd',
-      [true, false, false, false, true, false]: 'e',
-      [true, true, false, true, false, false]: 'f',
-      [true, true, false, true, true, false]: 'g',
-      [true, true, false, false, true, false]: 'h',
-      [false, true, false, true, false, false]: 'i',
-      [false, true, false, true, true, false]: 'j',
-      [true, false, true, false, false, false]: 'k',
-      [true, true, true, false, false, false]: 'l',
-      [true, false, true, true, false, false]: 'm',
-      [true, false, true, true, true, false]: 'n',
-      [true, false, true, false, true, false]: 'o',
-      [true, true, true, true, false, false]: 'p',
-      [true, true, true, true, true, false]: 'q',
-      [true, true, true, false, true, false]: 'r',
-      [false, true, true, true, false, false]: 's',
-      [false, true, true, true, true, false]: 't',
-      [true, false, true, false, false, true]: 'u',
-      [true, true, true, false, false, true]: 'v',
-      [false, true, false, true, true, true]: 'w',
-      [true, false, true, true, false, true]: 'x',
-      [true, false, true, true, true, true]: 'y',
-      [true, false, true, false, true, true]: 'z',
-      [false, false, false, false, false, false]: '',
-    };
+  String cell_translator(bool c1, bool c2, bool c3, bool c4, bool c5, bool c6) {
+    String letra = '';
+
+    if (c1 == true &&
+        c2 == false &&
+        c3 == false &&
+        c4 == false &&
+        c5 == false &&
+        c6 == false) {
+      letra = 'a';
+    } else if (c1 == true &&
+        c2 == true &&
+        c3 == false &&
+        c4 == false &&
+        c5 == false &&
+        c6 == false) {
+      letra = 'b';
+    } else if (c1 == true &&
+        c2 == false &&
+        c3 == false &&
+        c4 == true &&
+        c5 == false &&
+        c6 == false) {
+      letra = 'c';
+    } else if (c1 == true &&
+        c2 == false &&
+        c3 == false &&
+        c4 == true &&
+        c5 == true &&
+        c6 == false) {
+      letra = 'd';
+    } else if (c1 == true &&
+        c2 == false &&
+        c3 == false &&
+        c4 == false &&
+        c5 == true &&
+        c6 == false) {
+      letra = 'e';
+    } else if (c1 == true &&
+        c2 == true &&
+        c3 == false &&
+        c4 == true &&
+        c5 == false &&
+        c6 == false) {
+      letra = 'f';
+    } else if (c1 == true &&
+        c2 == true &&
+        c3 == false &&
+        c4 == true &&
+        c5 == true &&
+        c6 == false) {
+      letra = 'g';
+    } else if (c1 == true &&
+        c2 == true &&
+        c3 == false &&
+        c4 == false &&
+        c5 == true &&
+        c6 == false) {
+      letra = 'h';
+    } else if (c1 == false &&
+        c2 == true &&
+        c3 == false &&
+        c4 == true &&
+        c5 == false &&
+        c6 == false) {
+      letra = 'i';
+    } else if (c1 == false &&
+        c2 == true &&
+        c3 == false &&
+        c4 == true &&
+        c5 == true &&
+        c6 == false) {
+      letra = 'j';
+    } else if (c1 == true &&
+        c2 == false &&
+        c3 == true &&
+        c4 == false &&
+        c5 == false &&
+        c6 == false) {
+      letra = 'k';
+    } else if (c1 == true &&
+        c2 == true &&
+        c3 == true &&
+        c4 == false &&
+        c5 == false &&
+        c6 == false) {
+      letra = 'l';
+    } else if (c1 == true &&
+        c2 == false &&
+        c3 == true &&
+        c4 == true &&
+        c5 == false &&
+        c6 == false) {
+      letra = 'm';
+    } else if (c1 == true &&
+        c2 == false &&
+        c3 == true &&
+        c4 == true &&
+        c5 == true &&
+        c6 == false) {
+      letra = 'n';
+    } else if (c1 == true &&
+        c2 == false &&
+        c3 == true &&
+        c4 == false &&
+        c5 == true &&
+        c6 == false) {
+      letra = 'o';
+    } else if (c1 == true &&
+        c2 == true &&
+        c3 == true &&
+        c4 == true &&
+        c5 == false &&
+        c6 == false) {
+      letra = 'p';
+    } else if (c1 == true &&
+        c2 == true &&
+        c3 == true &&
+        c4 == true &&
+        c5 == true &&
+        c6 == false) {
+      letra = 'q';
+    } else if (c1 == true &&
+        c2 == true &&
+        c3 == true &&
+        c4 == false &&
+        c5 == true &&
+        c6 == false) {
+      letra = 'r';
+    } else if (c1 == false &&
+        c2 == true &&
+        c3 == true &&
+        c4 == true &&
+        c5 == false &&
+        c6 == false) {
+      letra = 's';
+    } else if (c1 == false &&
+        c2 == true &&
+        c3 == true &&
+        c4 == true &&
+        c5 == true &&
+        c6 == false) {
+      letra = 't';
+    } else if (c1 == true &&
+        c2 == false &&
+        c3 == true &&
+        c4 == false &&
+        c5 == false &&
+        c6 == true) {
+      letra = 'u';
+    } else if (c1 == true &&
+        c2 == true &&
+        c3 == true &&
+        c4 == false &&
+        c5 == false &&
+        c6 == true) {
+      letra = 'v';
+    } else if (c1 == false &&
+        c2 == true &&
+        c3 == false &&
+        c4 == true &&
+        c5 == true &&
+        c6 == true) {
+      letra = 'w';
+    } else if (c1 == true &&
+        c2 == false &&
+        c3 == true &&
+        c4 == true &&
+        c5 == false &&
+        c6 == true) {
+      letra = 'x';
+    } else if (c1 == true &&
+        c2 == false &&
+        c3 == true &&
+        c4 == true &&
+        c5 == true &&
+        c6 == true) {
+      letra = 'y';
+    } else if (c1 == true &&
+        c2 == false &&
+        c3 == true &&
+        c4 == false &&
+        c5 == true &&
+        c6 == true) {
+      letra = 'z';
+    } else if (c1 == false &&
+        c2 == false &&
+        c3 == false &&
+        c4 == false &&
+        c5 == false &&
+        c6 == false) {
+      letra = '';
+    }
+
+    return letra;
   }
 }
