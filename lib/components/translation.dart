@@ -143,6 +143,10 @@ class _TranslationState extends State<Translation> {
     );
   }
 
+  void _historico(BuildContext context) {
+    Navigator.of(context).pushNamed('/historico-screen');
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -292,7 +296,8 @@ class _TranslationState extends State<Translation> {
               ),
             ),
             ElevatedButton(
-                onPressed: () {}, child: Text('Histórico de Pesquisa'))
+                onPressed: () => _historico(context),
+                child: Text('Histórico de Pesquisa'))
           ],
         ),
       ),

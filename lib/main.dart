@@ -7,6 +7,7 @@ import 'package:braille_app/models/user_data.dart';
 import 'package:braille_app/screens/acertos_screen.dart';
 import 'package:braille_app/screens/auth_screen.dart';
 import 'package:braille_app/screens/forgot_password.dart';
+import 'package:braille_app/screens/historico_screen.dart';
 import 'package:braille_app/screens/learn_screen.dart';
 import 'package:braille_app/screens/quest_1_screen.dart';
 import 'package:braille_app/screens/register_screen.dart';
@@ -178,6 +179,7 @@ class BrailleApp extends StatelessWidget {
           '/testar-screen': (ctx) => TestarScreen(),
           '/quest-1-screen': (ctx) => Quest1Screen(),
           '/acertos-screen': (ctx) => AcertosScreen(),
+          '/historico-screen': (ctx) => HistoricoScreen(),
         },
       ),
     );
