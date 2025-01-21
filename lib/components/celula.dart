@@ -5,9 +5,8 @@ import 'package:braille_app/models/braillecell.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 class OneCell extends StatefulWidget {
-   const OneCell({super.key});
+  const OneCell({super.key});
 
   @override
   State<OneCell> createState() => _OneCellState();
@@ -15,10 +14,9 @@ class OneCell extends StatefulWidget {
 
 class _OneCellState extends State<OneCell> {
   @override
-  void initState(){
+  void initState() {
     super.initState();
     Provider.of<Cell>(context, listen: false).loadBall1('', '');
-    
   }
 
   @override
@@ -28,7 +26,7 @@ class _OneCellState extends State<OneCell> {
         title: const Text('célula'),
       ),
       body: Row(
-        children: const [
+        children: [
           Matriz(),
         ],
       ),

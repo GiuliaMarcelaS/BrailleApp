@@ -25,7 +25,7 @@ class TabsScreen2 extends StatelessWidget {
     final initialIndex = args?['initialIndex'] ?? 0;
 
     return DefaultTabController(
-      length: 4,
+      length: 5,
       initialIndex: initialIndex,
       child: Scaffold(
         backgroundColor: Colors.white,

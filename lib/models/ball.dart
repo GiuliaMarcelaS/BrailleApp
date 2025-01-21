@@ -809,198 +809,208 @@ class Ball with ChangeNotifier {
   //   notifyListeners();
   //  }
 
-  String cell_translator(bool c1, bool c2, bool c3, bool c4, bool c5, bool c6) {
+  List<bool> c1L = [];
+  List<bool> c2L = [];
+  List<bool> c3L = [];
+  List<bool> c4L = [];
+  List<bool> c5L = [];
+  List<bool> c6L = [];
+
+  String cell_translator(
+      bool c1, bool c2, bool c3, bool c4, bool c5, bool c6, List numMatrizes) {
     String letra = '';
 
-    if (c1 == true &&
-        c2 == false &&
-        c3 == false &&
-        c4 == false &&
-        c5 == false &&
-        c6 == false) {
-      letra = 'a';
-    } else if (c1 == true &&
-        c2 == true &&
-        c3 == false &&
-        c4 == false &&
-        c5 == false &&
-        c6 == false) {
-      letra = 'b';
-    } else if (c1 == true &&
-        c2 == false &&
-        c3 == false &&
-        c4 == true &&
-        c5 == false &&
-        c6 == false) {
-      letra = 'c';
-    } else if (c1 == true &&
-        c2 == false &&
-        c3 == false &&
-        c4 == true &&
-        c5 == true &&
-        c6 == false) {
-      letra = 'd';
-    } else if (c1 == true &&
-        c2 == false &&
-        c3 == false &&
-        c4 == false &&
-        c5 == true &&
-        c6 == false) {
-      letra = 'e';
-    } else if (c1 == true &&
-        c2 == true &&
-        c3 == false &&
-        c4 == true &&
-        c5 == false &&
-        c6 == false) {
-      letra = 'f';
-    } else if (c1 == true &&
-        c2 == true &&
-        c3 == false &&
-        c4 == true &&
-        c5 == true &&
-        c6 == false) {
-      letra = 'g';
-    } else if (c1 == true &&
-        c2 == true &&
-        c3 == false &&
-        c4 == false &&
-        c5 == true &&
-        c6 == false) {
-      letra = 'h';
-    } else if (c1 == false &&
-        c2 == true &&
-        c3 == false &&
-        c4 == true &&
-        c5 == false &&
-        c6 == false) {
-      letra = 'i';
-    } else if (c1 == false &&
-        c2 == true &&
-        c3 == false &&
-        c4 == true &&
-        c5 == true &&
-        c6 == false) {
-      letra = 'j';
-    } else if (c1 == true &&
-        c2 == false &&
-        c3 == true &&
-        c4 == false &&
-        c5 == false &&
-        c6 == false) {
-      letra = 'k';
-    } else if (c1 == true &&
-        c2 == true &&
-        c3 == true &&
-        c4 == false &&
-        c5 == false &&
-        c6 == false) {
-      letra = 'l';
-    } else if (c1 == true &&
-        c2 == false &&
-        c3 == true &&
-        c4 == true &&
-        c5 == false &&
-        c6 == false) {
-      letra = 'm';
-    } else if (c1 == true &&
-        c2 == false &&
-        c3 == true &&
-        c4 == true &&
-        c5 == true &&
-        c6 == false) {
-      letra = 'n';
-    } else if (c1 == true &&
-        c2 == false &&
-        c3 == true &&
-        c4 == false &&
-        c5 == true &&
-        c6 == false) {
-      letra = 'o';
-    } else if (c1 == true &&
-        c2 == true &&
-        c3 == true &&
-        c4 == true &&
-        c5 == false &&
-        c6 == false) {
-      letra = 'p';
-    } else if (c1 == true &&
-        c2 == true &&
-        c3 == true &&
-        c4 == true &&
-        c5 == true &&
-        c6 == false) {
-      letra = 'q';
-    } else if (c1 == true &&
-        c2 == true &&
-        c3 == true &&
-        c4 == false &&
-        c5 == true &&
-        c6 == false) {
-      letra = 'r';
-    } else if (c1 == false &&
-        c2 == true &&
-        c3 == true &&
-        c4 == true &&
-        c5 == false &&
-        c6 == false) {
-      letra = 's';
-    } else if (c1 == false &&
-        c2 == true &&
-        c3 == true &&
-        c4 == true &&
-        c5 == true &&
-        c6 == false) {
-      letra = 't';
-    } else if (c1 == true &&
-        c2 == false &&
-        c3 == true &&
-        c4 == false &&
-        c5 == false &&
-        c6 == true) {
-      letra = 'u';
-    } else if (c1 == true &&
-        c2 == true &&
-        c3 == true &&
-        c4 == false &&
-        c5 == false &&
-        c6 == true) {
-      letra = 'v';
-    } else if (c1 == false &&
-        c2 == true &&
-        c3 == false &&
-        c4 == true &&
-        c5 == true &&
-        c6 == true) {
-      letra = 'w';
-    } else if (c1 == true &&
-        c2 == false &&
-        c3 == true &&
-        c4 == true &&
-        c5 == false &&
-        c6 == true) {
-      letra = 'x';
-    } else if (c1 == true &&
-        c2 == false &&
-        c3 == true &&
-        c4 == true &&
-        c5 == true &&
-        c6 == true) {
-      letra = 'y';
-    } else if (c1 == true &&
-        c2 == false &&
-        c3 == true &&
-        c4 == false &&
-        c5 == true &&
-        c6 == true) {
-      letra = 'z';
-    } else if (c1 == false &&
-        c2 == false &&
-        c3 == false &&
-        c4 == false &&
-        c5 == false &&
-        c6 == false) {
-      letra = '';
+    for (int i = 0; i < numMatrizes.length; i++) {
+      if (c1 == true &&
+          c2 == false &&
+          c3 == false &&
+          c4 == false &&
+          c5 == false &&
+          c6 == false) {
+        letra = letra + 'a';
+      } else if (c1 == true &&
+          c2 == true &&
+          c3 == false &&
+          c4 == false &&
+          c5 == false &&
+          c6 == false) {
+        letra = letra + 'b';
+      } else if (c1 == true &&
+          c2 == false &&
+          c3 == false &&
+          c4 == true &&
+          c5 == false &&
+          c6 == false) {
+        letra = letra + 'c';
+      } else if (c1 == true &&
+          c2 == false &&
+          c3 == false &&
+          c4 == true &&
+          c5 == true &&
+          c6 == false) {
+        letra = letra + 'd';
+      } else if (c1 == true &&
+          c2 == false &&
+          c3 == false &&
+          c4 == false &&
+          c5 == true &&
+          c6 == false) {
+        letra = letra + 'e';
+      } else if (c1 == true &&
+          c2 == true &&
+          c3 == false &&
+          c4 == true &&
+          c5 == false &&
+          c6 == false) {
+        letra = letra + 'f';
+      } else if (c1 == true &&
+          c2 == true &&
+          c3 == false &&
+          c4 == true &&
+          c5 == true &&
+          c6 == false) {
+        letra = letra + 'g';
+      } else if (c1 == true &&
+          c2 == true &&
+          c3 == false &&
+          c4 == false &&
+          c5 == true &&
+          c6 == false) {
+        letra = letra + 'h';
+      } else if (c1 == false &&
+          c2 == true &&
+          c3 == false &&
+          c4 == true &&
+          c5 == false &&
+          c6 == false) {
+        letra = letra + 'i';
+      } else if (c1 == false &&
+          c2 == true &&
+          c3 == false &&
+          c4 == true &&
+          c5 == true &&
+          c6 == false) {
+        letra = letra + 'j';
+      } else if (c1 == true &&
+          c2 == false &&
+          c3 == true &&
+          c4 == false &&
+          c5 == false &&
+          c6 == false) {
+        letra = letra + 'k';
+      } else if (c1 == true &&
+          c2 == true &&
+          c3 == true &&
+          c4 == false &&
+          c5 == false &&
+          c6 == false) {
+        letra = letra + 'l';
+      } else if (c1 == true &&
+          c2 == false &&
+          c3 == true &&
+          c4 == true &&
+          c5 == false &&
+          c6 == false) {
+        letra = letra + 'm';
+      } else if (c1 == true &&
+          c2 == false &&
+          c3 == true &&
+          c4 == true &&
+          c5 == true &&
+          c6 == false) {
+        letra = letra + 'n';
+      } else if (c1 == true &&
+          c2 == false &&
+          c3 == true &&
+          c4 == false &&
+          c5 == true &&
+          c6 == false) {
+        letra = letra + 'o';
+      } else if (c1 == true &&
+          c2 == true &&
+          c3 == true &&
+          c4 == true &&
+          c5 == false &&
+          c6 == false) {
+        letra = letra + 'p';
+      } else if (c1 == true &&
+          c2 == true &&
+          c3 == true &&
+          c4 == true &&
+          c5 == true &&
+          c6 == false) {
+        letra = letra + 'q';
+      } else if (c1 == true &&
+          c2 == true &&
+          c3 == true &&
+          c4 == false &&
+          c5 == true &&
+          c6 == false) {
+        letra = letra + 'r';
+      } else if (c1 == false &&
+          c2 == true &&
+          c3 == true &&
+          c4 == true &&
+          c5 == false &&
+          c6 == false) {
+        letra = letra + 's';
+      } else if (c1 == false &&
+          c2 == true &&
+          c3 == true &&
+          c4 == true &&
+          c5 == true &&
+          c6 == false) {
+        letra = letra + 't';
+      } else if (c1 == true &&
+          c2 == false &&
+          c3 == true &&
+          c4 == false &&
+          c5 == false &&
+          c6 == true) {
+        letra = letra + 'u';
+      } else if (c1 == true &&
+          c2 == true &&
+          c3 == true &&
+          c4 == false &&
+          c5 == false &&
+          c6 == true) {
+        letra = letra + 'v';
+      } else if (c1 == false &&
+          c2 == true &&
+          c3 == false &&
+          c4 == true &&
+          c5 == true &&
+          c6 == true) {
+        letra = letra + 'w';
+      } else if (c1 == true &&
+          c2 == false &&
+          c3 == true &&
+          c4 == true &&
+          c5 == false &&
+          c6 == true) {
+        letra = letra + 'x';
+      } else if (c1 == true &&
+          c2 == false &&
+          c3 == true &&
+          c4 == true &&
+          c5 == true &&
+          c6 == true) {
+        letra = letra + 'y';
+      } else if (c1 == true &&
+          c2 == false &&
+          c3 == true &&
+          c4 == false &&
+          c5 == true &&
+          c6 == true) {
+        letra = letra + 'z';
+      } else if (c1 == false &&
+          c2 == false &&
+          c3 == false &&
+          c4 == false &&
+          c5 == false &&
+          c6 == false) {
+        letra = letra + '';
+      }
     }
 
     return letra;
