@@ -17,7 +17,9 @@ class _EscreverScreenState extends State<EscreverScreen> {
 
   void _addMatriz() {
     setState(() {
-      matrizes.add(Matriz()); // Adiciona uma nova matriz à lista
+      matrizes.add(Matriz(
+        indice: matrizes.length,
+      )); // Adiciona uma nova matriz à lista
     });
   }
 
@@ -58,12 +60,18 @@ class _EscreverScreenState extends State<EscreverScreen> {
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal, // Permite rolagem horizontal
               child: Row(
-                children: matrizes, // Renderiza todas as matrizes na lista
+                children: matrizes
+                    .map((matriz) => Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0), // Espaçamento entre matrizes
+                          child: matriz,
+                        ))
+                    .toList(), // Renderiza todas as matrizes na lista
               ),
             ),
           ),
           Text(
-            ball.translation,
+            ball.separaCaracteres.join(''),
             style: const TextStyle(fontSize: 20),
           ),
         ],

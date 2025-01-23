@@ -11,6 +11,7 @@ class Matriz extends StatefulWidget {
   bool cel4;
   bool cel5;
   bool cel6;
+  int indice;
 
   Matriz({
     super.key,
@@ -20,6 +21,7 @@ class Matriz extends StatefulWidget {
     this.cel4 = false,
     this.cel5 = false,
     this.cel6 = false,
+    this.indice = 0,
   });
 
   @override
@@ -81,6 +83,8 @@ class _MatrizState extends State<Matriz> {
     });
   }
 
+  List separaLetras = [];
+
   String cell_translator() {
     String letra = '';
     if (isClicked1 == true &&
@@ -103,7 +107,7 @@ class _MatrizState extends State<Matriz> {
         isClicked4 == true &&
         isClicked5 == false &&
         isClicked6 == false) {
-      letra = 'isClicked';
+      letra = 'c';
     } else if (isClicked1 == true &&
         isClicked2 == false &&
         isClicked3 == false &&
@@ -289,7 +293,7 @@ class _MatrizState extends State<Matriz> {
             IconButton(
                 onPressed: () {
                   toggleBall1();
-                  ball.translation = cell_translator();
+                  ball.separaCaracteres[widget.indice] = cell_translator();
                   ball.notifyListeners();
                 },
                 icon: Icon(
@@ -298,7 +302,9 @@ class _MatrizState extends State<Matriz> {
             IconButton(
                 onPressed: () {
                   toggleBall4();
-                  ball.translation = cell_translator();
+                  print(widget.indice);
+                  print(ball.aux);
+                  ball.separaCaracteres[widget.indice] = cell_translator();
                   ball.notifyListeners();
                 },
                 icon: Icon(
@@ -311,7 +317,7 @@ class _MatrizState extends State<Matriz> {
             IconButton(
                 onPressed: () {
                   toggleBall2();
-                  ball.translation = cell_translator();
+                  ball.separaCaracteres[widget.indice] = cell_translator();
                   ball.notifyListeners();
                 },
                 icon: Icon(
@@ -320,7 +326,7 @@ class _MatrizState extends State<Matriz> {
             IconButton(
                 onPressed: () {
                   toggleBall5();
-                  ball.translation = cell_translator();
+                  ball.separaCaracteres[widget.indice] = cell_translator();
                   ball.notifyListeners();
                 },
                 icon: Icon(
@@ -333,7 +339,7 @@ class _MatrizState extends State<Matriz> {
             IconButton(
                 onPressed: () {
                   toggleBall3();
-                  ball.translation = cell_translator();
+                  ball.separaCaracteres[widget.indice] = cell_translator();
                   ball.notifyListeners();
                 },
                 icon: Icon(
@@ -342,7 +348,7 @@ class _MatrizState extends State<Matriz> {
             IconButton(
                 onPressed: () {
                   toggleBall6();
-                  ball.translation = cell_translator();
+                  ball.separaCaracteres[widget.indice] = cell_translator();
                   ball.notifyListeners();
                 },
                 icon: Icon(

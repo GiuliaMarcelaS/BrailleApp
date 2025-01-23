@@ -815,6 +815,8 @@ class Ball with ChangeNotifier {
   List<bool> c4L = [];
   List<bool> c5L = [];
   List<bool> c6L = [];
+  int aux = 0;
+  List separaCaracteres = List.filled(100, '');
 
   String cell_translator(
       bool c1, bool c2, bool c3, bool c4, bool c5, bool c6, List numMatrizes) {
