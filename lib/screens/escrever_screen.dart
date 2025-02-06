@@ -18,7 +18,7 @@ class _EscreverScreenState extends State<EscreverScreen> {
   void _addMatriz() {
     setState(() {
       matrizes.add(Matriz(
-        indice: matrizes.length,
+        // indice: matrizes.length,
       )); // Adiciona uma nova matriz à lista
     });
   }

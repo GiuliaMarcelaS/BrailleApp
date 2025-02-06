@@ -1,28 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:braille_app/models/braillecell.dart';
 import 'package:provider/provider.dart';
-import 'package:braille_app/models/auth.dart';
 import 'package:braille_app/models/ball.dart';
 
 class Matriz extends StatefulWidget {
-  bool cel1;
-  bool cel2;
-  bool cel3;
-  bool cel4;
-  bool cel5;
-  bool cel6;
-  int indice;
-
-  Matriz({
-    super.key,
-    this.cel1 = false,
-    this.cel2 = false,
-    this.cel3 = false,
-    this.cel4 = false,
-    this.cel5 = false,
-    this.cel6 = false,
-    this.indice = 0,
-  });
+  Matriz({super.key});
 
   @override
   State<Matriz> createState() => _MatrizState();
@@ -30,330 +11,161 @@ class Matriz extends StatefulWidget {
 
 class _MatrizState extends State<Matriz> {
   bool isClicked1 = false;
-
   bool isClicked2 = false;
-
   bool isClicked3 = false;
-
   bool isClicked4 = false;
-
   bool isClicked5 = false;
-
   bool isClicked6 = false;
+  int indice = 0;
 
-  void toggleBall1() {
+  void novaLetra() {
+    final ball = Provider.of<Ball>(context, listen: false);
+
     setState(() {
-      isClicked1 = !isClicked1;
-      cell_translator();
+      isClicked1 = false;
+      isClicked2 = false;
+      isClicked3 = false;
+      isClicked4 = false;
+      isClicked5 = false;
+      isClicked6 = false;
+      indice++;
+
+      // Adiciona "_" na nova posição se ainda não existir
+      if (indice >= ball.separaCaracteres.length) {
+        ball.separaCaracteres.add('_');
+      } else {
+        ball.separaCaracteres[indice] = '_';
+      }
+
+      ball.notifyListeners();
     });
   }
 
-  void toggleBall2() {
-    setState(() {
-      isClicked2 = !isClicked2;
-      cell_translator();
-    });
+  void letraAnterior() {
+    final ball = Provider.of<Ball>(context, listen: false);
+
+    if (indice > 0) {
+      setState(() {
+        ball.separaCaracteres[indice] = '';
+        indice--;
+        ball.notifyListeners();
+      });
+    }
   }
 
-  void toggleBall3() {
-    setState(() {
-      isClicked3 = !isClicked3;
-      cell_translator();
-    });
+  void updateLetter() {
+    final ball = Provider.of<Ball>(context, listen: false);
+    final translatedLetter = cell_translator();
+
+    if (indice < ball.separaCaracteres.length) {
+      ball.separaCaracteres[indice] = translatedLetter.isEmpty ? '_' : translatedLetter;
+      ball.notifyListeners();
+    }
   }
 
-  void toggleBall4() {
-    setState(() {
-      isClicked4 = !isClicked4;
-      cell_translator();
-    });
-  }
+  void toggleBall1() => setState(() {
+    isClicked1 = !isClicked1;
+    updateLetter();
+  });
 
-  void toggleBall5() {
-    setState(() {
-      isClicked5 = !isClicked5;
-      cell_translator();
-    });
-  }
+  void toggleBall2() => setState(() {
+    isClicked2 = !isClicked2;
+    updateLetter();
+  });
 
-  void toggleBall6() {
-    setState(() {
-      isClicked6 = !isClicked6;
-      cell_translator();
-    });
-  }
+  void toggleBall3() => setState(() {
+    isClicked3 = !isClicked3;
+    updateLetter();
+  });
 
-  List separaLetras = [];
+  void toggleBall4() => setState(() {
+    isClicked4 = !isClicked4;
+    updateLetter();
+  });
+
+  void toggleBall5() => setState(() {
+    isClicked5 = !isClicked5;
+    updateLetter();
+  });
+
+  void toggleBall6() => setState(() {
+    isClicked6 = !isClicked6;
+    updateLetter();
+  });
 
   String cell_translator() {
-    String letra = '';
-    if (isClicked1 == true &&
-        isClicked2 == false &&
-        isClicked3 == false &&
-        isClicked4 == false &&
-        isClicked5 == false &&
-        isClicked6 == false) {
-      letra = 'a';
-    } else if (isClicked1 == true &&
-        isClicked2 == true &&
-        isClicked3 == false &&
-        isClicked4 == false &&
-        isClicked5 == false &&
-        isClicked6 == false) {
-      letra = 'b';
-    } else if (isClicked1 == true &&
-        isClicked2 == false &&
-        isClicked3 == false &&
-        isClicked4 == true &&
-        isClicked5 == false &&
-        isClicked6 == false) {
-      letra = 'c';
-    } else if (isClicked1 == true &&
-        isClicked2 == false &&
-        isClicked3 == false &&
-        isClicked4 == true &&
-        isClicked5 == true &&
-        isClicked6 == false) {
-      letra = 'd';
-    } else if (isClicked1 == true &&
-        isClicked2 == false &&
-        isClicked3 == false &&
-        isClicked4 == false &&
-        isClicked5 == true &&
-        isClicked6 == false) {
-      letra = 'e';
-    } else if (isClicked1 == true &&
-        isClicked2 == true &&
-        isClicked3 == false &&
-        isClicked4 == true &&
-        isClicked5 == false &&
-        isClicked6 == false) {
-      letra = 'f';
-    } else if (isClicked1 == true &&
-        isClicked2 == true &&
-        isClicked3 == false &&
-        isClicked4 == true &&
-        isClicked5 == true &&
-        isClicked6 == false) {
-      letra = 'g';
-    } else if (isClicked1 == true &&
-        isClicked2 == true &&
-        isClicked3 == false &&
-        isClicked4 == false &&
-        isClicked5 == true &&
-        isClicked6 == false) {
-      letra = 'h';
-    } else if (isClicked1 == false &&
-        isClicked2 == true &&
-        isClicked3 == false &&
-        isClicked4 == true &&
-        isClicked5 == false &&
-        isClicked6 == false) {
-      letra = 'i';
-    } else if (isClicked1 == false &&
-        isClicked2 == true &&
-        isClicked3 == false &&
-        isClicked4 == true &&
-        isClicked5 == true &&
-        isClicked6 == false) {
-      letra = 'j';
-    } else if (isClicked1 == true &&
-        isClicked2 == false &&
-        isClicked3 == true &&
-        isClicked4 == false &&
-        isClicked5 == false &&
-        isClicked6 == false) {
-      letra = 'k';
-    } else if (isClicked1 == true &&
-        isClicked2 == true &&
-        isClicked3 == true &&
-        isClicked4 == false &&
-        isClicked5 == false &&
-        isClicked6 == false) {
-      letra = 'l';
-    } else if (isClicked1 == true &&
-        isClicked2 == false &&
-        isClicked3 == true &&
-        isClicked4 == true &&
-        isClicked5 == false &&
-        isClicked6 == false) {
-      letra = 'm';
-    } else if (isClicked1 == true &&
-        isClicked2 == false &&
-        isClicked3 == true &&
-        isClicked4 == true &&
-        isClicked5 == true &&
-        isClicked6 == false) {
-      letra = 'n';
-    } else if (isClicked1 == true &&
-        isClicked2 == false &&
-        isClicked3 == true &&
-        isClicked4 == false &&
-        isClicked5 == true &&
-        isClicked6 == false) {
-      letra = 'o';
-    } else if (isClicked1 == true &&
-        isClicked2 == true &&
-        isClicked3 == true &&
-        isClicked4 == true &&
-        isClicked5 == false &&
-        isClicked6 == false) {
-      letra = 'p';
-    } else if (isClicked1 == true &&
-        isClicked2 == true &&
-        isClicked3 == true &&
-        isClicked4 == true &&
-        isClicked5 == true &&
-        isClicked6 == false) {
-      letra = 'q';
-    } else if (isClicked1 == true &&
-        isClicked2 == true &&
-        isClicked3 == true &&
-        isClicked4 == false &&
-        isClicked5 == true &&
-        isClicked6 == false) {
-      letra = 'r';
-    } else if (isClicked1 == false &&
-        isClicked2 == true &&
-        isClicked3 == true &&
-        isClicked4 == true &&
-        isClicked5 == false &&
-        isClicked6 == false) {
-      letra = 's';
-    } else if (isClicked1 == false &&
-        isClicked2 == true &&
-        isClicked3 == true &&
-        isClicked4 == true &&
-        isClicked5 == true &&
-        isClicked6 == false) {
-      letra = 't';
-    } else if (isClicked1 == true &&
-        isClicked2 == false &&
-        isClicked3 == true &&
-        isClicked4 == false &&
-        isClicked5 == false &&
-        isClicked6 == true) {
-      letra = 'u';
-    } else if (isClicked1 == true &&
-        isClicked2 == true &&
-        isClicked3 == true &&
-        isClicked4 == false &&
-        isClicked5 == false &&
-        isClicked6 == true) {
-      letra = 'v';
-    } else if (isClicked1 == false &&
-        isClicked2 == true &&
-        isClicked3 == false &&
-        isClicked4 == true &&
-        isClicked5 == true &&
-        isClicked6 == true) {
-      letra = 'w';
-    } else if (isClicked1 == true &&
-        isClicked2 == false &&
-        isClicked3 == true &&
-        isClicked4 == true &&
-        isClicked5 == false &&
-        isClicked6 == true) {
-      letra = 'x';
-    } else if (isClicked1 == true &&
-        isClicked2 == false &&
-        isClicked3 == true &&
-        isClicked4 == true &&
-        isClicked5 == true &&
-        isClicked6 == true) {
-      letra = 'y';
-    } else if (isClicked1 == true &&
-        isClicked2 == false &&
-        isClicked3 == true &&
-        isClicked4 == false &&
-        isClicked5 == true &&
-        isClicked6 == true) {
-      letra = 'z';
-    } else if (isClicked1 == false &&
-        isClicked2 == false &&
-        isClicked3 == false &&
-        isClicked4 == false &&
-        isClicked5 == false &&
-        isClicked6 == false) {
-      letra = '';
-    }
-
-    return letra;
+    if (isClicked1 && !isClicked2 && !isClicked3 && !isClicked4 && !isClicked5 && !isClicked6) return 'a';
+    if (isClicked1 && isClicked2 && !isClicked3 && !isClicked4 && !isClicked5 && !isClicked6) return 'b';
+    if (isClicked1 && !isClicked2 && !isClicked3 && isClicked4 && !isClicked5 && !isClicked6) return 'c';
+    if (isClicked1 && !isClicked2 && !isClicked3 && isClicked4 && isClicked5 && !isClicked6) return 'd';
+    if (isClicked1 && !isClicked2 && !isClicked3 && !isClicked4 && isClicked5 && !isClicked6) return 'e';
+    if (isClicked1 && isClicked2 && !isClicked3 && isClicked4 && !isClicked5 && !isClicked6) return 'f';
+    if (isClicked1 && isClicked2 && !isClicked3 && isClicked4 && isClicked5 && !isClicked6) return 'g';
+    if (isClicked1 && isClicked2 && !isClicked3 && !isClicked4 && isClicked5 && !isClicked6) return 'h';
+    if (!isClicked1 && isClicked2 && !isClicked3 && isClicked4 && !isClicked5 && !isClicked6) return 'i';
+    if (!isClicked1 && isClicked2 && !isClicked3 && isClicked4 && isClicked5 && !isClicked6) return 'j';
+    if (isClicked1 && !isClicked2 && isClicked3 && !isClicked4 && !isClicked5 && !isClicked6) return 'k';
+    if (isClicked1 && isClicked2 && isClicked3 && !isClicked4 && !isClicked5 && !isClicked6) return 'l';
+    if (isClicked1 && !isClicked2 && isClicked3 && isClicked4 && !isClicked5 && !isClicked6) return 'm';
+    if (isClicked1 && !isClicked2 && isClicked3 && isClicked4 && isClicked5 && !isClicked6) return 'n';
+    if (isClicked1 && !isClicked2 && isClicked3 && !isClicked4 && isClicked5 && !isClicked6) return 'o';
+    if (isClicked1 && isClicked2 && isClicked3 && isClicked4 && !isClicked5 && !isClicked6) return 'p';
+    if (isClicked1 && isClicked2 && isClicked3 && isClicked4 && isClicked5 && !isClicked6) return 'q';
+    if (isClicked1 && isClicked2 && isClicked3 && !isClicked4 && isClicked5 && !isClicked6) return 'r';
+    if (!isClicked1 && isClicked2 && isClicked3 && isClicked4 && !isClicked5 && !isClicked6) return 's';
+    if (!isClicked1 && isClicked2 && isClicked3 && isClicked4 && isClicked5 && !isClicked6) return 't';
+    if (isClicked1 && !isClicked2 && isClicked3 && !isClicked4 && !isClicked5 && isClicked6) return 'u';
+    if (isClicked1 && isClicked2 && isClicked3 && !isClicked4 && !isClicked5 && isClicked6) return 'v';
+    if (!isClicked1 && isClicked2 && !isClicked3 && isClicked4 && isClicked5 && isClicked6) return 'w';
+    if (isClicked1 && !isClicked2 && isClicked3 && isClicked4 && !isClicked5 && isClicked6) return 'x';
+    if (isClicked1 && !isClicked2 && isClicked3 && isClicked4 && isClicked5 && isClicked6) return 'y';
+    if (isClicked1 && !isClicked2 && isClicked3 && !isClicked4 && isClicked5 && isClicked6) return 'z';
+    return '';
   }
 
   @override
   Widget build(BuildContext context) {
-    final cell = Provider.of<Cell>(context);
     final ball = Provider.of<Ball>(context);
-    final auth = Provider.of<Auth>(context, listen: false);
     return Column(
       children: [
         Row(
           children: [
-            IconButton(
-                onPressed: () {
-                  toggleBall1();
-                  ball.separaCaracteres[widget.indice] = cell_translator();
+            ElevatedButton(
+              onPressed: () {
+                if (indice > 0) {
+                  ball.separaCaracteres[indice] = ''; // Remove apenas o último caractere
+                  letraAnterior();
                   ball.notifyListeners();
-                },
-                icon: Icon(
-                  isClicked1 ? Icons.circle : Icons.circle_outlined,
-                )),
-            IconButton(
-                onPressed: () {
-                  toggleBall4();
-                  print(widget.indice);
-                  print(ball.aux);
-                  ball.separaCaracteres[widget.indice] = cell_translator();
-                  ball.notifyListeners();
-                },
-                icon: Icon(
-                  isClicked4 ? Icons.circle : Icons.circle_outlined,
-                )),
+                }
+              },
+              child: Text('Letra Anterior'),
+            ),
+            ElevatedButton(
+              onPressed: novaLetra,
+              child: Text('Nova Letra'),
+            ),
           ],
         ),
-        Row(
+        Column(
           children: [
-            IconButton(
-                onPressed: () {
-                  toggleBall2();
-                  ball.separaCaracteres[widget.indice] = cell_translator();
-                  ball.notifyListeners();
-                },
-                icon: Icon(
-                  isClicked2 ? Icons.circle : Icons.circle_outlined,
-                )),
-            IconButton(
-                onPressed: () {
-                  toggleBall5();
-                  ball.separaCaracteres[widget.indice] = cell_translator();
-                  ball.notifyListeners();
-                },
-                icon: Icon(
-                  isClicked5 ? Icons.circle : Icons.circle_outlined,
-                )),
-          ],
-        ),
-        Row(
-          children: [
-            IconButton(
-                onPressed: () {
-                  toggleBall3();
-                  ball.separaCaracteres[widget.indice] = cell_translator();
-                  ball.notifyListeners();
-                },
-                icon: Icon(
-                  isClicked3 ? Icons.circle : Icons.circle_outlined,
-                )),
-            IconButton(
-                onPressed: () {
-                  toggleBall6();
-                  ball.separaCaracteres[widget.indice] = cell_translator();
-                  ball.notifyListeners();
-                },
-                icon: Icon(
-                  isClicked6 ? Icons.circle : Icons.circle_outlined,
-                )),
+            Row(
+              children: [
+                IconButton(onPressed: toggleBall1, icon: Icon(isClicked1 ? Icons.circle : Icons.circle_outlined)),
+                IconButton(onPressed: toggleBall4, icon: Icon(isClicked4 ? Icons.circle : Icons.circle_outlined)),
+              ],
+            ),
+            Row(
+              children: [
+                IconButton(onPressed: toggleBall2, icon: Icon(isClicked2 ? Icons.circle : Icons.circle_outlined)),
+                IconButton(onPressed: toggleBall5, icon: Icon(isClicked5 ? Icons.circle : Icons.circle_outlined)),
+              ],
+            ),
+            Row(
+              children: [
+                IconButton(onPressed: toggleBall3, icon: Icon(isClicked3 ? Icons.circle : Icons.circle_outlined)),
+                IconButton(onPressed: toggleBall6, icon: Icon(isClicked6 ? Icons.circle : Icons.circle_outlined)),
+              ],
+            ),
           ],
         ),
       ],

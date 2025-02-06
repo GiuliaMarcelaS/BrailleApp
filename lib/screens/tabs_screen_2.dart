@@ -1,6 +1,7 @@
 import 'package:braille_app/models/graphic.dart';
 import 'package:braille_app/models/teste.dart';
 import 'package:braille_app/screens/alphabet_translator_screen.dart';
+import 'package:braille_app/screens/escrever_screen_2.dart';
 import 'package:braille_app/screens/escrever_screen.dart';
 import 'package:braille_app/screens/expressions_translator_screen.dart';
 import 'package:braille_app/screens/learn_screen.dart';
@@ -37,7 +38,7 @@ class TabsScreen2 extends StatelessWidget {
                   PhraseTranslatorScreen(),
                   ModulosScreen(),
                   LearnScreen(),
-                  EscreverScreen(),
+                  EscreverScreen2(),
                   Container(),
                 ],
               ),
