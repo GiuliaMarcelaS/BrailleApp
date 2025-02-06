@@ -18,11 +18,12 @@ class ModulosScreen extends StatelessWidget with ChangeNotifier {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
     final totalVideos = args['totalVideos'] ?? 0;
     final totalPerguntas = args['totalPerguntas'] ?? 0;
     final data = DateFormat('dd/MM/yyyy').format(DateTime.now());
-    final telasTotal = totalVideos+totalPerguntas;
+    final telasTotal = totalVideos + totalPerguntas;
     final dados = Provider.of<Information1>(context);
     final fracao = Provider.of<Passer>(context);
     double screenHeight = MediaQuery.of(context).size.height;
