@@ -20,6 +20,7 @@ class _MatrizState extends State<Matriz> {
   bool maiuscula = false;
   String letraAtual = "_"; // Placeholder antes de submeter
 
+  // Lógica para a célula Braille
   void novaLetra() {
     setState(() {
       isClicked1 = false;
@@ -88,6 +89,7 @@ class _MatrizState extends State<Matriz> {
   void habilitaMaiuscula() => setState(() => maiuscula = !maiuscula);
 
   String cell_translator() {
+    // Lógica para tradução dos caracteres (como no código original)
     if (isClicked1 &&
         !isClicked2 &&
         !isClicked3 &&
@@ -304,13 +306,20 @@ class _MatrizState extends State<Matriz> {
         !isClicked6) {
       return ' ';
     }
-    return ""; // Retorna vazio se nenhum botão for pressionado
+    // ... o restante da lógica continua igual para os outros caracteres Braille
+    return "";
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(width: 10),
+        IconButton(
+          onPressed: habilitaMaiuscula,
+          icon: Icon(Icons.arrow_upward_outlined),
+        ),
+        // Matriz para exibir os botões de Braille
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -322,6 +331,7 @@ class _MatrizState extends State<Matriz> {
                 icon: Icon(isClicked4 ? Icons.circle : Icons.circle_outlined)),
           ],
         ),
+        // Adiciona os outros botões de Braille
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -348,14 +358,25 @@ class _MatrizState extends State<Matriz> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(onPressed: voltarLetra, child: Text("Voltar Letra")),
+            // IconButton(
+            //   onPressed: voltarLetra,
+            //   icon: Icon(Icons.backspace_outlined),
+            // ),
+            // SizedBox(width: 10),
+            // IconButton(
+            //   onPressed: habilitaMaiuscula,
+            //   icon: Icon(Icons.arrow_upward_outlined),
+            // ),
             SizedBox(width: 10),
-            ElevatedButton(onPressed: submeterLetra, child: Text("Submeter")),
+            // IconButton(
+            //   onPressed: limpar,
+            //   icon: Icon(Icons.delete),
+            // ),
             SizedBox(width: 10),
-            ElevatedButton(
-                onPressed: habilitaMaiuscula, child: Text("Caps Lock")),
-            SizedBox(width: 10),
-            ElevatedButton(onPressed: limpar, child: Text("Limpar")),
+            IconButton(
+              onPressed: submeterLetra,
+              icon: Icon(Icons.arrow_forward_rounded),
+            ),
           ],
         ),
       ],
