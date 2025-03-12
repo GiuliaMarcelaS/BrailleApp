@@ -310,75 +310,121 @@ class _MatrizState extends State<Matriz> {
     return "";
   }
 
+  bool espelhado = false;
+
+  void habilitaReglete(){
+    setState(() {
+    espelhado = !espelhado;
+      
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
+    //  mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(width: 10),
-        IconButton(
-          onPressed: habilitaMaiuscula,
-          icon: Icon(Icons.arrow_upward_outlined),
-        ),
-        // Matriz para exibir os botões de Braille
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-                onPressed: toggleBall1,
-                icon: Icon(isClicked1 ? Icons.circle : Icons.circle_outlined)),
-            IconButton(
-                onPressed: toggleBall4,
-                icon: Icon(isClicked4 ? Icons.circle : Icons.circle_outlined)),
-          ],
-        ),
-        // Adiciona os outros botões de Braille
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-                onPressed: toggleBall2,
-                icon: Icon(isClicked2 ? Icons.circle : Icons.circle_outlined)),
-            IconButton(
-                onPressed: toggleBall5,
-                icon: Icon(isClicked5 ? Icons.circle : Icons.circle_outlined)),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-                onPressed: toggleBall3,
-                icon: Icon(isClicked3 ? Icons.circle : Icons.circle_outlined)),
-            IconButton(
-                onPressed: toggleBall6,
-                icon: Icon(isClicked6 ? Icons.circle : Icons.circle_outlined)),
-          ],
-        ),
-        SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // IconButton(
-            //   onPressed: voltarLetra,
-            //   icon: Icon(Icons.backspace_outlined),
-            // ),
-            // SizedBox(width: 10),
-            // IconButton(
-            //   onPressed: habilitaMaiuscula,
-            //   icon: Icon(Icons.arrow_upward_outlined),
-            // ),
-            SizedBox(width: 10),
-            // IconButton(
-            //   onPressed: limpar,
-            //   icon: Icon(Icons.delete),
-            // ),
-            SizedBox(width: 10),
-            IconButton(
-              onPressed: submeterLetra,
-              icon: Icon(Icons.arrow_forward_rounded),
+             SizedBox(width: 50),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                IconButton(
+                  onPressed: habilitaMaiuscula,
+                  icon: Icon(Icons.arrow_circle_up_sharp),
+                ),
+            ElevatedButton(onPressed: (){ habilitaReglete();}, child: Text('reglete')),
+              ],
             ),
+            SizedBox(width: 60,),
+            // Matriz para exibir os botões de Braille
+        Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                espelhado?
+                Text('4', style: TextStyle(fontSize: 10, color: const Color.fromARGB(255, 112, 105, 105)),):
+                Text('1', style: TextStyle(fontSize: 10, color: const Color.fromARGB(255, 112, 105, 105)),),
+                espelhado?
+                IconButton(
+                    onPressed: toggleBall4,
+                    icon: Icon(isClicked4 ? Icons.circle : Icons.circle_outlined)):
+                IconButton(
+                    onPressed: toggleBall1,
+                    icon: Icon(isClicked1 ? Icons.circle : Icons.circle_outlined)),
+                espelhado?
+                IconButton(
+                    onPressed: toggleBall1,
+                    icon: Icon(isClicked1 ? Icons.circle : Icons.circle_outlined)):
+                IconButton(
+                    onPressed: toggleBall4,
+                    icon: Icon(isClicked4 ? Icons.circle : Icons.circle_outlined)),
+                espelhado?
+                Text('1', style: TextStyle(fontSize: 10, color: const Color.fromARGB(255, 112, 105, 105)),):
+                Text('4', style: TextStyle(fontSize: 10, color: const Color.fromARGB(255, 112, 105, 105)),)
+              ],
+            ),
+            // Adiciona os outros botões de Braille
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                espelhado?
+                Text('5', style: TextStyle(fontSize: 10, color: const Color.fromARGB(255, 112, 105, 105)),):
+                Text('2', style: TextStyle(fontSize: 10, color: const Color.fromARGB(255, 112, 105, 105)),),
+                espelhado?
+                IconButton(
+                    onPressed: toggleBall5,
+                    icon: Icon(isClicked5 ? Icons.circle : Icons.circle_outlined)):
+                IconButton(
+                    onPressed: toggleBall2,
+                    icon: Icon(isClicked2 ? Icons.circle : Icons.circle_outlined)),
+                espelhado?
+                IconButton(
+                    onPressed: toggleBall2,
+                    icon: Icon(isClicked2 ? Icons.circle : Icons.circle_outlined)):
+                IconButton(
+                    onPressed: toggleBall5,
+                    icon: Icon(isClicked5 ? Icons.circle : Icons.circle_outlined)),
+                espelhado?
+                Text('2', style: TextStyle(fontSize: 10, color: const Color.fromARGB(255, 112, 105, 105)),):
+                Text('5', style: TextStyle(fontSize: 10, color: const Color.fromARGB(255, 112, 105, 105)),)
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                 espelhado?
+                Text('6', style: TextStyle(fontSize: 10, color: const Color.fromARGB(255, 112, 105, 105)),):
+                Text('3', style: TextStyle(fontSize: 10, color: const Color.fromARGB(255, 112, 105, 105)),),
+                espelhado?
+                IconButton(
+                    onPressed: toggleBall6,
+                    icon: Icon(isClicked6 ? Icons.circle : Icons.circle_outlined)):
+                IconButton(
+                    onPressed: toggleBall3,
+                    icon: Icon(isClicked3 ? Icons.circle : Icons.circle_outlined)),
+                espelhado?
+                IconButton(
+                    onPressed: toggleBall3,
+                    icon: Icon(isClicked3 ? Icons.circle : Icons.circle_outlined)):
+                IconButton(
+                    onPressed: toggleBall6,
+                    icon: Icon(isClicked6 ? Icons.circle : Icons.circle_outlined)),
+                espelhado?
+                Text('3', style: TextStyle(fontSize: 10, color: const Color.fromARGB(255, 112, 105, 105)),):
+                Text('6', style: TextStyle(fontSize: 10, color: const Color.fromARGB(255, 112, 105, 105)),)
+              ],
+            ),
+            SizedBox(height: 20),
           ],
         ),
+         SizedBox(width: 50,),
+         IconButton(
+                  onPressed: submeterLetra,
+                  icon: Icon(Icons.arrow_forward_rounded),
+                ),
       ],
     );
   }

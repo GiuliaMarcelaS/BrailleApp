@@ -33,6 +33,17 @@ class _EscreverScreen2State extends State<EscreverScreen2> {
       body: Column(
         children: [
           Matriz(),
+           Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                onPressed: _handleBackspace,
+                icon: Icon(Icons.backspace_outlined),
+              ),
+              const SizedBox(width: 10),
+              IconButton(onPressed: _clearText, icon: Icon(Icons.delete)),
+            ],
+          ),
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -42,7 +53,7 @@ class _EscreverScreen2State extends State<EscreverScreen2> {
               readOnly: false, // Permite interações no campo
               maxLines: null, // Permite múltiplas linhas
               decoration: InputDecoration(
-                hintText: "Escreva seu texto",
+              //  hintText: "Escreva seu texto",
                 border: OutlineInputBorder(),
                 filled: true,
                 fillColor: Colors.grey[200],
@@ -65,17 +76,17 @@ class _EscreverScreen2State extends State<EscreverScreen2> {
             ),
           ),
           const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                onPressed: _handleBackspace,
-                icon: Icon(Icons.backspace_outlined),
-              ),
-              const SizedBox(width: 10),
-              IconButton(onPressed: _clearText, icon: Icon(Icons.delete)),
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     IconButton(
+          //       onPressed: _handleBackspace,
+          //       icon: Icon(Icons.backspace_outlined),
+          //     ),
+          //     const SizedBox(width: 10),
+          //     IconButton(onPressed: _clearText, icon: Icon(Icons.delete)),
+          //   ],
+          // ),
         ],
       ),
     );
