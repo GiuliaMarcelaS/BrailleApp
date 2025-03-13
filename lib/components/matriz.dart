@@ -298,6 +298,358 @@ class _MatrizState extends State<Matriz> {
         isClicked6) {
       return maiuscula ? 'Z' : 'z';
     }
+    // if (isClicked1 &&
+    //     !isClicked2 &&
+    //     !isClicked3 &&
+    //     !isClicked4 &&
+    //     !isClicked5 &&
+    //     !isClicked6) {
+    //   return '1';
+    // }
+    // if (!isClicked1 &&
+    //     !isClicked2 &&
+    //     isClicked3 &&
+    //     isClicked4 &&
+    //     isClicked5 &&
+    //     isClicked6) {
+    //   return '2';
+    // }
+    // if (isClicked1 &&
+    //     !isClicked2 &&
+    //     !isClicked3 &&
+    //     isClicked4 &&
+    //     !isClicked5 &&
+    //     !isClicked6) {
+    //   return '3';
+    // }
+    // if (isClicked1 &&
+    //     !isClicked2 &&
+    //     !isClicked3 &&
+    //     isClicked4 &&
+    //     isClicked5 &&
+    //     !isClicked6) {
+    //   return '4';
+    // }
+    // if (isClicked1 &&
+    //     !isClicked2 &&
+    //     !isClicked3 &&
+    //     !isClicked4 &&
+    //     isClicked5 &&
+    //     !isClicked6) {
+    //   return '5';
+    // }
+    // if (isClicked1 &&
+    //     isClicked2 &&
+    //     !isClicked3 &&
+    //     isClicked4 &&
+    //     !isClicked5 &&
+    //     !isClicked6) {
+    //   return '6';
+    // }
+    // if (isClicked1 &&
+    //     isClicked2 &&
+    //     !isClicked3 &&
+    //     isClicked4 &&
+    //     isClicked5 &&
+    //     !isClicked6) {
+    //   return '7';
+    // }
+    // if (isClicked1 &&
+    //     isClicked2 &&
+    //     !isClicked3 &&
+    //     !isClicked4 &&
+    //     isClicked5 &&
+    //     !isClicked6) {
+    //   return '8';
+    // }
+    // if (!isClicked1 &&
+    //     isClicked2 &&
+    //     !isClicked3 &&
+    //     isClicked4 &&
+    //     !isClicked5 &&
+    //     !isClicked6) {
+    //   return '9';
+    // }
+    // if (!isClicked1 &&
+    //     isClicked2 &&
+    //     !isClicked3 &&
+    //     isClicked4 &&
+    //     isClicked5 &&
+    //     !isClicked6) {
+    //   return '0';
+    // }
+    if (!isClicked1 &&
+        isClicked2 &&
+        !isClicked3 &&
+        isClicked4 &&
+        isClicked5 &&
+        !isClicked6) {
+      return '*';
+    }
+    if (!isClicked1 &&
+        isClicked2 &&
+        !isClicked3 &&
+        isClicked4 &&
+        isClicked5 &&
+        !isClicked6) {
+      return '-';
+    }
+    if (!isClicked1 &&
+        isClicked2 &&
+        !isClicked3 &&
+        isClicked4 &&
+        isClicked5 &&
+        !isClicked6) {
+      return '+';
+    }
+    if (!isClicked1 &&
+        isClicked2 &&
+        !isClicked3 &&
+        isClicked4 &&
+        isClicked5 &&
+        !isClicked6) {
+      return '/';
+    }
+    if (!isClicked1 &&
+        isClicked2 &&
+        !isClicked3 &&
+        isClicked4 &&
+        isClicked5 &&
+        !isClicked6) {
+      return '=';
+    }
+    if (!isClicked1 &&
+        isClicked2 &&
+        !isClicked3 &&
+        isClicked4 &&
+        isClicked5 &&
+        !isClicked6) {
+      return '(';
+    }
+    if (!isClicked1 &&
+        isClicked2 &&
+        !isClicked3 &&
+        isClicked4 &&
+        isClicked5 &&
+        !isClicked6) {
+      return ')';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return maiuscula ? 'Á' : 'Á';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return maiuscula ? 'É' : 'é';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return maiuscula ? 'Í' : 'í';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return maiuscula ? 'Ó' : 'ó';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return maiuscula ? 'Ú' : 'ú';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return maiuscula ? 'À' : 'à';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return maiuscula ? 'Â' : 'â';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return maiuscula ? 'Ê' : 'ê';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return maiuscula ? 'Ô' : 'ô';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return maiuscula ? 'Ã' : 'ã';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return maiuscula ? 'Õ' : 'õ';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return maiuscula ? 'Ç' : 'ç';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return ',';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return ';';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return ':';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return '.';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return '?';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return '!';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return '&';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return '|';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return '>';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return '<';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return '°';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return '"';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return '\$';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return '[';
+    }
+    if (isClicked1 &&
+        !isClicked2 &&
+        isClicked3 &&
+        isClicked4 &&
+        !isClicked5 &&
+        isClicked6) {
+      return ']';
+    }
     if (!isClicked1 &&
         !isClicked2 &&
         !isClicked3 &&
