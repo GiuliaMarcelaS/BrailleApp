@@ -40,18 +40,28 @@ class _MatrizState extends State<Matriz> {
     final ball = Provider.of<Ball>(context, listen: false);
     final translatedLetter = numero ? number_translator() : cell_translator();
 
+    if (translatedLetter.isEmpty) {
+      // Mostra uma mensagem de erro se for inválido
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Caractere inválido'),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return; // Interrompe o envio
+    }
+
     setState(() {
       if (indice >= ball.separaCaracteres.length) {
-        ball.separaCaracteres
-            .add(translatedLetter.isEmpty ? '_' : translatedLetter);
+        ball.separaCaracteres.add(translatedLetter);
       } else {
-        ball.separaCaracteres[indice] =
-            translatedLetter.isEmpty ? '_' : translatedLetter;
+        ball.separaCaracteres[indice] = translatedLetter;
       }
 
       ball.notifyListeners();
-      indice++; // Avança para a próxima posição após submeter
-      novaLetra(); // Reseta os botões
+      indice++;
+      novaLetra();
     });
   }
 
@@ -837,18 +847,6 @@ class _MatrizState extends State<Matriz> {
                   ],
                 ),
                 SizedBox(width: 20),
-                Column(
-                  children: [
-                    IconButton(
-                      onPressed: submeterLetra,
-                      icon: Icon(Icons.done),
-                    ),
-                    Text(
-                      'submeter',
-                      style: TextStyle(fontSize: 10),
-                    ),
-                  ],
-                ),
               ],
             ),
             SizedBox(
@@ -857,194 +855,111 @@ class _MatrizState extends State<Matriz> {
           ],
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               width: 80,
-              child: Visibility(
-                visible: maiuscula,
-                child: MatrizMaiuscula(),
+              child: Stack(
+                children: [
+                  Visibility(
+                    visible: maiuscula,
+                    child: MatrizMaiuscula(),
+                  ),
+                  Visibility(
+                    visible: numero,
+                    child: MatrizNumero(),
+                  ),
+                ],
               ),
             ),
-            SizedBox(
-              width: 80,
-              child: Visibility(
-                visible: numero,
-                child: MatrizNumero(),
+            Container(
+              width: MediaQuery.of(context).size.width *
+                  0.6, // largura proporcional à tela
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(espelhado ? '4' : '1',
+                          style: TextStyle(fontSize: 16)),
+                      IconButton(
+                        iconSize: 50,
+                        onPressed: espelhado ? toggleBall4 : toggleBall1,
+                        icon: Icon((espelhado ? isClicked4 : isClicked1)
+                            ? Icons.circle
+                            : Icons.circle_outlined),
+                      ),
+                      IconButton(
+                        iconSize: 50,
+                        onPressed: espelhado ? toggleBall1 : toggleBall4,
+                        icon: Icon((espelhado ? isClicked1 : isClicked4)
+                            ? Icons.circle
+                            : Icons.circle_outlined),
+                      ),
+                      Text(espelhado ? '1' : '4',
+                          style: TextStyle(fontSize: 16)),
+                    ],
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(espelhado ? '5' : '2',
+                          style: TextStyle(fontSize: 16)),
+                      IconButton(
+                        iconSize: 50,
+                        onPressed: espelhado ? toggleBall5 : toggleBall2,
+                        icon: Icon((espelhado ? isClicked5 : isClicked2)
+                            ? Icons.circle
+                            : Icons.circle_outlined),
+                      ),
+                      IconButton(
+                        iconSize: 50,
+                        onPressed: espelhado ? toggleBall2 : toggleBall5,
+                        icon: Icon((espelhado ? isClicked2 : isClicked5)
+                            ? Icons.circle
+                            : Icons.circle_outlined),
+                      ),
+                      Text(espelhado ? '2' : '5',
+                          style: TextStyle(fontSize: 16)),
+                    ],
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(espelhado ? '6' : '3',
+                          style: TextStyle(fontSize: 16)),
+                      IconButton(
+                        iconSize: 50,
+                        onPressed: espelhado ? toggleBall6 : toggleBall3,
+                        icon: Icon((espelhado ? isClicked6 : isClicked3)
+                            ? Icons.circle
+                            : Icons.circle_outlined),
+                      ),
+                      IconButton(
+                        iconSize: 50,
+                        onPressed: espelhado ? toggleBall3 : toggleBall6,
+                        icon: Icon((espelhado ? isClicked3 : isClicked6)
+                            ? Icons.circle
+                            : Icons.circle_outlined),
+                      ),
+                      Text(espelhado ? '3' : '6',
+                          style: TextStyle(fontSize: 16)),
+                    ],
+                  ),
+                ],
               ),
             ),
             Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    espelhado
-                        ? Text(
-                            '4',
-                            style: TextStyle(
-                                fontSize: 10,
-                                color:
-                                    const Color.fromARGB(255, 112, 105, 105)),
-                          )
-                        : Text(
-                            '1',
-                            style: TextStyle(
-                                fontSize: 10,
-                                color:
-                                    const Color.fromARGB(255, 112, 105, 105)),
-                          ),
-                    espelhado
-                        ? IconButton(
-                            onPressed: toggleBall4,
-                            icon: Icon(isClicked4
-                                ? Icons.circle
-                                : Icons.circle_outlined))
-                        : IconButton(
-                            onPressed: toggleBall1,
-                            icon: Icon(isClicked1
-                                ? Icons.circle
-                                : Icons.circle_outlined)),
-                    espelhado
-                        ? IconButton(
-                            onPressed: toggleBall1,
-                            icon: Icon(isClicked1
-                                ? Icons.circle
-                                : Icons.circle_outlined))
-                        : IconButton(
-                            onPressed: toggleBall4,
-                            icon: Icon(isClicked4
-                                ? Icons.circle
-                                : Icons.circle_outlined)),
-                    espelhado
-                        ? Text(
-                            '1',
-                            style: TextStyle(
-                                fontSize: 10,
-                                color:
-                                    const Color.fromARGB(255, 112, 105, 105)),
-                          )
-                        : Text(
-                            '4',
-                            style: TextStyle(
-                                fontSize: 10,
-                                color:
-                                    const Color.fromARGB(255, 112, 105, 105)),
-                          )
-                  ],
+                IconButton(
+                  onPressed: submeterLetra,
+                  icon: Icon(Icons.arrow_forward),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    espelhado
-                        ? Text(
-                            '5',
-                            style: TextStyle(
-                                fontSize: 10,
-                                color:
-                                    const Color.fromARGB(255, 112, 105, 105)),
-                          )
-                        : Text(
-                            '2',
-                            style: TextStyle(
-                                fontSize: 10,
-                                color:
-                                    const Color.fromARGB(255, 112, 105, 105)),
-                          ),
-                    espelhado
-                        ? IconButton(
-                            onPressed: toggleBall5,
-                            icon: Icon(isClicked5
-                                ? Icons.circle
-                                : Icons.circle_outlined))
-                        : IconButton(
-                            onPressed: toggleBall2,
-                            icon: Icon(isClicked2
-                                ? Icons.circle
-                                : Icons.circle_outlined)),
-                    espelhado
-                        ? IconButton(
-                            onPressed: toggleBall2,
-                            icon: Icon(isClicked2
-                                ? Icons.circle
-                                : Icons.circle_outlined))
-                        : IconButton(
-                            onPressed: toggleBall5,
-                            icon: Icon(isClicked5
-                                ? Icons.circle
-                                : Icons.circle_outlined)),
-                    espelhado
-                        ? Text(
-                            '2',
-                            style: TextStyle(
-                                fontSize: 10,
-                                color:
-                                    const Color.fromARGB(255, 112, 105, 105)),
-                          )
-                        : Text(
-                            '5',
-                            style: TextStyle(
-                                fontSize: 10,
-                                color:
-                                    const Color.fromARGB(255, 112, 105, 105)),
-                          )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    espelhado
-                        ? Text(
-                            '6',
-                            style: TextStyle(
-                                fontSize: 10,
-                                color:
-                                    const Color.fromARGB(255, 112, 105, 105)),
-                          )
-                        : Text(
-                            '3',
-                            style: TextStyle(
-                                fontSize: 10,
-                                color:
-                                    const Color.fromARGB(255, 112, 105, 105)),
-                          ),
-                    espelhado
-                        ? IconButton(
-                            onPressed: toggleBall6,
-                            icon: Icon(isClicked6
-                                ? Icons.circle
-                                : Icons.circle_outlined))
-                        : IconButton(
-                            onPressed: toggleBall3,
-                            icon: Icon(isClicked3
-                                ? Icons.circle
-                                : Icons.circle_outlined)),
-                    espelhado
-                        ? IconButton(
-                            onPressed: toggleBall3,
-                            icon: Icon(isClicked3
-                                ? Icons.circle
-                                : Icons.circle_outlined))
-                        : IconButton(
-                            onPressed: toggleBall6,
-                            icon: Icon(isClicked6
-                                ? Icons.circle
-                                : Icons.circle_outlined)),
-                    espelhado
-                        ? Text(
-                            '3',
-                            style: TextStyle(
-                                fontSize: 10,
-                                color:
-                                    const Color.fromARGB(255, 112, 105, 105)),
-                          )
-                        : Text(
-                            '6',
-                            style: TextStyle(
-                                fontSize: 10,
-                                color:
-                                    const Color.fromARGB(255, 112, 105, 105)),
-                          )
-                  ],
+                Text(
+                  'submeter',
+                  style: TextStyle(fontSize: 10),
                 ),
               ],
             ),

@@ -8,49 +8,55 @@ class MatrizMaiuscula extends StatelessWidget {
     return Column(
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Distribui uniformemente
           children: [
-            SizedBox(
-              width: 40, // Define um tamanho fixo semelhante ao IconButton
-              height: 30,
-              child: Icon(Icons.circle),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Icon(Icons.circle_outlined, size: 50),
+              ),
             ),
-            SizedBox(
-              width: 40,
-              height: 30,
-              child: Icon(Icons.circle_outlined),
+            SizedBox(width: 50),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Icon(Icons.circle, size: 50),
+              ),
             ),
           ],
         ),
-        SizedBox(height: 10), // Espaçamento entre as linhas
+        SizedBox(height: 20),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(
-              width: 40,
-              height: 30,
-              child: Icon(Icons.circle_outlined),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Icon(Icons.circle_outlined, size: 50),
+              ),
             ),
-            SizedBox(
-              width: 40,
-              height: 30,
-              child: Icon(Icons.circle_outlined),
+            SizedBox(width: 50),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Icon(Icons.circle_outlined, size: 50),
+              ),
             ),
           ],
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 20),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(
-              width: 40,
-              height: 30,
-              child: Icon(Icons.circle),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Icon(Icons.circle_outlined, size: 50),
+              ),
             ),
-            SizedBox(
-              width: 40,
-              height: 30,
-              child: Icon(Icons.circle_outlined),
+            SizedBox(width: 50),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Icon(Icons.circle, size: 50),
+              ),
             ),
           ],
         ),
