@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">283187428602-faud1u3ed349ebn7dv8la4pvsnqp4sav.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://muiraquitabraille-default-rtdb.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">283187428602</string>
+    <string name="google_api_key" translatable="false">AIzaSyAJ6sWP3iripom1Qe5dLqpbpm_ACvOY0X4</string>
+    <string name="google_app_id" translatable="false">1:283187428602:android:5f07dc6aba7c3846fbdd43</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAJ6sWP3iripom1Qe5dLqpbpm_ACvOY0X4</string>
+    <string name="google_storage_bucket" translatable="false">muiraquitabraille.appspot.com</string>
+    <string name="project_id" translatable="false">muiraquitabraille</string>
+</resources>
