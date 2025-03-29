@@ -107,12 +107,9 @@ class BrailleApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => Teste(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => Information1(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => ModulosScreen(),
-        ),
+        // ChangeNotifierProvider(
+        //   create: (_) => ModulosScreen(),
+        // ),
         ChangeNotifierProvider(
           create: (_) => Historico(),
         ),
@@ -133,6 +130,9 @@ class BrailleApp extends StatelessWidget {
           update: (ctx, auth, previous) {
             return Passer(auth.token ?? '', auth.userId ?? '');
           },
+        ),
+        ChangeNotifierProvider(
+          create: (_) => Information1(),
         ),
         ChangeNotifierProxyProvider<Auth, UserData>(
           create: (_) => UserData("", ''),
