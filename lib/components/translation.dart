@@ -1,13 +1,15 @@
-import 'package:braille_app/models/ball.dart';
-import 'package:braille_app/models/cells_list.dart';
-import 'package:braille_app/models/historico_list.dart';
+// ignore_for_file: prefer_interpolation_to_compose_strings, avoid_unnecessary_containers
+
+import 'package:braille_app/components/ball.dart';
+import 'package:braille_app/services/cells_list.dart';
+import 'package:braille_app/services/historico_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/auth.dart';
+import '../services/auth.dart';
 import 'package:flutter/services.dart';
 
 class Translation extends StatefulWidget {
-  Translation({super.key});
+  const Translation({super.key});
 
   @override
   State<Translation> createState() => _TranslationState();
@@ -149,7 +151,6 @@ class _TranslationState extends State<Translation> {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Expanded(
       child: SingleChildScrollView(
@@ -221,29 +222,29 @@ class _TranslationState extends State<Translation> {
                     _controller.clear();
                     setState(() {});
                   },
-                  child: Text(
-                    'Limpar',
-                    style: TextStyle(color: Colors.white),
-                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF208B52),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
+                  ),
+                  child: Text(
+                    'Limpar',
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
                 SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: _submitText,
-                  child: Text(
-                    'Submeter',
-                    style: TextStyle(color: Colors.white),
-                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF208B52),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
+                  ),
+                  child: Text(
+                    'Submeter',
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ],

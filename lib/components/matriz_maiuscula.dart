@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MatrizMaiuscula extends StatelessWidget {
-  MatrizMaiuscula({super.key});
+  const MatrizMaiuscula({super.key});
 
   @override
   Widget build(BuildContext context) {

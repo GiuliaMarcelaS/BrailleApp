@@ -1,10 +1,12 @@
-import 'package:braille_app/models/auth.dart';
-import 'package:braille_app/models/fases.dart';
-import 'package:braille_app/models/passer.dart';
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: non_constant_identifier_names, avoid_print, use_build_context_synchronously
+
+import 'package:braille_app/services/auth.dart';
+import 'package:braille_app/models/modulos.dart';
+import 'package:braille_app/services/passer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class Topico extends StatelessWidget with ChangeNotifier {
   int id;
   String number;
@@ -45,17 +47,17 @@ class Topico extends StatelessWidget with ChangeNotifier {
   @override
   Widget build(BuildContext context) {
     final passer = Provider.of<Passer>(context);
-    void _topic1f(BuildContext context) async {
+    void topic1f(BuildContext context) async {
       final args =
           ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-      final Fase fase = args['fase'];
+      final Modulo fase = args['fase'];
       final Topico topico = this;
       final Passer passer = args['passer'];
       final auth = Provider.of<Auth>(context, listen: false);
       await passer.getLugar(fase, topico, auth.token ?? '', auth.userId ?? '');
       String caminho = '/topic-1-screen';
       checkpoint = passer.chek;
-      print("teste2" + passer.chek.toString());
+      print("teste2${passer.chek}");
       if (checkpoint == 1) {
         caminho = '/topico-1-conteudo-screen';
       } else if (checkpoint == 2) {
@@ -64,7 +66,7 @@ class Topico extends StatelessWidget with ChangeNotifier {
         caminho = '/topic-1-screen';
       }
       await passer.getIndice(fase, topico, auth.token ?? '', auth.userId ?? '');
-      print("i1" + passer.indice.toString());
+      print("i1${passer.indice}");
       Navigator.of(context).pushNamed(caminho,
           arguments: {'fase': fase, 'topico': topico, "passer": passer});
     }
@@ -96,7 +98,7 @@ class Topico extends StatelessWidget with ChangeNotifier {
             margin: EdgeInsets.only(left: 20),
             child: passer.topicoCompleto >= id
                 ? IconButton(
-                    onPressed: () => _topic1f(context),
+                    onPressed: () => topic1f(context),
                     icon: Icon(
                       Icons.play_circle,
                       color: Color(0xFF208B52),

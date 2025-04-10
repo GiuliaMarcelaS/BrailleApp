@@ -1,18 +1,8 @@
-import 'package:braille_app/models/graphic.dart';
-import 'package:braille_app/models/teste.dart';
-import 'package:braille_app/screens/alphabet_translator_screen.dart';
 import 'package:braille_app/screens/escrever_screen_2.dart';
-import 'package:braille_app/screens/escrever_screen.dart';
-import 'package:braille_app/screens/expressions_translator_screen.dart';
 import 'package:braille_app/screens/learn_screen.dart';
 import 'package:braille_app/screens/modulos_screen.dart';
-import 'package:braille_app/screens/number_translator_screen.dart';
 import 'package:braille_app/screens/phrase_translator_screen.dart';
-import 'package:braille_app/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../models/auth.dart';
 
 class TabsScreen2 extends StatelessWidget {
   const TabsScreen2({super.key});
@@ -20,7 +10,6 @@ class TabsScreen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final initialIndex = args?['initialIndex'] ?? 0;

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 class Ball with ChangeNotifier {
@@ -836,189 +838,189 @@ class Ball with ChangeNotifier {
           c4 == false &&
           c5 == false &&
           c6 == false) {
-        letra = letra + 'a';
+        letra = '${letra}a';
       } else if (c1 == true &&
           c2 == true &&
           c3 == false &&
           c4 == false &&
           c5 == false &&
           c6 == false) {
-        letra = letra + 'b';
+        letra = '${letra}b';
       } else if (c1 == true &&
           c2 == false &&
           c3 == false &&
           c4 == true &&
           c5 == false &&
           c6 == false) {
-        letra = letra + 'c';
+        letra = '${letra}c';
       } else if (c1 == true &&
           c2 == false &&
           c3 == false &&
           c4 == true &&
           c5 == true &&
           c6 == false) {
-        letra = letra + 'd';
+        letra = '${letra}d';
       } else if (c1 == true &&
           c2 == false &&
           c3 == false &&
           c4 == false &&
           c5 == true &&
           c6 == false) {
-        letra = letra + 'e';
+        letra = '${letra}e';
       } else if (c1 == true &&
           c2 == true &&
           c3 == false &&
           c4 == true &&
           c5 == false &&
           c6 == false) {
-        letra = letra + 'f';
+        letra = '${letra}f';
       } else if (c1 == true &&
           c2 == true &&
           c3 == false &&
           c4 == true &&
           c5 == true &&
           c6 == false) {
-        letra = letra + 'g';
+        letra = '${letra}g';
       } else if (c1 == true &&
           c2 == true &&
           c3 == false &&
           c4 == false &&
           c5 == true &&
           c6 == false) {
-        letra = letra + 'h';
+        letra = '${letra}h';
       } else if (c1 == false &&
           c2 == true &&
           c3 == false &&
           c4 == true &&
           c5 == false &&
           c6 == false) {
-        letra = letra + 'i';
+        letra = '${letra}i';
       } else if (c1 == false &&
           c2 == true &&
           c3 == false &&
           c4 == true &&
           c5 == true &&
           c6 == false) {
-        letra = letra + 'j';
+        letra = '${letra}j';
       } else if (c1 == true &&
           c2 == false &&
           c3 == true &&
           c4 == false &&
           c5 == false &&
           c6 == false) {
-        letra = letra + 'k';
+        letra = '${letra}k';
       } else if (c1 == true &&
           c2 == true &&
           c3 == true &&
           c4 == false &&
           c5 == false &&
           c6 == false) {
-        letra = letra + 'l';
+        letra = '${letra}l';
       } else if (c1 == true &&
           c2 == false &&
           c3 == true &&
           c4 == true &&
           c5 == false &&
           c6 == false) {
-        letra = letra + 'm';
+        letra = '${letra}m';
       } else if (c1 == true &&
           c2 == false &&
           c3 == true &&
           c4 == true &&
           c5 == true &&
           c6 == false) {
-        letra = letra + 'n';
+        letra = '${letra}n';
       } else if (c1 == true &&
           c2 == false &&
           c3 == true &&
           c4 == false &&
           c5 == true &&
           c6 == false) {
-        letra = letra + 'o';
+        letra = '${letra}o';
       } else if (c1 == true &&
           c2 == true &&
           c3 == true &&
           c4 == true &&
           c5 == false &&
           c6 == false) {
-        letra = letra + 'p';
+        letra = '${letra}p';
       } else if (c1 == true &&
           c2 == true &&
           c3 == true &&
           c4 == true &&
           c5 == true &&
           c6 == false) {
-        letra = letra + 'q';
+        letra = '${letra}q';
       } else if (c1 == true &&
           c2 == true &&
           c3 == true &&
           c4 == false &&
           c5 == true &&
           c6 == false) {
-        letra = letra + 'r';
+        letra = '${letra}r';
       } else if (c1 == false &&
           c2 == true &&
           c3 == true &&
           c4 == true &&
           c5 == false &&
           c6 == false) {
-        letra = letra + 's';
+        letra = '${letra}s';
       } else if (c1 == false &&
           c2 == true &&
           c3 == true &&
           c4 == true &&
           c5 == true &&
           c6 == false) {
-        letra = letra + 't';
+        letra = '${letra}t';
       } else if (c1 == true &&
           c2 == false &&
           c3 == true &&
           c4 == false &&
           c5 == false &&
           c6 == true) {
-        letra = letra + 'u';
+        letra = '${letra}u';
       } else if (c1 == true &&
           c2 == true &&
           c3 == true &&
           c4 == false &&
           c5 == false &&
           c6 == true) {
-        letra = letra + 'v';
+        letra = '${letra}v';
       } else if (c1 == false &&
           c2 == true &&
           c3 == false &&
           c4 == true &&
           c5 == true &&
           c6 == true) {
-        letra = letra + 'w';
+        letra = '${letra}w';
       } else if (c1 == true &&
           c2 == false &&
           c3 == true &&
           c4 == true &&
           c5 == false &&
           c6 == true) {
-        letra = letra + 'x';
+        letra = '${letra}x';
       } else if (c1 == true &&
           c2 == false &&
           c3 == true &&
           c4 == true &&
           c5 == true &&
           c6 == true) {
-        letra = letra + 'y';
+        letra = '${letra}y';
       } else if (c1 == true &&
           c2 == false &&
           c3 == true &&
           c4 == false &&
           c5 == true &&
           c6 == true) {
-        letra = letra + 'z';
+        letra = '${letra}z';
       } else if (c1 == false &&
           c2 == false &&
           c3 == false &&
           c4 == false &&
           c5 == false &&
           c6 == false) {
-        letra = letra + '';
+        letra = letra;
       }
     }
 

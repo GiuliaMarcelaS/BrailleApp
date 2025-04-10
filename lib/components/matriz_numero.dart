@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MatrizNumero extends StatelessWidget {
-  MatrizNumero({super.key});
+  const MatrizNumero({super.key});
 
   @override
   Widget build(BuildContext context) {

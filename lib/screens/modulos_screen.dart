@@ -1,14 +1,14 @@
-import 'package:braille_app/models/information_1.dart';
-import 'package:braille_app/models/passer.dart';
+import 'package:braille_app/services/information_1.dart';
+import 'package:braille_app/services/passer.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../components/fase_grid.dart';
+import '../components/modulos_grid.dart';
 
 class ModulosScreen extends StatelessWidget {
   final num fracaoValue;
 
-  ModulosScreen({
+  const ModulosScreen({
     super.key,
     this.fracaoValue = 0,
   });
@@ -16,7 +16,8 @@ class ModulosScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Obtenção dos dados passados via Navigator
-    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
 
     final totalVideos = args?['totalVideos'] ?? 0;
     final totalPerguntas = args?['totalPerguntas'] ?? 0;
@@ -26,13 +27,13 @@ class ModulosScreen extends StatelessWidget {
     final dados = Provider.of<Information1>(context);
     final fracaoProvider = Provider.of<Passer>(context);
 
-    final fracaoValor = fracaoProvider.fracao ?? 0;
+    final fracaoValor = fracaoProvider.fracao;
 
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
     final safeTelasTotal = telasTotal > 0 ? telasTotal : 1;
-    final safeFracaoValor = fracaoValor != null && fracaoValor > 0 ? fracaoValor : 0;
+    final safeFracaoValor = fracaoValor > 0 ? fracaoValor : 0;
 
     return Scaffold(
       backgroundColor: Color(0xFFDDE9DD),
@@ -52,7 +53,8 @@ class ModulosScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 20, top: 82 / 800 * screenHeight),
+                      margin: EdgeInsets.only(
+                          left: 20, top: 82 / 800 * screenHeight),
                       child: Text(
                         'Olá, ${dados.nome}!',
                         style: TextStyle(
@@ -63,7 +65,8 @@ class ModulosScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 20, top: 12 / 800 * screenHeight),
+                      margin: EdgeInsets.only(
+                          left: 20, top: 12 / 800 * screenHeight),
                       height: 10,
                       width: 212 / 360 * screenWidth,
                       color: Colors.white,
@@ -74,8 +77,9 @@ class ModulosScreen extends StatelessWidget {
                           ),
                           FractionallySizedBox(
                             alignment: Alignment.centerLeft,
-                            widthFactor: (safeTelasTotal > 0 && safeFracaoValor != null)
-                                ? (safeFracaoValor / safeTelasTotal).clamp(0.0, 1.0)
+                            widthFactor: (safeTelasTotal > 0)
+                                ? (safeFracaoValor / safeTelasTotal)
+                                    .clamp(0.0, 1.0)
                                 : 0.0,
                             child: Container(
                               color: Colors.green,
@@ -85,7 +89,8 @@ class ModulosScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 20, top: 3 / 800 * screenHeight),
+                      margin: EdgeInsets.only(
+                          left: 20, top: 3 / 800 * screenHeight),
                       child: Text(
                         'Aulas ${((safeFracaoValor / safeTelasTotal) * 100).toInt()}% concluídas',
                         style: TextStyle(
@@ -96,7 +101,8 @@ class ModulosScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 20, top: 2 / 800 * screenHeight),
+                      margin: EdgeInsets.only(
+                          left: 20, top: 2 / 800 * screenHeight),
                       child: Text(
                         'Última prática: $data',
                         style: TextStyle(
@@ -111,7 +117,7 @@ class ModulosScreen extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(child: FaseGrid()),
+          Expanded(child: ModulosGrid()),
         ],
       ),
     );

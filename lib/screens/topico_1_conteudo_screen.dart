@@ -1,13 +1,13 @@
-import 'package:braille_app/models/auth.dart';
-import 'package:braille_app/models/fases.dart';
-import 'package:braille_app/models/passer.dart';
-import 'package:braille_app/models/topico.dart';
+import 'package:braille_app/services/auth.dart';
+import 'package:braille_app/models/modulos.dart';
+import 'package:braille_app/services/passer.dart';
+import 'package:braille_app/services/topico.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 // import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Topico1ConteudoScreen extends StatefulWidget {
-  const Topico1ConteudoScreen({Key? key}) : super(key: key);
+  const Topico1ConteudoScreen({super.key});
 
   @override
   State<Topico1ConteudoScreen> createState() => _Topico1ConteudoScreenState();
@@ -42,7 +42,7 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
   void _testar(BuildContext context) {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final Fase fase = args['fase'];
+    final Modulo fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
@@ -66,7 +66,7 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
   @override
   void initState() {
     super.initState();
-    final passer = Provider.of<Passer>(context, listen: false);
+    Provider.of<Passer>(context, listen: false);
     // indice = passer.indice; // Carrega o valor inicial do índice
   }
 
@@ -74,7 +74,7 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final Fase fase = args['fase'];
+    final Modulo fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
@@ -100,9 +100,9 @@ class _Topico1ConteudoScreenState extends State<Topico1ConteudoScreen> {
         centerTitle: true,
         actions: [
           Container(
-            child: Image.asset('assets/images/muiraq_preto.png'),
             width: screenWidth * 20 / 360,
             margin: EdgeInsets.only(right: screenWidth * 25 / 360),
+            child: Image.asset('assets/images/muiraq_preto.png'),
           ),
         ],
       ),

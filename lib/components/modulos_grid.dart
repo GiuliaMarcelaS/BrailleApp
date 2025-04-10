@@ -1,24 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-import '../models/fase_list.dart';
-import '../models/fases.dart';
-import 'fase_item.dart';
+import '../models/modulos_list.dart';
+import '../models/modulos.dart';
+import 'modulo_item.dart';
 
-class FaseGrid extends StatelessWidget {
-  const FaseGrid({super.key});
+class ModulosGrid extends StatelessWidget {
+  const ModulosGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<FaseList>(context);
-    final List<Fase> loadedFases = provider.items;
+    final provider = Provider.of<ModulosList>(context);
+    final List<Modulo> loadedFases = provider.items;
 
     return GridView.builder(
       padding: const EdgeInsets.all(10),
       itemCount: loadedFases.length,
       itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
         value: loadedFases[i],
-        child: const FaseItem(),
+        child: const ModuloItem(),
       ),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,

@@ -1,6 +1,6 @@
 import 'package:braille_app/models/historico.dart';
-import 'package:braille_app/models/historico_item.dart';
-import 'package:braille_app/models/historico_list.dart';
+import 'package:braille_app/components/historico_item.dart';
+import 'package:braille_app/services/historico_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

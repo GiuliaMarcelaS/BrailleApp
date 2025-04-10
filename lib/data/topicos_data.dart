@@ -1,5 +1,6 @@
-import '../models/topico.dart';
+import '../services/topico.dart';
 
+// ignore: non_constant_identifier_names
 var topicos_data = [
   [
     Topico(

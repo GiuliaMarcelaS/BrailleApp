@@ -1,6 +1,7 @@
+// ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+
 import 'package:braille_app/components/matriz.dart';
-import 'package:braille_app/components/matriz_maiuscula.dart';
-import 'package:braille_app/models/ball.dart';
+import 'package:braille_app/components/ball.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -35,38 +36,38 @@ class _EscreverScreen2State extends State<EscreverScreen2> {
         children: [
           Matriz(),
           Padding(
-  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-  child: TextField(
-    controller: _controller,
-    showCursor: false,
-    readOnly: true,
-    maxLines: null, // Permite múltiplas linhas
-    decoration: InputDecoration(
-      border: OutlineInputBorder(),
-      filled: true,
-      fillColor: Colors.grey[200],
-      suffixIcon: _controller.text.isNotEmpty
-          ? IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: _clearText, // Chama a função de limpar
-            )
-          : null, // Esconde o botão quando o texto estiver vazio
-    ),
-    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-    onChanged: (text) {
-      ball.separaCaracteres = text.split('');
-    },
-    onTap: () {
-      if (_controller.text == "_") {
-        _controller.text = "";
-        ball.separaCaracteres.clear();
-      }
-    },
-    onEditingComplete: () {
-      FocusScope.of(context).unfocus();
-    },
-  ),
-),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: TextField(
+              controller: _controller,
+              showCursor: false,
+              readOnly: true,
+              maxLines: null, // Permite múltiplas linhas
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                filled: true,
+                fillColor: Colors.grey[200],
+                suffixIcon: _controller.text.isNotEmpty
+                    ? IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: _clearText, // Chama a função de limpar
+                      )
+                    : null, // Esconde o botão quando o texto estiver vazio
+              ),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              onChanged: (text) {
+                ball.separaCaracteres = text.split('');
+              },
+              onTap: () {
+                if (_controller.text == "_") {
+                  _controller.text = "";
+                  ball.separaCaracteres.clear();
+                }
+              },
+              onEditingComplete: () {
+                FocusScope.of(context).unfocus();
+              },
+            ),
+          ),
           const SizedBox(height: 20),
           // Row(
           //   mainAxisAlignment: MainAxisAlignment.center,
@@ -85,16 +86,16 @@ class _EscreverScreen2State extends State<EscreverScreen2> {
   }
 
   void _clearText() {
-  setState(() {
-    // Substitui cada elemento da lista por uma string vazia
-    for (int i = 0; i < ball.separaCaracteres.length; i++) {
-      ball.separaCaracteres[i] = '';
-    }
-    
-    _controller.text = ball.separaCaracteres.join(''); // Atualiza o TextField
-    ball.notifyListeners(); // Notifica para atualizar o estado do Provider
-  });
-}
+    setState(() {
+      // Substitui cada elemento da lista por uma string vazia
+      for (int i = 0; i < ball.separaCaracteres.length; i++) {
+        ball.separaCaracteres[i] = '';
+      }
+
+      _controller.text = ball.separaCaracteres.join(''); // Atualiza o TextField
+      ball.notifyListeners(); // Notifica para atualizar o estado do Provider
+    });
+  }
 
   @override
   void dispose() {

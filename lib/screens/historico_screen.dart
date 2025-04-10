@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:braille_app/models/historico_list.dart';
-import 'package:braille_app/models/auth.dart';
+import 'package:braille_app/services/historico_list.dart';
+import 'package:braille_app/services/auth.dart';
 
 class HistoricoScreen extends StatelessWidget {
   const HistoricoScreen({super.key});

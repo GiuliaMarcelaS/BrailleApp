@@ -1,17 +1,15 @@
-import 'package:braille_app/models/passer.dart';
-import 'package:braille_app/models/topico.dart';
-import 'package:braille_app/models/user_data.dart';
-import 'package:braille_app/screens/modulos_screen.dart';
+import 'package:braille_app/services/passer.dart';
+import 'package:braille_app/services/topico.dart';
 import 'package:flutter/material.dart';
-import 'package:braille_app/models/fases.dart';
+import 'package:braille_app/models/modulos.dart';
 import 'package:provider/provider.dart';
 
-class FaseItem extends StatelessWidget {
-  const FaseItem({super.key});
+class ModuloItem extends StatelessWidget {
+  const ModuloItem({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<Fase>(
+    return Consumer<Modulo>(
       builder: (context, fase, child) {
         final topico = Provider.of<Topico>(context);
         final passer = Provider.of<Passer>(context);
@@ -58,8 +56,8 @@ class FaseItem extends StatelessWidget {
                 : null,
             child: Card(
               elevation: 8,
-              child: Image.asset(fase.imageUrl),
               color: Colors.white,
+              child: Image.asset(fase.imageUrl),
             ),
           ),
         );

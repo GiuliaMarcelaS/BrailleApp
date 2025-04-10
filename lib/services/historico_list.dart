@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields, unused_field
+
 import 'dart:convert';
 
 import 'package:braille_app/models/historico.dart';

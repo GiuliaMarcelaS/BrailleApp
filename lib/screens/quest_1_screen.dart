@@ -1,7 +1,7 @@
-import 'package:braille_app/models/auth.dart';
-import 'package:braille_app/models/fases.dart';
-import 'package:braille_app/models/passer.dart';
-import 'package:braille_app/models/topico.dart';
+import 'package:braille_app/services/auth.dart';
+import 'package:braille_app/models/modulos.dart';
+import 'package:braille_app/services/passer.dart';
+import 'package:braille_app/services/topico.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +21,7 @@ class _Quest1ScreenState extends State<Quest1Screen> {
   void _acertos(BuildContext context) {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final Fase fase = args['fase'];
+    final Modulo fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
@@ -44,10 +44,9 @@ class _Quest1ScreenState extends State<Quest1Screen> {
   void analiseAcerto(int number, Topico topico) {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final Fase fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
-    final auth = Provider.of<Auth>(context, listen: false);
+    Provider.of<Auth>(context, listen: false);
     setState(() {
       isAnswered = true;
       isCorrect = topico.acertos[passer.indice] == (number - 1);
@@ -62,7 +61,7 @@ class _Quest1ScreenState extends State<Quest1Screen> {
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final Fase fase = args['fase'];
+    final Modulo fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
     double screenHeight = MediaQuery.of(context).size.height;
@@ -106,9 +105,9 @@ class _Quest1ScreenState extends State<Quest1Screen> {
         shape: Border(bottom: BorderSide(color: Colors.black)),
         actions: [
           Container(
-            child: Image.asset('assets/images/muiraq_preto.png'),
             width: screenWidth * 20 / 360,
             margin: EdgeInsets.only(right: screenWidth * 25 / 360),
+            child: Image.asset('assets/images/muiraq_preto.png'),
           )
         ],
       ),

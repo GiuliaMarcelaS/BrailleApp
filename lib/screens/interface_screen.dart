@@ -1,9 +1,11 @@
-import 'package:braille_app/models/auth.dart';
-import 'package:braille_app/models/graphic.dart';
-import 'package:braille_app/models/information_1.dart';
-import 'package:braille_app/models/passer.dart';
-import 'package:braille_app/models/teste.dart';
-import 'package:braille_app/models/topico.dart';
+// ignore_for_file: unused_local_variable, avoid_print
+
+import 'package:braille_app/services/auth.dart';
+import 'package:braille_app/services/graphic.dart';
+import 'package:braille_app/services/information_1.dart';
+import 'package:braille_app/services/passer.dart';
+import 'package:braille_app/services/topico.dart';
+// ignore: unused_import
 import 'package:braille_app/models/user_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -89,7 +91,6 @@ class _InterfaceState extends State<Interface> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    final teste = Provider.of<Teste>(context);
     final graphic = Provider.of<Graphic>(context);
     final auth = Provider.of<Auth>(context);
 

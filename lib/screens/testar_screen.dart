@@ -1,9 +1,8 @@
-import 'package:braille_app/models/auth.dart';
-import 'package:braille_app/models/fases.dart';
-import 'package:braille_app/models/finished.dart';
-import 'package:braille_app/models/passer.dart';
-import 'package:braille_app/models/topico.dart';
-import 'package:braille_app/screens/modulos_screen.dart';
+import 'package:braille_app/services/auth.dart';
+import 'package:braille_app/models/modulos.dart';
+import 'package:braille_app/components/finished.dart';
+import 'package:braille_app/services/passer.dart';
+import 'package:braille_app/services/topico.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,10 +12,10 @@ class TestarScreen extends StatelessWidget {
   void _quest_1(BuildContext context) {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final Fase fase = args['fase'];
+    final Modulo fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
-    final auth = Provider.of<Auth>(context, listen: false);
+    Provider.of<Auth>(context, listen: false);
     // if (passer.topicoCompleto <= topico.id) {
     //   passer.incrementaFracao(passer, topico, fase, auth.token??'', auth.userId??"");
     // }
@@ -26,8 +25,6 @@ class TestarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
     return Finished(
       image: 'assets/images/Group46.png',
       negrito: 'Agora vamos testar seus conhecimentos!',

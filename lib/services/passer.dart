@@ -1,5 +1,7 @@
-import 'package:braille_app/models/fases.dart';
-import 'package:braille_app/models/topico.dart';
+// ignore_for_file: avoid_print
+
+import 'package:braille_app/models/modulos.dart';
+import 'package:braille_app/services/topico.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:braille_app/utils/constants.dart';
@@ -26,7 +28,8 @@ class Passer with ChangeNotifier {
     this.fracaoT = 0,
   });
 
-  void incrementaFaset(Fase fase, Topico topico, String token, String userId) {
+  void incrementaFaset(
+      Modulo fase, Topico topico, String token, String userId) {
     faseCompleta = fase.id + 1;
     notifyListeners();
   }
@@ -37,7 +40,7 @@ class Passer with ChangeNotifier {
   }
 
   void incrementaFracao(
-      Passer passer, Topico topico, Fase fase, String token, String userId) {
+      Passer passer, Topico topico, Modulo fase, String token, String userId) {
     fracaoT += 1;
     topico.avanco += 1;
     fracao += 1;
@@ -62,14 +65,14 @@ class Passer with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getTelaT(Fase fase, String token, String userId) async {
+  Future<void> getTelaT(Modulo fase, String token, String userId) async {
     fracaoT = 0;
     final response = await http.get(Uri.parse(
         "${Constants.BASE_URL}/users/$userId/modulos/${(fase.id).toString()}.json?auth=$token"));
     var dados = jsonDecode(response.body);
     print("oi ${dados['telaT']}");
     fracaoT = dados['telaT'];
-    print("fracaO" + fracaoT.toString());
+    print("fracaO$fracaoT");
     notifyListeners();
   }
 
@@ -82,7 +85,7 @@ class Passer with ChangeNotifier {
     print(faseCompleta);
   }
 
-  Future<void> incrementaFase(Fase fase, String token, String userId) async {
+  Future<void> incrementaFase(Modulo fase, String token, String userId) async {
     faseCompleta = fase.id + 1;
     notifyListeners();
     await http.put(
@@ -99,7 +102,7 @@ class Passer with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> salvaModulo(Fase fase, String token, String userId) async {
+  Future<void> salvaModulo(Modulo fase, String token, String userId) async {
     await http.patch(
       Uri.parse('${Constants.BASE_URL}/users/$userId/modulo.json?auth=$token'),
       body: jsonEncode({"modulo": faseCompleta}),
@@ -115,7 +118,7 @@ class Passer with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> salvaTelaTopico(Fase fase, String token, String userId) async {
+  Future<void> salvaTelaTopico(Modulo fase, String token, String userId) async {
     await http.patch(
       Uri.parse(
           '${Constants.BASE_URL}/users/$userId/modulos/${fase.id}.json?auth=$token'),
@@ -124,7 +127,7 @@ class Passer with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> salvaAcerto(Fase fase, Topico topico, String token,
+  Future<void> salvaAcerto(Modulo fase, Topico topico, String token,
       String userId, int acertos) async {
     await http.patch(
       Uri.parse(
@@ -136,8 +139,8 @@ class Passer with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> salvaLugar(
-      Fase fase, Topico topico, String token, String userId, int numero) async {
+  Future<void> salvaLugar(Modulo fase, Topico topico, String token,
+      String userId, int numero) async {
     await http.patch(
       Uri.parse(
           '${Constants.BASE_URL}/users/$userId/modulos/${fase.id}/${topico.id}.json?auth=$token'),
@@ -147,7 +150,7 @@ class Passer with ChangeNotifier {
   }
 
   Future<void> getLugar(
-      Fase fase, Topico topico, String token, String userId) async {
+      Modulo fase, Topico topico, String token, String userId) async {
     final response = await http.get(Uri.parse(
         "${Constants.BASE_URL}/users/$userId/modulos/${fase.id}/${topico.id}.json?auth=$token"));
 
@@ -166,8 +169,8 @@ class Passer with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> salvaIndice(
-      Fase fase, Topico topico, String token, String userId, int indice) async {
+  Future<void> salvaIndice(Modulo fase, Topico topico, String token,
+      String userId, int indice) async {
     await http.patch(
       Uri.parse(
           '${Constants.BASE_URL}/users/$userId/modulos/${fase.id}/${topico.id}.json?auth=$token'),
@@ -177,7 +180,7 @@ class Passer with ChangeNotifier {
   }
 
   Future<void> getIndice(
-      Fase fase, Topico topico, String token, String userId) async {
+      Modulo fase, Topico topico, String token, String userId) async {
     final response = await http.get(Uri.parse(
         "${Constants.BASE_URL}/users/$userId/modulos/${fase.id}/${topico.id}.json?auth=$token"));
 

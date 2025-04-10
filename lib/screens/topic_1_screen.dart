@@ -1,7 +1,7 @@
-import 'package:braille_app/models/auth.dart';
-import 'package:braille_app/models/fases.dart';
-import 'package:braille_app/models/passer.dart';
-import 'package:braille_app/models/topico.dart';
+import 'package:braille_app/services/auth.dart';
+import 'package:braille_app/models/modulos.dart';
+import 'package:braille_app/services/passer.dart';
+import 'package:braille_app/services/topico.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +11,7 @@ class Topic1Screen extends StatelessWidget {
   void _topico1conteudo(BuildContext context) {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final Fase fase = args['fase'];
+    final Modulo fase = args['fase'];
     final Topico topico = args['topico'];
     final Passer passer = args['passer'];
     final auth = Provider.of<Auth>(context, listen: false);
@@ -28,9 +28,7 @@ class Topic1Screen extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final Fase fase = args['fase'];
     final Topico topico = args['topico'];
-    final Passer passer = args['passer'];
     return Scaffold(
       backgroundColor: Color(0xFFDDE9DD),
       appBar: AppBar(
@@ -39,9 +37,9 @@ class Topic1Screen extends StatelessWidget {
         centerTitle: true,
         actions: [
           Container(
-            child: Image.asset('assets/images/muiraq_preto.png'),
             width: screenWidth * 20 / 360,
             margin: EdgeInsets.only(right: screenWidth * 25 / 360),
+            child: Image.asset('assets/images/muiraq_preto.png'),
           )
         ],
       ),
@@ -60,8 +58,8 @@ class Topic1Screen extends StatelessWidget {
                 children: [
                   Container(
                     height: 159 / 800 * screenHeight,
-                    child: Image.asset('assets/images/Group143.png'),
                     margin: EdgeInsets.only(right: 47 / 360 * screenWidth),
+                    child: Image.asset('assets/images/Group143.png'),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,11 +1,13 @@
+// ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member, duplicate_ignore
+
 import 'package:braille_app/components/matriz_maiuscula.dart';
 import 'package:braille_app/components/matriz_numero.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:braille_app/models/ball.dart';
+import 'package:braille_app/components/ball.dart';
 
 class Matriz extends StatefulWidget {
-  Matriz({super.key});
+  const Matriz({super.key});
 
   @override
   State<Matriz> createState() => _MatrizState();
@@ -59,6 +61,7 @@ class _MatrizState extends State<Matriz> {
         ball.separaCaracteres[indice] = translatedLetter;
       }
 
+      // ignore: invalid_use_of_protected_member
       ball.notifyListeners();
       indice++;
       novaLetra();
@@ -113,6 +116,7 @@ class _MatrizState extends State<Matriz> {
     });
   }
 
+  // ignore: non_constant_identifier_names
   String number_translator() {
     if (isClicked1 &&
         !isClicked2 &&
@@ -197,6 +201,7 @@ class _MatrizState extends State<Matriz> {
     return '';
   }
 
+  // ignore: non_constant_identifier_names
   String cell_translator() {
     // Lógica para tradução dos caracteres (como no código original)
     if (isClicked1 &&
@@ -872,7 +877,7 @@ class _MatrizState extends State<Matriz> {
                 ],
               ),
             ),
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width *
                   0.6, // largura proporcional à tela
               child: Column(
