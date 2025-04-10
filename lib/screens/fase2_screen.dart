@@ -21,9 +21,7 @@ class _FaseScreenState extends State<Fase2Screen> {
       body: Column(
         children: [
           Text('Vidas: $lives'),
-          // Aqui você coloca o conteúdo específico da fase
           Text(widget.fase?.description ?? ''),
-          // Lista de perguntas, desafios etc
         ],
       ),
     );
