@@ -1,3 +1,4 @@
+import 'package:braille_app/components/fase.dart';
 import 'package:braille_app/models/historico.dart';
 import 'package:braille_app/services/historico_list.dart';
 import 'package:braille_app/services/information_1.dart';
@@ -137,7 +138,10 @@ class BrailleApp extends StatelessWidget {
           '/quest-1-screen': (ctx) => Quest1Screen(),
           '/acertos-screen': (ctx) => AcertosScreen(),
           '/historico-screen': (ctx) => HistoricoScreen(),
-          '/fase-screen': (ctx) => Fase2Screen(),
+          '/fase-screen': (ctx) {
+            final args = ModalRoute.of(ctx)!.settings.arguments as Fase;
+            return Fase2Screen(faseId: args.id);
+          },
         },
       ),
     );

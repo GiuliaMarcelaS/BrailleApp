@@ -5,7 +5,6 @@ import 'package:braille_app/data/fases2_data.dart';
 class LearnScreen extends StatelessWidget {
   LearnScreen({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +43,7 @@ class LearnScreen extends StatelessWidget {
                       Navigator.pushNamed(
                         context,
                         '/fase-screen',
-                        arguments: fase,
+                        arguments: fase, // Passa o objeto fase completo
                       );
                     });
                   },
@@ -67,7 +66,6 @@ class LearnScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              // ignore: deprecated_member_use
               color: Colors.black.withOpacity(0.1),
               blurRadius: 4,
               offset: const Offset(0, 2),
