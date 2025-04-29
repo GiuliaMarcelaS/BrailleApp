@@ -43,7 +43,7 @@ class LearnScreen extends StatelessWidget {
                       Navigator.pushNamed(
                         context,
                         '/fase-screen',
-                        arguments: fase, // Passa o objeto fase completo
+                        arguments: fase, 
                       );
                     });
                   },

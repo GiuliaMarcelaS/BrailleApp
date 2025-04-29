@@ -23,7 +23,6 @@ class GameFlowBloc extends Bloc<GameFlowEvent, GameFlowState> {
     emit(FaseLoading());
 
     try {
-      // Simula carregamento
       await Future.delayed(Duration(milliseconds: 500));
 
       final fase = fases.firstWhere((f) => f.id == event.faseId);
