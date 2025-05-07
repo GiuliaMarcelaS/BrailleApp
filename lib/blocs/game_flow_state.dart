@@ -29,6 +29,10 @@ class MiniGameStarted extends GameFlowState {
   });
 }
 
-class GameOver extends GameFlowState {}
+class GameOver extends GameFlowState {
+  final String faseId;
+
+  GameOver({required this.faseId});
+}
 
 class FaseCompleted extends GameFlowState {}

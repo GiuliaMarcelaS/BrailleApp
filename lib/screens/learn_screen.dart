@@ -1,62 +1,96 @@
 import 'package:braille_app/components/fase.dart';
+import 'package:braille_app/services/auth.dart';
+import 'package:braille_app/services/fase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:braille_app/data/fases2_data.dart';
+import 'package:provider/provider.dart';
 
 class LearnScreen extends StatelessWidget {
   LearnScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFDDE9DE),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 8),
-              const Text(
-                'Giulia',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
+    final auth = Provider.of<Auth>(context);
+    final faseService = FaseService(
+      token: auth.token ?? '',
+      userId: auth.userId ?? '',
+    );
+
+    return FutureBuilder<int>(
+      future: faseService.getFaseAtual(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+
+        final faseAtual = snapshot.data!;
+
+        return Scaffold(
+          backgroundColor: const Color(0xFFDDE9DE),
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Giulia',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Como você quer praticar hoje?',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+                  Expanded(
+                    child: ListView.separated(
+                      itemCount: fases.length,
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 16),
+                      itemBuilder: (context, index) {
+                        final fase = fases[index];
+                        final isDesbloqueada =
+                            int.tryParse(fase.id) != null &&
+                            int.parse(fase.id) <= faseAtual;
+
+                        return Opacity(
+                          opacity: isDesbloqueada ? 1.0 : 0.5,
+                          child: _buildOptionCard(
+                            fase,
+                            isDesbloqueada
+                                ? () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      '/fase-screen',
+                                      arguments: fase,
+                                    );
+                                  }
+                                : null,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 16),
-              const Text(
-                'Como você quer praticar hoje?',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 32),
-              Expanded(
-                child: ListView.separated(
-                  itemCount: fases.length,
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 16),
-                  itemBuilder: (context, index) {
-                    final fase = fases[index];
-                    return _buildOptionCard(fase, () {
-                      Navigator.pushNamed(
-                        context,
-                        '/fase-screen',
-                        arguments: fase, 
-                      );
-                    });
-                  },
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
-  Widget _buildOptionCard(Fase fase, VoidCallback onTap) {
+  Widget _buildOptionCard(Fase fase, VoidCallback? onTap) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(16),
