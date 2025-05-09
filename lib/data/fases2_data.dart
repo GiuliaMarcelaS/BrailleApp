@@ -10,18 +10,6 @@ final List<Fase> fases = [
     color: Color(0xFF00C2CB),
     icon: 'assets/explorador.png',
     miniGames: [
-      MiniGameTemplate(
-        id: '1-1',
-        type: MiniGameType.LETTER_RECOGNITION,
-        difficulty: 1,
-        content: {'letter': 'A', 'brailleSymbol': '⠁'},
-      ),
-      MiniGameTemplate(
-        id: '1-2',
-        type: MiniGameType.LETTER_RECOGNITION,
-        difficulty: 1,
-        content: {'letter': 'B', 'brailleSymbol': '⠃'},
-      ),
     ],
   ),
   Fase(
@@ -31,15 +19,6 @@ final List<Fase> fases = [
     color: Color(0xFF6FCF97),
     icon: 'assets/mestre.png',
     miniGames: [
-      MiniGameTemplate(
-        id: '2-1',
-        type: MiniGameType.SYLLABLE,
-        difficulty: 1,
-        content: {
-          'syllable': 'BA',
-          'brailleSymbols': ['⠃', '⠁']
-        },
-      ),
     ],
   ),
 ];

@@ -1,4 +1,5 @@
 import 'package:braille_app/blocs/game_flow_bloc.dart';
+import 'package:braille_app/components/minigames_templates/letra_linha_game.dart';
 import 'package:braille_app/models/minigame_model.dart';
 import 'package:braille_app/services/auth.dart';
 import 'package:braille_app/services/fase_service.dart';
@@ -12,20 +13,25 @@ import 'package:provider/provider.dart';
 class Fase2Screen extends StatelessWidget {
   final String faseId;
 
-  Fase2Screen({
-    this.faseId = '',
-  });
+  Fase2Screen({this.faseId = ''});
 
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context);
     return BlocProvider(
-      create: (context) => GameFlowBloc(faseService: FaseService(token: auth.token??'', userId: auth.userId??''))..add(LoadFaseEvent(faseId)),
+      create: (context) => GameFlowBloc(
+        faseService: FaseService(
+          token: auth.token ?? '',
+          userId: auth.userId ?? '',
+        ),
+      )..add(LoadFaseEvent(faseId)),
       child: Scaffold(
         body: BlocBuilder<GameFlowBloc, GameFlowState>(
           builder: (context, state) {
             if (state is FaseLoading) {
               return Center(child: CircularProgressIndicator());
+            } else if (state is FaseLoaded) {
+              return const Center(child: CircularProgressIndicator());
             } else if (state is MiniGameStarted) {
               return _buildMiniGameScreen(state, context);
             } else if (state is GameOver) {
@@ -40,47 +46,47 @@ class Fase2Screen extends StatelessWidget {
     );
   }
 
- Widget _buildMiniGameScreen(MiniGameStarted state, BuildContext context) {
-  Widget gameWidget;
+  Widget _buildMiniGameScreen(MiniGameStarted state, BuildContext context) {
+    Widget gameWidget;
 
-  switch (state.miniGame.type) {
-    case MiniGameType.LETTER_RECOGNITION:
-      gameWidget = LetterRecognitionGame(
-        config: state.miniGame,
-        onAnswerSubmitted: (isCorrect) {
-          context.read<GameFlowBloc>().add(AnswerSubmittedEvent(isCorrect));
-        },
-      );
-      break;
-    default:
-      gameWidget = Center(child: Text('MiniGame não implementado'));
+    switch (state.miniGame.type) {
+      case MiniGameType.MULTIPLE_LETRAS_LINHA:
+        gameWidget = LetraLinhaGame(
+          questao: state.miniGame.questao!,
+          onSubmit: (acertou) {
+            context.read<GameFlowBloc>().add(AnswerSubmittedEvent(acertou));
+          },
+        );
+        break;
+      default:
+        gameWidget = Center(child: Text('MiniGame não implementado'));
+    }
+
+    return Column(
+      children: [
+        const SizedBox(height: 40),
+        _buildHearts(state.remainingLives),
+        const SizedBox(height: 16),
+        Expanded(child: gameWidget),
+      ],
+    );
   }
 
-  return Column(
-    children: [
-      const SizedBox(height: 40),
-      _buildHearts(state.remainingLives),
-      const SizedBox(height: 16),
-      Expanded(child: gameWidget),
-    ],
-  );
-}
-
-Widget _buildHearts(int lives) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: List.generate(3, (index) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-        child: Icon(
-          Icons.favorite,
-          color: index < lives ? Colors.red : Colors.grey,
-          size: 32,
-        ),
-      );
-    }),
-  );
-}
+  Widget _buildHearts(int lives) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(3, (index) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+          child: Icon(
+            Icons.favorite,
+            color: index < lives ? Colors.red : Colors.grey,
+            size: 32,
+          ),
+        );
+      }),
+    );
+  }
 
   Widget _buildGameOverScreen(BuildContext context) {
     return Center(
@@ -101,19 +107,19 @@ Widget _buildHearts(int lives) {
   }
 
   Widget _buildFaseCompletedScreen(BuildContext context) {
-  Future.microtask(() {
-    Navigator.pop(context); // volta para LearnScreen
-  });
+    Future.microtask(() {
+      Navigator.pop(context);
+    });
 
-  return Center(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('Fase Concluída!', style: TextStyle(fontSize: 24)),
-        SizedBox(height: 20),
-        CircularProgressIndicator(),
-      ],
-    ),
-  );
-}
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Fase Concluída!', style: TextStyle(fontSize: 24)),
+          SizedBox(height: 20),
+          CircularProgressIndicator(),
+        ],
+      ),
+    );
+  }
 }

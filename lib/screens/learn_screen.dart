@@ -1,8 +1,8 @@
 import 'package:braille_app/components/fase.dart';
+import 'package:braille_app/data/fases2_data.dart';
 import 'package:braille_app/services/auth.dart';
 import 'package:braille_app/services/fase_service.dart';
 import 'package:flutter/material.dart';
-import 'package:braille_app/data/fases2_data.dart';
 import 'package:provider/provider.dart';
 
 class LearnScreen extends StatelessWidget {
@@ -18,14 +18,15 @@ class LearnScreen extends StatelessWidget {
 
     return FutureBuilder<int>(
       future: faseService.getFaseAtual(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
+      builder: (context, snapshotFaseAtual) {
+        if (!snapshotFaseAtual.hasData) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
         }
 
-        final faseAtual = snapshot.data!;
+        final faseAtual = snapshotFaseAtual.data!;
+        final fasesDisponiveis = fases;
 
         return Scaffold(
           backgroundColor: const Color(0xFFDDE9DE),
@@ -54,11 +55,11 @@ class LearnScreen extends StatelessWidget {
                   const SizedBox(height: 32),
                   Expanded(
                     child: ListView.separated(
-                      itemCount: fases.length,
+                      itemCount: fasesDisponiveis.length,
                       separatorBuilder: (context, index) =>
                           const SizedBox(height: 16),
                       itemBuilder: (context, index) {
-                        final fase = fases[index];
+                        final fase = fasesDisponiveis[index];
                         final isDesbloqueada =
                             int.tryParse(fase.id) != null &&
                             int.parse(fase.id) <= faseAtual;

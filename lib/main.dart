@@ -33,6 +33,7 @@ import 'package:braille_app/screens/testar_screen.dart';
 import 'package:braille_app/screens/topic_1_screen.dart';
 import 'package:braille_app/screens/topico_1_conteudo_screen.dart';
 import 'package:braille_app/screens/users_chart_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/modulos_screen.dart';

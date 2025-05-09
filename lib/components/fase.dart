@@ -17,4 +17,20 @@ class Fase {
     required this.icon,
     required this.miniGames,
   });
+
+  Fase copyWith({
+    List<MiniGameTemplate>? miniGames,
+  }) {
+    return Fase(
+      id: id,
+      title: title,
+      description: description,
+      color: color,
+      icon: icon,
+      miniGames: miniGames ?? this.miniGames,
+    );
+  }
 }
+
+
+
