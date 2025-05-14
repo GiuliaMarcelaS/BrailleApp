@@ -47,19 +47,23 @@ class FaseService {
     // Associa faseId a uma combinação fixa por enquanto (você pode mapear por id depois)
     String categoria = 'reconhecer';
     String padrao = 'padrao_1';
+    String grupo = 'a';
 
-    final snapshot = await _firestore
+    final snapshot_reconhecer = await _firestore
         .collection('categorias')
         .doc(categoria)
         .collection('padroes')
         .doc(padrao)
+        .collection('grupos')
+        .doc(grupo)
         .collection('questoes')
         .get();
+        
 
     print('➡️ Buscando minigames de $categoria/$padrao');
-    print('➡️ Encontrados: ${snapshot.docs.length} questoes');
+    print('➡️ Encontrados: ${snapshot_reconhecer.docs.length} questoes');
 
-    return snapshot.docs.map((doc) {
+    return snapshot_reconhecer.docs.map((doc) {
       final data = doc.data();
       final questao = QuestaoModel.fromMap(data, data['id']);
 

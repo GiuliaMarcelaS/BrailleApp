@@ -62,8 +62,8 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
         ElevatedButton(
           onPressed: () {
             final acerto = _selecionadas.length ==
-                    widget.questao.corretas.length &&
-                _selecionadas.every(widget.questao.corretas.contains);
+                    widget.questao.corretas!.length &&
+                _selecionadas.every(widget.questao.corretas!.contains);
             widget.onSubmit(acerto);
           },
           child: const Text("Responder"),
