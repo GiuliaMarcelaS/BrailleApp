@@ -84,16 +84,19 @@ class GameFlowBloc extends Bloc<GameFlowEvent, GameFlowState> {
     final currentIndex =
         fase.miniGames.indexWhere((mg) => mg.id == currentState.miniGame.id);
 
-    if (currentIndex == fase.miniGames.length - 1) {
+    print(sequenciaMinigames[fase.id]!.length);
+
+    if (currentIndex == sequenciaMinigames[fase.id]!.length - 1) {
       await faseService.atualizarFase(int.parse(fase.id) + 1);
       emit(FaseCompleted());
     } else {
+      final miniGames = await faseService.carregarMiniGamesDaFase(fase.id);
       emit(FaseLoaded(
         fase: fase,
         currentMiniGameIndex: currentIndex + 1,
         lives: currentState.remainingLives,
       ));
-      add(StartMiniGameEvent(fase.miniGames[currentIndex + 1]));
+      add(StartMiniGameEvent(miniGames[currentIndex + 2]));
     }
   }
 

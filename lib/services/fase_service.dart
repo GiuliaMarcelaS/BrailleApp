@@ -7,6 +7,29 @@ import 'package:braille_app/models/questao_model.dart';
 import 'package:braille_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 
+     final sequenciaMinigames = {
+    '1': [
+      {
+        'categoria': 'apresentar', 
+        'padrao': 'padrao_1', 
+        'tipo': MiniGameType.APRESENTAR,
+        'temGrupo': false
+      },
+      {
+        'categoria': 'reconhecer', 
+        'padrao': 'padrao_1', 
+        'grupo': 'a', 
+        'tipo': MiniGameType.MULTIPLE_LETRAS_LINHA,
+        'temGrupo': true
+      },
+      {
+        'categoria': 'diferenciar', 
+        'padrao': 'padrao_1', 
+        'tipo': MiniGameType.COMPLETAR_PALAVRA,
+        'temGrupo': false
+      },
+    ],
+  };
 class FaseService {
   final String token;
   final String userId;
@@ -45,29 +68,6 @@ class FaseService {
 
   Future<List<MiniGameTemplate>> carregarMiniGamesDaFase(String faseId) async {
 
-     final sequenciaMinigames = {
-    '1': [
-      {
-        'categoria': 'apresentar', 
-        'padrao': 'padrao_1', 
-        'tipo': MiniGameType.APRESENTAR,
-        'temGrupo': false
-      },
-      {
-        'categoria': 'reconhecer', 
-        'padrao': 'padrao_1', 
-        'grupo': 'a', 
-        'tipo': MiniGameType.MULTIPLE_LETRAS_LINHA,
-        'temGrupo': true
-      },
-      {
-        'categoria': 'diferenciar', 
-        'padrao': 'padrao_1', 
-        'tipo': MiniGameType.COMPLETAR_PALAVRA,
-        'temGrupo': false
-      },
-    ],
-  };
      final miniGames = <MiniGameTemplate>[];
 
   for (var config in sequenciaMinigames[faseId] ?? []) {
