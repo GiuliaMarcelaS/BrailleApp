@@ -26,8 +26,8 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
         const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: List.generate(widget.questao.opcoes.length, (index) {
-            final letra = widget.questao.opcoes[index];
+          children: List.generate(widget.questao.opcoes!.length, (index) {
+            final letra = widget.questao.opcoes![index];
             final selecionada = _selecionadas.contains(index);
 
             return GestureDetector(

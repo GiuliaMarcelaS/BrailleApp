@@ -11,6 +11,7 @@ class ApresentarGame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('Enunciado recebido: ${questao.enunciado}');
     return Column(
       children: [
         Text(questao.enunciado, style: const TextStyle(fontSize: 18)),

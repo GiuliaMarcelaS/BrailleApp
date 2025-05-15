@@ -58,6 +58,28 @@ class FaseService {
         .doc(grupo)
         .collection('questoes')
         .get();
+
+    // String categoria = 'apresentar';
+    // String padrao = 'padrao_1';
+
+    // final snapshot_reconhecer = await _firestore
+    //     .collection('categorias')
+    //     .doc(categoria)
+    //     .collection('padroes')
+    //     .doc(padrao)
+    //     .collection('questoes')
+    //     .get();
+
+    // String categoria = 'diferenciar';
+    // String padrao = 'padrao_1';
+
+    // final snapshot_reconhecer = await _firestore
+    //     .collection('categorias')
+    //     .doc(categoria)
+    //     .collection('padroes')
+    //     .doc(padrao)
+    //     .collection('questoes')
+    //     .get();
         
 
     print('➡️ Buscando minigames de $categoria/$padrao');

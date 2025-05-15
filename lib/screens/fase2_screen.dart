@@ -1,4 +1,6 @@
 import 'package:braille_app/blocs/game_flow_bloc.dart';
+import 'package:braille_app/components/minigames_templates/apresentar_game.dart';
+import 'package:braille_app/components/minigames_templates/completar_palavra_game.dart';
 import 'package:braille_app/components/minigames_templates/letra_linha_game.dart';
 import 'package:braille_app/models/minigame_model.dart';
 import 'package:braille_app/services/auth.dart';
@@ -61,6 +63,25 @@ class Fase2Screen extends StatelessWidget {
       default:
         gameWidget = Center(child: Text('MiniGame não implementado'));
     }
+    // switch (state.miniGame.type) {
+    //   case MiniGameType.MULTIPLE_LETRAS_LINHA:
+    //     gameWidget = ApresentarGame(
+    //       questao: state.miniGame.questao!,
+    //     );
+    //     break;
+    //   default:
+    //     gameWidget = Center(child: Text('MiniGame não implementado'));
+    // }
+
+    // switch (state.miniGame.type) {
+    //   case MiniGameType.MULTIPLE_LETRAS_LINHA:
+    //     gameWidget = CompletarPalavraSimpleGame(
+    //       questao: state.miniGame.questao!,
+    //     );
+    //     break;
+    //   default:
+    //     gameWidget = Center(child: Text('MiniGame não implementado'));
+    // }
 
     return Column(
       children: [

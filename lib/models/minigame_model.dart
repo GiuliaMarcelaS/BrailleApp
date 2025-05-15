@@ -1,6 +1,6 @@
 import 'package:braille_app/models/questao_model.dart';
 
-enum MiniGameType { LETTER_RECOGNITION, SYLLABLE, TEXT_TRANSCRIPTION, MULTIPLE_LETRAS_LINHA }
+enum MiniGameType { LETTER_RECOGNITION, SYLLABLE, TEXT_TRANSCRIPTION, MULTIPLE_LETRAS_LINHA, APRESENTAR, COMPLETAR_PALAVRA }
 
 class MiniGameTemplate {
   final String id;
