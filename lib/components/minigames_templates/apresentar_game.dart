@@ -3,10 +3,12 @@ import 'package:braille_app/models/questao_model.dart';
 
 class ApresentarGame extends StatelessWidget {
   final QuestaoModel questao;
+  final void Function(bool acerto) onSubmit;
 
   const ApresentarGame({
     super.key,
     required this.questao,
+    required this.onSubmit,
   });
 
   @override
@@ -38,6 +40,12 @@ class ApresentarGame extends StatelessWidget {
             );
           }).toList(),
         ),
+         ElevatedButton(
+          onPressed: () {
+            onSubmit(true);
+          },
+          child: const Text("Continuar"),
+        )
       ],
     );
   }

@@ -66,7 +66,7 @@ class GameFlowBloc extends Bloc<GameFlowEvent, GameFlowState> {
   ) async {
     if (state is MiniGameStarted) {
       final currentState = state as MiniGameStarted;
-      final fase = await faseService.buscarFasePorMiniGameId(currentState.miniGame.id);
+      final fase = fases.firstWhere((f) => f.id == event.faseId);
 
       if (event.isCorrect) {
         await _handleCorrectAnswer(fase, currentState, emit);

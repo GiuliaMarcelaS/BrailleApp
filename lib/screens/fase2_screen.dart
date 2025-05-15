@@ -56,13 +56,16 @@ class Fase2Screen extends StatelessWidget {
         gameWidget = LetraLinhaGame(
           questao: state.miniGame.questao!,
           onSubmit: (acertou) {
-            context.read<GameFlowBloc>().add(AnswerSubmittedEvent(acertou));
+            context.read<GameFlowBloc>().add(AnswerSubmittedEvent(acertou, faseId));
           },
         );
         break;
       case MiniGameType.APRESENTAR:
         gameWidget = ApresentarGame(
           questao: state.miniGame.questao!,
+          onSubmit: (acertou) {
+            context.read<GameFlowBloc>().add(AnswerSubmittedEvent(acertou, faseId));
+          },
         );
         break;
       case MiniGameType.COMPLETAR_PALAVRA:

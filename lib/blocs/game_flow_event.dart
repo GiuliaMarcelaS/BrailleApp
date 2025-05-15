@@ -13,8 +13,9 @@ class StartMiniGameEvent extends GameFlowEvent {
 }
 
 class AnswerSubmittedEvent extends GameFlowEvent {
+  final String faseId;
   final bool isCorrect;
-  AnswerSubmittedEvent(this.isCorrect);
+  AnswerSubmittedEvent(this.isCorrect, this.faseId);
 }
 
 class RetryFaseEvent extends GameFlowEvent {}
