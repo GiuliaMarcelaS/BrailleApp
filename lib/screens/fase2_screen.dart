@@ -1,158 +1,110 @@
-import 'package:braille_app/blocs/game_flow_bloc.dart';
-import 'package:braille_app/components/minigames_templates/apresentar_game.dart';
-import 'package:braille_app/components/minigames_templates/completar_palavra_game.dart';
 import 'package:braille_app/components/minigames_templates/letra_linha_game.dart';
 import 'package:braille_app/models/minigame_model.dart';
-import 'package:braille_app/services/auth.dart';
-import 'package:braille_app/services/fase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:braille_app/blocs/game_flow_bloc.dart';
 import 'package:braille_app/blocs/game_flow_event.dart';
 import 'package:braille_app/blocs/game_flow_state.dart';
-import 'package:braille_app/components/minigames_templates/base_minigame.dart';
-import 'package:provider/provider.dart';
+import 'package:braille_app/services/fase_service.dart';
+import 'package:braille_app/components/minigames_templates/apresentar_game.dart';
+import 'package:braille_app/components/minigames_templates/completar_palavra_game.dart';
 
 class Fase2Screen extends StatelessWidget {
   final String faseId;
+  final FaseService faseService;
 
-  Fase2Screen({this.faseId = ''});
+  const Fase2Screen({
+    Key? key,
+    required this.faseId,
+    required this.faseService,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final auth = Provider.of<Auth>(context);
     return BlocProvider(
-      create: (context) => GameFlowBloc(
-        faseService: FaseService(
-          token: auth.token ?? '',
-          userId: auth.userId ?? '',
-        ),
-      )..add(LoadFaseEvent(faseId)),
+      create: (_) => GameFlowBloc(faseService: faseService)
+        ..add(LoadFaseEvent(faseId)),
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('Fase \$faseId'),
+        ),
         body: BlocBuilder<GameFlowBloc, GameFlowState>(
           builder: (context, state) {
             if (state is FaseLoading) {
-              return Center(child: CircularProgressIndicator());
-            } else if (state is FaseLoaded) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is MiniGameStarted) {
-              return _buildMiniGameScreen(state, context);
-            } else if (state is GameOver) {
-              return _buildGameOverScreen(context);
+              Widget gameWidget = const SizedBox.shrink();
+
+              switch (state.miniGame.type) {
+                case MiniGameType.APRESENTAR:
+                  gameWidget = ApresentarGame(
+                    questao: state.miniGame.questao!,
+                    onSubmit: (acertou) => context
+                        .read<GameFlowBloc>()
+                        .add(AnswerSubmittedEvent(acertou, faseId)),
+                  );
+                  break;
+                case MiniGameType.MULTIPLE_LETRAS_LINHA:
+                  gameWidget = LetraLinhaGame(
+                    questao: state.miniGame.questao!,
+                    onSubmit: (acertou) => context
+                        .read<GameFlowBloc>()
+                        .add(AnswerSubmittedEvent(acertou, faseId)),
+                  );
+                  break;
+                case MiniGameType.COMPLETAR_PALAVRA:
+                  gameWidget = CompletarPalavraSimpleGame(
+                    questao: state.miniGame.questao!,
+                    onSubmit: (acertou) => context
+                        .read<GameFlowBloc>()
+                        .add(AnswerSubmittedEvent(acertou, faseId)),
+                  );
+                  break;
+              }
+
+              return Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                        state.remainingLives,
+                        (i) => const Icon(Icons.favorite, color: Colors.red),
+                      ),
+                    ),
+                  ),
+                  Expanded(child: gameWidget),
+                ],
+              );
             } else if (state is FaseCompleted) {
-              return _buildFaseCompletedScreen(context);
+              return Center(
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Próxima Fase'),
+                ),
+              );
+            } else if (state is GameOver) {
+              return Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text('Game Over', style: TextStyle(fontSize: 24)),
+                    ElevatedButton(
+                      onPressed: () => context
+                          .read<GameFlowBloc>()
+                          .add(RetryFaseEvent()),
+                      child: const Text('Tentar Novamente'),
+                    ),
+                  ],
+                ),
+              );
             }
-            return Center(child: Text('Estado desconhecido'));
+
+            return const SizedBox.shrink();
           },
         ),
-      ),
-    );
-  }
-
-  Widget _buildMiniGameScreen(MiniGameStarted state, BuildContext context) {
-    Widget gameWidget;
-
-    switch (state.miniGame.type) {
-      case MiniGameType.MULTIPLE_LETRAS_LINHA:
-        gameWidget = LetraLinhaGame(
-          questao: state.miniGame.questao!,
-          onSubmit: (acertou) {
-            context.read<GameFlowBloc>().add(AnswerSubmittedEvent(acertou, faseId));
-          },
-        );
-        break;
-      case MiniGameType.APRESENTAR:
-        gameWidget = ApresentarGame(
-          questao: state.miniGame.questao!,
-          onSubmit: (acertou) {
-            context.read<GameFlowBloc>().add(AnswerSubmittedEvent(acertou, faseId));
-          },
-        );
-        break;
-      case MiniGameType.COMPLETAR_PALAVRA:
-        gameWidget = CompletarPalavraSimpleGame(
-          questao: state.miniGame.questao!,
-        );
-        break;
-      default:
-        gameWidget = Center(child: Text('MiniGame não implementado'));
-    }
-    // switch (state.miniGame.type) {
-    //   case MiniGameType.MULTIPLE_LETRAS_LINHA:
-    //     gameWidget = ApresentarGame(
-    //       questao: state.miniGame.questao!,
-    //     );
-    //     break;
-    //   default:
-    //     gameWidget = Center(child: Text('MiniGame não implementado'));
-    // }
-
-    // switch (state.miniGame.type) {
-    //   case MiniGameType.MULTIPLE_LETRAS_LINHA:
-    //     gameWidget = CompletarPalavraSimpleGame(
-    //       questao: state.miniGame.questao!,
-    //     );
-    //     break;
-    //   default:
-    //     gameWidget = Center(child: Text('MiniGame não implementado'));
-    // }
-
-    return Column(
-      children: [
-        const SizedBox(height: 40),
-        _buildHearts(state.remainingLives),
-        const SizedBox(height: 16),
-        Expanded(child: gameWidget),
-      ],
-    );
-  }
-
-  Widget _buildHearts(int lives) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(3, (index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4.0),
-          child: Icon(
-            Icons.favorite,
-            color: index < lives ? Colors.red : Colors.grey,
-            size: 32,
-          ),
-        );
-      }),
-    );
-  }
-
-  Widget _buildGameOverScreen(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Game Over!', style: TextStyle(fontSize: 24)),
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              context.read<GameFlowBloc>().add(RetryFaseEvent());
-            },
-            child: Text('Tentar Novamente'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFaseCompletedScreen(BuildContext context) {
-    Future.microtask(() {
-      Navigator.pop(context);
-    });
-
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Fase Concluída!', style: TextStyle(fontSize: 24)),
-          SizedBox(height: 20),
-          CircularProgressIndicator(),
-        ],
       ),
     );
   }

@@ -1,35 +1,15 @@
 import 'dart:convert';
+
+import 'package:braille_app/data/minigames_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
 import 'package:braille_app/components/fase.dart';
 import 'package:braille_app/models/minigame_model.dart';
 import 'package:braille_app/models/questao_model.dart';
 import 'package:braille_app/utils/constants.dart';
-import 'package:flutter/material.dart';
 
-     final sequenciaMinigames = {
-    '1': [
-      {
-        'categoria': 'apresentar', 
-        'padrao': 'padrao_1', 
-        'tipo': MiniGameType.APRESENTAR,
-        'temGrupo': false
-      },
-      {
-        'categoria': 'reconhecer', 
-        'padrao': 'padrao_1', 
-        'grupo': 'a', 
-        'tipo': MiniGameType.MULTIPLE_LETRAS_LINHA,
-        'temGrupo': true
-      },
-      {
-        'categoria': 'diferenciar', 
-        'padrao': 'padrao_1', 
-        'tipo': MiniGameType.COMPLETAR_PALAVRA,
-        'temGrupo': false
-      },
-    ],
-  };
 class FaseService {
   final String token;
   final String userId;
@@ -37,89 +17,123 @@ class FaseService {
 
   FaseService({required this.token, required this.userId});
 
-  Future<int> getFaseAtual() async {
-    final response = await http.get(
-      Uri.parse('${Constants.BASE_URL}/users/$userId/fase.json?auth=$token'),
-    );
+  // ---------------------------------------------------------------------------
+  // Firebase Realtime DB helpers
+  // ---------------------------------------------------------------------------
 
+  Future<int> getFaseAtual() async {
+    final url = '${Constants.BASE_URL}/users/$userId/fase.json?auth=$token';
+    final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      return data ?? 1;
+      return (data as int?) ?? 1;
     } else {
       throw Exception('Erro ao carregar fase atual');
     }
   }
 
   Future<void> atualizarFase(int novaFase) async {
-    await http.put(
-      Uri.parse('${Constants.BASE_URL}/users/$userId/fase.json?auth=$token'),
-      body: jsonEncode(novaFase),
-    );
+    final url = '${Constants.BASE_URL}/users/$userId/fase.json?auth=$token';
+    await http.put(Uri.parse(url), body: jsonEncode(novaFase));
   }
 
+  // ---------------------------------------------------------------------------
+  // Local-only helpers
+  // ---------------------------------------------------------------------------
+
   Future<Fase> carregarFasePorId(String id) async {
-    // Fases são locais, então esse método só é usado no Retry
     throw UnimplementedError('Fase vem de dados locais');
   }
 
   Future<Fase> buscarFasePorMiniGameId(String miniGameId) async {
-    throw UnimplementedError('Busca de fase por minigame não usada com fases locais');
+    throw UnimplementedError();
   }
+
+  // ---------------------------------------------------------------------------
+  // MiniGames
+  // ---------------------------------------------------------------------------
 
   Future<List<MiniGameTemplate>> carregarMiniGamesDaFase(String faseId) async {
+    final miniGames = <MiniGameTemplate>[];
+    final configs = sequenciaMinigames[faseId] ?? [];
 
-     final miniGames = <MiniGameTemplate>[];
+    for (var config in configs) {
+      // Monta referência de coleção
+      late CollectionReference ref;
+      if (config.containsKey('grupo')) {
+        ref = _firestore
+            .collection('categorias')
+            .doc(config['categoria'] as String)
+            .collection('padroes')
+            .doc(config['padrao'] as String)
+            .collection('grupos')
+            .doc(config['grupo'] as String)
+            .collection('questoes');
+      } else {
+        ref = _firestore
+            .collection('categorias')
+            .doc(config['categoria'] as String)
+            .collection('padroes')
+            .doc(config['padrao'] as String)
+            .collection('questoes');
+      }
 
-  for (var config in sequenciaMinigames[faseId] ?? []) {
-    CollectionReference collectionRef;
-    
-    if (config['temGrupo'] == true) {
-      collectionRef = _firestore
-          .collection('categorias')
-          .doc(config['categoria'])
-          .collection('padroes')
-          .doc(config['padrao'])
-          .collection('grupos')
-          .doc(config['grupo'])
-          .collection('questoes');
-    } else {
-      collectionRef = _firestore
-          .collection('categorias')
-          .doc(config['categoria'])
-          .collection('padroes')
-          .doc(config['padrao'])
-          .collection('questoes');
+      // Se houver 'id', busca apenas aquela questão
+      if (config.containsKey('id')) {
+        final docId = config['id'] as String;
+        final docSnap = await ref.doc(docId).get();
+        if (docSnap.exists) {
+          final data = docSnap.data() as Map<String, dynamic>;
+          miniGames.add(
+            MiniGameTemplate(
+              id: docSnap.id,
+              type: config['tipo'] as MiniGameType,
+              difficulty: 1,
+              questao: QuestaoModel.fromMap(data, docSnap.id),
+            ),
+          );
+        }
+      } else {
+        // Caso contrário, carrega toda a coleção
+        final snapshot = await ref.get();
+        for (var doc in snapshot.docs) {
+          final data = doc.data() as Map<String, dynamic>;
+          miniGames.add(
+            MiniGameTemplate(
+              id: doc.id,
+              type: config['tipo'] as MiniGameType,
+              difficulty: 1,
+              questao: QuestaoModel.fromMap(data, doc.id),
+            ),
+          );
+        }
+      }
     }
 
-    final snapshot = await collectionRef.get();
-
-    miniGames.addAll(snapshot.docs.map((doc) {
-      final data = doc.data() as Map<String, dynamic>;
-      return MiniGameTemplate(
-        id: doc.id,
-        type: config['tipo'] as MiniGameType,
-        difficulty: 1,
-        questao: QuestaoModel.fromMap(data, doc.id),
-      );
-    }));
+    return miniGames;
   }
 
-  return miniGames;
-}
+  // ---------------------------------------------------------------------------
+  // Utilitários
+  // ---------------------------------------------------------------------------
 
   MiniGameType _getMiniGameType(String value) {
     switch (value) {
+      case 'apresentar':
+        return MiniGameType.APRESENTAR;
       case 'letras_linha':
         return MiniGameType.MULTIPLE_LETRAS_LINHA;
+      case 'completar_palavra':
+        return MiniGameType.COMPLETAR_PALAVRA;
       default:
         throw Exception('Tipo de minigame desconhecido: $value');
     }
   }
 
   Color _parseColor(String hex) {
-    hex = hex.replaceAll('#', '');
-    if (hex.length == 6) hex = 'FF$hex';
-    return Color(int.parse(hex, radix: 16));
+    var colorStr = hex.replaceAll('#', '');
+    if (colorStr.length == 6) colorStr = 'FF$colorStr';
+    return Color(int.parse(colorStr, radix: 16));
   }
 
   Future<List<Fase>> carregarTodasAsFases() async {

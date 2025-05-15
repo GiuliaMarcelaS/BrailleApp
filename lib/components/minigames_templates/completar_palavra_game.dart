@@ -3,27 +3,32 @@ import 'package:braille_app/models/questao_model.dart';
 
 class CompletarPalavraSimpleGame extends StatefulWidget {
   final QuestaoModel questao;
-//  final void Function(bool acerto) onSubmit;
+  final void Function(bool acerto) onSubmit;
 
   const CompletarPalavraSimpleGame({
-    super.key,
+    Key? key,
     required this.questao,
-   // required this.onSubmit,
-  });
+    required this.onSubmit,
+  }) : super(key: key);
 
   @override
-  State<CompletarPalavraSimpleGame> createState() => _CompletarPalavraSimpleGameState();
+  State<CompletarPalavraSimpleGame> createState() =>
+      _CompletarPalavraSimpleGameState();
 }
 
-class _CompletarPalavraSimpleGameState extends State<CompletarPalavraSimpleGame> {
-  List<String?> _respostas = [];
+class _CompletarPalavraSimpleGameState
+    extends State<CompletarPalavraSimpleGame> {
+  late List<String?> _respostas;
   int _indiceSelecao = 0;
 
   @override
   void initState() {
     super.initState();
     // Inicializa com null para cada lacuna
-    _respostas = List.filled(widget.questao.ordemCorreta?.length ?? 0, null);
+    _respostas = List.filled(
+      widget.questao.ordemCorreta?.length ?? 0,
+      null,
+    );
   }
 
   @override
@@ -31,34 +36,46 @@ class _CompletarPalavraSimpleGameState extends State<CompletarPalavraSimpleGame>
     return Column(
       children: [
         // Imagem
-        Container(
-          height: 150,
-          margin: const EdgeInsets.only(bottom: 20),
-          child: Image.network(widget.questao.imagemUrl!),
-        ),
-        
+        if (widget.questao.imagemUrl != null)
+          Container(
+            height: 150,
+            margin: const EdgeInsets.only(bottom: 20),
+            child: Image.network(widget.questao.imagemUrl!),
+          ),
+
         // Palavra com lacunas
         _buildPalavraComLacunas(),
-        
+
         const SizedBox(height: 30),
-        
+
         // Instrução
         Text(
           "Clique nos caracteres na ordem correta:",
           style: TextStyle(fontSize: 16, color: Colors.grey[600]),
         ),
-        
+
         const SizedBox(height: 10),
-        
+
         // Caracteres Braille para seleção
         _buildOpcoesBraille(),
-        
+
         const SizedBox(height: 20),
-        
-        // Botão de verificar
-        ElevatedButton(
-          onPressed: _verificarResposta,
-          child: const Text("Verificar"),
+
+        // Botões de ação: Apagar e Verificar
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.backspace),
+              tooltip: 'Apagar último',
+              onPressed: _indiceSelecao > 0 ? _apagarUltimo : null,
+            ),
+            const SizedBox(width: 20),
+            ElevatedButton(
+              onPressed: _verificarResposta,
+              child: const Text("Verificar"),
+            ),
+          ],
         ),
       ],
     );
@@ -67,28 +84,32 @@ class _CompletarPalavraSimpleGameState extends State<CompletarPalavraSimpleGame>
   Widget _buildPalavraComLacunas() {
     final dica = widget.questao.dica ?? '';
     final lacunas = widget.questao.posicoesLacunas ?? [];
-    
+
     return Wrap(
       alignment: WrapAlignment.center,
       spacing: 8,
       children: List.generate(dica.length, (index) {
         final isLacuna = lacunas.contains(index);
-        final caractere = isLacuna 
-          ? _respostas[lacunas.indexOf(index)] 
-          : dica[index];
-        
-        return Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: isLacuna ? Colors.blue : Colors.transparent,
-              width: 2,
+        final respostaIndex = isLacuna ? lacunas.indexOf(index) : null;
+        final caractere = isLacuna ? _respostas[respostaIndex!] : dica[index];
+
+        return GestureDetector(
+          onTap: isLacuna && caractere != null
+              ? () => _clearFromIndex(respostaIndex!)
+              : null,
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: isLacuna ? Colors.blue : Colors.transparent,
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(8),
             ),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Text(
-            caractere ?? '_',
-            style: const TextStyle(fontSize: 32),
+            child: Text(
+              caractere ?? '_',
+              style: const TextStyle(fontSize: 32),
+            ),
           ),
         );
       }),
@@ -100,7 +121,7 @@ class _CompletarPalavraSimpleGameState extends State<CompletarPalavraSimpleGame>
       spacing: 12,
       children: (widget.questao.opcoes ?? []).map((opcao) {
         final jaUsada = _respostas.contains(opcao);
-        
+
         return GestureDetector(
           onTap: jaUsada ? null : () => _selecionarCaractere(opcao),
           child: Opacity(
@@ -131,6 +152,22 @@ class _CompletarPalavraSimpleGameState extends State<CompletarPalavraSimpleGame>
     }
   }
 
+  void _apagarUltimo() {
+    setState(() {
+      _indiceSelecao--;
+      _respostas[_indiceSelecao] = null;
+    });
+  }
+
+  void _clearFromIndex(int startIndex) {
+    setState(() {
+      for (int i = startIndex; i < _respostas.length; i++) {
+        _respostas[i] = null;
+      }
+      _indiceSelecao = startIndex;
+    });
+  }
+
   void _verificarResposta() {
     if (_indiceSelecao < _respostas.length) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -140,13 +177,13 @@ class _CompletarPalavraSimpleGameState extends State<CompletarPalavraSimpleGame>
     }
 
     final acerto = _verificarOrdemCorreta();
-  //  widget.onSubmit(acerto);
+    widget.onSubmit(acerto);
   }
 
   bool _verificarOrdemCorreta() {
     final ordemCorreta = widget.questao.ordemCorreta ?? [];
     final opcoes = widget.questao.opcoes ?? [];
-    
+
     for (int i = 0; i < ordemCorreta.length; i++) {
       if (_respostas[i] != opcoes[ordemCorreta[i]]) {
         return false;

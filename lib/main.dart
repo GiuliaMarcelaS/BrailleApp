@@ -9,7 +9,6 @@ import 'package:braille_app/screens/auth_screen.dart';
 import 'package:braille_app/screens/fase2_screen.dart';
 import 'package:braille_app/screens/forgot_password.dart';
 import 'package:braille_app/screens/historico_screen.dart';
-// import 'package:braille_app/screens/learn_screen.dart';
 import 'package:braille_app/screens/quest_1_screen.dart';
 import 'package:braille_app/screens/register_screen.dart';
 import 'package:braille_app/screens/about_you_1_screen.dart';
@@ -24,9 +23,8 @@ import 'package:braille_app/services/cells_list.dart';
 import 'package:braille_app/models/modulos_list.dart';
 import 'package:braille_app/services/graphic.dart';
 import 'package:braille_app/services/passer.dart';
+import 'package:braille_app/services/fase_service.dart'; // import do FaseService
 import 'package:braille_app/screens/fase_screen.dart';
-// import 'package:braille_app/screens/graphic_screen.dart';
-// import 'package:braille_app/screens/phrase_translator_screen.dart';
 import 'package:braille_app/screens/ready_screen.dart';
 import 'package:braille_app/screens/tabs_screen_2.dart';
 import 'package:braille_app/screens/testar_screen.dart';
@@ -55,75 +53,52 @@ class BrailleApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => Auth(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => ModulosList(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => BallsList(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => CellsList(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => Modulo(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => Topico(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => Ball(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => Graphic(),
-        ),
-        // ChangeNotifierProvider(
-        //   create: (_) => ModulosScreen(),
-        // ),
-        ChangeNotifierProvider(
-          create: (_) => Historico(),
-        ),
+        ChangeNotifierProvider(create: (_) => Auth()),
+        ChangeNotifierProvider(create: (_) => ModulosList()),
+        ChangeNotifierProvider(create: (_) => BallsList()),
+        ChangeNotifierProvider(create: (_) => CellsList()),
+        ChangeNotifierProvider(create: (_) => Modulo()),
+        ChangeNotifierProvider(create: (_) => Topico()),
+        ChangeNotifierProvider(create: (_) => Ball()),
+        ChangeNotifierProvider(create: (_) => Graphic()),
+        ChangeNotifierProvider(create: (_) => Historico()),
         ChangeNotifierProxyProvider<Auth, HistoricoList>(
-          create: (_) => HistoricoList("", ''),
-          update: (ctx, auth, previous) {
-            return HistoricoList(auth.token ?? '', auth.userId ?? '');
-          },
+          create: (_) => HistoricoList('', ''),
+          update: (ctx, auth, _) => HistoricoList(auth.token ?? '', auth.userId ?? ''),
         ),
         ChangeNotifierProxyProvider<Auth, Passer>(
-          create: (_) => Passer("", ''),
-          update: (ctx, auth, previous) {
-            return Passer(auth.token ?? '', auth.userId ?? '');
-          },
+          create: (_) => Passer('', ''),
+          update: (ctx, auth, _) => Passer(auth.token ?? '', auth.userId ?? ''),
         ),
-        ChangeNotifierProvider(
-          create: (_) => Information1(),
-        ),
+        ChangeNotifierProvider(create: (_) => Information1()),
         ChangeNotifierProxyProvider<Auth, UserData>(
-          create: (_) => UserData("", ''),
-          update: (ctx, auth, previous) {
-            return UserData(auth.token ?? '', auth.userId ?? '');
-          },
+          create: (_) => UserData('', ''),
+          update: (ctx, auth, _) => UserData(auth.token ?? '', auth.userId ?? ''),
+        ),
+        // <-- Aqui adicionamos o FaseService com ProxyProvider para obter token e userId do Auth
+        ProxyProvider<Auth, FaseService>(
+          update: (ctx, auth, _) => FaseService(
+            token: auth.token ?? '',
+            userId: auth.userId ?? '',
+          ),
         ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            scaffoldBackgroundColor: Color(0xFFDDE9DD),
-            appBarTheme: AppBarTheme(color: Color(0xFFDDE9DD)),
-            tabBarTheme: TabBarTheme(
-              indicatorColor: Colors.black,
-              labelColor: Colors.black,
-            )),
+          scaffoldBackgroundColor: const Color(0xFFDDE9DD),
+          appBarTheme: const AppBarTheme(color: Color(0xFFDDE9DD)),
+          tabBarTheme: const TabBarTheme(
+            indicatorColor: Colors.black,
+            labelColor: Colors.black,
+          ),
+        ),
         routes: {
           '/': (ctx) => const AuthScreen(),
           '/modulos-screen': (ctx) => ModulosScreen(),
           '/interface-screen': (ctx) => const Interface(),
           '/tabs-screen-2': (ctx) => const TabsScreen2(),
-          // '/phrase-translator-screen': (ctx) => const PhraseTranslatorScreen(),
           '/fases-screen': (ctz) => const FaseScreen(),
-          // '/graphic-screen': (ctz) => GraphicScreen(),
           '/users-chart-screen': (ctz) => const UsersChartScreen(),
           '/login-screen': (ctz) => const LoginScreen(),
           '/register-screen': (ctz) => const RegisterScreen(),
@@ -141,7 +116,12 @@ class BrailleApp extends StatelessWidget {
           '/historico-screen': (ctx) => HistoricoScreen(),
           '/fase-screen': (ctx) {
             final args = ModalRoute.of(ctx)!.settings.arguments as Fase;
-            return Fase2Screen(faseId: args.id);
+            // Obtém o FaseService injetado
+            final faseService = Provider.of<FaseService>(ctx, listen: false);
+            return Fase2Screen(
+              faseId: args.id,
+              faseService: faseService,
+            );
           },
         },
       ),
