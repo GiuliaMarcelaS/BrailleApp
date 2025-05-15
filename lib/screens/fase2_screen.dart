@@ -60,6 +60,16 @@ class Fase2Screen extends StatelessWidget {
           },
         );
         break;
+      case MiniGameType.APRESENTAR:
+        gameWidget = ApresentarGame(
+          questao: state.miniGame.questao!,
+        );
+        break;
+      case MiniGameType.COMPLETAR_PALAVRA:
+        gameWidget = CompletarPalavraSimpleGame(
+          questao: state.miniGame.questao!,
+        );
+        break;
       default:
         gameWidget = Center(child: Text('MiniGame não implementado'));
     }

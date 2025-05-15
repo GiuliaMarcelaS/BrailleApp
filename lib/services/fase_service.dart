@@ -44,59 +44,68 @@ class FaseService {
   }
 
   Future<List<MiniGameTemplate>> carregarMiniGamesDaFase(String faseId) async {
-    // Associa faseId a uma combinação fixa por enquanto (você pode mapear por id depois)
-    String categoria = 'reconhecer';
-    String padrao = 'padrao_1';
-    String grupo = 'a';
 
-    final snapshot_reconhecer = await _firestore
-        .collection('categorias')
-        .doc(categoria)
-        .collection('padroes')
-        .doc(padrao)
-        .collection('grupos')
-        .doc(grupo)
-        .collection('questoes')
-        .get();
+     final sequenciaMinigames = {
+    '1': [
+      {
+        'categoria': 'apresentar', 
+        'padrao': 'padrao_1', 
+        'tipo': MiniGameType.APRESENTAR,
+        'temGrupo': false
+      },
+      {
+        'categoria': 'reconhecer', 
+        'padrao': 'padrao_1', 
+        'grupo': 'a', 
+        'tipo': MiniGameType.MULTIPLE_LETRAS_LINHA,
+        'temGrupo': true
+      },
+      {
+        'categoria': 'diferenciar', 
+        'padrao': 'padrao_1', 
+        'tipo': MiniGameType.COMPLETAR_PALAVRA,
+        'temGrupo': false
+      },
+    ],
+  };
+     final miniGames = <MiniGameTemplate>[];
 
-    // String categoria = 'apresentar';
-    // String padrao = 'padrao_1';
+  for (var config in sequenciaMinigames[faseId] ?? []) {
+    CollectionReference collectionRef;
+    
+    if (config['temGrupo'] == true) {
+      collectionRef = _firestore
+          .collection('categorias')
+          .doc(config['categoria'])
+          .collection('padroes')
+          .doc(config['padrao'])
+          .collection('grupos')
+          .doc(config['grupo'])
+          .collection('questoes');
+    } else {
+      collectionRef = _firestore
+          .collection('categorias')
+          .doc(config['categoria'])
+          .collection('padroes')
+          .doc(config['padrao'])
+          .collection('questoes');
+    }
 
-    // final snapshot_reconhecer = await _firestore
-    //     .collection('categorias')
-    //     .doc(categoria)
-    //     .collection('padroes')
-    //     .doc(padrao)
-    //     .collection('questoes')
-    //     .get();
+    final snapshot = await collectionRef.get();
 
-    // String categoria = 'diferenciar';
-    // String padrao = 'padrao_1';
-
-    // final snapshot_reconhecer = await _firestore
-    //     .collection('categorias')
-    //     .doc(categoria)
-    //     .collection('padroes')
-    //     .doc(padrao)
-    //     .collection('questoes')
-    //     .get();
-        
-
-    print('➡️ Buscando minigames de $categoria/$padrao');
-    print('➡️ Encontrados: ${snapshot_reconhecer.docs.length} questoes');
-
-    return snapshot_reconhecer.docs.map((doc) {
-      final data = doc.data();
-      final questao = QuestaoModel.fromMap(data, data['id']);
-
+    miniGames.addAll(snapshot.docs.map((doc) {
+      final data = doc.data() as Map<String, dynamic>;
       return MiniGameTemplate(
         id: doc.id,
-        type: MiniGameType.MULTIPLE_LETRAS_LINHA, // fixo por agora
+        type: config['tipo'] as MiniGameType,
         difficulty: 1,
-        questao: questao,
+        questao: QuestaoModel.fromMap(data, doc.id),
       );
-    }).toList();
+    }));
   }
+
+  return miniGames;
+}
 
   MiniGameType _getMiniGameType(String value) {
     switch (value) {
