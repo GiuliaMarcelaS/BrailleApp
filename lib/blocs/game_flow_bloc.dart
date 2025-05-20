@@ -13,9 +13,9 @@ class GameFlowBloc extends Bloc<GameFlowEvent, GameFlowState> {
   final FaseService faseService;
 
   /// Sequência atual de minigames
-  late final List<MiniGameTemplate> _currentMiniGames;
+  late List<MiniGameTemplate> _currentMiniGames;
   /// Número da fase atual (como inteiro)
-  late final int _currentPhaseNumber;
+  late int _currentPhaseNumber;
 
   GameFlowBloc({required this.faseService}) : super(GameFlowInitial()) {
     on<LoadFaseEvent>(_onLoadFase);
@@ -29,12 +29,8 @@ class GameFlowBloc extends Bloc<GameFlowEvent, GameFlowState> {
     Emitter<GameFlowState> emit,
   ) async {
     emit(FaseLoading());
+    _currentPhaseNumber = int.tryParse(event.faseId) ?? 1;
     try {
-      // Parse e salva número da fase
-      _currentPhaseNumber = int.tryParse(event.faseId) ?? 1;
-      // Simula loading suave
-      await Future.delayed(const Duration(milliseconds: 300));
-
       final faseBase = fases.firstWhere((f) => f.id == event.faseId);
       _currentMiniGames =
           await faseService.carregarMiniGamesDaFase(faseBase.id);
@@ -75,7 +71,6 @@ class GameFlowBloc extends Bloc<GameFlowEvent, GameFlowState> {
 
     if (event.isCorrect) {
       if (idx == _currentMiniGames.length - 1) {
-        // Último minigame: atualiza a fase no backend antes de concluir
         await faseService.atualizarFase(_currentPhaseNumber + 1);
         emit(FaseCompleted());
       } else {
@@ -87,7 +82,7 @@ class GameFlowBloc extends Bloc<GameFlowEvent, GameFlowState> {
     } else {
       final livesLeft = current.remainingLives - 1;
       if (livesLeft <= 0) {
-        emit(GameOver(faseId: event.faseId));
+        emit(GameOver(faseId: _currentPhaseNumber.toString()));
       } else {
         emit(MiniGameStarted(
           miniGame: current.miniGame,
@@ -97,11 +92,10 @@ class GameFlowBloc extends Bloc<GameFlowEvent, GameFlowState> {
     }
   }
 
-  Future<void> _onRetryFase(
+  void _onRetryFase(
     RetryFaseEvent event,
     Emitter<GameFlowState> emit,
-  ) async {
-    // Recarrega a mesma fase
+  ) {
     add(LoadFaseEvent(_currentPhaseNumber.toString()));
   }
 }
