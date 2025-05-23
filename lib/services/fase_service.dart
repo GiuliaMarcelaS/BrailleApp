@@ -53,65 +53,94 @@ class FaseService {
   // MiniGames
   // ---------------------------------------------------------------------------
 
-  Future<List<MiniGameTemplate>> carregarMiniGamesDaFase(String faseId) async {
-    final miniGames = <MiniGameTemplate>[];
-    final configs = sequenciaMinigames[faseId] ?? [];
+ Future<List<MiniGameTemplate>> carregarMiniGamesDaFase(String faseId) async {
+  final miniGames = <MiniGameTemplate>[];
+  final configs = sequenciaMinigames[faseId] ?? [];
 
-    for (var config in configs) {
-      // Monta referência de coleção
-      late CollectionReference ref;
-      if (config.containsKey('grupo')) {
-        ref = _firestore
-            .collection('categorias')
-            .doc(config['categoria'] as String)
-            .collection('padroes')
-            .doc(config['padrao'] as String)
-            .collection('grupos')
-            .doc(config['grupo'] as String)
-            .collection('questoes');
-      } else {
-        ref = _firestore
-            .collection('categorias')
-            .doc(config['categoria'] as String)
-            .collection('padroes')
-            .doc(config['padrao'] as String)
-            .collection('questoes');
-      }
+  for (var config in configs) {
+    // referência ao doc de padrão
+    final padraoDocRef = _firestore
+        .collection('categorias')
+        .doc(config['categoria'] as String)
+        .collection('padroes')
+        .doc(config['padrao'] as String);
 
-      // Se houver 'id', busca apenas aquela questão
-      if (config.containsKey('id')) {
-        final docId = config['id'] as String;
-        final docSnap = await ref.doc(docId).get();
-        if (docSnap.exists) {
-          final data = docSnap.data() as Map<String, dynamic>;
-          miniGames.add(
-            MiniGameTemplate(
-              id: docSnap.id,
-              type: config['tipo'] as MiniGameType,
-              difficulty: 1,
-              questao: QuestaoModel.fromMap(data, docSnap.id),
-            ),
-          );
-        }
-      } else {
-        // Caso contrário, carrega toda a coleção
-        final snapshot = await ref.get();
-        for (var doc in snapshot.docs) {
-          final data = doc.data() as Map<String, dynamic>;
-          miniGames.add(
-            MiniGameTemplate(
-              id: doc.id,
-              type: config['tipo'] as MiniGameType,
-              difficulty: 1,
-              questao: QuestaoModel.fromMap(data, doc.id),
-            ),
-          );
-        }
+    // 1) Caso APRESENTAR, pega o próprio documento de padrão e cria o QuestaoModel “na mão”
+    if (config['tipo'] == MiniGameType.APRESENTAR) {
+      final docSnap = await padraoDocRef.get();
+      if (docSnap.exists) {
+        final data = docSnap.data()! as Map<String, dynamic>;
+        // extrai o map de caracteres
+        final caracteres = (data['caracteres'] as Map<dynamic, dynamic>?)
+                ?.map((k, v) => MapEntry<String, String>(
+                      k.toString(),
+                      v.toString(),
+                    )) ??
+            {};
+        // instância manual do QuestaoModel
+        final questao = QuestaoModel(
+          id: docSnap.id,
+          caracteres: caracteres,
+          // preencha outros campos que seu construtor exigir com defaults:
+          enunciado: '',
+          opcoes: const [],
+          ordemCorreta: const [],
+          posicoesLacunas: const [],
+          dica: null,
+          imagemUrl: null,
+        );
+        miniGames.add(MiniGameTemplate(
+          id: docSnap.id,
+          type: MiniGameType.APRESENTAR,
+          difficulty: 1,
+          questao: questao,
+        ));
       }
+      continue;
     }
 
-    return miniGames;
+    // 2) Caso não seja APRESENTAR, monta a subcoleção normalmente
+    late CollectionReference ref;
+    if (config.containsKey('grupo')) {
+      ref = padraoDocRef
+          .collection('grupos')
+          .doc(config['grupo'] as String)
+          .collection('questoes');
+    } else {
+      ref = padraoDocRef.collection('questoes');
+    }
+
+    // 3) Se houver ID específico, busca só ele
+    if (config.containsKey('id')) {
+      final docId = config['id'] as String;
+      final docSnap = await ref.doc(docId).get();
+      if (docSnap.exists) {
+        final data = docSnap.data()! as Map<String, dynamic>;
+        miniGames.add(MiniGameTemplate(
+          id: docSnap.id,
+          type: config['tipo'] as MiniGameType,
+          difficulty: 1,
+          questao: QuestaoModel.fromMap(data, docSnap.id),
+        ));
+      }
+    } else {
+      // 4) Senão, carrega toda a coleção de questões
+      final snapshot = await ref.get();
+      for (var doc in snapshot.docs) {
+        final data = doc.data() as Map<String, dynamic>;
+        miniGames.add(MiniGameTemplate(
+          id: doc.id,
+          type: config['tipo'] as MiniGameType,
+          difficulty: 1,
+          questao: QuestaoModel.fromMap(data, doc.id),
+        ));
+      }
+    }
   }
+
+  return miniGames;
+}
+
 
   // ---------------------------------------------------------------------------
   // Utilitários

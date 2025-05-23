@@ -6,7 +6,6 @@ final Map<String, List<Map<String, dynamic>>> sequenciaMinigames = {
       'categoria': 'apresentar',
       'padrao': 'padrao_1',
       'tipo': MiniGameType.APRESENTAR,
-      'id': 'q1', // ID da questão específica
     },
     {
       'categoria': 'reconhecer',
@@ -16,18 +15,96 @@ final Map<String, List<Map<String, dynamic>>> sequenciaMinigames = {
       'id': 'q1',
     },
     {
-      'categoria': 'diferenciar',
+      'categoria': 'reconhecer',
       'padrao': 'padrao_1',
-      'tipo': MiniGameType.COMPLETAR_PALAVRA,
+      'grupo': 'b',
+      'tipo': MiniGameType.MULTIPLE_LETRAS_LINHA,
+      'id': 'q1',
+    },
+    {
+      'categoria': 'reconhecer',
+      'padrao': 'padrao_1',
+      'grupo': 'c',
+      'tipo': MiniGameType.MULTIPLE_LETRAS_LINHA,
+      'id': 'q1',
+    },
+    {
+      'categoria': 'reconhecer',
+      'padrao': 'padrao_1',
+      'grupo': 'd',
+      'tipo': MiniGameType.MULTIPLE_LETRAS_LINHA,
+      'id': 'q1',
+    },
+    {
+      'categoria': 'reconhecer',
+      'padrao': 'padrao_1',
+      'grupo': 'e',
+      'tipo': MiniGameType.MULTIPLE_LETRAS_LINHA,
       'id': 'q1',
     },
   ],
   '2': [
     {
       'categoria': 'apresentar',
-      'padrao': 'padrao_1',
+      'padrao': 'padrao_2',
       'tipo': MiniGameType.APRESENTAR,
-      'id': 'q2'
+    },
+     {
+      'categoria': 'reconhecer',
+      'padrao': 'padrao_2',
+      'grupo': 'a',
+      'tipo': MiniGameType.MULTIPLE_LETRAS_LINHA,
+      'id': 'q1',
+    },
+     {
+      'categoria': 'reconhecer',
+      'padrao': 'padrao_2',
+      'grupo': 'b',
+      'tipo': MiniGameType.MULTIPLE_LETRAS_LINHA,
+      'id': 'q1',
+    },
+     {
+      'categoria': 'reconhecer',
+      'padrao': 'padrao_2',
+      'grupo': 'c',
+      'tipo': MiniGameType.MULTIPLE_LETRAS_LINHA,
+      'id': 'q1',
+    },
+  ],
+  '3': [
+    {
+      'categoria': 'apresentar',
+      'padrao': 'padrao_3',
+      'tipo': MiniGameType.APRESENTAR,
+    },
+     {
+      'categoria': 'reconhecer',
+      'padrao': 'padrao_3',
+      'grupo': 'a',
+      'tipo': MiniGameType.MULTIPLE_LETRAS_LINHA,
+      'id': 'q1',
+    },
+     {
+      'categoria': 'reconhecer',
+      'padrao': 'padrao_3',
+      'grupo': 'b',
+      'tipo': MiniGameType.MULTIPLE_LETRAS_LINHA,
+      'id': 'q1',
+    },
+     {
+      'categoria': 'reconhecer',
+      'padrao': 'padrao_3',
+      'grupo': 'c',
+      'tipo': MiniGameType.MULTIPLE_LETRAS_LINHA,
+      'id': 'q1',
+    },
+  ],
+  '4': [
+    {
+      'categoria': 'diferenciar',
+      'padrao': 'padrao_1',
+      'tipo': MiniGameType.COMPLETAR_PALAVRA,
+      'id': 'q1',
     },
   ],
 };

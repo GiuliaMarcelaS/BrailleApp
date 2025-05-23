@@ -5,8 +5,8 @@ import '../models/minigame_model.dart';
 final List<Fase> fases = [
   Fase(
     id: '1',
-    title: 'Explorador Braille',
-    description: 'Treine o reconhecimento das letras em Braille',
+    title: 'Fase 1',
+    description: '',
     color: Color(0xFF00C2CB),
     icon: 'assets/explorador.png',
     miniGames: [
@@ -14,8 +14,26 @@ final List<Fase> fases = [
   ),
   Fase(
     id: '2',
-    title: 'Mestre das Sílabas',
-    description: 'Forme palavras em Braille',
+    title: 'Fase 2',
+    description: '',
+    color: Color(0xFF6FCF97),
+    icon: 'assets/mestre.png',
+    miniGames: [
+    ],
+  ),
+  Fase(
+    id: '3',
+    title: 'Fase 3',
+    description: '',
+    color: Color(0xFF6FCF97),
+    icon: 'assets/mestre.png',
+    miniGames: [
+    ],
+  ),
+  Fase(
+    id: '4',
+    title: 'Fase 4',
+    description: '',
     color: Color(0xFF6FCF97),
     icon: 'assets/mestre.png',
     miniGames: [

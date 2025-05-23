@@ -67,13 +67,13 @@ class _Fase2ScreenState extends State<Fase2Screen> {
                   Widget gameWidget = const SizedBox.shrink();
                   switch (state.miniGame.type) {
                     case MiniGameType.APRESENTAR:
-                      gameWidget = ApresentarGame(
-                        questao: state.miniGame.questao!,
-                        onSubmit: (_) => _bloc.add(
-                          AnswerSubmittedEvent(true, widget.faseId),
-                        ),
-                      );
-                      break;
+  gameWidget = ApresentarGame(
+    questao: state.miniGame.questao!,
+    onContinue: () => _bloc.add(
+      AnswerSubmittedEvent(true, widget.faseId),
+    ),
+  );
+  break;
                     case MiniGameType.MULTIPLE_LETRAS_LINHA:
                       gameWidget = LetraLinhaGame(
                         questao: state.miniGame.questao!,
