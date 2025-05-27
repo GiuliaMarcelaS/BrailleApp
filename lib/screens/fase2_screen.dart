@@ -53,113 +53,120 @@ class _Fase2ScreenState extends State<Fase2Screen> {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: _bloc,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Fase ${widget.faseId}'),
-        ),
-        body: Stack(
-          children: [
-            BlocBuilder<GameFlowBloc, GameFlowState>(
-              builder: (context, state) {
-                if (state is FaseLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state is MiniGameStarted) {
-                  Widget gameWidget = const SizedBox.shrink();
-                  switch (state.miniGame.type) {
-                    case MiniGameType.APRESENTAR:
-  gameWidget = ApresentarGame(
-    questao: state.miniGame.questao!,
-    onContinue: () => _bloc.add(
-      AnswerSubmittedEvent(true, widget.faseId),
-    ),
-  );
-  break;
-                    case MiniGameType.MULTIPLE_LETRAS_LINHA:
-                      gameWidget = LetraLinhaGame(
-                        questao: state.miniGame.questao!,
-                        onSubmit: _onUserSubmit,
-                      );
-                      break;
-                    case MiniGameType.COMPLETAR_PALAVRA:
-                      gameWidget = CompletarPalavraSimpleGame(
-                        questao: state.miniGame.questao!,
-                        onSubmit: _onUserSubmit,
-                      );
-                      break;
-                  }
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(
-                            state.remainingLives,
-                            (i) => const Icon(Icons.favorite, color: Colors.red),
+      child: BlocBuilder<GameFlowBloc, GameFlowState>(
+        builder: (context, state) {
+          // Extrai vidas remanescentes quando disponível
+          final hearts = (state is MiniGameStarted)
+              ? List.generate(
+                  state.remainingLives,
+                  (_) => const Icon(Icons.favorite, color: Colors.red),
+                )
+              : <Widget>[];
+
+          // Conteúdo principal com base no estado
+          Widget content;
+          if (state is FaseLoading) {
+            content = const Center(child: CircularProgressIndicator());
+          } else if (state is MiniGameStarted) {
+            Widget gameWidget = const SizedBox.shrink();
+            switch (state.miniGame.type) {
+              case MiniGameType.APRESENTAR:
+                gameWidget = ApresentarGame(
+                  questao: state.miniGame.questao!,
+                  onContinue: () => _bloc.add(
+                    AnswerSubmittedEvent(true, widget.faseId),
+                  ),
+                );
+                break;
+              case MiniGameType.MULTIPLE_LETRAS_LINHA:
+                gameWidget = LetraLinhaGame(
+                  questao: state.miniGame.questao!,
+                  onSubmit: _onUserSubmit,
+                );
+                break;
+              case MiniGameType.COMPLETAR_PALAVRA:
+                gameWidget = CompletarPalavraSimpleGame(
+                  questao: state.miniGame.questao!,
+                  onSubmit: _onUserSubmit,
+                );
+                break;
+            }
+            content = Column(
+              children: [Expanded(child: gameWidget)],
+            );
+          } else if (state is GameOver) {
+            content = Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'Você perdeu todas as vidas',
+                    style: TextStyle(fontSize: 24),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () => _bloc.add(RetryFaseEvent()),
+                    child: const Text('Tentar novamente'),
+                  ),
+                  const SizedBox(height: 10),
+                  OutlinedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Voltar para fases'),
+                  ),
+                ],
+              ),
+            );
+          } else if (state is FaseCompleted) {
+            content = Center(
+              child: ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Próxima Fase'),
+              ),
+            );
+          } else {
+            content = const SizedBox.shrink();
+          }
+
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Fase ${widget.faseId}'),
+              centerTitle: true,
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(children: hearts),
+                ),
+              ],
+            ),
+            body: Stack(
+              children: [
+                content,
+                if (_showFeedback)
+                  Positioned.fill(
+                    child: Container(
+                      color: Colors.black.withOpacity(0.5),
+                      alignment: Alignment.center,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 20, horizontal: 40),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          _feedbackText,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      Expanded(child: gameWidget),
-                    ],
-                  );
-                } else if (state is GameOver) {
-                  // Exibe feedback de game over com botões
-                  return Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Text(
-                          'Você perdeu todas as vidas',
-                          style: TextStyle(fontSize: 24),
-                        ),
-                        const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: () => _bloc.add(RetryFaseEvent()),
-                          child: const Text('Tentar novamente'),
-                        ),
-                        const SizedBox(height: 10),
-                        OutlinedButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: const Text('Voltar para fases'),
-                        ),
-                      ],
-                    ),
-                  );
-                } else if (state is FaseCompleted) {
-                  return Center(
-                    child: ElevatedButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text('Próxima Fase'),
-                    ),
-                  );
-                }
-                return const SizedBox.shrink();
-              },
-            ),
-            if (_showFeedback)
-              Positioned.fill(
-                child: Container(
-                  color: Colors.black.withOpacity(0.5),
-                  alignment: Alignment.center,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 40),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      _feedbackText,
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
                     ),
                   ),
-                ),
-              ),
-          ],
-        ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

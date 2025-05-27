@@ -1,6 +1,6 @@
 class QuestaoModel {
   final String id;
-  final String enunciado;
+  final String? enunciado;
   final List<String>? opcoes;
   final List<int>? corretas;
   final Map<Object, String>? caracteres;
@@ -13,7 +13,7 @@ class QuestaoModel {
 
   QuestaoModel({
     required this.id,
-    required this.enunciado,
+    this.enunciado,
     this.opcoes,
     this.corretas,
     this.caracteres,

@@ -94,10 +94,13 @@ class _TranslationState extends State<Translation> {
     bool caplock = false;
     bool palavraMai = false;
 
-    if (frase == frase.toUpperCase() && frase.length > 1) {
-      frase = frase.toLowerCase();
-      caplock = true;
-    }
+    if (frase.length > 1 &&
+    frase == frase.toUpperCase() &&
+    !RegExp(r'^\d+$').hasMatch(frase)
+) {
+  frase = frase.toLowerCase();
+  caplock = true;
+}
 
     List<String> palavras = frase.split(' ');
 

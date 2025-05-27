@@ -77,12 +77,13 @@ class FaseService {
                       v.toString(),
                     )) ??
             {};
+        final enunciado = data['enunciado'] as String? ?? '';
         // instância manual do QuestaoModel
         final questao = QuestaoModel(
           id: docSnap.id,
           caracteres: caracteres,
           // preencha outros campos que seu construtor exigir com defaults:
-          enunciado: '',
+          enunciado: enunciado,
           opcoes: const [],
           ordemCorreta: const [],
           posicoesLacunas: const [],

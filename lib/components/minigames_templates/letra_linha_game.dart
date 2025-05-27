@@ -22,7 +22,7 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(widget.questao.enunciado, style: const TextStyle(fontSize: 18)),
+        Text(widget.questao.enunciado ?? '', style: const TextStyle(fontSize: 18)),
         const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
