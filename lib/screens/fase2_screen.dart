@@ -1,4 +1,3 @@
-import 'package:braille_app/components/minigames_templates/letra_linha_game.dart';
 import 'package:braille_app/models/minigame_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +6,7 @@ import 'package:braille_app/blocs/game_flow_event.dart';
 import 'package:braille_app/blocs/game_flow_state.dart';
 import 'package:braille_app/services/fase_service.dart';
 import 'package:braille_app/components/minigames_templates/apresentar_game.dart';
+import 'package:braille_app/components/minigames_templates/letra_linha_game.dart';
 import 'package:braille_app/components/minigames_templates/completar_palavra_game.dart';
 
 class Fase2Screen extends StatefulWidget {
@@ -23,6 +23,7 @@ class Fase2Screen extends StatefulWidget {
 class _Fase2ScreenState extends State<Fase2Screen> {
   late final GameFlowBloc _bloc;
   bool _showFeedback = false;
+  bool _feedbackSuccess = false;
   String _feedbackText = '';
 
   @override
@@ -40,8 +41,9 @@ class _Fase2ScreenState extends State<Fase2Screen> {
 
   void _onUserSubmit(bool acertou) {
     setState(() {
+      _feedbackSuccess = acertou;
+      _feedbackText = acertou ? 'Resposta correta' : 'Resposta errada';
       _showFeedback = true;
-      _feedbackText = acertou ? 'Questão certa' : 'Questão errada';
     });
     Future.delayed(const Duration(seconds: 1), () {
       setState(() => _showFeedback = false);
@@ -55,7 +57,6 @@ class _Fase2ScreenState extends State<Fase2Screen> {
       value: _bloc,
       child: BlocBuilder<GameFlowBloc, GameFlowState>(
         builder: (context, state) {
-          // Extrai vidas remanescentes quando disponível
           final hearts = (state is MiniGameStarted)
               ? List.generate(
                   state.remainingLives,
@@ -63,7 +64,6 @@ class _Fase2ScreenState extends State<Fase2Screen> {
                 )
               : <Widget>[];
 
-          // Conteúdo principal com base no estado
           Widget content;
           if (state is FaseLoading) {
             content = const Center(child: CircularProgressIndicator());
@@ -79,11 +79,12 @@ class _Fase2ScreenState extends State<Fase2Screen> {
                 );
                 break;
               case MiniGameType.MULTIPLE_LETRAS_LINHA:
-                gameWidget = LetraLinhaGame(
-                  questao: state.miniGame.questao!,
-                  onSubmit: _onUserSubmit,
-                );
-                break;
+  gameWidget = LetraLinhaGame(
+    key: ValueKey(state.miniGame.id),      
+    questao: state.miniGame.questao!,
+    onSubmit: _onUserSubmit,
+  );
+  break;
               case MiniGameType.COMPLETAR_PALAVRA:
                 gameWidget = CompletarPalavraSimpleGame(
                   questao: state.miniGame.questao!,
@@ -131,12 +132,10 @@ class _Fase2ScreenState extends State<Fase2Screen> {
             appBar: AppBar(
               title: Text('Fase ${widget.faseId}'),
               centerTitle: true,
-              actions: [
-                Padding(
+              actions: [Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Row(children: hearts),
-                ),
-              ],
+                )],
             ),
             body: Stack(
               children: [
@@ -150,7 +149,7 @@ class _Fase2ScreenState extends State<Fase2Screen> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 20, horizontal: 40),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: _feedbackSuccess ? Colors.green : Colors.red,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -158,6 +157,7 @@ class _Fase2ScreenState extends State<Fase2Screen> {
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                       ),

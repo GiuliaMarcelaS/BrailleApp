@@ -71,10 +71,28 @@ class _CompletarPalavraSimpleGameState
               onPressed: _indiceSelecao > 0 ? _apagarUltimo : null,
             ),
             const SizedBox(width: 20),
-            ElevatedButton(
-              onPressed: _verificarResposta,
-              child: const Text("Verificar"),
-            ),
+           Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: ElevatedButton(
+                onPressed:_verificarResposta,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green.shade700,
+                  foregroundColor: Colors.white,
+                  elevation: 4,
+                  shadowColor: Colors.black54,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Continuar',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            ),  
           ],
         ),
       ],

@@ -28,7 +28,7 @@ class ApresentarGame extends StatelessWidget {
             // Exibe o ID do padrão
             if (questao.id != null) ...[
               Text(
-                questao.enunciado!,
+                "${questao.id}: ${questao.enunciado!}",
                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),

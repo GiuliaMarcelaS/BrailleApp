@@ -28,7 +28,7 @@ class TabsScreen2 extends StatelessWidget {
                   ModulosScreen(),
                   LearnScreen(),
                   EscreverScreen2(),
-                  Container(),
+                //  Container(),
                 ],
               ),
             ),
@@ -63,10 +63,10 @@ class TabsScreen2 extends StatelessWidget {
               icon: Icon(Icons.text_snippet, size: 23 / 800 * screenHeight),
               text: "Escrever",
             ),
-            Tab(
-              icon: Icon(Icons.person, size: 23 / 800 * screenHeight),
-              text: "Perfil",
-            ),
+            // Tab(
+            //   icon: Icon(Icons.person, size: 23 / 800 * screenHeight),
+            //   text: "Perfil",
+            // ),
           ],
           labelColor: Color(0xFF208B52),
           unselectedLabelColor: Color(0xFF4AB37B),
