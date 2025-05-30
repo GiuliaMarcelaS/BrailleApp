@@ -163,80 +163,86 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
               key: _formKey,
               child: Column(
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(top: screenHeight * 22 / 800),
-                    width: screenWidth * 328 / 360,
-                    height: screenHeight * 70 / 800,
-                    color: Colors.white,
-                    child: TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'Nome',
-                        labelStyle: TextStyle(fontWeight: FontWeight.w800),
-                        hintText: 'Ex: Vera Lucia',
-                        border: OutlineInputBorder(),
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                      onSaved: (rec) => name.nome = rec ?? 'teste',
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: screenHeight * 22 / 800),
-                    width: screenWidth * 328 / 360,
-                    height: screenHeight * 70 / 800,
-                    color: Colors.white,
-                    child: TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'E-mail',
-                        labelStyle: TextStyle(fontWeight: FontWeight.w800),
-                        hintText: 'Ex: joao@gmail.com',
-                        border: OutlineInputBorder(),
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                      onSaved: (email) => _authData['email'] = email ?? '',
-                      // ignore: no_leading_underscores_for_local_identifiers
-                      validator: (_email) {
-                        final email = _email ?? '';
-                        if (email.trim().isEmpty || !email.contains('@')) {
-                          return 'Informe um e-mail válido';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Container(
-                    height: screenHeight * 70 / 800,
-                    margin: EdgeInsets.only(top: screenHeight * 28 / 800),
-                    width: screenWidth * 328 / 360,
-                    color: Colors.white,
-                    child: TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'Senha',
-                        labelStyle: TextStyle(fontWeight: FontWeight.w800),
-                        hintText: 'Ex: senha123',
-                        border: OutlineInputBorder(),
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                      obscureText: true,
-                      controller: _passwordController,
-                      onSaved: (password) =>
-                          _authData['password'] = password ?? '',
-                      // ignore: no_leading_underscores_for_local_identifiers, body_might_complete_normally_nullable
-                      validator: (_password) {
-                        final password = _password ?? '';
-                        if (password.isEmpty || password.length < 5) {
-                          return 'Informe uma senha válida';
-                        }
-                      },
-                    ),
-                  ),
+                 // Nome:
+Padding(
+  padding: EdgeInsets.only(top: screenHeight * 22 / 800),
+  child: SizedBox(
+    width: screenWidth * 328 / 360,
+    height: screenHeight * 70 / 800,
+    child: TextFormField(
+      decoration: const InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        labelText: 'Nome',
+        labelStyle: TextStyle(fontWeight: FontWeight.w800),
+        hintText: 'Ex: Vera Lucia',
+        border: OutlineInputBorder(),
+      ),
+      keyboardType: TextInputType.name,
+      onSaved: (rec) => name.nome = rec ?? 'teste',
+    ),
+  ),
+),
+
+// E-mail:
+SizedBox(
+  width: screenWidth * 328 / 360,
+  height: screenHeight * 70 / 800,
+  child: TextFormField(
+    decoration: const InputDecoration(
+      filled: true,
+      fillColor: Colors.white,
+      labelText: 'E-mail',
+      labelStyle: TextStyle(fontWeight: FontWeight.w800),
+      hintText: 'Ex: joao@gmail.com',
+      border: OutlineInputBorder(),
+    ),
+    keyboardType: TextInputType.emailAddress,
+    onSaved: (email) => _authData['email'] = email ?? '',
+    validator: (_email) {
+      final email = _email ?? '';
+      if (email.trim().isEmpty || !email.contains('@')) {
+        return 'Informe um e-mail válido';
+      }
+      return null;
+    },
+  ),
+),
+
+// Senha:
+SizedBox(
+  width: screenWidth * 328 / 360,
+  height: screenHeight * 70 / 800,
+  child: TextFormField(
+    controller: _passwordController,
+    obscureText: true,
+    decoration: const InputDecoration(
+      filled: true,
+      fillColor: Colors.white,
+      labelText: 'Senha',
+      labelStyle: TextStyle(fontWeight: FontWeight.w800),
+      hintText: 'Ex: senha123',
+      border: OutlineInputBorder(),
+    ),
+    validator: (_password) {
+      final password = _password ?? '';
+      if (password.isEmpty || password.length < 5) {
+        return 'Informe uma senha válida';
+      }
+      return null;
+    },
+    onSaved: (password) => _authData['password'] = password ?? '',
+  ),
+),
+
                   if (_isSignup())
-                    Container(
-                      margin: EdgeInsets.only(top: screenHeight * 22 / 800),
-                      width: screenWidth * 328 / 360,
-                      height: screenHeight * 70 / 800,
-                      color: Colors.white,
+                    SizedBox(
+                       width: screenWidth * 328 / 360,
+    height: screenHeight * 70 / 800,
                       child: TextFormField(
                         decoration: const InputDecoration(
+                          filled: true ,
+                          fillColor: Colors.white,
                           labelText: 'Confirmar Senha',
                           labelStyle: TextStyle(fontWeight: FontWeight.w800),
                           border: OutlineInputBorder(),
@@ -256,10 +262,10 @@ class _AuthFormRegisterState extends State<AuthFormRegister> {
                               },
                       ),
                     ),
-                  Container(
-                    height: screenHeight * 29 / 800,
-                    color: Color(0xFFDDE9DD),
-                  ),
+                  // Container(
+                  //   height: screenHeight * 29 / 800,
+                  //   color: Color(0xFFDDE9DD),
+                  // ),
                   if (_isLoading)
                     const CircularProgressIndicator()
                   else

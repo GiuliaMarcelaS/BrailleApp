@@ -101,56 +101,58 @@ class _AuthFormState extends State<AuthForm> {
               key: _formKey,
               child: Column(
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(top: screenHeight * 22 / 800),
+                 Padding(
+  padding: EdgeInsets.only(top: screenHeight * 22 / 800),
+  child: SizedBox(
+    width: screenWidth * 328 / 360,
+    height: screenHeight * 70 / 800,
+    child: TextFormField(
+      decoration: const InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        labelText: 'E-mail',
+        labelStyle: TextStyle(fontWeight: FontWeight.w800),
+        hintText: 'Ex: joao@gmail.com',
+        border: OutlineInputBorder(),
+      ),
+      keyboardType: TextInputType.emailAddress,
+      onSaved: (email) => _authData['email'] = email ?? '',
+      validator: (_email) {
+        final email = _email ?? '';
+        if (email.trim().isEmpty || !email.contains('@')) {
+          return 'Informe um e-mail válido';
+        }
+        return null;
+      },
+    ),
+  ),
+),
+                  SizedBox(
                     width: screenWidth * 328 / 360,
                     height: screenHeight * 70 / 800,
-                    color: Colors.white,
                     child: TextFormField(
+                      controller: _passwordController,
+                      obscureText: true,
                       decoration: const InputDecoration(
-                        labelText: 'E-mail',
-                        labelStyle: TextStyle(fontWeight: FontWeight.w800),
-                        hintText: 'Ex: joao@gmail.com',
-                        border: OutlineInputBorder(),
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                      onSaved: (email) => _authData['email'] = email ?? '',
-                      // ignore: no_leading_underscores_for_local_identifiers
-                      validator: (_email) {
-                        final email = _email ?? '';
-                        if (email.trim().isEmpty || !email.contains('@')) {
-                          return 'Informe um e-mail válido';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Container(
-                    height: screenHeight * 70 / 800,
-                    margin: EdgeInsets.only(top: screenHeight * 28 / 800),
-                    width: screenWidth * 328 / 360,
-                    color: Colors.white,
-                    child: TextFormField(
-                      decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
                         labelText: 'Senha',
                         labelStyle: TextStyle(fontWeight: FontWeight.w800),
                         hintText: 'Ex: senha123',
                         border: OutlineInputBorder(),
                       ),
                       keyboardType: TextInputType.emailAddress,
-                      obscureText: true,
-                      controller: _passwordController,
-                      onSaved: (password) =>
-                          _authData['password'] = password ?? '',
-                      // ignore: no_leading_underscores_for_local_identifiers, body_might_complete_normally_nullable
+                      onSaved: (password) => _authData['password'] = password ?? '',
                       validator: (_password) {
                         final password = _password ?? '';
                         if (password.isEmpty || password.length < 5) {
                           return 'Informe uma senha válida';
                         }
+                        return null;
                       },
                     ),
                   ),
+
                   if (_isSignup())
                     TextFormField(
                       decoration:
