@@ -11,6 +11,10 @@ class PhraseTranslatorScreen extends StatelessWidget {
     Provider.of<Ball>(context);
     // var texto = ball.braille_translator('teste');
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Tradução"),
+        centerTitle: true,
+      ),
       backgroundColor: Color(0xFFDDE9DD),
       body: Column(
         children: [

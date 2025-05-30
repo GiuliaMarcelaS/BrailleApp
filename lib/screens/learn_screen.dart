@@ -1,4 +1,3 @@
-import 'package:braille_app/components/fase.dart';
 import 'package:braille_app/data/fases2_data.dart';
 import 'package:braille_app/services/auth.dart';
 import 'package:braille_app/services/fase_service.dart';
@@ -6,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class LearnScreen extends StatelessWidget {
-  LearnScreen({super.key});
+  LearnScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,144 +17,105 @@ class LearnScreen extends StatelessWidget {
 
     return FutureBuilder<int>(
       future: faseService.getFaseAtual(),
-      builder: (context, snapshotFaseAtual) {
-        if (!snapshotFaseAtual.hasData) {
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
           return const Scaffold(
+            backgroundColor: Color(0xFFDDE9DE),
             body: Center(child: CircularProgressIndicator()),
           );
         }
-
-        final faseAtual = snapshotFaseAtual.data!;
-        final fasesDisponiveis = fases;
+        final faseAtual = snapshot.data!;
 
         return Scaffold(
           backgroundColor: const Color(0xFFDDE9DE),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Giulia',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'Como você quer praticar hoje?',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-                  Expanded(
-                    child: ListView.separated(
-                      itemCount: fasesDisponiveis.length,
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 16),
-                      itemBuilder: (context, index) {
-                        final fase = fasesDisponiveis[index];
-                        final isDesbloqueada =
-                            int.tryParse(fase.id) != null &&
-                            int.parse(fase.id) <= faseAtual;
-
-                        return Opacity(
-                          opacity: isDesbloqueada ? 1.0 : 0.5,
-                          child: _buildOptionCard(
-                            fase,
-                            isDesbloqueada
-                                ? () {
-                                    Navigator.pushNamed(
-                                      context,
-                                      '/fase-screen',
-                                      arguments: fase,
-                                    );
-                                  }
-                                : null,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
+          appBar: AppBar(
+          //  backgroundColor: const Color(0xFF8FBF8F),
+            elevation: 0,
+            title: const Text(
+              'Vamos praticar?',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            centerTitle: true,
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            child: GridView.builder(
+              itemCount: fases.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 16,
+                childAspectRatio: 3 / 2,
               ),
+              itemBuilder: (context, index) {
+                final fase = fases[index];
+                final idNum = int.tryParse(fase.id) ?? 0;
+                final isUnlocked = idNum <= faseAtual;
+
+                return Opacity(
+                  opacity: isUnlocked ? 1.0 : 0.35,
+                  child: InkWell(
+                    onTap: isUnlocked
+                        ? () => Navigator.pushNamed(
+                              context,
+                              '/fase-screen',
+                              arguments: fase,
+                            )
+                        : null,
+                    borderRadius: BorderRadius.circular(12),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      elevation: 4,
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: fase.color,
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(12),
+                                topRight: Radius.circular(12),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    fase.title,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey[800],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  // Text(
+                                  //   fase.description,
+                                  //   style: TextStyle(
+                                  //     fontSize: 12,
+                                  //     color: Colors.grey[600],
+                                  //   ),
+                                  // ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         );
       },
-    );
-  }
-
-  Widget _buildOptionCard(Fase fase, VoidCallback? onTap) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 4,
-              offset: const Offset(0, 2),
-            )
-          ],
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 3,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      fase.title,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      fase.description,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              width: 80,
-              height: 80,
-              decoration: BoxDecoration(
-                color: fase.color,
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(16),
-                  bottomRight: Radius.circular(16),
-                ),
-              ),
-              child: Center(
-                child: Image.asset(
-                  fase.icon,
-                  width: 48,
-                  height: 48,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

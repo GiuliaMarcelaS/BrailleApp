@@ -106,11 +106,23 @@ class _Fase2ScreenState extends State<Fase2Screen> {
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () => _bloc.add(RetryFaseEvent()),
-                    child: const Text('Tentar novamente'),
+                     style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF208B52),
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
-                  const SizedBox(height: 10),
+                    onPressed: () => _bloc.add(RetryFaseEvent()),
+                    child: const Text('Tentar novamente', style: TextStyle(fontSize: 20),),
+                  ),
+                  const SizedBox(height: 20),
                   OutlinedButton(
+                     style: ElevatedButton.styleFrom(
+                   // backgroundColor: Color(0xFF208B52),
+                    foregroundColor: Colors.black,
+                    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  ),
                     onPressed: () => Navigator.pop(context),
                     child: const Text('Voltar para fases'),
                   ),
@@ -120,9 +132,18 @@ class _Fase2ScreenState extends State<Fase2Screen> {
           } else if (state is FaseCompleted) {
             content = Center(
               child: ElevatedButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Próxima Fase'),
-              ),
+                  onPressed: () => Navigator.pop(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF208B52),
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  ),
+                  child: const Text(
+                    'Próxima Fase',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
             );
           } else {
             content = const SizedBox.shrink();

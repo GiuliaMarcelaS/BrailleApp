@@ -30,6 +30,7 @@ class _AuthFormState extends State<AuthForm> {
   bool _isSignup() => _authMode == AuthMode.signup;
 
   Future<void> _submit() async {
+    FocusScope.of(context).unfocus();
     final isValid = _formKey.currentState?.validate() ?? false;
     if (!isValid) {
       return;

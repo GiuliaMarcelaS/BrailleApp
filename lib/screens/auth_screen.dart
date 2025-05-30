@@ -42,7 +42,7 @@ class AuthScreen extends StatelessWidget {
                 padding: EdgeInsets.all(1 / 80 * screenHeight),
                 width: screenWidth * 331 / 360,
                 child: Text(
-                  'Desvende o mundo do Braille de forma divertida e interativa com Muiraquitã Braille!',
+                  'Desvende o mundo do Braille de forma divertida e interativa com vBraille!',
                   style: TextStyle(
                     fontSize: (14 / 800) * screenHeight,
                     fontFamily: 'Roboto',

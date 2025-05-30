@@ -28,7 +28,7 @@ class ApresentarGame extends StatelessWidget {
             // Exibe o ID do padrão
             if (questao.id != null) ...[
               Text(
-                "${questao.id}: ${questao.enunciado!}",
+                "Padrão ${int.parse(questao.id.split('_').last)}: ${questao.enunciado!}",
                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
@@ -58,7 +58,7 @@ class ApresentarGame extends StatelessWidget {
                                   children: List.generate(keyChars.length, (i) {
                                     return Padding(
                                       padding: EdgeInsets.only(
-                                        right: i < keyChars.length - 1 ? 3.0 : 0,
+                                        right: i < keyChars.length - 1 ? 0.0 : 0,
                                       ),
                                       child: Container(
                                         alignment: Alignment.center,

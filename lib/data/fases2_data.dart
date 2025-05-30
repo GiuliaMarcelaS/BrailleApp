@@ -7,7 +7,7 @@ final List<Fase> fases = [
     id: '1',
     title: 'Fase 1',
     description: '',
-    color: Color(0xFF00C2CB),
+    color: Color(0xFF208B52),
     icon: 'assets/explorador.png',
     miniGames: [
     ],
@@ -16,7 +16,7 @@ final List<Fase> fases = [
     id: '2',
     title: 'Fase 2',
     description: '',
-    color: Color(0xFF6FCF97),
+    color: Color(0xFF208B52),
     icon: 'assets/mestre.png',
     miniGames: [
     ],
@@ -25,7 +25,7 @@ final List<Fase> fases = [
     id: '3',
     title: 'Fase 3',
     description: '',
-    color: Color(0xFF6FCF97),
+    color: Color(0xFF208B52),
     icon: 'assets/mestre.png',
     miniGames: [
     ],
@@ -34,7 +34,7 @@ final List<Fase> fases = [
     id: '4',
     title: 'Fase 4',
     description: '',
-    color: Color(0xFF6FCF97),
+    color: Color(0xFF208B52),
     icon: 'assets/mestre.png',
     miniGames: [
     ],

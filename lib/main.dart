@@ -33,6 +33,7 @@ import 'package:braille_app/screens/topico_1_conteudo_screen.dart';
 import 'package:braille_app/screens/users_chart_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'screens/modulos_screen.dart';
 import 'package:braille_app/screens/interface_screen.dart';
@@ -43,7 +44,11 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const BrailleApp());
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]).then((_) {
+    runApp(const BrailleApp());
+  });
 }
 
 class BrailleApp extends StatelessWidget {

@@ -45,4 +45,19 @@ class HistoricoList with ChangeNotifier {
         }));
     notifyListeners();
   }
+
+  Future<void> deleteHistorico(String token, String userId, String id) async {
+    final url = Uri.parse(
+      '${Constants.BASE_URL}/users/$userId/historico/$id.json?auth=$token'
+    );
+    final response = await http.delete(url);
+
+    if (response.statusCode >= 400) {
+      throw Exception('Falha ao excluir histórico.');
+    }
+
+    // Remove localmente e notifica listeners
+    _items.removeWhere((item) => item.id == id);
+    notifyListeners();
+  }
 }

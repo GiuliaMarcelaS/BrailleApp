@@ -117,7 +117,7 @@ class _InterfaceState extends State<Interface> {
           Container(
             alignment: Alignment.center,
             height: screenHeight * 20 / 360,
-            child: const Text('Muiraquitã em Braille',
+            child: const Text('vBraille',
                 style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w700,
@@ -127,7 +127,8 @@ class _InterfaceState extends State<Interface> {
             width: screenWidth * 0.80,
             height: screenHeight * 50 / 800,
             margin: const EdgeInsets.only(top: 10),
-            child: ElevatedButton(
+            child: 
+            ElevatedButton(
                 onPressed: (() => _modulos(context)),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF208B52),
