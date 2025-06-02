@@ -97,6 +97,14 @@ class BrailleApp extends StatelessWidget {
             indicatorColor: Colors.black,
             labelColor: Colors.black,
           ),
+          primaryColor: Color(0xFF208B52),
+          colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF208B52)),
+          progressIndicatorTheme: ProgressIndicatorThemeData(color: Color(0xFF208B52)),
+          inputDecorationTheme: InputDecorationTheme(
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Color(0xFF208B52)),
+            )
+          )
         ),
         routes: {
           '/': (ctx) => const AuthScreen(),

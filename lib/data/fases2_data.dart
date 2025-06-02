@@ -39,4 +39,22 @@ final List<Fase> fases = [
     miniGames: [
     ],
   ),
+  Fase(
+    id: '5',
+    title: 'Fase 5',
+    description: '',
+    color: Color(0xFF208B52),
+    icon: 'assets/mestre.png',
+    miniGames: [
+    ],
+  ),
+  Fase(
+    id: '6',
+    title: 'Fase 6',
+    description: '',
+    color: Color(0xFF208B52),
+    icon: 'assets/mestre.png',
+    miniGames: [
+    ],
+  ),
 ];

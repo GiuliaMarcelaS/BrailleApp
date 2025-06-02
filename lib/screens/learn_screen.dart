@@ -81,31 +81,19 @@ class LearnScreen extends StatelessWidget {
                             ),
                           ),
                           Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    fase.title,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.grey[800],
-                                    ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  // Text(
-                                  //   fase.description,
-                                  //   style: TextStyle(
-                                  //     fontSize: 12,
-                                  //     color: Colors.grey[600],
-                                  //   ),
-                                  // ),
-                                ],
-                              ),
-                            ),
-                          ),
+  child: Center(
+    child: Text(
+      fase.title,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: Colors.grey[800],
+      ),
+    ),
+  ),
+),
+
                         ],
                       ),
                     ),

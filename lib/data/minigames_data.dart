@@ -154,4 +154,86 @@ final Map<String, List<Map<String, dynamic>>> sequenciaMinigames = {
       'id': 'q10',
     },
   ],
+  '5': [
+    {
+      'categoria': 'diferenciar',
+      'padrao': 'padrao_2',
+      'tipo': MiniGameType.COMPLETAR_PALAVRA,
+      'id': 'q1',
+    },
+    {
+      'categoria': 'diferenciar',
+      'padrao': 'padrao_2',
+      'tipo': MiniGameType.COMPLETAR_PALAVRA,
+      'id': 'q2',
+    },
+    {
+      'categoria': 'diferenciar',
+      'padrao': 'padrao_2',
+      'tipo': MiniGameType.COMPLETAR_PALAVRA,
+      'id': 'q3',
+    },
+    {
+      'categoria': 'diferenciar',
+      'padrao': 'padrao_2',
+      'tipo': MiniGameType.COMPLETAR_PALAVRA,
+      'id': 'q4',
+    },
+    {
+      'categoria': 'diferenciar',
+      'padrao': 'padrao_2',
+      'tipo': MiniGameType.COMPLETAR_PALAVRA,
+      'id': 'q5',
+    },
+    {
+      'categoria': 'diferenciar',
+      'padrao': 'padrao_2',
+      'tipo': MiniGameType.COMPLETAR_PALAVRA,
+      'id': 'q6',
+    },
+  ],
+  '6': [
+    {
+      'categoria': 'diferenciar',
+      'padrao': 'padrao_3',
+      'tipo': MiniGameType.COMPLETAR_PALAVRA,
+      'id': 'q1',
+    },
+    {
+      'categoria': 'diferenciar',
+      'padrao': 'padrao_3',
+      'tipo': MiniGameType.COMPLETAR_PALAVRA,
+      'id': 'q2',
+    },
+    {
+      'categoria': 'diferenciar',
+      'padrao': 'padrao_3',
+      'tipo': MiniGameType.COMPLETAR_PALAVRA,
+      'id': 'q3',
+    },
+    {
+      'categoria': 'diferenciar',
+      'padrao': 'padrao_3',
+      'tipo': MiniGameType.COMPLETAR_PALAVRA,
+      'id': 'q4',
+    },
+    {
+      'categoria': 'diferenciar',
+      'padrao': 'padrao_3',
+      'tipo': MiniGameType.COMPLETAR_PALAVRA,
+      'id': 'q5',
+    },
+    {
+      'categoria': 'diferenciar',
+      'padrao': 'padrao_3',
+      'tipo': MiniGameType.COMPLETAR_PALAVRA,
+      'id': 'q6',
+    },
+    {
+      'categoria': 'diferenciar',
+      'padrao': 'padrao_3',
+      'tipo': MiniGameType.COMPLETAR_PALAVRA,
+      'id': 'q7',
+    },
+  ],
 };
