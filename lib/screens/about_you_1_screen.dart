@@ -1,5 +1,3 @@
-// ignore_for_file: non_constant_identifier_names, avoid_print
-
 import 'package:braille_app/services/auth.dart';
 import 'package:braille_app/services/information_1.dart';
 import 'package:flutter/material.dart';
@@ -32,13 +30,14 @@ class _AboutYou1ScreenState extends State<AboutYou1Screen> {
     final auth = Provider.of<Auth>(context);
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      backgroundColor: Color(0xFFDDE9DD),
+      backgroundColor: const Color(0xFFDDE9DD),
       appBar: AppBar(
-        backgroundColor: Color(0xFFDDE9DD),
-        title: Text("Sobre você"),
+        backgroundColor: const Color(0xFFDDE9DD),
+        title: const Text("Sobre você"),
         centerTitle: true,
-        shape: Border(bottom: BorderSide(color: Colors.black)),
+        shape: const Border(bottom: BorderSide(color: Colors.black)),
         actions: [
           Container(
             width: screenWidth * 20 / 360,
@@ -47,138 +46,90 @@ class _AboutYou1ScreenState extends State<AboutYou1Screen> {
           )
         ],
       ),
-      body: SizedBox(
-        width: double.infinity,
+      body: SafeArea(
         child: Column(
           children: [
-            Container(
-              margin: EdgeInsets.only(top: screenHeight * 30 / 800),
-              child: Text(
-                'O quanto você entende do sistema braille?',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: screenHeight * 30 / 800),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: screenWidth * 16 / 360),
+                      child: const Text(
+                        'O quanto você entende do sistema braille?',
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.w700),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    ...List.generate(4, (index) {
+                      final options = [
+                        'Não sei nada',
+                        'Conheço alguns caracteres',
+                        'Consigo ler com alguma ajuda',
+                        'Leio sem nenhuma dificuldade'
+                      ];
+                      final optionIndex = index + 1;
+
+                      return Container(
+                        margin: EdgeInsets.only(top: screenHeight * 15 / 800),
+                        width: screenWidth * 328 / 360,
+                        height: screenHeight * 50 / 800,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            foregroundColor: Colors.black,
+                            backgroundColor: selected == optionIndex
+                                ? const Color(0xFFBAE2CD)
+                                : Colors.white,
+                          ),
+                          onPressed: () {
+                            select(optionIndex);
+                          },
+                          child: Row(
+                            children: [
+                              Icon(
+                                selected == optionIndex
+                                    ? Icons.check_circle_outline_outlined
+                                    : Icons.circle_outlined,
+                              ),
+                              SizedBox(width: screenWidth * 8 / 360),
+                              Flexible(child: Text(options[index])),
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
+                  ],
+                ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(top: screenHeight * 20 / 800),
-              height: screenHeight * 50 / 800,
-              width: screenWidth * 328 / 360,
-              child: ElevatedButton(
+            Padding(
+              padding: EdgeInsets.only(
+                bottom: screenHeight * 40 / 800,
+              ),
+              child: SizedBox(
+                height: screenHeight * 50 / 800,
+                width: screenWidth * 328 / 360,
+                child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      foregroundColor: Colors.black,
-                      backgroundColor:
-                          selected == 1 ? Color(0xFFBAE2CD) : Colors.white),
-                  onPressed: () {
-                    select(1);
-                  },
-                  child: Row(
-                    children: [
-                      selected == 1
-                          ? Icon(Icons.check_circle_outline_outlined)
-                          : Icon(Icons.circle_outlined),
-                      SizedBox(
-                        width: screenWidth * 8 / 360,
-                      ),
-                      Text('Não sei nada'),
-                    ],
-                  )),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: screenHeight * 15 / 800),
-              width: screenWidth * 328 / 360,
-              height: screenHeight * 50 / 800,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      foregroundColor: Colors.black,
-                      backgroundColor:
-                          selected == 2 ? Color(0xFFBAE2CD) : Colors.white),
-                  onPressed: () {
-                    select(2);
-                  },
-                  child: Row(
-                    children: [
-                      selected == 2
-                          ? Icon(Icons.check_circle_outline_outlined)
-                          : Icon(Icons.circle_outlined),
-                      SizedBox(
-                        width: screenWidth * 8 / 360,
-                      ),
-                      Text('Conheço alguns caracteres'),
-                    ],
-                  )),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: screenHeight * 15 / 800),
-              width: screenWidth * 328 / 360,
-              height: screenHeight * 50 / 800,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      foregroundColor: Colors.black,
-                      backgroundColor:
-                          selected == 3 ? Color(0xFFBAE2CD) : Colors.white),
-                  onPressed: () {
-                    select(3);
-                  },
-                  child: Row(
-                    children: [
-                      selected == 3
-                          ? Icon(Icons.check_circle_outline_outlined)
-                          : Icon(Icons.circle_outlined),
-                      SizedBox(
-                        width: screenWidth * 8 / 360,
-                      ),
-                      Text('Consigo ler com alguma ajuda'),
-                    ],
-                  )),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: screenHeight * 15 / 800),
-              width: screenWidth * 328 / 360,
-              height: screenHeight * 50 / 800,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      foregroundColor: Colors.black,
-                      backgroundColor:
-                          selected == 4 ? Color(0xFFBAE2CD) : Colors.white),
-                  onPressed: () {
-                    select(4);
-                  },
-                  child: Row(
-                    children: [
-                      selected == 4
-                          ? Icon(Icons.check_circle_outline_outlined)
-                          : Icon(Icons.circle_outlined),
-                      SizedBox(
-                        width: screenWidth * 8 / 360,
-                      ),
-                      Text('Leio sem nenhuma dificuldade'),
-                    ],
-                  )),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: screenHeight * 250 / 800),
-              height: screenHeight * 50 / 800,
-              width: screenWidth * 328 / 360,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF208B52),
+                    backgroundColor: const Color(0xFF208B52),
                   ),
                   onPressed: () {
                     _about_you_2(context);
                     information.saveInformation1(
                         auth.token ?? '', auth.userId ?? '', selected);
                   },
-                  child: Text(
+                  child: const Text(
                     'Continuar',
                     style: TextStyle(color: Colors.white),
-                  )),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

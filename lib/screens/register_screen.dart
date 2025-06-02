@@ -8,6 +8,7 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Color(0xFFDDE9DD),
       appBar: AppBar(
         backgroundColor: Color(0xFFDDE9DD),
@@ -22,11 +23,8 @@ class RegisterScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        children: [
-          AuthFormRegister(),
-        ],
-      ),
+      body: AuthFormRegister(),
     );
   }
 }
+

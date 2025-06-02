@@ -97,116 +97,122 @@ class _AuthFormState extends State<AuthForm> {
         ),
         Container(
           color: Color(0xFFDDE9DD),
-          child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                 Padding(
-  padding: EdgeInsets.only(top: screenHeight * 22 / 800),
-  child: SizedBox(
-    width: screenWidth * 328 / 360,
-    height: screenHeight * 70 / 800,
-    child: TextFormField(
-      decoration: const InputDecoration(
-        filled: true,
-        fillColor: Colors.white,
-        labelText: 'E-mail',
-        labelStyle: TextStyle(fontWeight: FontWeight.w800),
-        hintText: 'Ex: joao@gmail.com',
-        border: OutlineInputBorder(),
-      ),
-      keyboardType: TextInputType.emailAddress,
-      onSaved: (email) => _authData['email'] = email ?? '',
-      validator: (_email) {
-        final email = _email ?? '';
-        if (email.trim().isEmpty || !email.contains('@')) {
-          return 'Informe um e-mail válido';
-        }
-        return null;
-      },
-    ),
-  ),
-),
-                  SizedBox(
-                    width: screenWidth * 328 / 360,
-                    height: screenHeight * 70 / 800,
-                    child: TextFormField(
-                      controller: _passwordController,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        labelText: 'Senha',
-                        labelStyle: TextStyle(fontWeight: FontWeight.w800),
-                        hintText: 'Ex: senha123',
-                        border: OutlineInputBorder(),
+          child: SafeArea(
+            child: SingleChildScrollView(
+              child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [ 
+                     SizedBox(
+                       width: screenWidth * 328 / 360,
+                       height: screenHeight * 70 / 800,
+                       child: TextFormField(
+                         decoration: const InputDecoration(
+                           filled: true,
+                           fillColor: Colors.white,
+                           labelText: 'E-mail',
+                           labelStyle: TextStyle(fontWeight: FontWeight.w800),
+                           hintText: 'Ex: joao@gmail.com',
+                           border: OutlineInputBorder(),
+                         ),
+                         keyboardType: TextInputType.emailAddress,
+                         onSaved: (email) => _authData['email'] = email ?? '',
+                         validator: (_email) {
+                           final email = _email ?? '';
+                           if (email.trim().isEmpty || !email.contains('@')) {
+                             return 'Informe um e-mail válido';
+                           }
+                           return null;
+                         },
+                       ),
+                     ),
+                      SizedBox(
+                        width: screenWidth * 328 / 360,
+                      //  height: screenHeight * 70 / 800,
+                        child: TextFormField(
+                          controller: _passwordController,
+                          obscureText: true,
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            labelText: 'Senha',
+                            labelStyle: TextStyle(fontWeight: FontWeight.w800),
+                            hintText: 'Ex: senha123',
+                            border: OutlineInputBorder(),
+                          ),
+                          keyboardType: TextInputType.emailAddress,
+                          onSaved: (password) => _authData['password'] = password ?? '',
+                          validator: (_password) {
+                            final password = _password ?? '';
+                            if (password.isEmpty || password.length < 5) {
+                              return 'Informe uma senha válida';
+                            }
+                            return null;
+                          },
+                        ),
                       ),
-                      keyboardType: TextInputType.emailAddress,
-                      onSaved: (password) => _authData['password'] = password ?? '',
-                      validator: (_password) {
-                        final password = _password ?? '';
-                        if (password.isEmpty || password.length < 5) {
-                          return 'Informe uma senha válida';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-
-                  if (_isSignup())
-                    TextFormField(
-                      decoration:
-                          const InputDecoration(labelText: 'Confirmar Senha'),
-                      keyboardType: TextInputType.emailAddress,
-                      obscureText: true,
-                      // onSaved: (password) => _authData['password'] = password ??'',
-                      validator: _isLogin()
-                          ? null
-                          // ignore: no_leading_underscores_for_local_identifiers
-                          : (_password) {
-                              final password = _password ?? '';
-                              if (password != _passwordController.text) {
-                                return 'Senhas informadas não conferem.';
-                              }
-                              return null;
-                            },
-                    ),
-                  Container(
-                    width: screenWidth * 300 / 360,
-                    alignment: Alignment.bottomRight,
-                    child: TextButton(
-                      onPressed: () {
-                        _forgotPassword(context);
-                      },
-                      child: Text(
-                        'Esqueceu sua senha?',
-                        style: TextStyle(color: Color(0xFF1CB9C5)),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: screenHeight * 29 / 800,
-                    color: Color(0xFFDDE9DD),
-                  ),
-                  if (_isLoading)
-                    const CircularProgressIndicator()
-                  else
-                    SizedBox(
-                      height: screenHeight * 50 / 800,
-                      width: screenWidth * 328 / 360,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFFACC9B8)),
-                          onPressed: _submit,
+              
+                      // if (_isSignup())
+                      //   TextFormField(
+                      //     decoration:
+                      //         const InputDecoration(labelText: 'Confirmar Senha'),
+                      //     keyboardType: TextInputType.emailAddress,
+                      //     obscureText: true,
+                      //     // onSaved: (password) => _authData['password'] = password ??'',
+                      //     validator: _isLogin()
+                      //         ? null
+                      //         // ignore: no_leading_underscores_for_local_identifiers
+                      //         : (_password) {
+                      //             final password = _password ?? '';
+                      //             if (password != _passwordController.text) {
+                      //               return 'Senhas informadas não conferem.';
+                      //             }
+                      //             return null;
+                      //           },
+                      //   ),
+                      Container(
+                        width: screenWidth * 300 / 360,
+                        alignment: Alignment.bottomRight,
+                        child: TextButton(
+                          style: ButtonStyle(
+                           padding: WidgetStateProperty.all(EdgeInsets.zero),
+                           tapTargetSize: MaterialTapTargetSize.shrinkWrap, 
+                           minimumSize: WidgetStateProperty.all(Size(0, 25)),
+                          ),
+                          onPressed: () {
+                            _forgotPassword(context);
+                          },
                           child: Text(
-                            _authMode == AuthMode.login
-                                ? 'Entrar'
-                                : 'REGISTRAR',
-                            style: TextStyle(color: Colors.white),
-                          )),
-                    ),
-                ],
-              )),
+                            'Esqueceu sua senha?',
+                            style: TextStyle(color: Color(0xFF1CB9C5)),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: screenHeight * 29 / 800,
+                        color: Color(0xFFDDE9DD),
+                      ),
+                      if (_isLoading)
+                        const CircularProgressIndicator()
+                      else
+                        SizedBox(
+                          height: screenHeight * 50 / 800,
+                          width: screenWidth * 328 / 360,
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Color(0xFF208B52)),
+                              onPressed: _submit,
+                              child: Text(
+                                _authMode == AuthMode.login
+                                    ? 'Entrar'
+                                    : 'REGISTRAR',
+                                style: TextStyle(color: Colors.white),
+                              )),
+                        ),
+                    ],
+                  )),
+            ),
+          ),
         )
       ],
     );

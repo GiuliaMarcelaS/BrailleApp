@@ -3,7 +3,7 @@ class QuestaoModel {
   final String? enunciado;
   final List<String>? opcoes;
   final List<int>? corretas;
-  final Map<Object, String>? caracteres;
+  late final Map<Object, String>? caracteres;
   final String? imagemUrl; // Novo
   final String? palavra; // Novo
   final String? dica; // Novo

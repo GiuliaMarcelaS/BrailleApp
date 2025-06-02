@@ -32,7 +32,7 @@ class LearnScreen extends StatelessWidget {
           //  backgroundColor: const Color(0xFF8FBF8F),
             elevation: 0,
             title: const Text(
-              'Vamos praticar?',
+              'Vamos aprender?',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             centerTitle: true,

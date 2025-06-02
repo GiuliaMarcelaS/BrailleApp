@@ -53,6 +53,8 @@ class _Fase2ScreenState extends State<Fase2Screen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return BlocProvider.value(
       value: _bloc,
       child: BlocBuilder<GameFlowBloc, GameFlowState>(
@@ -95,13 +97,73 @@ class _Fase2ScreenState extends State<Fase2Screen> {
             content = Column(
               children: [Expanded(child: gameWidget)],
             );
-          } else if (state is GameOver) {
+          } else if (state is FaseCompleted) {
+  content = Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          margin: EdgeInsets.only(bottom: screenHeight * 0.08),
+          alignment: Alignment.center,
+          width: screenWidth * 340 / 360,
+          height: screenHeight * 150 / 360,
+          child: Image.asset(
+            'assets/images/fase_concluida.png',
+            fit: BoxFit.fill,
+          ),
+        ),
+        const Text(
+          'Parabéns, você concluiu a fase com sucesso!',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 24),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 32.0),
+          child: SizedBox(
+            width: screenWidth * 0.8,
+            height: 50,
+            child: ElevatedButton(
+              onPressed: () => Navigator.pop(context),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF208B52),
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Text(
+                'Próxima Fase',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+} else if (state is GameOver) {
             content = Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                   Container(
+              decoration: const BoxDecoration(),
+              padding: const EdgeInsets.all(29),
+              margin: const EdgeInsets.only(top: 100, bottom: 5),
+              alignment: Alignment.center,
+              width: screenWidth * 290 / 360,
+              height: screenHeight * 150 / 360,
+              child: Image.asset(
+                'assets/images/muiraquita_triste.png',
+                fit: BoxFit.fill,
+              ),
+            ),
                   const Text(
-                    'Você perdeu todas as vidas',
+                    'Você perdeu todas as vidas!',
                     style: TextStyle(fontSize: 24),
                   ),
                   const SizedBox(height: 20),
@@ -116,36 +178,72 @@ class _Fase2ScreenState extends State<Fase2Screen> {
                     child: const Text('Tentar novamente', style: TextStyle(fontSize: 20),),
                   ),
                   const SizedBox(height: 20),
-                  OutlinedButton(
-                     style: ElevatedButton.styleFrom(
-                   // backgroundColor: Color(0xFF208B52),
-                    foregroundColor: Colors.black,
-                    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
+                  TextButton(
+                     style: TextButton.styleFrom(
+                  //  backgroundColor: Color(0xFF208B52),
+                    foregroundColor: Color(0xFF1CB9C5),
+                   // padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('Voltar para fases'),
+                    child: const Text('Voltar para fases', style: TextStyle(fontSize: 20),),
                   ),
                 ],
               ),
             );
-          } else if (state is FaseCompleted) {
-            content = Center(
-              child: ElevatedButton(
-                  onPressed: () => Navigator.pop(context),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF208B52),
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  ),
-                  child: const Text(
-                    'Próxima Fase',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
+          }
+
+
+else if (state is FaseCompleted) {
+  content = Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          margin: EdgeInsets.only(bottom: screenHeight * 0.08),
+          alignment: Alignment.center,
+          width: screenWidth * 340 / 360,
+          height: screenHeight * 150 / 360,
+          child: Image.asset(
+            'assets/images/fase_concluida.png',
+            fit: BoxFit.fill,
+          ),
+        ),
+        const Text(
+          'Parabéns, você concluiu a fase com sucesso!',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 24),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 32.0),
+          child: SizedBox(
+            width: screenWidth * 0.8,
+            height: 50,
+            child: ElevatedButton(
+              onPressed: () => Navigator.pop(context),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF208B52),
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
-            );
-          } else {
+              ),
+              child: const Text(
+                'Próxima Fase',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+           else {
             content = const SizedBox.shrink();
           }
 

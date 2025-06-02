@@ -15,7 +15,7 @@ class TabsScreen2 extends StatelessWidget {
     final initialIndex = args?['initialIndex'] ?? 0;
 
     return DefaultTabController(
-      length: 5,
+      length: 3,
       initialIndex: initialIndex,
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -25,9 +25,9 @@ class TabsScreen2 extends StatelessWidget {
               child: TabBarView(
                 children: [
                   PhraseTranslatorScreen(),
-                  ModulosScreen(),
                   LearnScreen(),
                   EscreverScreen2(),
+                //  ModulosScreen(),
                 //  Container(),
                 ],
               ),
@@ -50,10 +50,6 @@ class TabsScreen2 extends StatelessWidget {
                 size: 23 / 800 * screenHeight,
               ),
               text: "Traduzir",
-            ),
-            Tab(
-              icon: Icon(Icons.menu_book_sharp, size: 23 / 800 * screenHeight),
-              text: "Aprender",
             ),
             Tab(
               icon: Icon(Icons.auto_fix_high, size: 23 / 800 * screenHeight),

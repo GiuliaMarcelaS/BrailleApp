@@ -71,15 +71,18 @@ class GameFlowBloc extends Bloc<GameFlowEvent, GameFlowState> {
 
     if (event.isCorrect) {
       if (idx == _currentMiniGames.length - 1) {
+        // Último minigame da fase: tenta atualizar para a próxima
         await faseService.atualizarFase(_currentPhaseNumber + 1);
         emit(FaseCompleted());
       } else {
+        // Avança para o próximo minigame, mantendo as vidas
         emit(MiniGameStarted(
           miniGame: _currentMiniGames[idx + 1],
           remainingLives: current.remainingLives,
         ));
       }
     } else {
+      // Errou: desconta vida
       final livesLeft = current.remainingLives - 1;
       if (livesLeft <= 0) {
         emit(GameOver(faseId: _currentPhaseNumber.toString()));

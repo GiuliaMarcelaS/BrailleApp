@@ -12,10 +12,12 @@ class CompletarPalavraSimpleGame extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CompletarPalavraSimpleGameState createState() => _CompletarPalavraSimpleGameState();
+  _CompletarPalavraSimpleGameState createState() =>
+      _CompletarPalavraSimpleGameState();
 }
 
-class _CompletarPalavraSimpleGameState extends State<CompletarPalavraSimpleGame> {
+class _CompletarPalavraSimpleGameState
+    extends State<CompletarPalavraSimpleGame> {
   late List<String?> _respostas;
   int _indiceSelecao = 0;
 
@@ -75,7 +77,8 @@ class _CompletarPalavraSimpleGameState extends State<CompletarPalavraSimpleGame>
                         height: 40,
                         child: CircularProgressIndicator(
                           value: progress.expectedTotalBytes != null
-                              ? progress.cumulativeBytesLoaded / progress.expectedTotalBytes!
+                              ? progress.cumulativeBytesLoaded /
+                                  progress.expectedTotalBytes!
                               : null,
                         ),
                       ),
@@ -170,7 +173,8 @@ class _CompletarPalavraSimpleGameState extends State<CompletarPalavraSimpleGame>
                     backgroundColor: const Color(0xFF208B52),
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape:
+                        RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
                   child: const Text(
                     'Verificar',
@@ -215,12 +219,20 @@ class _CompletarPalavraSimpleGameState extends State<CompletarPalavraSimpleGame>
     final acerto = List.generate(
             ordem.length, (i) => _respostas[i] == opcs[ordem[i]])
         .every((e) => e);
+
+    if (!acerto) {
+      // Se errou, limpa todas as seleções e devolve os caracteres à lista
+      _clearFromIndex(0);
+    }
+
     widget.onSubmit(acerto);
   }
 
   void _clearFromIndex(int startIndex) {
     setState(() {
-      for (int i = startIndex; i < _respostas.length; i++) _respostas[i] = null;
+      for (int i = startIndex; i < _respostas.length; i++) {
+        _respostas[i] = null;
+      }
       _indiceSelecao = startIndex;
     });
   }

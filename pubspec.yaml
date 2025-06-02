@@ -92,6 +92,9 @@ flutter:
     - assets\images\Group143.png
     - assets\images\Group46.png
     - assets\images\Group48.png
+    - assets\images\interface_braille.png
+    - assets\images\muiraquita_triste.png
+    - assets\images\fase_concluida.png
    # - assets\videos\video1.mp4
     #- images/a_dot_ham.jpeg
 

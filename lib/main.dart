@@ -31,7 +31,7 @@ import 'package:braille_app/screens/testar_screen.dart';
 import 'package:braille_app/screens/topic_1_screen.dart';
 import 'package:braille_app/screens/topico_1_conteudo_screen.dart';
 import 'package:braille_app/screens/users_chart_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';  
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -93,7 +93,7 @@ class BrailleApp extends StatelessWidget {
         theme: ThemeData(
           scaffoldBackgroundColor: const Color(0xFFDDE9DD),
           appBarTheme: const AppBarTheme(color: Color(0xFFDDE9DD)),
-          tabBarTheme: const TabBarTheme(
+          tabBarTheme: const TabBarThemeData(
             indicatorColor: Colors.black,
             labelColor: Colors.black,
           ),

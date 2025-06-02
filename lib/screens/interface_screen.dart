@@ -54,20 +54,20 @@ class _InterfaceState extends State<Interface> {
     int totalVideos = resultado['totalVideos'] ?? 0;
     int totalPerguntas = resultado['totalPerguntas'] ?? 0;
     print(totalPerguntas + totalVideos);
-    Navigator.of(context).pushNamed(
-      '/tabs-screen-2',
-      arguments: {
-        'initialIndex': 1,
-        'totalVideos': totalVideos,
-        'totalPerguntas': totalPerguntas,
-      },
-    );
+    // Navigator.of(context).pushNamed(
+    //   '/tabs-screen-2',
+    //   arguments: {
+    //     'initialIndex': 1,
+    //     'totalVideos': totalVideos,
+    //     'totalPerguntas': totalPerguntas,
+    //   },
+    // );
   }
 
   void _learn(BuildContext context) {
     Navigator.of(context).pushNamed(
       '/tabs-screen-2',
-      arguments: {'initialIndex': 2},
+      arguments: {'initialIndex': 1},
     );
   }
 
@@ -81,7 +81,7 @@ class _InterfaceState extends State<Interface> {
   void _escrever(BuildContext context) {
     Navigator.of(context).pushNamed(
       '/tabs-screen-2',
-      arguments: {'initialIndex': 3},
+      arguments: {'initialIndex': 2},
     );
   }
 
@@ -100,94 +100,98 @@ class _InterfaceState extends State<Interface> {
     int totalPerguntas = resultado['totalPerguntas'] ?? 0;
 
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            decoration: const BoxDecoration(),
-            padding: const EdgeInsets.all(29),
-            margin: const EdgeInsets.only(top: 100, bottom: 5),
-            alignment: Alignment.center,
-            width: screenWidth * 290 / 360,
-            height: screenHeight * 100 / 360,
-            child: Image.asset(
-              'assets/images/group12.png',
-              fit: BoxFit.fill,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              decoration: const BoxDecoration(),
+              padding: const EdgeInsets.all(29),
+              margin: const EdgeInsets.only(top: 100, bottom: 5),
+              alignment: Alignment.center,
+              width: screenWidth * 290 / 360,
+              height: screenHeight * 150 / 360,
+              child: Image.asset(
+                'assets/images/interface_braille.png',
+                fit: BoxFit.fill,
+              ),
             ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            height: screenHeight * 20 / 360,
-            child: const Text('vBraille',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 26)),
-          ),
-          Container(
-            width: screenWidth * 0.80,
-            height: screenHeight * 50 / 800,
-            margin: const EdgeInsets.only(top: 10),
-            child: 
-            ElevatedButton(
-                onPressed: (() => _modulos(context)),
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF208B52),
-                    foregroundColor: Colors.white,
-                    elevation: 20,
-                    shadowColor: Colors.black),
-                child: const Text('Aprender')),
-          ),
-          Container(
-            width: screenWidth * 0.80,
-            height: screenHeight * 50 / 800,
-            margin: const EdgeInsets.only(top: 10),
-            child: ElevatedButton(
-                onPressed: (() => _learn(context)),
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF208B52),
-                    foregroundColor: Colors.white,
-                    elevation: 20,
-                    shadowColor: Colors.black),
-                child: const Text('Praticar')),
-          ),
-          Container(
-            width: screenWidth * 0.80,
-            height: screenHeight * 50 / 800,
-            margin: const EdgeInsets.only(top: 10),
-            child: ElevatedButton(
-                onPressed: (() => _escrever(context)),
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF208B52),
-                    foregroundColor: Colors.white,
-                    elevation: 20,
-                    shadowColor: Colors.black),
-                child: const Text('Escrever')),
-          ),
-          Container(
-            width: screenWidth * 0.80,
-            height: screenHeight * 50 / 800,
-            margin: const EdgeInsets.only(top: 10),
-            child: ElevatedButton(
-                onPressed: _isButtonDisabled
-                    ? null
-                    : (() {
-                        _traduzir(context);
-                      }),
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF208B52),
-                    foregroundColor: Colors.white,
-                    elevation: 20,
-                    shadowColor: Colors.black),
-                child: const Text('Traduzir')),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 40),
-            child: const Text(
-              'Bem-Vindo!',
-              style: TextStyle(color: Colors.black),
+            // Container(
+            // //  alignment: Alignment.center,
+            //   height: screenHeight * 20 / 360,
+            //   child: const Text('vBraille',
+            //       style: TextStyle(
+            //           color: Colors.black,
+            //           fontWeight: FontWeight.w700,
+            //           fontSize: 26)),
+            // ),
+            // Container(
+            //   width: screenWidth * 0.80,
+            //   height: screenHeight * 50 / 800,
+            //   margin: const EdgeInsets.only(top: 10),
+            //   child: 
+            //   ElevatedButton(
+            //       onPressed: (() => _modulos(context)),
+            //       style: ElevatedButton.styleFrom(
+            //           backgroundColor: Color(0xFF208B52),
+            //           foregroundColor: Colors.white,
+            //           elevation: 20,
+            //           shadowColor: Colors.black),
+            //       child: const Text('Aprender')),
+            // ),
+            Container(
+              width: screenWidth * 0.80,
+              height: screenHeight * 50 / 800,
+              margin: const EdgeInsets.only(top: 10),
+              child: ElevatedButton(
+                  onPressed: (() => _learn(context)),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF208B52),
+                      foregroundColor: Colors.white,
+                      elevation: 20,
+                      shadowColor: Colors.black),
+                  child: const Text('Aprender')),
             ),
-          )
-        ],
+            Container(
+              width: screenWidth * 0.80,
+              height: screenHeight * 50 / 800,
+              margin: const EdgeInsets.only(top: 10),
+              child: ElevatedButton(
+                  onPressed: (() => _escrever(context)),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF208B52),
+                      foregroundColor: Colors.white,
+                      elevation: 20,
+                      shadowColor: Colors.black),
+                  child: const Text('Escrever')),
+            ),
+            Container(
+              width: screenWidth * 0.80,
+              height: screenHeight * 50 / 800,
+              margin: const EdgeInsets.only(top: 10),
+              child: ElevatedButton(
+                  onPressed: _isButtonDisabled
+                      ? null
+                      : (() {
+                          _traduzir(context);
+                        }),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF208B52),
+                      foregroundColor: Colors.white,
+                      elevation: 20,
+                      shadowColor: Colors.black),
+                  child: const Text('Traduzir')),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 40),
+              child: const Text(
+                'Bem-Vindo!',
+                style: TextStyle(color: Colors.black),
+              ),
+            )
+          ],
+        ),
       ),
       backgroundColor: Color(0xFFDDE9DD),
     );
