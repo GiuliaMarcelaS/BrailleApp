@@ -67,14 +67,14 @@ class _InterfaceState extends State<Interface> {
   void _learn(BuildContext context) {
     Navigator.of(context).pushNamed(
       '/tabs-screen-2',
-      arguments: {'initialIndex': 1},
+      arguments: {'initialIndex': 0},
     );
   }
 
   void _traduzir(BuildContext context) {
     Navigator.of(context).pushNamed(
       '/tabs-screen-2',
-      arguments: {'initialIndex': 0},
+      arguments: {'initialIndex': 1},
     );
   }
 
@@ -151,7 +151,7 @@ class _InterfaceState extends State<Interface> {
                       foregroundColor: Colors.white,
                       elevation: 20,
                       shadowColor: Colors.black),
-                  child: const Text('Aprender')),
+                  child: const Text('Aprender', style: TextStyle(fontSize: 18),)),
             ),
             Container(
               width: screenWidth * 0.80,
@@ -164,7 +164,7 @@ class _InterfaceState extends State<Interface> {
                       foregroundColor: Colors.white,
                       elevation: 20,
                       shadowColor: Colors.black),
-                  child: const Text('Escrever')),
+                  child: const Text('Escrever',style: TextStyle(fontSize: 18),)),
             ),
             Container(
               width: screenWidth * 0.80,
@@ -181,13 +181,13 @@ class _InterfaceState extends State<Interface> {
                       foregroundColor: Colors.white,
                       elevation: 20,
                       shadowColor: Colors.black),
-                  child: const Text('Traduzir')),
+                  child: const Text('Traduzir', style: TextStyle(fontSize: 18),)),
             ),
             Container(
               margin: const EdgeInsets.only(top: 40),
               child: const Text(
                 'Bem-Vindo!',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.black, fontSize: 18),
               ),
             )
           ],

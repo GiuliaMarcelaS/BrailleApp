@@ -30,7 +30,6 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
   @override
   void didUpdateWidget(covariant LetraLinhaGame oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // Limpa seleções e fecha tip ao trocar de questão
     setState(() {
       _selecionadas.clear();
       _showTip = false;
@@ -43,15 +42,12 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
     });
   }
 
-  /// Extrai todas as letras individuais entre aspas no enunciado
   List<String> _extrairLetrasDoEnunciado(String enunciado) {
     final regExp = RegExp(r'"([^"]+)"');
     final matches = regExp.allMatches(enunciado);
-    // Cada match.group(1) pode ser, por exemplo, "df" ou "d"
-    // Vamos separar cada caractere individual
     final letras = <String>[];
     for (final m in matches) {
-      final grupo = m.group(1)!; // e.g. "df" ou "d"
+      final grupo = m.group(1)!;
       for (var caractere in grupo.split('')) {
         letras.add(caractere.toLowerCase());
       }
@@ -59,17 +55,34 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
     return letras;
   }
 
+  List<TextSpan> _formatarEnunciado(String texto) {
+    final spans = <TextSpan>[];
+    final regExp = RegExp(r'"([^"]+)"');
+    int lastIndex = 0;
+
+    for (final match in regExp.allMatches(texto)) {
+      if (match.start > lastIndex) {
+        spans.add(TextSpan(text: texto.substring(lastIndex, match.start)));
+      }
+      spans.add(TextSpan(
+        text: match.group(1),
+        style: const TextStyle(fontWeight: FontWeight.bold),
+      ));
+      lastIndex = match.end;
+    }
+
+    if (lastIndex < texto.length) {
+      spans.add(TextSpan(text: texto.substring(lastIndex)));
+    }
+
+    return spans;
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Enunciado completo (incluindo as aspas)
     final enunciadoText = widget.questao.enunciado ?? '';
-    // Lista de letras em português extraídas do enunciado
     final letrasDoEnunciado = _extrairLetrasDoEnunciado(enunciadoText);
-
-    // Opções exibidas na tela (cada item é um caractere Braille)
     final opcoesList = widget.questao.opcoes ?? [];
-
-    // Índices corretos (para verificar se o usuário acertou)
     final corretasIndices = widget.questao.corretas ?? [];
 
     return Stack(
@@ -79,17 +92,17 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
           children: [
             const SizedBox(height: 20),
 
-            // Exibe o enunciado completo
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                enunciadoText,
-                style: const TextStyle(fontSize: 18),
+              child: RichText(
                 textAlign: TextAlign.center,
+                text: TextSpan(
+                  style: const TextStyle(fontSize: 18, color: Colors.black),
+                  children: _formatarEnunciado(enunciadoText),
+                ),
               ),
             ),
 
-            // Torna as opções scrolláveis na horizontal
             Expanded(
               child: Center(
                 child: SingleChildScrollView(
@@ -137,7 +150,6 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
               ),
             ),
 
-            // Botão "Continuar"
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
@@ -160,8 +172,7 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
                 child: const Center(
                   child: Text(
                     'Continuar',
-                    style:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -169,7 +180,6 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
           ],
         ),
 
-        // Botão de dica (ícone) no canto superior direito
         Positioned(
           top: 80,
           right: 8,
@@ -186,11 +196,10 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
           ),
         ),
 
-        // Overlay de dica: exibe uma lista (Braille, Letra) para cada letra do enunciado
         if (_showTip)
           Positioned.fill(
             child: GestureDetector(
-              onTap: _toggleTip, // Fecha ao tocar fora do card
+              onTap: _toggleTip,
               child: Container(
                 color: Colors.black.withOpacity(0.5),
                 alignment: Alignment.center,
@@ -204,7 +213,6 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: letrasDoEnunciado.map((letraPortugues) {
-                        // Usa o método braille_translator para cada letra
                         final brailleChar =
                             _ballHelper.braille_translator(letraPortugues);
                         return Padding(

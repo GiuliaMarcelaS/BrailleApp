@@ -28,10 +28,26 @@ class ApresentarGame extends StatelessWidget {
             // Exibe o ID do padrão
             if (questao.id != null) ...[
               Text(
-                "Padrão ${int.parse(questao.id.split('_').last)}: ${questao.enunciado!}",
+                questao.enunciado!,
                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
+              const SizedBox(height: 16),
+              RichText(
+  textAlign: TextAlign.center,
+  text: TextSpan(
+    style: const TextStyle(fontSize: 16, color: Colors.black),
+    children: [
+      const TextSpan(text: "Memorize os caracteres abaixo e, em seguida, clique em "),
+      const TextSpan(
+        text: "Continuar",
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      const TextSpan(text: " para prosseguir"),
+    ],
+  ),
+),
+
               const SizedBox(height: 16),
             ],
             // Grid responsivo de caracteres

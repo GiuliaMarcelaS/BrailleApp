@@ -126,12 +126,12 @@ class _MatrizState extends State<Matriz> {
         !isClicked6) {
       return '1';
     }
-    if (!isClicked1 &&
-        !isClicked2 &&
-        isClicked3 &&
-        isClicked4 &&
-        isClicked5 &&
-        isClicked6) {
+    if (isClicked1 &&
+        isClicked2 &&
+        !isClicked3 &&
+        !isClicked4 &&
+        !isClicked5 &&
+        !isClicked6) {
       return '2';
     }
     if (isClicked1 &&
@@ -811,14 +811,23 @@ class _MatrizState extends State<Matriz> {
               children: [
                 Column(
                   children: [
-                    IconButton(
-                      onPressed: habilitaMaiuscula,
-                      icon: Icon(Icons.format_size),
-                    ),
-                    Text(
-                      'caixa alta',
-                      style: TextStyle(fontSize: 10),
-                    ),
+                    GestureDetector(
+      onTap: habilitaMaiuscula,
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: maiuscula
+            ? BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromARGB(255, 44, 44, 44),
+              )
+            : null,
+        child: Icon(
+          Icons.format_size,
+          color: maiuscula ? Colors.white : Colors.black,
+        ),
+      ),
+    ),
+    const Text('Caixa alta', style: TextStyle(fontSize: 10)),
                   ],
                 ),
                 SizedBox(
@@ -826,14 +835,23 @@ class _MatrizState extends State<Matriz> {
                 ),
                 Column(
                   children: [
-                    IconButton(
-                      onPressed: habilitaReglete,
-                      icon: Icon(Icons.flip),
-                    ),
-                    Text(
-                      'reglete',
-                      style: TextStyle(fontSize: 10),
-                    ),
+                    GestureDetector(
+      onTap: habilitaReglete,
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: espelhado
+            ? BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromARGB(255, 44, 44, 44),
+              )
+            : null,
+        child: Icon(
+          Icons.flip,
+          color: espelhado ? Colors.white : Colors.black,
+        ),
+      ),
+    ),
+    const Text('Reglete', style: TextStyle(fontSize: 10)),
                   ],
                 ),
                 SizedBox(
@@ -841,14 +859,23 @@ class _MatrizState extends State<Matriz> {
                 ),
                 Column(
                   children: [
-                    IconButton(
-                      onPressed: habilitaNumero,
-                      icon: Icon(Icons.numbers),
-                    ),
-                    Text(
-                      'Número',
-                      style: TextStyle(fontSize: 10),
-                    ),
+                    GestureDetector(
+      onTap: habilitaNumero,
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: numero
+            ? BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromARGB(255, 44, 44, 44),
+              )
+            : null,
+        child: Icon(
+          Icons.numbers,
+          color: numero ? Colors.white : Colors.black,
+        ),
+      ),
+    ),
+    const Text('Número', style: TextStyle(fontSize: 10)),
                   ],
                 ),
                 SizedBox(width: 20),
@@ -963,7 +990,7 @@ class _MatrizState extends State<Matriz> {
                   icon: Icon(Icons.arrow_forward),
                 ),
                 Text(
-                  'submeter',
+                  'Traduzir',
                   style: TextStyle(fontSize: 10),
                 ),
               ],

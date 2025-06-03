@@ -24,8 +24,8 @@ class TabsScreen2 extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  PhraseTranslatorScreen(),
                   LearnScreen(),
+                  PhraseTranslatorScreen(),
                   EscreverScreen2(),
                 //  ModulosScreen(),
                 //  Container(),
@@ -45,15 +45,15 @@ class TabsScreen2 extends StatelessWidget {
           ),
           tabs: [
             Tab(
+              icon: Icon(Icons.auto_fix_high, size: 23 / 800 * screenHeight),
+              text: "Aprender",
+            ),
+            Tab(
               icon: Icon(
                 Icons.translate,
                 size: 23 / 800 * screenHeight,
               ),
               text: "Traduzir",
-            ),
-            Tab(
-              icon: Icon(Icons.auto_fix_high, size: 23 / 800 * screenHeight),
-              text: "Praticar",
             ),
             Tab(
               icon: Icon(Icons.text_snippet, size: 23 / 800 * screenHeight),
