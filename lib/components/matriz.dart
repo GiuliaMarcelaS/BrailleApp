@@ -818,7 +818,7 @@ class _MatrizState extends State<Matriz> {
         decoration: maiuscula
             ? BoxDecoration(
                 shape: BoxShape.circle,
-                color: Color.fromARGB(255, 44, 44, 44),
+                color: Color(0xFF208B52),
               )
             : null,
         child: Icon(
@@ -842,7 +842,7 @@ class _MatrizState extends State<Matriz> {
         decoration: espelhado
             ? BoxDecoration(
                 shape: BoxShape.circle,
-                color: Color.fromARGB(255, 44, 44, 44),
+                color: Color(0xFF208B52),
               )
             : null,
         child: Icon(
@@ -866,7 +866,7 @@ class _MatrizState extends State<Matriz> {
         decoration: numero
             ? BoxDecoration(
                 shape: BoxShape.circle,
-                color: Color.fromARGB(255, 44, 44, 44),
+                color: Color(0xFF208B52),
               )
             : null,
         child: Icon(

@@ -29,7 +29,6 @@ class LearnScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: const Color(0xFFDDE9DE),
           appBar: AppBar(
-          //  backgroundColor: const Color(0xFF8FBF8F),
             elevation: 0,
             title: const Text(
               'Vamos aprender?',
@@ -70,30 +69,47 @@ class LearnScreen extends StatelessWidget {
                       elevation: 4,
                       child: Column(
                         children: [
-                          Container(
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: fase.color,
+                          // Parte superior: imagem responsiva
+                          Expanded(
+                            flex: 2,
+                            child: ClipRRect(
                               borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(12),
                                 topRight: Radius.circular(12),
                               ),
+                              child: Container(
+                              //  color: fase.color,
+                                child: Center(
+                                  child: fase.icon.isNotEmpty
+                                      ? Image.asset(
+                                          fase.icon,
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          fit: BoxFit.contain,
+                                        )
+                                      : const SizedBox.shrink(),
+                                ),
+                              ),
                             ),
                           ),
-                          Expanded(
-  child: Center(
-    child: Text(
-      fase.title,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-        color: Colors.grey[800],
-      ),
-    ),
-  ),
-),
 
+                          // Parte inferior: título responsivo
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              child: Text(
+                                fase.title,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[800],
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
