@@ -906,7 +906,7 @@ class _MatrizState extends State<Matriz> {
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width *
-                  0.6, // largura proporcional à tela
+                  0.5, // largura proporcional à tela
               child: Column(
                 children: [
                   Row(
@@ -985,10 +985,22 @@ class _MatrizState extends State<Matriz> {
             ),
             Column(
               children: [
-                IconButton(
-                  onPressed: submeterLetra,
-                  icon: Icon(Icons.arrow_forward),
-                ),
+                ElevatedButton(
+  onPressed: submeterLetra,
+  style: ElevatedButton.styleFrom(
+    shape: const CircleBorder(),
+    padding: const EdgeInsets.all(10),   // controla o tamanho do círculo
+    backgroundColor: Color(0xFF208B52),       // cor de fundo do círculo
+    foregroundColor: Colors.white,       // cor do ícone
+    elevation: 4,
+  ),
+  child: const Icon(
+    Icons.arrow_forward,                // seta para a direita
+    size: 24,
+    color: Colors.white,
+  ),
+),
+SizedBox(height: 10,),
                 Text(
                   'Traduzir',
                   style: TextStyle(fontSize: 10),
