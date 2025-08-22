@@ -17,17 +17,19 @@ class ApresentarGame extends StatelessWidget {
     final sortedEntries = caracteresMap.entries.toList()
       ..sort((a, b) => a.key.compareTo(b.key));
 
+    // A sua lógica para identificar o caso dos numerais é mantida intacta.
     final isNumberCase = (sortedEntries.isNotEmpty &&
-    (questao.mostrarPopupMaiuscula == false && // não é maiúscula
-    sortedEntries.every((e) =>
-        RegExp(r'^\d+$').hasMatch(e.key) && e.value.length > 1)));
-
+        (questao.mostrarPopupMaiuscula == false &&
+            sortedEntries.every((e) =>
+                RegExp(r'^\d+$').hasMatch(e.key) && e.value.length > 1)));
 
     return Scaffold(
       backgroundColor: Colors.green.shade50,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
+        // O `isNumberCase ? ... : ...` decide qual layout usar
         child: isNumberCase
+            // LAYOUT PARA NÚMEROS: Esta parte não foi alterada e continua como você enviou.
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -51,6 +53,7 @@ class ApresentarGame extends StatelessWidget {
                               width: itemW,
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Container(
                                     width: itemW * .8,
@@ -118,6 +121,7 @@ class ApresentarGame extends StatelessWidget {
                   ),
                 ],
               )
+            // LAYOUT PARA O CASO GERAL (LETRAS/PALAVRAS): Esta parte foi corrigida com o Wrap.
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -150,114 +154,92 @@ class ApresentarGame extends StatelessWidget {
                   ],
                   if (sortedEntries.isNotEmpty)
                     Expanded(
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          final count = sortedEntries.length;
-                          final itemWidth = constraints.maxWidth / count;
+                      child: Wrap(
+                        alignment: WrapAlignment.center,
+                        spacing: 16.0,
+                        runSpacing: 16.0,
+                        children: sortedEntries.map((entry) {
+                          final keyChars = entry.key.split('');
+                          final valChars = entry.value.split('');
+                          
                           return Row(
-                            children: sortedEntries.map((entry) {
-                              final keyChars = entry.key.split('');
-                              final valChars = entry.value.split('');
-                              return SizedBox(
-                                width: itemWidth,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: List.generate(keyChars.length, (i) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 4.0),
                                 child: Column(
-                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: List.generate(
-                                          keyChars.length, (i) {
-                                        return Column(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            if (valChars[i] == "⠨") // botão acima
-                                              IconButton(
-                                                icon: const Icon(Icons.info_outline,
-                                                    size: 15,
-                                                    color: Colors.green),
-                                                padding: EdgeInsets.zero,
-                                                constraints:
-                                                    const BoxConstraints(),
-                                                onPressed: () {
-                                                  showDialog(
-                                                    context: context,
-                                                    builder: (ctx) =>
-                                                        AlertDialog(
-                                                      title:
-                                                          const Text("Dica"),
-                                                      content: const Text(
-                                                        "O caractere de seta indica letra maiúscula.\n"
-                                                        "Ele vem antes da letra correspondente.",
-                                                      ),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.of(ctx)
-                                                                  .pop(),
-                                                          child: const Text(
-                                                              "Entendi"),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  );
-                                                },
+                                    if (valChars[i] == "⠨")
+                                      IconButton(
+                                        icon: const Icon(Icons.info_outline,
+                                            size: 15,
+                                            color: Colors.green),
+                                        padding: EdgeInsets.zero,
+                                        constraints:
+                                            const BoxConstraints(),
+                                        onPressed: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (ctx) =>
+                                                AlertDialog(
+                                              title:
+                                                  const Text("Dica"),
+                                              content: const Text(
+                                                "O caractere de seta indica letra maiúscula.\n"
+                                                "Ele vem antes da letra correspondente.",
                                               ),
-                                            Container(
-                                              alignment: Alignment.center,
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                border: Border.all(
-                                                    color: Colors.grey.shade400),
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                              ),
-                                              child: Transform.translate(
-                                                offset: Offset(0, 4),
-                                                child: Text(
-                                                  valChars[i],
-                                                  style: const TextStyle(
-                                                      fontSize: 32, height: 1),
-                                                  textAlign: TextAlign.center,
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.of(ctx)
+                                                          .pop(),
+                                                  child: const Text(
+                                                      "Entendi"),
                                                 ),
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      }),
-                                    ),
-                                    const SizedBox(height: 6),
-                                    FittedBox(
-                                      fit: BoxFit.scaleDown,
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: List.generate(
-                                            keyChars.length, (i) {
-                                          return Padding(
-                                            padding: EdgeInsets.only(
-                                                right: i <
-                                                        keyChars.length - 1
-                                                    ? 8.0
-                                                    : 0),
-                                            child: Text(
-                                              keyChars[i],
-                                              style: const TextStyle(
-                                                fontSize: 24,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                              textAlign: TextAlign.center,
+                                              ],
                                             ),
                                           );
-                                        }),
+                                        },
                                       ),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      padding:
+                                          const EdgeInsets.all(4.0),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(
+                                            color: Colors.grey.shade400),
+                                        borderRadius:
+                                            BorderRadius.circular(8),
+                                      ),
+                                      child: Transform.translate(
+                                        offset: Offset(0, 4),
+                                        child: Text(
+                                          valChars[i],
+                                          style: const TextStyle(
+                                              fontSize: 32, height: 1),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      keyChars[i],
+                                      style: const TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      textAlign: TextAlign.center,
                                     ),
                                   ],
                                 ),
                               );
-                            }).toList(),
+                            }),
                           );
-                        },
+                        }).toList(),
                       ),
                     ),
                   const SizedBox(height: 16),

@@ -79,176 +79,187 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final enunciadoText = widget.questao.enunciado ?? '';
-    final letrasDoEnunciado = _extrairLetrasDoEnunciado(enunciadoText);
-    final opcoesList = widget.questao.opcoes ?? [];
-    final corretasIndices = widget.questao.corretas ?? [];
+Widget build(BuildContext context) {
+  final enunciadoText = widget.questao.enunciado ?? '';
+  final letrasDoEnunciado = _extrairLetrasDoEnunciado(enunciadoText);
+  final opcoesList = widget.questao.opcoes ?? [];
+  final corretasIndices = widget.questao.corretas ?? [];
 
-    return Stack(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: 20),
+  // NOVO: Lógica para identificar se a questão é numérica.
+  // Verificamos se a lista de letras não está vazia e se todos os
+  // caracteres são dígitos numéricos.
+  final isNumericQuestion = letrasDoEnunciado.isNotEmpty &&
+      letrasDoEnunciado.every((char) => RegExp(r'^\d$').hasMatch(char));
 
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  style: const TextStyle(fontSize: 18, color: Colors.black),
-                  children: _formatarEnunciado(enunciadoText),
-                ),
+  return Stack(
+    children: [
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: const TextStyle(fontSize: 18, color: Colors.black),
+                children: _formatarEnunciado(enunciadoText),
               ),
-            ),
-
-            Expanded(
-              child: Center(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-                  child: Wrap(
-                    alignment: WrapAlignment.center,
-                    spacing: 8.0,
-                    runSpacing: 12.0,
-                    children: List.generate(
-                      opcoesList.length,
-                      (index) {
-                        final caractereBraille = opcoesList[index];
-                        final selecionada = _selecionadas.contains(index);
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              if (selecionada) {
-                                _selecionadas.remove(index);
-                              } else {
-                                _selecionadas.add(index);
-                              }
-                            });
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: selecionada ? Colors.green : Colors.grey,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                              color: selecionada
-                                  ? Colors.green.withOpacity(0.2)
-                                  : null,
-                            ),
-                            child: Transform.translate(
-                              offset: const Offset(0, 4),
-                              child: Text(
-                                caractereBraille,
-                                style: const TextStyle(fontSize: 32),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  final acerto = Set.from(_selecionadas).containsAll(corretasIndices) &&
-                                 Set.from(corretasIndices).containsAll(_selecionadas);
-
-                  print('[DEBUG UI] Selecionadas: $_selecionadas');
-                  print('[DEBUG UI] Corretas: $corretasIndices');
-                  print('[DEBUG UI] Acerto? $acerto');
-
-                  widget.onSubmit(acerto);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green.shade700,
-                  foregroundColor: Colors.white,
-                  elevation: 4,
-                  shadowColor: Colors.black54,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                ),
-                child: const Center(
-                  child: Text(
-                    'Continuar',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-
-        Positioned(
-          top: 80,
-          right: 8,
-          child: Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: IconButton(
-              icon: const Icon(Icons.help_outline),
-              tooltip: 'Mostrar dica',
-              onPressed: _toggleTip,
             ),
           ),
-        ),
-
-        if (_showTip)
-          Positioned.fill(
-            child: GestureDetector(
-              onTap: _toggleTip,
-              child: Container(
-                color: Colors.black.withOpacity(0.5),
-                alignment: Alignment.center,
-                child: Card(
-                  margin: const EdgeInsets.symmetric(horizontal: 24),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: letrasDoEnunciado.map((letraPortugues) {
-                        final brailleChar =
-                            _ballHelper.braille_translator(letraPortugues);
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                brailleChar,
-                                style: const TextStyle(fontSize: 32),
-                              ),
-                              const SizedBox(width: 12),
-                              Text(
-                                letraPortugues,
-                                style: const TextStyle(fontSize: 32),
-                              ),
-                            ],
+          Expanded(
+            child: Center(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 16.0, horizontal: 8.0),
+                child: Wrap(
+                  alignment: WrapAlignment.center,
+                  spacing: 8.0,
+                  runSpacing: 12.0,
+                  children: List.generate(
+                    opcoesList.length,
+                    (index) {
+                      final caractereBraille = opcoesList[index];
+                      final selecionada = _selecionadas.contains(index);
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (selecionada) {
+                              _selecionadas.remove(index);
+                            } else {
+                              _selecionadas.add(index);
+                            }
+                          });
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: selecionada ? Colors.green : Colors.grey,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                            color: selecionada
+                                ? Colors.green.withOpacity(0.2)
+                                : null,
                           ),
-                        );
-                      }).toList(),
-                    ),
+                          child: Transform.translate(
+                            offset: const Offset(0, 4),
+                            child: Text(
+                              caractereBraille,
+                              style: const TextStyle(fontSize: 32),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
             ),
           ),
-      ],
-    );
-  }
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                final acerto =
+                    Set.from(_selecionadas).containsAll(corretasIndices) &&
+                        Set.from(corretasIndices).containsAll(_selecionadas);
+
+                print('[DEBUG UI] Selecionadas: $_selecionadas');
+                print('[DEBUG UI] Corretas: $corretasIndices');
+                print('[DEBUG UI] Acerto? $acerto');
+
+                widget.onSubmit(acerto);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green.shade700,
+                foregroundColor: Colors.white,
+                elevation: 4,
+                shadowColor: Colors.black54,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+              ),
+              child: const Center(
+                child: Text(
+                  'Continuar',
+                  style: TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      Positioned(
+        top: 80,
+        right: 8,
+        child: Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: IconButton(
+            icon: const Icon(Icons.help_outline),
+            tooltip: 'Mostrar dica',
+            onPressed: _toggleTip,
+          ),
+        ),
+      ),
+      if (_showTip)
+        Positioned.fill(
+          child: GestureDetector(
+            onTap: _toggleTip,
+            child: Container(
+              color: Colors.black.withOpacity(0.5),
+              alignment: Alignment.center,
+              child: Card(
+                margin: const EdgeInsets.symmetric(horizontal: 24),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: letrasDoEnunciado.map((letraPortugues) {
+                      final brailleChar =
+                          _ballHelper.braille_translator(letraPortugues);
+                      
+                      // NOVO: Adiciona o sinal de número se a questão for numérica.
+                      // Usamos um operador ternário para decidir o que exibir.
+                      final textoBrailleFinal = isNumericQuestion
+                          ? '⠼ $brailleChar'
+                          : brailleChar;
+
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              textoBrailleFinal, // Usa a nova variável
+                              style: const TextStyle(fontSize: 32),
+                            ),
+                            const SizedBox(width: 12),
+                            Text(
+                              letraPortugues,
+                              style: const TextStyle(fontSize: 32),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+    ],
+  );
+}
 }
