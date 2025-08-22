@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:braille_app/data/minigames_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:braille_app/components/fase.dart';
 import 'package:braille_app/models/minigame_model.dart';
 import 'package:braille_app/models/questao_model.dart';
@@ -18,221 +16,209 @@ class FaseService {
 
   FaseService({required this.token, required this.userId});
 
-  // ---------------------------------------------------------------------------
-  // Firebase Realtime DB helpers
-  // ---------------------------------------------------------------------------
-
-  /// Retorna a fase atual (ou 1, se não existir)
   Future<int> getFaseAtual() async {
     final url = '${Constants.BASE_URL}/users/$userId/fase.json?auth=$token';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      final faseArmazenada = (data as int?) ?? 1;
-      debugPrint('[FaseService] fase atual no DB = $faseArmazenada');
-      return faseArmazenada;
+      return (data as int?) ?? 1;
     } else {
       throw Exception('Erro ao carregar fase atual');
     }
   }
 
-  /// Atualiza somente se [novaFase] for maior que a fase atual
   Future<void> atualizarFase(int novaFase) async {
     try {
       final faseAtual = await getFaseAtual();
-      debugPrint(
-          '[FaseService] tentativa de atualizar para fase $novaFase (atualmente é $faseAtual)');
-
       if (novaFase > faseAtual) {
         final url = '${Constants.BASE_URL}/users/$userId/fase.json?auth=$token';
-        final response =
-            await http.put(Uri.parse(url), body: jsonEncode(novaFase));
-        if (response.statusCode == 200) {
-          debugPrint('[FaseService] fase atualizada para $novaFase com sucesso.');
-        } else {
-          debugPrint(
-              '[FaseService] falha ao atualizar fase. Código HTTP: ${response.statusCode}');
-        }
-      } else {
-        debugPrint(
-            '[FaseService] não atualiza (novaFase <= faseAtual), mantido em $faseAtual.');
+        await http.put(Uri.parse(url), body: jsonEncode(novaFase));
       }
     } catch (e) {
       debugPrint('Falha ao tentar atualizar fase: $e');
     }
   }
 
-  // ---------------------------------------------------------------------------
-  // Local-only helpers
-  // ---------------------------------------------------------------------------
+  Future<List<MiniGameTemplate>> carregarMiniGamesDaFase(String faseId) async {
+  final miniGames = <MiniGameTemplate>[];
+  final configs = sequenciaMinigames[faseId] ?? [];
+  final random = Random();
 
-  Future<Fase> carregarFasePorId(String id) async {
-    throw UnimplementedError('Fase vem de dados locais');
-  }
+  for (var config in configs) {
+    final padrao = config['padrao'] as String;
+    final padraoNum = int.tryParse(padrao.split('_').last) ?? 0;
+    
 
-  Future<Fase> buscarFasePorMiniGameId(String miniGameId) async {
-    throw UnimplementedError();
-  }
+    final padraoDocRef = _firestore
+        .collection('categorias')
+        .doc(config['categoria'] as String)
+        .collection('padroes')
+        .doc(padrao);
 
-  // ---------------------------------------------------------------------------
-  // MiniGames
-  // ---------------------------------------------------------------------------
-
-  /// Carrega minigames de [faseId] sempre na ordem definida em [sequenciaMinigames].
-  /// Para cada config de tipo MULTIPLE_LETRAS_LINHA (reconhecer), escolhe aleatoriamente
-  /// 3 questões daquele grupo.
-  Future<List<MiniGameTemplate>> carregarMiniGamesDaFase(
-      String faseId) async {
-    final miniGames = <MiniGameTemplate>[];
-    final configs = sequenciaMinigames[faseId] ?? [];
-    final random = Random();
-
-    for (var config in configs) {
-      // 1) Referência ao doc “padroes/{padrao}”
-      final padraoDocRef = _firestore
-          .collection('categorias')
-          .doc(config['categoria'] as String)
-          .collection('padroes')
-          .doc(config['padrao'] as String);
-
-      // 2) Se for APRESENTAR e tiver 'direct': true, busca diretamente no doc
-      if (config['tipo'] == MiniGameType.APRESENTAR &&
-          (config['direct'] == true)) {
-        final docSnap = await padraoDocRef.get();
-        if (docSnap.exists) {
-          final data = docSnap.data()! as Map<String, dynamic>;
-          final caracteres =
-              (data['caracteres'] as Map<dynamic, dynamic>?)?.map(
-                    (k, v) => MapEntry(k.toString(), v.toString()),
-                  ) ??
-                  {};
-
-          // Constrói QuestaoModel manualmente (não usa fromMap, pois o esquema do "apresentar" pode ser diferente)
-          final questao = QuestaoModel(
-            id: docSnap.id,
-            enunciado: data['enunciado']?.toString(),
-            opcoes:
-                data['opcoes'] != null ? List<String>.from(data['opcoes']) : null,
-            corretas:
-                data['corretas'] != null ? List<int>.from(data['corretas']) : null,
-            caracteres: caracteres,
-            imagemUrl: data['imagemUrl']?.toString(),
-            palavra: data['palavra']?.toString(),
-            dica: data['dica']?.toString(),
-            lacunas: data['lacunas'] != null
-                ? (data['lacunas'] as List<dynamic>)
-                    .map((e) => int.tryParse(e.toString()) ?? 0)
-                    .toList()
-                : null,
-            ordemCorreta: data['ordem_correta'] != null
-                ? (data['ordem_correta'] as List<dynamic>)
-                    .map((e) => int.tryParse(e.toString()) ?? 0)
-                    .toList()
-                : null,
-            posicoesLacunas: data['posicoesLacunas'] != null
-                ? (data['posicoesLacunas'] as List<dynamic>)
-                    .map((e) => int.tryParse(e.toString()) ?? 0)
-                    .toList()
-                : null,
-          );
-
-          miniGames.add(MiniGameTemplate(
-            id: docSnap.id,
-            type: MiniGameType.APRESENTAR,
-            difficulty: 1,
-            questao: questao,
-          ));
-        }
-        continue; // pula para o próximo config sem ir à subcoleção
+    if (config['tipo'] == MiniGameType.APRESENTAR && config['direct'] == true) {
+      final docSnap = await padraoDocRef.get();
+      if (docSnap.exists) {
+        final data = docSnap.data()!;
+        final caracteres = (data['caracteres'] as Map?)?.map((k, v) => MapEntry(k.toString(), v.toString())) ?? {};
+        final mostrarPopupMaiuscula = padraoNum == 7 && caracteres.values.any((c) => c.contains("⠠"));
+        final questao = QuestaoModel(
+          id: docSnap.id,
+          enunciado: data['enunciado'],
+          opcoes: (data['opcoes'] as List?)?.cast<String>(),
+          corretas: (data['corretas'] as List?)?.cast<int>(),
+          correta: data['correta'],
+          caracteres: caracteres,
+          imagemUrl: data['imagemUrl'],
+          palavra: data['palavra'],
+          dica: data['dica'],
+          lacunas: (data['lacunas'] as List?)?.map((e) => int.tryParse(e.toString()) ?? 0).toList(),
+          ordemCorreta: (data['ordem_correta'] as List?)?.map((e) => int.tryParse(e.toString()) ?? 0).toList(),
+          posicoesLacunas: (data['posicoesLacunas'] as List?)?.map((e) => int.tryParse(e.toString()) ?? 0).toList(),
+          mostrarPopupMaiuscula: mostrarPopupMaiuscula,
+        );
+        miniGames.add(MiniGameTemplate(
+          id: docSnap.id,
+          type: MiniGameType.APRESENTAR,
+          difficulty: 1,
+          questao: questao,
+        ));
       }
+      continue;
+    }
 
-      // 3) Caso não seja “apresentar”, monta a referência à subcoleção “questoes” ou “grupos/{g}/questoes”
+    if (config['tipo'] == MiniGameType.MULTIPLE_LETRAS_LINHA) {
+      final grupo = config['grupo'] as String?;
+      final subset = config['subset'] as List?;
       late CollectionReference ref;
-      if (config.containsKey('grupo')) {
-        ref = padraoDocRef
-            .collection('grupos')
-            .doc(config['grupo'] as String)
-            .collection('questoes');
+
+      if (grupo != null) {
+        ref = padraoDocRef.collection('grupos').doc(grupo).collection('questoes');
       } else {
         ref = padraoDocRef.collection('questoes');
       }
 
-      // 4) Se for MULTIPLE_LETRAS_LINHA (reconhecer), fazemos o sorteio de 3 questões
-      if (config['tipo'] == MiniGameType.MULTIPLE_LETRAS_LINHA) {
-        final snapshot = await ref.get();
-        final allDocs = snapshot.docs.toList();
+      final snapshot = await ref.get();
+      final allDocs = snapshot.docs;
 
-        if (allDocs.isNotEmpty) {
-          // Embaralha e pega até 3
-          allDocs.shuffle(random);
-          final escolhidos = allDocs.take(min(3, allDocs.length));
+      Iterable<QueryDocumentSnapshot> docsSelecionados;
 
-          for (var doc in escolhidos) {
-            final data = doc.data() as Map<String, dynamic>;
-            miniGames.add(MiniGameTemplate(
-              id: doc.id,
-              type: MiniGameType.MULTIPLE_LETRAS_LINHA,
-              difficulty: 1,
-              questao: QuestaoModel.fromMap(data, doc.id),
-            ));
-          }
-        }
-        continue;
+      if (padraoNum >= 4 && grupo == 'a') {
+        docsSelecionados = allDocs;
+      } else if (padraoNum >= 4 && (grupo == 'b' || grupo == 'c')) {
+        allDocs.shuffle(random);
+        docsSelecionados = allDocs.take(3);
+      } else if (padraoNum < 4) {
+        allDocs.shuffle(random);
+        docsSelecionados = allDocs.take(min(3, allDocs.length));
+      } else {
+        docsSelecionados = allDocs;
       }
 
-      // 5) Se tiver 'id' fixo, busca só esse doc
-      if (config.containsKey('id')) {
-        final docId = config['id'] as String;
-        final docSnap = await ref.doc(docId).get();
-        if (docSnap.exists) {
-          final data = docSnap.data()! as Map<String, dynamic>;
+      for (var doc in docsSelecionados) {
+        final data = doc.data() as Map<String, dynamic>;
+        final original = QuestaoModel.fromMap(data, doc.id);
+
+        if (subset != null) {
+          final newOpcoes = subset.map((i) => original.opcoes![i]).toList();
+          final newCorretas = <int>[];
+
+          if (original.corretas != null) {
+            for (int i = 0; i < subset.length; i++) {
+              if (original.corretas!.contains(subset[i])) newCorretas.add(i);
+            }
+          } else if (original.correta != null) {
+            final indexInSubset = subset.indexWhere((i) => original.opcoes![i] == original.correta);
+            if (indexInSubset >= 0) newCorretas.add(indexInSubset);
+          }
+
           miniGames.add(MiniGameTemplate(
-            id: docSnap.id,
-            type: config['tipo'] as MiniGameType,
+            id: '${doc.id}_${subset.join('_')}',
+            type: MiniGameType.MULTIPLE_LETRAS_LINHA,
             difficulty: 1,
-            questao: QuestaoModel.fromMap(data, docSnap.id),
+            questao: QuestaoModel(
+              id: original.id,
+              enunciado: original.enunciado,
+              opcoes: newOpcoes,
+              corretas: newCorretas,
+              correta: original.correta,
+              caracteres: original.caracteres,
+              imagemUrl: original.imagemUrl,
+              palavra: original.palavra,
+              dica: original.dica,
+              lacunas: original.lacunas,
+              ordemCorreta: original.ordemCorreta,
+              posicoesLacunas: original.posicoesLacunas,
+            ),
           ));
-        }
-      } else {
-        // 6) Senão, carrega toda a coleção de questões
-        final snapshot = await ref.get();
-        for (var doc in snapshot.docs) {
-          final data = doc.data() as Map<String, dynamic>;
+        } else {
+          int indexCorreta = -1;
+          if (original.correta != null && original.opcoes != null) {
+            indexCorreta = original.opcoes!.indexWhere((o) => o.trim() == original.correta!.trim());
+          }
+
+          final novaQuestao = QuestaoModel(
+            id: original.id,
+            enunciado: original.enunciado,
+            opcoes: original.opcoes,
+            corretas: indexCorreta >= 0 ? [indexCorreta] : original.corretas,
+            correta: original.correta,
+            caracteres: original.caracteres,
+            imagemUrl: original.imagemUrl,
+            palavra: original.palavra,
+            dica: original.dica,
+            lacunas: original.lacunas,
+            ordemCorreta: original.ordemCorreta,
+            posicoesLacunas: original.posicoesLacunas,
+          );
+
           miniGames.add(MiniGameTemplate(
             id: doc.id,
-            type: config['tipo'] as MiniGameType,
+            type: MiniGameType.MULTIPLE_LETRAS_LINHA,
             difficulty: 1,
-            questao: QuestaoModel.fromMap(data, doc.id),
+            questao: novaQuestao,
           ));
         }
       }
+
+      continue;
     }
 
-    return miniGames;
-  }
+    late CollectionReference ref;
+    if (config.containsKey('grupo')) {
+      ref = padraoDocRef.collection('grupos').doc(config['grupo'] as String).collection('questoes');
+    } else {
+      ref = padraoDocRef.collection('questoes');
+    }
 
-  // ---------------------------------------------------------------------------
-  // Utilitários para conversão
-  // ---------------------------------------------------------------------------
-
-  MiniGameType _getMiniGameType(String value) {
-    switch (value) {
-      case 'apresentar':
-        return MiniGameType.APRESENTAR;
-      case 'letras_linha':
-        return MiniGameType.MULTIPLE_LETRAS_LINHA;
-      case 'completar_palavra':
-        return MiniGameType.COMPLETAR_PALAVRA;
-      default:
-        throw Exception('Tipo de minigame desconhecido: $value');
+    if (config.containsKey('id')) {
+      final docId = config['id'] as String;
+      final docSnap = await ref.doc(docId).get();
+      if (docSnap.exists) {
+        final data = docSnap.data()! as Map<String, dynamic>;
+        miniGames.add(MiniGameTemplate(
+          id: docSnap.id,
+          type: config['tipo'] as MiniGameType,
+          difficulty: 1,
+          questao: QuestaoModel.fromMap(data, docSnap.id),
+        ));
+      }
+    } else {
+      final snapshot = await ref.get();
+      for (var doc in snapshot.docs) {
+        final data = doc.data() as Map<String, dynamic>;
+        miniGames.add(MiniGameTemplate(
+          id: doc.id,
+          type: config['tipo'] as MiniGameType,
+          difficulty: 1,
+          questao: QuestaoModel.fromMap(data, doc.id),
+        ));
+      }
     }
   }
 
-  Color _parseColor(String hex) {
-    var colorStr = hex.replaceAll('#', '');
-    if (colorStr.length == 6) colorStr = 'FF$colorStr';
-    return Color(int.parse(colorStr, radix: 16));
-  }
+  return miniGames;
+}
+
 
   Future<List<Fase>> carregarTodasAsFases() async {
     throw UnimplementedError('Fases são locais');

@@ -57,4 +57,130 @@ final List<Fase> fases = [
     miniGames: [
     ],
   ),
+  Fase(
+    id: '7',
+    title: 'Fase 7',
+    description: '',
+    color: Color(0xFF208B52),
+    icon: 'assets/images/Isolation_Mode.png',
+    miniGames: [
+    ],
+  ),
+  Fase(
+    id: '8',
+    title: 'Fase 8',
+    description: '',
+    color: Color(0xFF208B52),
+    icon: 'assets/images/Isolation_Mode.png',
+    miniGames: [
+    ],
+  ),
+  Fase(
+    id: '9',
+    title: 'Fase 9',
+    description: '',
+    color: Color(0xFF208B52),
+    icon: 'assets/images/Isolation_Mode.png',
+    miniGames: [
+    ],
+  ),
+  Fase(
+    id: '10',
+    title: 'Fase 10',
+    description: '',
+    color: Color(0xFF208B52),
+    icon: 'assets/images/Isolation_Mode.png',
+    miniGames: [
+    ],
+  ),
+  Fase(
+    id: '11',
+    title: 'Fase 11',
+    description: '',
+    color: Color(0xFF208B52),
+    icon: 'assets/images/Isolation_Mode.png',
+    miniGames: [
+    ],
+  ),
+  Fase(
+    id: '12',
+    title: 'Fase 12',
+    description: '',
+    color: Color(0xFF208B52),
+    icon: 'assets/images/Isolation_Mode.png',
+    miniGames: [
+    ],
+  ),
+  Fase(
+    id: '13',
+    title: 'Fase 13',
+    description: '',
+    color: Color(0xFF208B52),
+    icon: 'assets/images/Isolation_Mode.png',
+    miniGames: [
+    ],
+  ),
+  Fase(
+    id: '14',
+    title: 'Fase 14',
+    description: '',
+    color: Color(0xFF208B52),
+    icon: 'assets/images/Isolation_Mode.png',
+    miniGames: [
+    ],
+  ),
+  Fase(
+    id: '15',
+    title: 'Fase 15',
+    description: '',
+    color: Color(0xFF208B52),
+    icon: 'assets/images/Isolation_Mode.png',
+    miniGames: [
+    ],
+  ),
+  Fase(
+    id: '16',
+    title: 'Fase 16',
+    description: '',
+    color: Color(0xFF208B52),
+    icon: 'assets/images/Isolation_Mode.png',
+    miniGames: [
+    ],
+  ),
+  Fase(
+    id: '17',
+    title: 'Fase 17',
+    description: '',
+    color: Color(0xFF208B52),
+    icon: 'assets/images/Isolation_Mode.png',
+    miniGames: [
+    ],
+  ),
+  Fase(
+    id: '18',
+    title: 'Fase 18',
+    description: '',
+    color: Color(0xFF208B52),
+    icon: 'assets/images/Isolation_Mode.png',
+    miniGames: [
+    ],
+  ),
+  Fase(
+    id: '19',
+    title: 'Fase 19',
+    description: '',
+    color: Color(0xFF208B52),
+    icon: 'assets/images/Isolation_Mode.png',
+    miniGames: [
+    ],
+  ),
+  Fase(
+    id: '20',
+    title: 'Fase 20',
+    description: '',
+    color: Color(0xFF208B52),
+    icon: 'assets/images/Isolation_Mode.png',
+    miniGames: [
+    ],
+  ),
 ];

@@ -43,7 +43,7 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
   }
 
   List<String> _extrairLetrasDoEnunciado(String enunciado) {
-    final regExp = RegExp(r'"([^"]+)"');
+    final regExp = RegExp(r'"([^\"]+)"');
     final matches = regExp.allMatches(enunciado);
     final letras = <String>[];
     for (final m in matches) {
@@ -57,7 +57,7 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
 
   List<TextSpan> _formatarEnunciado(String texto) {
     final spans = <TextSpan>[];
-    final regExp = RegExp(r'"([^"]+)"');
+    final regExp = RegExp(r'"([^\"]+)"');
     int lastIndex = 0;
 
     for (final match in regExp.allMatches(texto)) {
@@ -106,9 +106,11 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
             Expanded(
               child: Center(
                 child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-                  child: Row(
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: 8.0,
+                    runSpacing: 12.0,
                     children: List.generate(
                       opcoesList.length,
                       (index) {
@@ -125,7 +127,7 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
                             });
                           },
                           child: Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                            margin: const EdgeInsets.symmetric(horizontal: 4.0),
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
                               border: Border.all(
@@ -137,9 +139,12 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
                                   ? Colors.green.withOpacity(0.2)
                                   : null,
                             ),
-                            child: Text(
-                              caractereBraille,
-                              style: const TextStyle(fontSize: 32),
+                            child: Transform.translate(
+                              offset: const Offset(0, 4),
+                              child: Text(
+                                caractereBraille,
+                                style: const TextStyle(fontSize: 32),
+                              ),
                             ),
                           ),
                         );
@@ -154,9 +159,13 @@ class _LetraLinhaGameState extends State<LetraLinhaGame> {
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
                 onPressed: () {
-                  final acerto =
-                      _selecionadas.length == corretasIndices.length &&
-                          _selecionadas.every(corretasIndices.contains);
+                  final acerto = Set.from(_selecionadas).containsAll(corretasIndices) &&
+                                 Set.from(corretasIndices).containsAll(_selecionadas);
+
+                  print('[DEBUG UI] Selecionadas: $_selecionadas');
+                  print('[DEBUG UI] Corretas: $corretasIndices');
+                  print('[DEBUG UI] Acerto? $acerto');
+
                   widget.onSubmit(acerto);
                 },
                 style: ElevatedButton.styleFrom(

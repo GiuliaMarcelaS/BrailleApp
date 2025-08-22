@@ -141,9 +141,12 @@ class _CompletarPalavraSimpleGameState
                         color: jaUsada ? Colors.grey[200] : Colors.blue[50],
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Text(
-                        opcao,
-                        style: const TextStyle(fontSize: 32),
+                      child: Transform.translate(
+                        offset: Offset(0, 4),
+                        child: Text(
+                          opcao,
+                          style: const TextStyle(fontSize: 32),
+                        ),
                       ),
                     ),
                   ),
